@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="34">
+<CheatTable CheatEngineTableVersion="38">
   <CheatEntries>
     <CheatEntry>
       <ID>113</ID>
@@ -282,6 +282,558 @@
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
+          <ID>614</ID>
+          <Description>"ItemList"</Description>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>615</ID>
+              <Description>"Edea's Pearl-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>40</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>616</ID>
+              <Description>"Dull Pearl-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>50</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>617</ID>
+              <Description>"Astral Charm-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>70</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>618</ID>
+              <Description>"Red Ring-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>80</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>619</ID>
+              <Description>"Torn Branch"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>90</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>620</ID>
+              <Description>"Pocket Incensory-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>B0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>621</ID>
+              <Description>"Rotten Bellflower"</Description>
+              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>4F0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>622</ID>
+                  <Description>"Rotten Bellflower"</Description>
+                  <DropDownListLink>Item[0]</DropDownListLink>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+                  <Offsets>
+                    <Offset>720</Offset>
+                    <Offset>4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>623</ID>
+                  <Description>"Rotten Bellflower"</Description>
+                  <DropDownListLink>Item[0]</DropDownListLink>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+                  <Offsets>
+                    <Offset>CA0</Offset>
+                    <Offset>4</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>624</ID>
+              <Description>"Bellflower-ISSUES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>5F0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>625</ID>
+              <Description>"Necklace of Sacrifice-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>C70</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>626</ID>
+              <Description>"Magnet Stone-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>C90</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>627</ID>
+              <Description>"Faerie Tear-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>CB0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>628</ID>
+              <Description>"Impurity Flask-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>CD0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>629</ID>
+              <Description>"Passiflora-Doesnt work properly"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>CE0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>630</ID>
+              <Description>"Crystal Seed-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>CF0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>631</ID>
+              <Description>"Tainted Missive-ISSUES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>D10</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>632</ID>
+              <Description>"Black Sachet-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>D20</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>633</ID>
+              <Description>"Ring of Candor-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>D50</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>634</ID>
+              <Description>"Small Coin"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>D60</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>635</ID>
+              <Description>"Backman Patch"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>D70</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>636</ID>
+              <Description>"Cat Sphere"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>D80</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>637</ID>
+              <Description>"Hazel Badge-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>D90</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>638</ID>
+              <Description>"Monastery Key"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>DA0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>639</ID>
+              <Description>"Clarity Shard-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>DD0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>640</ID>
+              <Description>"Dirty Shroom-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>DE0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>641</ID>
+              <Description>"Ivory Bug"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>DF0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>642</ID>
+              <Description>"Violet Sprite-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>E00</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>643</ID>
+              <Description>"Soft Tissue"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>E10</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>644</ID>
+              <Description>"Garden Key-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>E20</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>645</ID>
+              <Description>"Sparse Thread"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>E30</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>646</ID>
+              <Description>"Blessing Charm-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>E40</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>647</ID>
+              <Description>"Heavy Arrows"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>E50</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>648</ID>
+              <Description>"Bloodstained Tissue"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>E60</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>649</ID>
+              <Description>"Maple Leaf"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>E70</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>650</ID>
+              <Description>"Fresh Spring Leaf"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>E80</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>651</ID>
+              <Description>"Birthstone"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>E90</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>652</ID>
+              <Description>"Quick Arrows-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>EA0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>653</ID>
+              <Description>"Drilling Arrows-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>EB0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>654</ID>
+              <Description>"Sealed Wind-YES"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>EC0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>655</ID>
+              <Description>"Cinder Key"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>ED0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>656</ID>
+              <Description>"CF(Bow lvl charge)"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>EE0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>657</ID>
+              <Description>"CF(Charging speed)"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>EF0</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>658</ID>
+              <Description>"CF(Dash)"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>F00</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>659</ID>
+              <Description>"CF(Warp)"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02304CE8</Address>
+              <Offsets>
+                <Offset>F10</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
           <ID>364</ID>
           <Description>"Ivory Bugs"</Description>
           <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
@@ -295,21 +847,6 @@
               <Address>"MomodoraRUtM.exe"+230C440</Address>
               <Offsets>
                 <Offset>3C0</Offset>
-                <Offset>4</Offset>
-                <Offset>4</Offset>
-                <Offset>60</Offset>
-                <Offset>4</Offset>
-                <Offset>0</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>585</ID>
-              <Description>"IB[0]"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+230C440</Address>
-              <Offsets>
-                <Offset>270</Offset>
                 <Offset>4</Offset>
                 <Offset>4</Offset>
                 <Offset>60</Offset>
@@ -602,6 +1139,21 @@
                 <Offset>0</Offset>
               </Offsets>
             </CheatEntry>
+            <CheatEntry>
+              <ID>660</ID>
+              <Description>"IB[20]"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+230C440</Address>
+              <Offsets>
+                <Offset>3B0</Offset>
+                <Offset>4</Offset>
+                <Offset>4</Offset>
+                <Offset>60</Offset>
+                <Offset>4</Offset>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
@@ -759,9 +1311,9 @@
 29:Karst Crest(Warp)
 30:?????
 31:Clarity Shard
-32:Disrty Shroom
+32:Dirty Shroom
 33:?????
-34:IvoryBug
+34:Ivory Bug
 35:Violet Sprite
 36:Soft Tissue
 37:Garden Key
@@ -1093,14 +1645,14 @@
     <CheatEntry>
       <ID>370</ID>
       <Description>"Flag Pointers"</Description>
-      <Options moManualExpandCollapse="1"/>
+      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
       <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>371</ID>
           <Description>"Grove"</Description>
-          <Options moManualExpandCollapse="1"/>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
           <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -1424,7 +1976,7 @@
         <CheatEntry>
           <ID>483</ID>
           <Description>"Frore Ciele"</Description>
-          <Options moManualExpandCollapse="1"/>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
           <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -1478,7 +2030,7 @@
         <CheatEntry>
           <ID>392</ID>
           <Description>"Karst Ciry"</Description>
-          <Options moManualExpandCollapse="1"/>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
           <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -1832,7 +2384,7 @@
         <CheatEntry>
           <ID>417</ID>
           <Description>"Subterranean Graves"</Description>
-          <Options moManualExpandCollapse="1"/>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
           <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -2141,7 +2693,7 @@
         <CheatEntry>
           <ID>429</ID>
           <Description>"Whiteleaf Memorial Park"</Description>
-          <Options moManualExpandCollapse="1"/>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
           <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -2390,7 +2942,7 @@
         <CheatEntry>
           <ID>453</ID>
           <Description>"Cinder Chambers"</Description>
-          <Options moManualExpandCollapse="1"/>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
           <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -2654,7 +3206,7 @@
         <CheatEntry>
           <ID>472</ID>
           <Description>"Forgotten Monastery"</Description>
-          <Options moManualExpandCollapse="1"/>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
           <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -2948,7 +3500,7 @@
         <CheatEntry>
           <ID>511</ID>
           <Description>"Pinacotheca"</Description>
-          <Options moManualExpandCollapse="1"/>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
           <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -3287,7 +3839,7 @@
         <CheatEntry>
           <ID>535</ID>
           <Description>"Karst Castle"</Description>
-          <Options moManualExpandCollapse="1"/>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
           <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -3536,7 +4088,7 @@
         <CheatEntry>
           <ID>373</ID>
           <Description>"Misc"</Description>
-          <Options moManualExpandCollapse="1"/>
+          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
           <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -3793,7 +4345,7 @@
     </CheatEntry>
   </CheatEntries>
   <CheatCodes>
-    <CodeEntry Color="20000000">
+    <CodeEntry>
       <Description>Change of fstp qword ptr [ebp+00]</Description>
       <AddressString>MomodoraRUtM.exe+5F027A</AddressString>
       <Before>
@@ -3816,7 +4368,7 @@
         <Byte>83</Byte>
       </After>
     </CodeEntry>
-    <CodeEntry Color="20000000">
+    <CodeEntry>
       <Description>Change of mov byte ptr [ebp+0F],00</Description>
       <AddressString>MomodoraRUtM.exe+5F0276</AddressString>
       <Before>
@@ -3840,7 +4392,7 @@
         <Byte>5F</Byte>
       </After>
     </CodeEntry>
-    <CodeEntry Color="20000000">
+    <CodeEntry>
       <Description>Change of fld qword ptr [esi]</Description>
       <AddressString>MomodoraRUtM.exe+5F0274</AddressString>
       <Before>
@@ -3862,7 +4414,7 @@
         <Byte>DD</Byte>
       </After>
     </CodeEntry>
-    <CodeEntry Color="20000000">
+    <CodeEntry>
       <Description>Change of jne MomodoraRUtM.exe+5F02DB</Description>
       <AddressString>MomodoraRUtM.exe+5F0263</AddressString>
       <Before>
