@@ -1,6 +1,7 @@
 ﻿using LiveSplit.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +18,9 @@ namespace LiveSplit.UI.Components
 
         public string UpdateName => ComponentName;
 
-        public string XMLURL => throw new NotImplementedException();
+        public string XMLURL => UpdateURL + "";
 
-        public string UpdateURL => throw new NotImplementedException();
+        public string UpdateURL => "";
 
         public Version Version => Version.Parse("1.0.0");
 

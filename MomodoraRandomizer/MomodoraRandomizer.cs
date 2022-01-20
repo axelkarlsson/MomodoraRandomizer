@@ -18,6 +18,9 @@ namespace LiveSplit.UI.Components
         private Process gameProc = null;
         private Random randomGenerator = null;
         private int seed = 0;
+        private MomodoraRandomizerSettings settingsControl;
+
+        public LiveSplitState state;
 
         int[] keyItemIDs = { 22,25,27,29,32,34,37,42,43,45,49,50,51,52,53 };
         int[] activeItemIDs = { 4,10,14,15,17,23,24,31,35,36,38,39,41,48 };
@@ -94,7 +97,10 @@ namespace LiveSplit.UI.Components
 
         public MomodoraRandomizer(LiveSplitState state)
         {
+            state.OnStart += onStart;
+            this.state = state;
             RandomizerLabel = new SimpleLabel("Randomizer Go!");
+            settingsControl = new MomodoraRandomizerSettings();
         }
 
         private void onStart(object sender, EventArgs e)
@@ -167,34 +173,30 @@ namespace LiveSplit.UI.Components
             RandomizerLabel.SetActualWidth(g);
             RandomizerLabel.Width = RandomizerLabel.ActualWidth;
             RandomizerLabel.Height = VerticalHeight;
-            RandomizerLabel.X = width - RandomizerLabel.ActualWidth;
-            RandomizerLabel.Y = textHeight * 0.42f - (3.5f * textHeight);
+            RandomizerLabel.X = width/2;
+            RandomizerLabel.Y = 3f;
 
             RandomizerLabel.Draw(g);
         }
 
         public XmlNode GetSettings(XmlDocument document)
         {
-            throw new NotImplementedException();
-            //return settingsControl.GetSettings(document)
+            return settingsControl.GetSettings(document);
         }
 
         public System.Windows.Forms.Control GetSettingsControl(LayoutMode mode)
         {
-            //return settingsControl;
-            throw new NotImplementedException();
+            return settingsControl;
         }
 
         public void SetSettings(XmlNode settings)
         {
-            //settingsControl.SetSettings(settings);
-            throw new NotImplementedException();
+            settingsControl.SetSettings(settings);
         }
 
         public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
             //do update stuff here!
-
             if (invalidator != null)
             {
                 invalidator.Invalidate(0, 0, width, height);
@@ -215,11 +217,13 @@ namespace LiveSplit.UI.Components
                     case 39690240:
                         //version 1.05b
                         gameProc = game[0];
-                        difficultyPointer = new DeepPointer(0x230C440,new int[] {0x0,0x4,0x60,0x4,0x4,0x630 });
+                        difficultyPointer = new DeepPointer(0x230C440,new int[] {0x0,0x4, 0x60,0x4,0x4,0x630 });
                         crestFragmentCount = new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4});
-                        IntPtr test = crestFragmentCount.Deref<IntPtr>(gameProc);
+                        IntPtr test = (IntPtr)crestFragmentCount.Deref<Int32>(gameProc);
+                        Debug.WriteLine(test.ToString("X"));
                         test = IntPtr.Add(test,0x5f0);
-                        gameProc.WriteValue(test, 10);
+                        Debug.WriteLine(test.ToString("X"));
+                        gameProc.WriteValue(test, (double)10);
                         RandomizerLabel.Text = difficultyPointer.Deref<double>(gameProc).ToString();
 
 
