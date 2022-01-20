@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="38">
+<CheatTable CheatEngineTableVersion="34">
   <CheatEntries>
     <CheatEntry>
       <ID>113</ID>
@@ -4249,7 +4249,7 @@
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+230C440</Address>
               <Offsets>
-                <Offset>0</Offset>
+                <Offset>790</Offset>
                 <Offset>4</Offset>
                 <Offset>4</Offset>
                 <Offset>60</Offset>
@@ -4345,7 +4345,7 @@
     </CheatEntry>
   </CheatEntries>
   <CheatCodes>
-    <CodeEntry>
+    <CodeEntry Color="20000000">
       <Description>Change of fstp qword ptr [ebp+00]</Description>
       <AddressString>MomodoraRUtM.exe+5F027A</AddressString>
       <Before>
@@ -4368,7 +4368,7 @@
         <Byte>83</Byte>
       </After>
     </CodeEntry>
-    <CodeEntry>
+    <CodeEntry Color="20000000">
       <Description>Change of mov byte ptr [ebp+0F],00</Description>
       <AddressString>MomodoraRUtM.exe+5F0276</AddressString>
       <Before>
@@ -4392,7 +4392,7 @@
         <Byte>5F</Byte>
       </After>
     </CodeEntry>
-    <CodeEntry>
+    <CodeEntry Color="20000000">
       <Description>Change of fld qword ptr [esi]</Description>
       <AddressString>MomodoraRUtM.exe+5F0274</AddressString>
       <Before>
@@ -4414,7 +4414,7 @@
         <Byte>DD</Byte>
       </After>
     </CodeEntry>
-    <CodeEntry>
+    <CodeEntry Color="20000000">
       <Description>Change of jne MomodoraRUtM.exe+5F02DB</Description>
       <AddressString>MomodoraRUtM.exe+5F0263</AddressString>
       <Before>
