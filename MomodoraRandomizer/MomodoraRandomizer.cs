@@ -86,6 +86,10 @@ namespace LiveSplit.UI.Components
         DeepPointer totalItems;
         DeepPointer[] inventoryItems;
         #endregion
+
+        #region misc pointers
+        DeepPointer difficultyPointer;
+        #endregion
         #endregion
 
         public MomodoraRandomizer(LiveSplitState state)
@@ -114,7 +118,7 @@ namespace LiveSplit.UI.Components
         {
             if (activeItemIDs.Contains(id))
             {
-                gameProc.WriteValue(activeItems., 1);
+                
             }
             else if (passiveItemIDs.Contains(id))
             {
@@ -211,7 +215,12 @@ namespace LiveSplit.UI.Components
                     case 39690240:
                         //version 1.05b
                         gameProc = game[0];
-                        RandomizerLabel.Text = "Randomizer Ready!";
+                        difficultyPointer = new DeepPointer(0x230C440,new int[] {0x0,0x4,0x60,0x4,0x4,0x630 });
+                        crestFragmentCount = new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4});
+                        IntPtr test = crestFragmentCount.Deref<IntPtr>(gameProc);
+                        test = IntPtr.Add(test,0x5f0);
+                        gameProc.WriteValue(test, 10);
+                        RandomizerLabel.Text = difficultyPointer.Deref<double>(gameProc).ToString();
 
 
                         return true;
