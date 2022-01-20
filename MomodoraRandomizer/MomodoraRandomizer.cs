@@ -19,6 +19,75 @@ namespace LiveSplit.UI.Components
         private Random randomGenerator = null;
         private int seed = 0;
 
+        int[] keyItemIDs = { 22,25,27,29,32,34,37,42,43,45,49,50,51,52,53 };
+        int[] activeItemIDs = { 4,10,14,15,17,23,24,31,35,36,38,39,41,48 };
+        int[] passiveItemIDs = { 1, 2, 5,6,7,8,9,11,13,16,18,21,26,40,44,46,47 };
+
+        #region pointers
+        #region charge item pointers
+        DeepPointer bellflowerSaveValue;
+        DeepPointer bellflowerMaxValue;
+        DeepPointer taintedMissiveSaveValue;
+        DeepPointer taintedMissiveMaxValue;
+        DeepPointer passifloraSaveValue;
+        DeepPointer passifloraMaxValue;
+        #endregion
+
+        #region shop stock pointers
+        DeepPointer[] karstShopItems;
+        DeepPointer[] graveShopItems;
+        DeepPointer[] parkShopItems;
+        DeepPointer[] cinderShopItems;
+        DeepPointer[] spiderShopItems;
+        DeepPointer[] monasteryShopItems;
+        DeepPointer[] pinaShopItems;
+        #endregion
+
+        #region ivory bug pointers
+        DeepPointer ivoryBugCount;
+        DeepPointer[] ivoryBugs;
+        DeepPointer oneDelivered;
+        DeepPointer fiveDelivered;
+        DeepPointer tenDelivered;
+        DeepPointer fifteenDelivered;
+        DeepPointer twentyDelivered;
+        #endregion
+
+        #region vitality fragment pointers
+        DeepPointer vitalityFragmentCount;
+        DeepPointer[] vitalityFragments;
+        #endregion
+
+        #region crest fragment pointers
+        DeepPointer crestFragmentCount;
+        DeepPointer[] crestFragments;
+        #endregion
+
+        #region item pickup pointers
+        DeepPointer[] noRequirementPickups;
+        DeepPointer[] crestFragmentsRequired;
+        DeepPointer blessedCharm;
+        DeepPointer rottenShroom;
+        DeepPointer greenLeaf;
+        DeepPointer softTissue;
+        DeepPointer catSphere;
+        DeepPointer bellFlowerPark;
+        DeepPointer dirtyShroom;
+        #endregion
+
+        #region boss items
+        DeepPointer[] bossItems;
+        #endregion
+
+        #region inventory pointers
+        DeepPointer activeItems;
+        DeepPointer passiveItems;
+        DeepPointer keyItems;
+        DeepPointer totalItems;
+        DeepPointer[] inventoryItems;
+        #endregion
+        #endregion
+
         public MomodoraRandomizer(LiveSplitState state)
         {
             RandomizerLabel = new SimpleLabel("Randomizer Go!");
@@ -39,6 +108,22 @@ namespace LiveSplit.UI.Components
 
                 //Setup magic here!
             }
+        }
+
+        private void giveItem(int id)
+        {
+            if (activeItemIDs.Contains(id))
+            {
+                gameProc.WriteValue(activeItems., 1);
+            }
+            else if (passiveItemIDs.Contains(id))
+            {
+
+            }
+            else if (keyItemIDs.Contains(id))
+            {
+
+            } 
         }
 
         public string ComponentName => "Momodora Randomizer";
@@ -127,6 +212,8 @@ namespace LiveSplit.UI.Components
                         //version 1.05b
                         gameProc = game[0];
                         RandomizerLabel.Text = "Randomizer Ready!";
+
+
                         return true;
                     default:
                         RandomizerLabel.Text = "Unsupported game version for randomizer";
