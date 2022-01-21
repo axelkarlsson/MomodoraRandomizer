@@ -14,6 +14,7 @@ namespace LiveSplit.UI.Components
 {
     public class MomodoraRandomizer : IComponent
     {
+
         private SimpleLabel RandomizerLabel;
         private Process gameProc = null;
         private Random randomGenerator = null;
@@ -83,11 +84,11 @@ namespace LiveSplit.UI.Components
         #endregion
 
         #region inventory pointers
-        DeepPointer activeItems;
-        DeepPointer passiveItems;
-        DeepPointer keyItems;
-        DeepPointer totalItems;
-        DeepPointer[] inventoryItems;
+        IntPtr activeItems;
+        IntPtr passiveItems;
+        IntPtr keyItems;
+        IntPtr totalItems;
+        IntPtr inventoryItems;
         #endregion
 
         #region misc pointers
@@ -122,18 +123,50 @@ namespace LiveSplit.UI.Components
 
         private void giveItem(int id)
         {
+            //To add an item: Increase total item countery by one, increase the category of item given by 1
+            //and set the inventory value for the next item slot to the id of the item given
+            var totalItemAmount = gameProc.ReadValue<int>(totalItems);
+            gameProc.WriteValue<int>(totalItems, (int)totalItemAmount + 1);
+            gameProc.WriteValue<double>(IntPtr.Add(inventoryItems, 0x10 * totalItemAmount), id);
+
             if (activeItemIDs.Contains(id))
             {
-                
+                var activeItemAmount = gameProc.ReadValue<double>(activeItems);
+                gameProc.WriteValue<double>(activeItems, (double)activeItemAmount + 1);
             }
             else if (passiveItemIDs.Contains(id))
             {
-
+                var passiveItemAmount = gameProc.ReadValue<double>(passiveItems);
+                gameProc.WriteValue<double>(passiveItems, (double)passiveItemAmount + 1);
             }
             else if (keyItemIDs.Contains(id))
             {
-
+                var keyItemAmount = gameProc.ReadValue<double>(keyItems);
+                gameProc.WriteValue<double>(keyItems, (double)keyItemAmount + 1);
             } 
+        }
+
+        private void removeLastItem()
+        {
+            //To remove last item, decrease total item counter by one and the corresponding 
+            var totalItemAmount = gameProc.ReadValue<int>(totalItems);
+            var lastItemID = gameProc.ReadValue<double>(IntPtr.Add(inventoryItems, 0x10 * totalItemAmount));
+            if (activeItemIDs.Contains((int)lastItemID))
+            {
+                var activeItemAmount = gameProc.ReadValue<double>(activeItems);
+                gameProc.WriteValue<double>(activeItems, (double)activeItemAmount - 1);
+            }
+            else if (passiveItemIDs.Contains((int)lastItemID))
+            {
+                var passiveItemAmount = gameProc.ReadValue<double>(passiveItems);
+                gameProc.WriteValue<double>(passiveItems, (double)passiveItemAmount - 1);
+            }
+            else if (keyItemIDs.Contains((int)lastItemID))
+            {
+                var keyItemAmount = gameProc.ReadValue<double>(keyItems);
+                gameProc.WriteValue<double>(keyItems, (double)keyItemAmount - 1);
+            }
+            gameProc.WriteValue<int>(totalItems, (int)totalItemAmount - 1);
         }
 
         public string ComponentName => "Momodora Randomizer";
@@ -217,6 +250,7 @@ namespace LiveSplit.UI.Components
                     case 39690240:
                         //version 1.05b
                         gameProc = game[0];
+                        /* Example of writing to memory
                         difficultyPointer = new DeepPointer(0x230C440,new int[] {0x0,0x4, 0x60,0x4,0x4,0x630 });
                         crestFragmentCount = new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4});
                         IntPtr test = (IntPtr)crestFragmentCount.Deref<Int32>(gameProc);
@@ -224,9 +258,13 @@ namespace LiveSplit.UI.Components
                         test = IntPtr.Add(test,0x5f0);
                         Debug.WriteLine(test.ToString("X"));
                         gameProc.WriteValue(test, (double)10);
-                        RandomizerLabel.Text = difficultyPointer.Deref<double>(gameProc).ToString();
-
-
+                        */
+                        //RandomizerLabel.Text = difficultyPointer.Deref<double>(gameProc).ToString();
+                        totalItems = IntPtr.Add((IntPtr)new DeepPointer(0x230b11c,new int[] { 0x1a4}).Deref<Int32>(gameProc),0x4);
+                        activeItems = IntPtr.Add((IntPtr)new DeepPointer(0x2304ce8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc30);
+                        passiveItems = IntPtr.Add((IntPtr)new DeepPointer(0x2304ce8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc40);
+                        keyItems = IntPtr.Add((IntPtr)new DeepPointer(0x2304ce8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x1100);
+                        inventoryItems = (IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a4, 0xC }).Deref<int>(gameProc);
                         return true;
                     default:
                         RandomizerLabel.Text = "Unsupported game version for randomizer";
