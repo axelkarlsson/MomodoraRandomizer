@@ -122,12 +122,20 @@ namespace LiveSplit.UI.Components
             if (VerifyProcessRunning())
             {
                 //If set seed ->
-                randomGenerator = new Random(0);
+                if (settingsControl.seed_enabled() == true)
+                {
+                    int.TryParse(settingsControl.seed_get(), out seed);
+                    randomGenerator = new Random(seed);
+                }
+
                 //else, random seed
-                //Thought it would be nice to do it this way so that the seed can be stored and displayed so that multiple people can run the same seed etc
-                randomGenerator = new Random();
-                seed = randomGenerator.Next();
-                randomGenerator = new Random(seed);
+                else
+                {
+                    randomGenerator = new Random();
+                    seed = randomGenerator.Next();
+                    settingsControl.seed_set(seed);
+                    randomGenerator = new Random(seed);
+                }
 
                 //0 = missive, 1 = bellflower, 2 = passiflora, 3 = bugs, 4 = crests, 5 = vitality
                 removeItemWatchers = new MemoryWatcher<double>[6];
@@ -568,45 +576,45 @@ namespace LiveSplit.UI.Components
                         karstShopItemsPointers = new IntPtr[3];
                         //Crystal Seed
                         karstShopItemsPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4}).Deref<Int32>(gameProc), 0xcf0);
-                        //??
+                        //Faerie Tear
                         karstShopItemsPointers[1] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xcb0);
-                        //??
-                        karstShopItemsPointers[1] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xd50);
+                        //Ring of Candor
+                        karstShopItemsPointers[2] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xd50);
 
                         graveShopItemsPointers = new IntPtr[2];
-                        //Lamp?
+                        //Clarity Shard
                         graveShopItemsPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xdd0);
                         //Necklace of Sacrifice
                         graveShopItemsPointers[1] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc70);
 
                         parkShopItemsPointers = new IntPtr[1];
-                        //Dull Pearl?
+                        //Dull Pearl
                         parkShopItemsPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x50);
 
                         cinderShopItemsPointers = new IntPtr[2];
-                        //??
+                        //Red Ring
                         cinderShopItemsPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x80);
-                        //??
+                        //Ring of Candor
                         cinderShopItemsPointers[1] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xd50);
 
                         spiderShopItemsPointers = new IntPtr[3];
-                        //??
+                        //Drilling Arrows
                         spiderShopItemsPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xeb0);
-                        //??
+                        //Ring of Candor
                         spiderShopItemsPointers[1] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xd50);
-                        //??
+                        //Impurity Flask
                         spiderShopItemsPointers[2] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xcd0);
 
                         monasteryShopItemsPointers = new IntPtr[1];
-                        //??
+                        //Faerie Tear
                         monasteryShopItemsPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xcb0);
 
                         pinaShopItemsPointers = new IntPtr[3];
-                        //??
+                        //Violet Sprite
                         pinaShopItemsPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xe00);
-                        //??
+                        //Quick Arrows
                         pinaShopItemsPointers[1] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xea0);
-                        //??
+                        //Pocket Incensory
                         pinaShopItemsPointers[2] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xb0);
 
                         bellflowerMaxValuePointer = IntPtr.Add((IntPtr)new DeepPointer(0x0230B134, new int[] { 0x14,0x0 }).Deref<Int32>(gameProc), 0x1c0);
