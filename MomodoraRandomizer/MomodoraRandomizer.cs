@@ -70,7 +70,6 @@ namespace LiveSplit.UI.Components
 
         #region item pickup pointers
         IntPtr[] noRequirementPickupPointers;
-        IntPtr[] crestFragmentsRequiredPointers;
         IntPtr blessedCharmPointer;
         IntPtr rottenShroomPointer;
         IntPtr greenLeafPointer;
@@ -100,6 +99,7 @@ namespace LiveSplit.UI.Components
         IntPtr difficultyPointer;
         #endregion
         #endregion
+        private MemoryWatcher<double>[] removeItemWatchers;
         private MemoryWatcher<double> [] testWatchers;
         private bool randomizerRunning;
 
@@ -128,14 +128,32 @@ namespace LiveSplit.UI.Components
                 randomGenerator = new Random();
                 seed = randomGenerator.Next();
                 randomGenerator = new Random(seed);
-                testWatchers = new MemoryWatcher<double>[4];
+
+                //0 = missive, 1 = bellflower, 2 = passiflora, 3 = bugs, 4 = crests, 5 = vitality
+                removeItemWatchers = new MemoryWatcher<double>[6];
+                removeItemWatchers[0] = new MemoryWatcher<double>(taintedMissiveMaxValuePointer);
+                removeItemWatchers[1] = new MemoryWatcher<double>(bellflowerMaxValuePointer);
+                removeItemWatchers[2] = new MemoryWatcher<double>(passifloraMaxValuePointer);
+                removeItemWatchers[3] = new MemoryWatcher<double>(ivoryBugCountPointer);
+                removeItemWatchers[4] = new MemoryWatcher<double>(crestFragmentCountPointer);
+                removeItemWatchers[5] = new MemoryWatcher<double>(vitalityFragmentCountPointer);
+
+                foreach(MemoryWatcher watcher in removeItemWatchers)
+                {
+                    watcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 100);
+                    watcher.Enabled = true;
+                }
+
+
+
+                testWatchers = new MemoryWatcher<double>[6];
                 testWatchers[0] = new MemoryWatcher<double>(noRequirementPickupPointers[1]);
                 testWatchers[0].OnChanged += (oldVal, newVal) =>
                 {
                     if (newVal == 1)
                     {
-                        removeLastItem();
-                        giveItem(40);
+                        removeItem();
+                        newItem(40);
                     }
                 };
                 testWatchers[0].UpdateInterval = new TimeSpan(0,0,0,0,100);
@@ -146,8 +164,8 @@ namespace LiveSplit.UI.Components
                 {
                     if (newVal == 1)
                     {
-                        removeVitalityFragment();
-                        addCrestFragment(52);
+                        removeItem();
+                        newItem(52);
                     }
                 };
                 testWatchers[1].UpdateInterval = new TimeSpan(0, 0, 0, 0, 100);
@@ -158,8 +176,8 @@ namespace LiveSplit.UI.Components
                 {
                     if (newVal == 1)
                     {
-                        removeIvoryBug();
-                        addVitalityFragment();
+                        removeItem();
+                        newItem(54);
                     }
                 };
                 testWatchers[2].UpdateInterval = new TimeSpan(0, 0, 0, 0, 100);
@@ -171,20 +189,179 @@ namespace LiveSplit.UI.Components
                 {
                     if (newVal == 1)
                     {
-                        removeVitalityFragment();
-                        addIvoryBug();
+                        removeItem();
+                        newItem(34);
                     }
                 };
                 testWatchers[3].UpdateInterval = new TimeSpan(0, 0, 0, 0, 100);
                 testWatchers[3].Enabled = true;
+
+                testWatchers[4] = new MemoryWatcher<double>(noRequirementPickupPointers[0]);
+                testWatchers[4].OnChanged += (oldVal, newVal) =>
+                {
+                    if (newVal == 1)
+                    {
+                        Debug.WriteLine("Picked up bellflower");
+                        removeItem();
+                        newItem(34);
+                    }
+                };
+                testWatchers[4].UpdateInterval = new TimeSpan(0, 0, 0, 0, 100);
+                testWatchers[4].Enabled = true;
+
+
+                testWatchers[5] = new MemoryWatcher<double>(bossItemPointers[0]);
+                testWatchers[5].OnChanged += (oldVal, newVal) =>
+                {
+                    if (newVal == 1)
+                    {
+                        removeItem();
+                        newItem(4,3);
+                    }
+                };
+                testWatchers[5].UpdateInterval = new TimeSpan(0, 0, 0, 0, 100);
+                testWatchers[5].Enabled = true;
 
                 randomizerRunning = true;
                 //Setup magic here!
             }
         }
 
+        private void newItem(int id, int addCharges = 0)
+        {
+            
+            if(id == 34)
+            {
+                //Ivory Bug
+                addIvoryBug();
+            }
+            else if (53 >= id && id >= 50)
+            {
+                //Crest Fragment
+                addCrestFragment(id);
+            }
+            else if (id == 54)
+            {
+                //Special id for vitality fragments
+                addVitalityFragment();
+            }
+            else if (id == 4 && id == 14 && id == 17)
+            {
+                addChargeItem(id, addCharges);
+            }
+            else
+            {
+                addItem(id);
+            }
+        }
 
-        private void giveItem(int id)
+        private void removeItem()
+        {
+            UpdateItemWatchers();
+
+            if (removeItemWatchers[0].Changed)
+            {
+                removeChargeItem(17, removeItemWatchers[0].Current - removeItemWatchers[0].Old);
+            }
+            else if (removeItemWatchers[1].Changed)
+            {
+                removeChargeItem(4, removeItemWatchers[1].Current - removeItemWatchers[1].Old);
+            }
+            else if (removeItemWatchers[2].Changed)
+            {
+                removeChargeItem(14, removeItemWatchers[2].Current - removeItemWatchers[2].Old);
+            }
+            else if (removeItemWatchers[3].Changed)
+            {
+                removeIvoryBug();
+            }
+            else if (removeItemWatchers[4].Changed)
+            {
+                removeCrestFragment();
+            }
+            else if (removeItemWatchers[5].Changed)
+            {
+                removeVitalityFragment();
+            }
+            else
+            {
+                removeLastItem();
+            }
+        }
+
+        private void addChargeItem(int id, double charges)
+        {
+            double currentCharges;
+            IntPtr maxValuePointer, saveValuePtr;
+            switch (id)
+            {
+                case 4:
+                    //Bellflower
+                    maxValuePointer = bellflowerMaxValuePointer;
+                    saveValuePtr = bellflowerSaveValuePointer;
+                    break;
+                case 14:
+                    //Passiflora
+                    maxValuePointer = passifloraMaxValuePointer;
+                    saveValuePtr = passifloraSaveValuePointer;
+                    break;
+                case 17:
+                    //Tainted Missive
+                    maxValuePointer = taintedMissiveMaxValuePointer;
+                    saveValuePtr = taintedMissiveSaveValuePointer;
+                    break;
+                default:
+                    //Defalut to bellflower, should probably be an error instead
+                    maxValuePointer = bellflowerMaxValuePointer;
+                    saveValuePtr = bellflowerSaveValuePointer;
+                    break;
+            }
+            currentCharges = gameProc.ReadValue<double>(maxValuePointer);
+            if (currentCharges == 0)
+            {
+                addItem(id);
+            }
+            gameProc.WriteValue<double>(maxValuePointer, charges + currentCharges);
+            gameProc.WriteValue<double>(saveValuePtr, charges + currentCharges);
+        }
+
+        private void removeChargeItem(int id, double charges)
+        {
+            double currentCharges;
+            IntPtr maxValuePointer, saveValuePtr;
+            switch (id)
+            {
+                case 4:
+                    //Bellflower
+                    maxValuePointer = bellflowerMaxValuePointer;
+                    saveValuePtr = bellflowerSaveValuePointer;
+                    break;
+                case 14:
+                    //Passiflora
+                    maxValuePointer = passifloraMaxValuePointer;
+                    saveValuePtr = passifloraSaveValuePointer;
+                    break;
+                case 17:
+                    //Tainted Missive
+                    maxValuePointer = taintedMissiveMaxValuePointer;
+                    saveValuePtr = taintedMissiveSaveValuePointer;
+                    break;
+                default:
+                    //Default to bellflower, should probably handle this with an error or something
+                    maxValuePointer = bellflowerMaxValuePointer;
+                    saveValuePtr = bellflowerSaveValuePointer;
+                    break;
+            }
+            currentCharges = gameProc.ReadValue<double>(maxValuePointer);
+            if (currentCharges - charges == 0)
+            {
+                removeLastItem();
+            }
+            gameProc.WriteValue<double>(maxValuePointer, charges - currentCharges);
+            gameProc.WriteValue<double>(saveValuePtr, charges - currentCharges);
+        }
+
+        private void addItem(int id)
         {
             //To add an item: Increase total item counter by one, increase the category of item given by 1
             //and set the inventory value for the next item slot to the id of the item given
@@ -243,7 +420,7 @@ namespace LiveSplit.UI.Components
         {
             double fragments = gameProc.ReadValue<double>(crestFragmentCountPointer);
             gameProc.WriteValue<double>(crestFragmentCountPointer, fragments + 1);
-            giveItem(id);
+            addItem(id);
         }
 
         private void removeVitalityFragment()
@@ -272,7 +449,7 @@ namespace LiveSplit.UI.Components
             gameProc.WriteValue<double>(ivoryBugCountPointer, bugs + 1);
             if(bugs == 0)
             {
-                giveItem(34);
+                addItem(34);
             }
         }
 
@@ -353,6 +530,7 @@ namespace LiveSplit.UI.Components
                 {
                     watcher.Update(gameProc);
                 }
+                UpdateItemWatchers();
                         
             }
 
@@ -360,6 +538,14 @@ namespace LiveSplit.UI.Components
             if (invalidator != null)
             {
                 invalidator.Invalidate(0, 0, width, height);
+            }
+        }
+
+        private void UpdateItemWatchers()
+        {
+            foreach (var watcher in removeItemWatchers)
+            {
+                watcher.Update(gameProc);
             }
         }
 
