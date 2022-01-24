@@ -14,6 +14,55 @@ namespace LiveSplit.UI.Components
 {
     public class MomodoraRandomizer : IComponent
     {
+        public enum Items: int
+        {
+            AdornedRing = 1,
+            NecklaceOfSacrifice = 2,
+            Bellflower = 4,
+            AstralCharm = 5,
+            EdeaPearl = 6,
+            DullPearl = 7,
+            RedRing = 8,
+            MagnetStone = 9,
+            RottenBellflower = 10,
+            FaerieTear = 11,
+            ImpurityFlask = 13,
+            Passiflora = 14,
+            CrystalSeed = 15,
+            MedalOfEquivalence = 16,
+            TaintedMissive = 17,
+            BlackSachet = 18,
+            RingOfCandor = 21,
+            SmallCoin = 22,
+            BackmanPatch = 23,
+            CatSphere = 24,
+            HazelBadge = 25,
+            TornBranch = 26,
+            MonasteryKey = 27,
+            ClarityShard = 31,
+            DirtyShroom = 32,
+            IvoryBug = 34,
+            VioletSprite = 35,
+            SoftTissue = 36,
+            GardenKey = 37,
+            SparseThread = 38,
+            BlessingCharm = 39,
+            HeavyArrows = 40,
+            BloodstainedTissue = 41,
+            MapleLeaf = 42,
+            FreshSpringLeaf = 43,
+            PocketIncensory = 44,
+            Birthstone = 45,
+            QuickArrows = 46,
+            DrillingArrows = 47,
+            SealedWind = 48,
+            CinderKey = 49,
+            FragmentBowPow = 50,
+            FragmentBowQuick = 51,
+            FragmentDash = 52,
+            FragmentWarp = 53,
+            VitalityFragment = 54
+        };
 
         private SimpleLabel RandomizerLabel;
         private Process gameProc = null;
@@ -23,9 +72,57 @@ namespace LiveSplit.UI.Components
 
         public LiveSplitState state;
 
-        int[] keyItemIDs = { 22,25,27,29,32,34,37,42,43,45,49,50,51,52,53 };
-        int[] activeItemIDs = { 4,10,14,15,17,23,24,31,35,36,38,39,41,48 };
-        int[] passiveItemIDs = { 1, 2, 5,6,7,8,9,11,13,16,18,21,26,40,44,46,47 };
+        static int[] keyItems = { 
+            (int)Items.SmallCoin, 
+            (int)Items.HazelBadge,
+            (int)Items.MonasteryKey,
+            (int)Items.DirtyShroom,
+            (int)Items.IvoryBug,
+            (int)Items.GardenKey,
+            (int)Items.MapleLeaf,
+            (int)Items.FreshSpringLeaf,
+            (int)Items.Birthstone,
+            (int)Items.CinderKey,
+            (int)Items.FragmentBowPow,
+            (int)Items.FragmentBowQuick,
+            (int)Items.FragmentDash,
+            (int)Items.FragmentWarp
+        };
+        static int[] activeItems = { 
+            (int)Items.Bellflower,
+            (int)Items.RottenBellflower,
+            (int)Items.Passiflora,
+            (int)Items.CrystalSeed,
+            (int)Items.TaintedMissive,
+            (int)Items.BackmanPatch,
+            (int)Items.CatSphere,
+            (int)Items.ClarityShard,
+            (int)Items.VioletSprite,
+            (int)Items.SoftTissue,
+            (int)Items.SparseThread,
+            (int)Items.BlessingCharm,
+            (int)Items.BloodstainedTissue,
+            (int)Items.SealedWind
+        };
+        static int[] passiveItems = {
+            (int)Items.AdornedRing,
+            (int)Items.NecklaceOfSacrifice,
+            (int)Items.AstralCharm,
+            (int)Items.EdeaPearl,
+            (int)Items.DullPearl,
+            (int)Items.RedRing,
+            (int)Items.MagnetStone,
+            (int)Items.FaerieTear,
+            (int)Items.ImpurityFlask,
+            (int)Items.MedalOfEquivalence,
+            (int)Items.BlackSachet,
+            (int)Items.RingOfCandor,
+            (int)Items.TornBranch,
+            (int)Items.HeavyArrows,
+            (int)Items.PocketIncensory,
+            (int)Items.QuickArrows,
+            (int)Items.DrillingArrows
+        };
 
         #region pointers
         #region charge item pointers
@@ -93,15 +190,23 @@ namespace LiveSplit.UI.Components
         IntPtr keyItemsPointer;
         IntPtr totalItemsPointer;
         IntPtr inventoryItemsStartPointer;
+        IntPtr inventoryItemsChargeStartPointer;
         #endregion
 
         #region misc pointers
         IntPtr difficultyPointer;
         #endregion
         #endregion
-        private MemoryWatcher<double>[] removeItemWatchers;
+
+        MemoryWatcher<double> taintedMissiveWatcher;
+        MemoryWatcher<double> bellflowerWatcher;
+        MemoryWatcher<double> passifloraWatcher;
+        MemoryWatcher<double> ivoryBugWatcher;
+        MemoryWatcher<double> crestFragmentWatcher;
+        MemoryWatcher<double> vitalityFragmentWatcher;
         private MemoryWatcher<double> [] testWatchers;
         private bool randomizerRunning;
+        private int itemGiven;
 
         public MomodoraRandomizer(LiveSplitState state)
         {
@@ -138,20 +243,29 @@ namespace LiveSplit.UI.Components
                 }
 
                 //0 = missive, 1 = bellflower, 2 = passiflora, 3 = bugs, 4 = crests, 5 = vitality
-                removeItemWatchers = new MemoryWatcher<double>[6];
-                removeItemWatchers[0] = new MemoryWatcher<double>(taintedMissiveMaxValuePointer);
-                removeItemWatchers[1] = new MemoryWatcher<double>(bellflowerMaxValuePointer);
-                removeItemWatchers[2] = new MemoryWatcher<double>(passifloraMaxValuePointer);
-                removeItemWatchers[3] = new MemoryWatcher<double>(ivoryBugCountPointer);
-                removeItemWatchers[4] = new MemoryWatcher<double>(crestFragmentCountPointer);
-                removeItemWatchers[5] = new MemoryWatcher<double>(vitalityFragmentCountPointer);
+                taintedMissiveWatcher = new MemoryWatcher<double>(taintedMissiveMaxValuePointer);
+                taintedMissiveWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                taintedMissiveWatcher.Enabled = true;
 
-                foreach(MemoryWatcher watcher in removeItemWatchers)
-                {
-                    watcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 100);
-                    watcher.Enabled = true;
-                }
+                bellflowerWatcher = new MemoryWatcher<double>(bellflowerMaxValuePointer);
+                bellflowerWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                bellflowerWatcher.Enabled = true;
 
+                passifloraWatcher = new MemoryWatcher<double>(passifloraMaxValuePointer);
+                passifloraWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                passifloraWatcher.Enabled = true;
+
+                ivoryBugWatcher = new MemoryWatcher<double>(ivoryBugCountPointer);
+                ivoryBugWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                ivoryBugWatcher.Enabled = true;
+
+                crestFragmentWatcher = new MemoryWatcher<double>(crestFragmentCountPointer);
+                crestFragmentWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                crestFragmentWatcher.Enabled = true;
+
+                vitalityFragmentWatcher = new MemoryWatcher<double>(vitalityFragmentCountPointer);
+                vitalityFragmentWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                vitalityFragmentWatcher.Enabled = true;
 
 
                 testWatchers = new MemoryWatcher<double>[6];
@@ -160,11 +274,10 @@ namespace LiveSplit.UI.Components
                 {
                     if (newVal == 1)
                     {
-                        removeItem();
-                        newItem(40);
+                        newItem((int)Items.HeavyArrows);
                     }
                 };
-                testWatchers[0].UpdateInterval = new TimeSpan(0,0,0,0,100);
+                testWatchers[0].UpdateInterval = new TimeSpan(0,0,0,0,10);
                 testWatchers[0].Enabled = true;
 
                 testWatchers[1] = new MemoryWatcher<double>(vitalityFragmentPointers[1]);
@@ -172,11 +285,10 @@ namespace LiveSplit.UI.Components
                 {
                     if (newVal == 1)
                     {
-                        removeItem();
-                        newItem(52);
+                        newItem((int)Items.Bellflower,3);
                     }
                 };
-                testWatchers[1].UpdateInterval = new TimeSpan(0, 0, 0, 0, 100);
+                testWatchers[1].UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
                 testWatchers[1].Enabled = true;
 
                 testWatchers[2] = new MemoryWatcher<double>(ivoryBugPointers[1]);
@@ -184,11 +296,10 @@ namespace LiveSplit.UI.Components
                 {
                     if (newVal == 1)
                     {
-                        removeItem();
                         newItem(54);
                     }
                 };
-                testWatchers[2].UpdateInterval = new TimeSpan(0, 0, 0, 0, 100);
+                testWatchers[2].UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
                 testWatchers[2].Enabled = true;
 
 
@@ -197,11 +308,10 @@ namespace LiveSplit.UI.Components
                 {
                     if (newVal == 1)
                     {
-                        removeItem();
                         newItem(34);
                     }
                 };
-                testWatchers[3].UpdateInterval = new TimeSpan(0, 0, 0, 0, 100);
+                testWatchers[3].UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
                 testWatchers[3].Enabled = true;
 
                 testWatchers[4] = new MemoryWatcher<double>(noRequirementPickupPointers[0]);
@@ -209,12 +319,10 @@ namespace LiveSplit.UI.Components
                 {
                     if (newVal == 1)
                     {
-                        Debug.WriteLine("Picked up bellflower");
-                        removeItem();
                         newItem(34);
                     }
                 };
-                testWatchers[4].UpdateInterval = new TimeSpan(0, 0, 0, 0, 100);
+                testWatchers[4].UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
                 testWatchers[4].Enabled = true;
 
 
@@ -223,37 +331,38 @@ namespace LiveSplit.UI.Components
                 {
                     if (newVal == 1)
                     {
-                        removeItem();
                         newItem(4,3);
                     }
                 };
-                testWatchers[5].UpdateInterval = new TimeSpan(0, 0, 0, 0, 100);
+                testWatchers[5].UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
                 testWatchers[5].Enabled = true;
 
                 randomizerRunning = true;
                 //Setup magic here!
             }
         }
-
+        
+        //Use newItem to give out an item [with charges] and remove the last item acquired
         private void newItem(int id, int addCharges = 0)
         {
-            
-            if(id == 34)
+            //testMagic
+            itemGiven = 3;
+
+            removeItem();
+            if (id == (int)Items.IvoryBug)
             {
-                //Ivory Bug
                 addIvoryBug();
             }
-            else if (53 >= id && id >= 50)
+            else if ((int)Items.FragmentWarp >= id && id >= (int)Items.FragmentBowPow)
             {
-                //Crest Fragment
                 addCrestFragment(id);
             }
-            else if (id == 54)
+            else if (id == (int)Items.VitalityFragment)
             {
                 //Special id for vitality fragments
                 addVitalityFragment();
             }
-            else if (id == 4 && id == 14 && id == 17)
+            else if (id == (int)Items.Bellflower || id == (int)Items.Passiflora || id == (int)Items.TaintedMissive)
             {
                 addChargeItem(id, addCharges);
             }
@@ -267,54 +376,58 @@ namespace LiveSplit.UI.Components
         {
             UpdateItemWatchers();
 
-            if (removeItemWatchers[0].Changed)
+            if (taintedMissiveWatcher.Changed)
             {
-                removeChargeItem(17, removeItemWatchers[0].Current - removeItemWatchers[0].Old);
+                Debug.WriteLine("Removing missive");
+                removeChargeItem((int)Items.TaintedMissive, taintedMissiveWatcher.Current - taintedMissiveWatcher.Old);
             }
-            else if (removeItemWatchers[1].Changed)
+            else if (bellflowerWatcher.Changed)
             {
-                removeChargeItem(4, removeItemWatchers[1].Current - removeItemWatchers[1].Old);
+                Debug.WriteLine("Removing bellflower");
+                removeChargeItem((int)Items.Bellflower, bellflowerWatcher.Current - bellflowerWatcher.Old);
             }
-            else if (removeItemWatchers[2].Changed)
+            else if (passifloraWatcher.Changed)
             {
-                removeChargeItem(14, removeItemWatchers[2].Current - removeItemWatchers[2].Old);
+                Debug.WriteLine("Removing passi");
+                removeChargeItem((int)Items.Passiflora, passifloraWatcher.Current - passifloraWatcher.Old);
             }
-            else if (removeItemWatchers[3].Changed)
+            else if (ivoryBugWatcher.Changed)
             {
+                Debug.WriteLine("Removing IB");
                 removeIvoryBug();
             }
-            else if (removeItemWatchers[4].Changed)
+            else if (crestFragmentWatcher.Changed)
             {
+                Debug.WriteLine("Crest Frag");
                 removeCrestFragment();
             }
-            else if (removeItemWatchers[5].Changed)
+            else if (vitalityFragmentWatcher.Changed)
             {
+                Debug.WriteLine("Removing Vit Frag");
                 removeVitalityFragment();
             }
             else
             {
+                Debug.WriteLine("Removing General Item");
                 removeLastItem();
             }
         }
 
         private void addChargeItem(int id, double charges)
         {
-            double currentCharges;
+            double currentMaxCharges;
             IntPtr maxValuePointer, saveValuePtr;
             switch (id)
             {
-                case 4:
-                    //Bellflower
+                case (int)Items.Bellflower:
                     maxValuePointer = bellflowerMaxValuePointer;
                     saveValuePtr = bellflowerSaveValuePointer;
                     break;
-                case 14:
-                    //Passiflora
+                case (int)Items.Passiflora:
                     maxValuePointer = passifloraMaxValuePointer;
                     saveValuePtr = passifloraSaveValuePointer;
                     break;
-                case 17:
-                    //Tainted Missive
+                case (int)Items.TaintedMissive:
                     maxValuePointer = taintedMissiveMaxValuePointer;
                     saveValuePtr = taintedMissiveSaveValuePointer;
                     break;
@@ -324,13 +437,24 @@ namespace LiveSplit.UI.Components
                     saveValuePtr = bellflowerSaveValuePointer;
                     break;
             }
-            currentCharges = gameProc.ReadValue<double>(maxValuePointer);
-            if (currentCharges == 0)
+            currentMaxCharges = gameProc.ReadValue<double>(maxValuePointer);
+            gameProc.WriteValue<double>(maxValuePointer, charges + currentMaxCharges);
+            gameProc.WriteValue<double>(saveValuePtr, charges + currentMaxCharges);
+            if (currentMaxCharges == 0)
             {
                 addItem(id);
             }
-            gameProc.WriteValue<double>(maxValuePointer, charges + currentCharges);
-            gameProc.WriteValue<double>(saveValuePtr, charges + currentCharges);
+
+            //Update charges if item in inventory, otherwise /shrug
+            var totalItemAmount = gameProc.ReadValue<int>(totalItemsPointer);
+            for(int i = 0; i > totalItemAmount; i++)
+            {
+                if (gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer,0x10*i)) == (double)id)
+                {
+                    double currentCharges = gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsChargeStartPointer, 0x10 * i));
+                    gameProc.WriteValue<double>(IntPtr.Add(inventoryItemsChargeStartPointer, 0x10 * i), currentCharges + charges);
+                }
+            }
         }
 
         private void removeChargeItem(int id, double charges)
@@ -339,18 +463,15 @@ namespace LiveSplit.UI.Components
             IntPtr maxValuePointer, saveValuePtr;
             switch (id)
             {
-                case 4:
-                    //Bellflower
+                case (int)Items.Bellflower:
                     maxValuePointer = bellflowerMaxValuePointer;
                     saveValuePtr = bellflowerSaveValuePointer;
                     break;
-                case 14:
-                    //Passiflora
+                case (int)Items.Passiflora:
                     maxValuePointer = passifloraMaxValuePointer;
                     saveValuePtr = passifloraSaveValuePointer;
                     break;
-                case 17:
-                    //Tainted Missive
+                case (int)Items.TaintedMissive:
                     maxValuePointer = taintedMissiveMaxValuePointer;
                     saveValuePtr = taintedMissiveSaveValuePointer;
                     break;
@@ -365,56 +486,25 @@ namespace LiveSplit.UI.Components
             {
                 removeLastItem();
             }
-            gameProc.WriteValue<double>(maxValuePointer, charges - currentCharges);
-            gameProc.WriteValue<double>(saveValuePtr, charges - currentCharges);
+            gameProc.WriteValue<double>(maxValuePointer, currentCharges - charges);
+            gameProc.WriteValue<double>(saveValuePtr, currentCharges - charges);
         }
 
         private void addItem(int id)
         {
-            //To add an item: Increase total item counter by one, increase the category of item given by 1
+            //To add an item: Increase total item counter by one
             //and set the inventory value for the next item slot to the id of the item given
             var totalItemAmount = gameProc.ReadValue<int>(totalItemsPointer);
             gameProc.WriteValue<int>(totalItemsPointer, (int)totalItemAmount + 1);
             gameProc.WriteValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * totalItemAmount), id);
-
-            if (activeItemIDs.Contains(id))
-            {
-                var activeItemAmount = gameProc.ReadValue<double>(activeItemsPointer);
-                gameProc.WriteValue<double>(activeItemsPointer, (double)activeItemAmount + 1);
-            }
-            else if (passiveItemIDs.Contains(id))
-            {
-                var passiveItemAmount = gameProc.ReadValue<double>(passiveItemsPointer);
-                gameProc.WriteValue<double>(passiveItemsPointer, (double)passiveItemAmount + 1);
-            }
-            else if (keyItemIDs.Contains(id))
-            {
-                var keyItemAmount = gameProc.ReadValue<double>(keyItemsPointer);
-                gameProc.WriteValue<double>(keyItemsPointer, (double)keyItemAmount + 1);
-            } 
         }
 
         private void removeLastItem()
         {
-            //To remove last item, decrease total item counter by one and the corresponding 
+            //To remove last item, decrease total item counter by one
             var totalItemAmount = gameProc.ReadValue<int>(totalItemsPointer);
-            var lastItemID = gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * totalItemAmount));
-            if (activeItemIDs.Contains((int)lastItemID))
-            {
-                var activeItemAmount = gameProc.ReadValue<double>(activeItemsPointer);
-                gameProc.WriteValue<double>(activeItemsPointer, (double)activeItemAmount - 1);
-            }
-            else if (passiveItemIDs.Contains((int)lastItemID))
-            {
-                var passiveItemAmount = gameProc.ReadValue<double>(passiveItemsPointer);
-                gameProc.WriteValue<double>(passiveItemsPointer, (double)passiveItemAmount - 1);
-            }
-            else if (keyItemIDs.Contains((int)lastItemID))
-            {
-                var keyItemAmount = gameProc.ReadValue<double>(keyItemsPointer);
-                gameProc.WriteValue<double>(keyItemsPointer, (double)keyItemAmount - 1);
-            }
             gameProc.WriteValue<int>(totalItemsPointer, (int)totalItemAmount - 1);
+            
         }
 
         private void removeCrestFragment()
@@ -457,7 +547,7 @@ namespace LiveSplit.UI.Components
             gameProc.WriteValue<double>(ivoryBugCountPointer, bugs + 1);
             if(bugs == 0)
             {
-                addItem(34);
+                addItem((int)Items.IvoryBug);
             }
         }
 
@@ -534,27 +624,32 @@ namespace LiveSplit.UI.Components
             if (VerifyProcessRunning() && randomizerRunning)
             {
 
+                //do update stuff here!
                 foreach (var watcher in testWatchers)
                 {
                     watcher.Update(gameProc);
                 }
-                UpdateItemWatchers();
-                        
+                if (itemGiven > 0) { 
+                    UpdateItemWatchers();
+                    itemGiven--;
+                }
+
+                if (invalidator != null)
+                {
+                    invalidator.Invalidate(0, 0, width, height);
+                }
             }
 
-            //do update stuff here!
-            if (invalidator != null)
-            {
-                invalidator.Invalidate(0, 0, width, height);
-            }
         }
 
         private void UpdateItemWatchers()
         {
-            foreach (var watcher in removeItemWatchers)
-            {
-                watcher.Update(gameProc);
-            }
+            taintedMissiveWatcher.Update(gameProc);
+            passifloraWatcher.Update(gameProc);
+            bellflowerWatcher.Update(gameProc);
+            ivoryBugWatcher.Update(gameProc);
+            crestFragmentWatcher.Update(gameProc);
+            vitalityFragmentWatcher.Update(gameProc);
         }
 
         private bool VerifyProcessRunning()
@@ -773,10 +868,12 @@ namespace LiveSplit.UI.Components
                         twentyDeliveredPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x7C0);
 
                         totalItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230b11c,new int[] { 0x1a4}).Deref<Int32>(gameProc),0x4);
+
                         activeItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304ce8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc30);
                         passiveItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304ce8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc40);
                         keyItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304ce8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x1100);
                         inventoryItemsStartPointer = (IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a4, 0xC }).Deref<int>(gameProc);
+                        inventoryItemsChargeStartPointer = (IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a8, 0xC }).Deref<int>(gameProc);
                         #endregion
                         return true;
                     default:
