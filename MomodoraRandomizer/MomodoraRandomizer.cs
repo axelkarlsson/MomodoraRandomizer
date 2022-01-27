@@ -64,6 +64,48 @@ namespace LiveSplit.UI.Components
             VitalityFragment = 54
         };
 
+        private Dictionary<int, int> sourceIdMapping = new Dictionary<int, int>
+        {
+            [0] = (int)Items.Bellflower,
+            [1] = (int)Items.AstralCharm,
+            [2] = (int)Items.Bellflower,
+            [3] = (int)Items.MagnetStone,
+            [4] = (int)Items.GardenKey,
+            [5] = (int)Items.CinderKey,
+            [6] = (int)Items.MonasteryKey,
+            [7] = (int)Items.TaintedMissive,
+            [8] = (int)Items.CrystalSeed,
+            [9] = (int)Items.FaerieTear,
+            [10] = (int)Items.RingOfCandor,
+            [11] = (int)Items.ClarityShard,
+            [12] = (int)Items.NecklaceOfSacrifice,
+            [13] = (int)Items.DullPearl,
+            [14] = (int)Items.RedRing,
+            [15] = (int)Items.DrillingArrows,
+            [16] = (int)Items.ImpurityFlask,
+            [17] = (int)Items.VioletSprite,
+            [18] = (int)Items.QuickArrows,
+            [19] = (int)Items.PocketIncensory,
+            [20] = (int)Items.BlackSachet,
+            [21] = (int)Items.SealedWind,
+            [22] = (int)Items.Bellflower,
+            [23] = (int)Items.Passiflora,
+            [24] = (int)Items.DirtyShroom,
+            [25] = (int)Items.Bellflower,
+            [26] = (int)Items.SoftTissue,
+            [27] = (int)Items.FreshSpringLeaf,
+            [28] = (int)Items.BlessingCharm,
+            [29] = (int)Items.RottenBellflower,
+            [30] = (int)Items.EdeaPearl,
+            [31] = (int)Items.BackmanPatch,
+            [32] = (int)Items.SparseThread,
+            [33] = (int)Items.PocketIncensory,
+            [34] = (int)Items.TornBranch,
+            [35] = (int)Items.TaintedMissive,
+            [36] = (int)Items.BloodstainedTissue,
+            [37] = (int)Items.HeavyArrows,
+        };
+
         const int RANDOMIZER_SOURCE_AMOUNT = 83;
 
         private SimpleLabel RandomizerLabel;
@@ -77,6 +119,28 @@ namespace LiveSplit.UI.Components
         private List<int> usedSources;
         private List<int> possibleSources;
         private List<int> impossibleSources;
+        private List<List<int>> requirementLists;
+        private List<int> requiresCatSphere;
+        private List<int> requiresCrestFragments;
+        private List<int> requiresGardenKey;
+        private List<int> requiresCinderKey;
+        private List<int> requiresMonasteryKey;
+        private List<int> requiresHazelBadge;
+        private List<int> requiresDirtyShroom;
+        private List<int> requiresSoftTissue;
+        private List<int> requiresIvoryBugs;
+
+        private bool[] catRequires = new bool[8] { false, false, false, false, false, false, false, false };
+        private bool[] crestRequires = new bool[8] { false, false, false, false, false, false, false, false };
+        private bool[] gardenRequires = new bool[8] { false, false, false, false, false, false, false, false };
+        private bool[] cinderRequires = new bool[8] { false, false, false, false, false, false, false, false };
+        private bool[] monasteryRequires = new bool[8] { false, false, false, false, false, false, false, false };
+        private bool[] hazelRequires = new bool[8] { false, false, false, false, false, false, false, false };
+        private bool[] softTissueRequires = new bool[8] { false, false, false, false, false, false, false, false };
+        private bool[] dirtyShroomRequires = new bool[8] { false, false, false, false, false, false, false, false };
+
+        private List<int> vitalityFragments;
+        private List<int> ivoryBugs;
 
         public LiveSplitState state;
 
@@ -183,7 +247,6 @@ namespace LiveSplit.UI.Components
         MemoryWatcher<double> ivoryBugWatcher;
         MemoryWatcher<double> crestFragmentWatcher;
         MemoryWatcher<double> vitalityFragmentWatcher;
-        private MemoryWatcher<double> [] testWatchers;
         private bool randomizerRunning;
         private int itemGiven;
 
@@ -196,6 +259,38 @@ namespace LiveSplit.UI.Components
             usedSources = new List<int>();
             possibleSources = new List<int>();
             impossibleSources = new List<int>();
+
+            vitalityFragments = new List<int>();
+            for (int i = 39; i <= 55; i++)
+            {
+                vitalityFragments.Add(i);
+            }
+            ivoryBugs = new List<int>();
+            for (int i = 56; i <= 75; i++)
+            {
+                ivoryBugs.Add(i);
+            }
+            requirementLists = new List<List<int>>();
+            requiresCatSphere = new List<int> { 24, 27, 39, 47, 48, 55, 63, 64, 65, 66, 67, 68, 70, 74, 75, 79 };
+            requiresCrestFragments = new List<int> { 0, 2, 17, 18, 19, 20, 21, 22, 23, 38, 39, 47, 50, 51, 52, 53, 54, 55, 71, 72, 73, 74, 75 };
+            requirementLists.Add(requiresCrestFragments);
+            requiresGardenKey = new List<int> { 66, 67, 68, 35, 26, 25 };
+            requirementLists.Add(requiresGardenKey);
+            requiresCinderKey = new List<int> { 49 };
+            requirementLists.Add(requiresCinderKey);
+            requiresMonasteryKey = new List<int> { 27, 36, 69, 70, 78 };
+            requirementLists.Add(requiresMonasteryKey);
+            requiresHazelBadge = new List<int> { 29 };
+            requirementLists.Add(requiresHazelBadge);
+            requiresDirtyShroom = new List<int> { 30 };
+            requirementLists.Add(requiresDirtyShroom);
+            requiresDirtyShroom = new List<int> { 30 };
+            requirementLists.Add(requiresDirtyShroom);
+            requiresSoftTissue = new List<int> { 37 };
+            requirementLists.Add(requiresSoftTissue);
+            requiresIvoryBugs = new List<int> { 80,81,82 };
+            requirementLists.Add(requiresIvoryBugs);
+
             state.OnStart += onStart;
             state.OnReset += onReset;
         }
@@ -225,50 +320,146 @@ namespace LiveSplit.UI.Components
                     randomGenerator = new Random(seed);
                 }
 
-                bannedSources.Clear();
-                impossibleSources.Clear();
-                usedSources.Clear();
-                possibleSources.Clear();
+                resetSources();
                 updateBannedSources();
                 randoSourceWatchers = new MemoryWatcherList();
 
-                //1: Place Crest Fragments
+                //Key items are played in order: Cat Sphere, Crest Fragments, Garden Key, Cinder Key, Monastery Key, (Hazel Badge, Soft Tissue, Dirty Shroom, Ivory Bugs) 
+                //1. Place Cat Sphere
+                #region cat sphere
+                updateImpossibleSources((int)Items.CatSphere);
+                updatePossibleSources();
+                int index = randomGenerator.Next(possibleSources.Count); 
+                createMemoryWatcher((int)Items.CatSphere, possibleSources[index]);
+                usedSources.Add(index);
+                for (int i = 0; i < requirementLists.Count; i++)
+                {
+                    if (requirementLists[i].Contains(index)) catRequires[i] = true;
+                }
+                #endregion
+
+                //2: Place Crest Fragments
+                #region crest Fragments
                 updateImpossibleSources((int)Items.FragmentBowPow);
                 updatePossibleSources();
-                int index = randomGenerator.Next(possibleSources.Count);
-                Debug.WriteLine("Bow Charge at " + index + " " + potentialSourcesPointers[possibleSources[index]].ToString("X"));
+                index = randomGenerator.Next(possibleSources.Count);
                 createMemoryWatcher((int)Items.FragmentBowPow, possibleSources[index]);
                 possibleSources.Remove(index);
                 usedSources.Add(index);
+                for (int i = 0; i < requirementLists.Count; i++)
+                {
+                    if (requirementLists[i].Contains(index)) crestRequires[i] = true;
+                }
 
                 index = randomGenerator.Next(possibleSources.Count);
-                Debug.WriteLine("Bow Quick at " + index + " " + potentialSourcesPointers[possibleSources[index]].ToString("X"));
                 createMemoryWatcher((int)Items.FragmentBowQuick, possibleSources[index]);
                 possibleSources.Remove(index);
                 usedSources.Add(index);
+                for (int i = 0; i < requirementLists.Count; i++)
+                {
+                    if (requirementLists[i].Contains(index)) crestRequires[i] = true;
+                }
 
                 index = randomGenerator.Next(possibleSources.Count);
-                Debug.WriteLine("Dash at " + index + " " + potentialSourcesPointers[possibleSources[index]].ToString("X"));
                 createMemoryWatcher((int)Items.FragmentDash, possibleSources[index]);
                 possibleSources.Remove(index);
                 usedSources.Add(index);
+                for (int i = 0; i < requirementLists.Count; i++)
+                {
+                    if (requirementLists[i].Contains(index)) crestRequires[i] = true;
+                }
 
                 index = randomGenerator.Next(possibleSources.Count);
-                Debug.WriteLine("Warp at" + index + " " + potentialSourcesPointers[possibleSources[index]].ToString("X"));
                 createMemoryWatcher((int)Items.FragmentWarp, possibleSources[index]);
                 possibleSources.Remove(index);
                 usedSources.Add(index);
+                for (int i = 0; i < requirementLists.Count; i++)
+                {
+                    if (requirementLists[i].Contains(index)) crestRequires[i] = true;
+                }
+                #endregion
 
-                //2. Place Cat Sphere
-                updateImpossibleSources((int)Items.CatSphere);
+                //3: Garden Key
+                #region garden Key
+                updateImpossibleSources((int)Items.GardenKey);
                 updatePossibleSources();
                 index = randomGenerator.Next(possibleSources.Count);
-                Debug.WriteLine("Cat Sphere at " + index + " " + potentialSourcesPointers[possibleSources[index]].ToString("X"));
-                createMemoryWatcher((int)Items.CatSphere, possibleSources[index]);
+                createMemoryWatcher((int)Items.GardenKey, possibleSources[index]);
                 usedSources.Add(index);
+                for (int i = 0; i < requirementLists.Count; i++)
+                {
+                    if (requirementLists[i].Contains(index)) gardenRequires[i] = true;
+                }
+                #endregion
 
-                //4. Place Ivory Bugs
-                for(int i = 56; i < 76; i++)
+                //4: Cinder Key
+                #region cinder Key
+                updateImpossibleSources((int)Items.CinderKey);
+                updatePossibleSources();
+                index = randomGenerator.Next(possibleSources.Count);
+                createMemoryWatcher((int)Items.CinderKey, possibleSources[index]);
+                usedSources.Add(index);
+                for (int i = 0; i < requirementLists.Count; i++)
+                {
+                    if (requirementLists[i].Contains(index)) cinderRequires[i] = true;
+                }
+                #endregion
+
+                //5: Monastery Key
+                #region monastery Key
+                updateImpossibleSources((int)Items.MonasteryKey);
+                updatePossibleSources();
+                index = randomGenerator.Next(possibleSources.Count);
+                createMemoryWatcher((int)Items.MonasteryKey, possibleSources[index]);
+                usedSources.Add(index);
+                for (int i = 0; i < requirementLists.Count; i++)
+                {
+                    if (requirementLists[i].Contains(index)) monasteryRequires[i] = true;
+                }
+                #endregion
+
+                //6: Hazel Badge
+                #region hazel badge
+                updateImpossibleSources((int)Items.HazelBadge);
+                updatePossibleSources();
+                index = randomGenerator.Next(possibleSources.Count);
+                createMemoryWatcher((int)Items.HazelBadge, possibleSources[index]);
+                usedSources.Add(index);
+                for (int i = 0; i < requirementLists.Count; i++)
+                {
+                    if (requirementLists[i].Contains(index)) hazelRequires[i] = true;
+                }
+                #endregion
+
+                //7: Soft Tissue
+                #region soft tissue
+                updateImpossibleSources((int)Items.SoftTissue);
+                updatePossibleSources();
+                index = randomGenerator.Next(possibleSources.Count);
+                createMemoryWatcher((int)Items.SoftTissue, possibleSources[index]);
+                usedSources.Add(index);
+                for (int i = 0; i < requirementLists.Count; i++)
+                {
+                    if (requirementLists[i].Contains(index)) softTissueRequires[i] = true;
+                }
+                #endregion
+
+                //8: Dirty Shroom
+                #region dirty shroom
+                updateImpossibleSources((int)Items.DirtyShroom);
+                updatePossibleSources();
+                index = randomGenerator.Next(possibleSources.Count);
+                createMemoryWatcher((int)Items.DirtyShroom, possibleSources[index]);
+                usedSources.Add(index);
+                for (int i = 0; i < requirementLists.Count; i++)
+                {
+                    if (requirementLists[i].Contains(index)) dirtyShroomRequires[i] = true;
+                }
+                #endregion
+
+                //9. Place Ivory Bugs
+                updateImpossibleSources((int)Items.IvoryBug);
+                for (int i = 56; i < 76; i++)
                 {
                     updatePossibleSources();
                     index = randomGenerator.Next(possibleSources.Count);
@@ -276,7 +467,7 @@ namespace LiveSplit.UI.Components
                     usedSources.Add(index);
                 }
 
-                //5. Place Vitality Fragments
+                //10. Place Vitality Fragments
                 for (int i = 39; i < 56; i++)
                 {
                     updatePossibleSources();
@@ -285,7 +476,7 @@ namespace LiveSplit.UI.Components
                     usedSources.Add(index);
                 }
 
-                //6. Rest of items
+                //11. Rest of items
                 for (int i = 0; i < 39; i++)
                 {
                     if (!bannedSources.Contains(i))
@@ -324,52 +515,21 @@ namespace LiveSplit.UI.Components
                 #endregion
 
                 randomizerRunning = true;
-                //Setup magic here!
             }
         }
 
-        private Dictionary<int, int> sourceIdMapping = new Dictionary<int, int> { 
-            [0]=(int)Items.Bellflower,
-            [1] = (int)Items.AstralCharm,
-            [2] = (int)Items.Bellflower,
-            [3] = (int)Items.MagnetStone,
-            [4] = (int)Items.GardenKey,
-            [5] = (int)Items.CinderKey,
-            [6] = (int)Items.MonasteryKey,
-            [7] = (int)Items.TaintedMissive,
-            [8] = (int)Items.CrystalSeed,
-            [9] = (int)Items.FaerieTear,
-            [10] = (int)Items.RingOfCandor,
-            [11] = (int)Items.ClarityShard,
-            [12] = (int)Items.NecklaceOfSacrifice,
-            [13] = (int)Items.DullPearl,
-            [14] = (int)Items.RedRing,
-            [15] = (int)Items.DrillingArrows,
-            [16] = (int)Items.ImpurityFlask,
-            [17] = (int)Items.VioletSprite,
-            [18] = (int)Items.QuickArrows,
-            [19] = (int)Items.PocketIncensory,
-            [20] = (int)Items.BlackSachet,
-            [21] = (int)Items.SealedWind,
-            [22] = (int)Items.Bellflower,
-            [23] = (int)Items.Passiflora,
-            [24] = (int)Items.DirtyShroom,
-            [25] = (int)Items.Bellflower,
-            [26] = (int)Items.SoftTissue,
-            [27] = (int)Items.FreshSpringLeaf,
-            [28] = (int)Items.BlessingCharm,
-            [29] = (int)Items.RottenBellflower,
-            [30] = (int)Items.EdeaPearl,
-            [31] = (int)Items.BackmanPatch,
-            [32] = (int)Items.SparseThread,
-            [33] = (int)Items.PocketIncensory,
-            [34] = (int)Items.TornBranch,
-            [35] = (int)Items.TaintedMissive,
-            [36] = (int)Items.BloodstainedTissue,
-            [37] = (int)Items.HeavyArrows,
-        };
+        private void resetSources()
+        {
+            bannedSources.Clear();
+            impossibleSources.Clear();
+            usedSources.Clear();
+            possibleSources.Clear();
+        }
+
         private void createMemoryWatcher(int giveItemID, int newSourceAddressIndex)
         {
+            //Maybe change Debug.WriteLine to write to a file instead?
+            Debug.WriteLine("Item ID " + giveItemID + " generated at position " + newSourceAddressIndex);
             MemoryWatcher<double> temp = new MemoryWatcher<double>(potentialSourcesPointers[newSourceAddressIndex]);
             temp.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
             temp.OnChanged += (old, current) =>
@@ -386,20 +546,88 @@ namespace LiveSplit.UI.Components
 
         private void updateImpossibleSources(int itemId)
         {
-            if(itemId == (int)Items.FragmentBowPow)
-            {
-                impossibleSources = new List<int> { 17,18,19,20,21,22,23,47,50,51,52,53,54,55,71,72,73,74,75};
+            impossibleSources.Clear();
+            //Key items are played in order: Cat Sphere, Crest Fragments, Garden Key, Cinder Key, Monastery Key, (Hazel Badge, Soft Tissue, Dirty Shroom, Ivory Bug) 
+            if (itemId == (int)Items.CatSphere)
+            { 
+                impossibleSources.AddRange(requiresCatSphere);
             }
-            else if(itemId == (int)Items.CatSphere)
+            else if (itemId == (int)Items.FragmentBowPow)
             {
-                //For future: if all spheres are gettable without Cat Sphere, sphere can be placed late game
-                impossibleSources = new List<int> { 24,27,48,63,64,65,66,67,68,70,79, 17, 18, 19, 20, 21, 22, 23, 47, 50, 51, 52, 53, 54, 55, 71, 72, 73, 74, 75 };
+                impossibleSources.AddRange(requiresCrestFragments);
+                if (catRequires[0]) impossibleSources.AddRange(requiresCatSphere);
+            }
+            else if (itemId == (int)Items.GardenKey)
+            {
+                impossibleSources.AddRange(requiresGardenKey);
+                if (catRequires[1]) impossibleSources.AddRange(requiresCatSphere);
+                if (crestRequires[1]) impossibleSources.AddRange(requiresCrestFragments);
+            }
+            else if (itemId == (int)Items.CinderKey)
+            {
+                impossibleSources.AddRange(requiresCinderKey);
+                if (catRequires[2]) impossibleSources.AddRange(requiresCatSphere);
+                if (crestRequires[2]) impossibleSources.AddRange(requiresCrestFragments);
+                if (gardenRequires[2]) impossibleSources.AddRange(requiresGardenKey);
+            }
+            else if (itemId == (int)Items.MonasteryKey)
+            {
+                impossibleSources.AddRange(requiresMonasteryKey);
+                if (catRequires[3]) impossibleSources.AddRange(requiresCatSphere);
+                if (crestRequires[3]) impossibleSources.AddRange(requiresCrestFragments);
+                if (gardenRequires[3]) impossibleSources.AddRange(requiresGardenKey);
+                if (cinderRequires[3]) impossibleSources.AddRange(requiresCinderKey);
+            }
+            else if (itemId == (int)Items.HazelBadge)
+            {
+                impossibleSources.AddRange(requiresHazelBadge);
+                if (catRequires[4]) impossibleSources.AddRange(requiresCatSphere);
+                if (crestRequires[4]) impossibleSources.AddRange(requiresCrestFragments);
+                if (gardenRequires[4]) impossibleSources.AddRange(requiresGardenKey);
+                if (cinderRequires[4]) impossibleSources.AddRange(requiresCinderKey);
+                if (monasteryRequires[4]) impossibleSources.AddRange(requiresMonasteryKey);
+            }
+            else if (itemId == (int)Items.SoftTissue)
+            {
+                impossibleSources.AddRange(requiresSoftTissue);
+                if (catRequires[5]) impossibleSources.AddRange(requiresCatSphere);
+                if (crestRequires[5]) impossibleSources.AddRange(requiresCrestFragments);
+                if (gardenRequires[5]) impossibleSources.AddRange(requiresGardenKey);
+                if (cinderRequires[5]) impossibleSources.AddRange(requiresCinderKey);
+                if (monasteryRequires[5]) impossibleSources.AddRange(requiresMonasteryKey);
+                if (hazelRequires[5]) impossibleSources.AddRange(requiresHazelBadge);
+            }
+            else if (itemId == (int)Items.DirtyShroom)
+            {
+                impossibleSources.AddRange(requiresDirtyShroom);
+                if (catRequires[6]) impossibleSources.AddRange(requiresCatSphere);
+                if (crestRequires[6]) impossibleSources.AddRange(requiresCrestFragments);
+                if (gardenRequires[6]) impossibleSources.AddRange(requiresGardenKey);
+                if (cinderRequires[6]) impossibleSources.AddRange(requiresCinderKey);
+                if (monasteryRequires[6]) impossibleSources.AddRange(requiresMonasteryKey);
+                if (hazelRequires[6]) impossibleSources.AddRange(requiresHazelBadge);
+                if (softTissueRequires[6]) impossibleSources.AddRange(requiresSoftTissue);
+            }
+            else if (itemId == (int)Items.IvoryBug)
+            {
+                impossibleSources.AddRange(requiresIvoryBugs);
+                if (catRequires[7]) impossibleSources.AddRange(requiresCatSphere);
+                if (crestRequires[7]) impossibleSources.AddRange(requiresCrestFragments);
+                if (gardenRequires[7]) impossibleSources.AddRange(requiresGardenKey);
+                if (cinderRequires[7]) impossibleSources.AddRange(requiresCinderKey);
+                if (monasteryRequires[7]) impossibleSources.AddRange(requiresMonasteryKey);
+                if (hazelRequires[7]) impossibleSources.AddRange(requiresHazelBadge);
+                if (softTissueRequires[7]) impossibleSources.AddRange(requiresSoftTissue);
+                if (dirtyShroomRequires[7]) impossibleSources.AddRange(requiresDirtyShroom);
             }
         }
 
         private void updateBannedSources()
         {
-            bannedSources = new List<int> { 4,5,6,8,9,10,11,12,13,14,15,16,17,18,19,28,29,80,81,82};
+            //If !VitFragments
+            bannedSources.AddRange(vitalityFragments);
+            //If !Ivory Bugs
+            bannedSources.AddRange(ivoryBugs);
         }
 
         private void updatePossibleSources()
@@ -430,7 +658,6 @@ namespace LiveSplit.UI.Components
             }
             else if (id == (int)Items.VitalityFragment)
             {
-                //Special id for vitality fragments
                 addVitalityFragment();
             }
             else if (id == (int)Items.Bellflower || id == (int)Items.Passiflora || id == (int)Items.TaintedMissive)
@@ -696,7 +923,7 @@ namespace LiveSplit.UI.Components
             {
 
                 //do update stuff here!
-                foreach (var watcher in testWatchers)
+                foreach (var watcher in randoSourceWatchers)
                 {
                     watcher.Update(gameProc);
                 }
