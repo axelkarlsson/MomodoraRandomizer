@@ -240,6 +240,7 @@ namespace LiveSplit.UI.Components
 
         #region misc pointers
         IntPtr difficultyPointer;
+        IntPtr levelID;
         #endregion
         #endregion
 
@@ -249,11 +250,16 @@ namespace LiveSplit.UI.Components
         MemoryWatcher<double> ivoryBugWatcher;
         MemoryWatcher<double> crestFragmentWatcher;
         MemoryWatcher<double> vitalityFragmentWatcher;
+        MemoryWatcher<int> levelIDWatcher;
         private bool randomizerRunning;
         private int itemGiven;
         private bool hasMissive;
         private bool hasPassiflora;
         private bool hasBellflower;
+
+        List<List<int>> doorLocations;
+        private double unlocked;
+        List<int> hasKey = new List<int> { 0, 0, 0 };
 
         public MomodoraRandomizer(LiveSplitState state)
         {
@@ -293,6 +299,13 @@ namespace LiveSplit.UI.Components
             requirementLists.Add(requiresDirtyShroom);
             requiresIvoryBugs = new List<int> { 80,81,82 };
             requirementLists.Add(requiresIvoryBugs);
+            //GardenKey, MonasteryKey, CinderKey
+            doorLocations = new List<List<int>>
+            {
+                new List<int> { 145, 84},
+                new List<int> { 99 },
+                new List<int> { 183 }
+            };
 
             state.OnStart += onStart;
             state.OnReset += onReset;
@@ -565,6 +578,14 @@ namespace LiveSplit.UI.Components
                 vitalityFragmentWatcher = new MemoryWatcher<double>(vitalityFragmentCountPointer);
                 vitalityFragmentWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
                 vitalityFragmentWatcher.Enabled = true;
+
+                levelIDWatcher = new MemoryWatcher<int>(levelID);
+                levelIDWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                levelIDWatcher.Enabled = true;
+                levelIDWatcher.OnChanged += (old, current) =>
+                {
+                    checkRoom(old, current);
+                };
                 #endregion
 
                 randomizerRunning = true;
@@ -594,7 +615,6 @@ namespace LiveSplit.UI.Components
             };
             temp.Enabled = true;
             randoSourceWatchers.Add(temp);
-
         }
 
         private void updateImpossibleSources(int itemId)
@@ -716,6 +736,10 @@ namespace LiveSplit.UI.Components
             else if (id == (int)Items.Bellflower || id == (int)Items.Passiflora || id == (int)Items.TaintedMissive)
             {
                 addChargeItem(id, addCharges);
+            }
+            else if (id == (int)Items.MonasteryKey || id == (int)Items.GardenKey || id == (int)Items.CinderKey)
+            {
+                addKey(id);
             }
             else
             {
@@ -906,6 +930,48 @@ namespace LiveSplit.UI.Components
             if (bugs == 1)
             {
                 removeLastItem();
+            }
+        }
+
+        private void addKey(int id)
+        {
+            if(id == (int)Items.MonasteryKey)
+            {
+                hasKey[1] = 1;
+            }
+            else if (id == (int)Items.GardenKey)
+            {
+                hasKey[2] = 1;
+            }
+            else
+            {
+                hasKey[3] = 1;
+            }
+
+            addItem(id);
+        }
+
+        private void checkRoom(int old, int current)
+        {
+            int j;
+
+            for (int i = 0; i < 3; i++)
+            {
+                j = i + 4;//Id for keys is 4-6
+
+                if (doorLocations[i].Contains(current))//If the player is in a room with doors that pertaint to a key
+                {
+                    unlocked = gameProc.ReadValue<double>(potentialSourcesPointers[j]);//Read value for key acquired
+
+                    if (unlocked != hasKey[i])//If the state of "key acquired" is different than it should be invert value
+                    {
+                        gameProc.WriteValue<double>(potentialSourcesPointers[j], 1-unlocked);//1-0=1; 1-1=0
+                    }
+                }
+                else if (doorLocations[i].Contains(old) && !doorLocations[i].Contains(current))//If they just left the room revert state of flag
+                {
+                    gameProc.WriteValue<double>(potentialSourcesPointers[j], unlocked);
+                }
             }
         }
 
@@ -1239,6 +1305,7 @@ namespace LiveSplit.UI.Components
                         keyItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304ce8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x1100);
                         inventoryItemsStartPointer = (IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a4, 0xC }).Deref<int>(gameProc);
                         inventoryItemsChargeStartPointer = (IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a8, 0xC }).Deref<int>(gameProc);
+                        levelID = (IntPtr)new DeepPointer(0x230F1A0).Deref<int>(gameProc);
                         #endregion
                         return true;
                     default:
