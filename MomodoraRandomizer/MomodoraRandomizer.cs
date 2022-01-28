@@ -130,6 +130,8 @@ namespace LiveSplit.UI.Components
         private List<int> requiresSoftTissue;
         private List<int> requiresIvoryBugs;
 
+        //                                         Crest, Garden, Cinder, Mona, Haze, Soft, Dirty, Bugs
+        private bool[,] requirementMatrix = new bool[8,8];
         private bool[] catRequires = new bool[8] { false, false, false, false, false, false, false, false };
         private bool[] crestRequires = new bool[8] { false, false, false, false, false, false, false, false };
         private bool[] gardenRequires = new bool[8] { false, false, false, false, false, false, false, false };
@@ -249,6 +251,9 @@ namespace LiveSplit.UI.Components
         MemoryWatcher<double> vitalityFragmentWatcher;
         private bool randomizerRunning;
         private int itemGiven;
+        private bool hasMissive;
+        private bool hasPassiflora;
+        private bool hasBellflower;
 
         public MomodoraRandomizer(LiveSplitState state)
         {
@@ -282,12 +287,10 @@ namespace LiveSplit.UI.Components
             requirementLists.Add(requiresMonasteryKey);
             requiresHazelBadge = new List<int> { 29 };
             requirementLists.Add(requiresHazelBadge);
-            requiresDirtyShroom = new List<int> { 30 };
-            requirementLists.Add(requiresDirtyShroom);
-            requiresDirtyShroom = new List<int> { 30 };
-            requirementLists.Add(requiresDirtyShroom);
             requiresSoftTissue = new List<int> { 37 };
             requirementLists.Add(requiresSoftTissue);
+            requiresDirtyShroom = new List<int> { 30 };
+            requirementLists.Add(requiresDirtyShroom);
             requiresIvoryBugs = new List<int> { 80,81,82 };
             requirementLists.Add(requiresIvoryBugs);
 
@@ -305,13 +308,11 @@ namespace LiveSplit.UI.Components
             if (VerifyProcessRunning())
             {
                 //If set seed ->
-                if (settingsControl.seed_enabled() == true)
+                if (!settingsControl.RandomSeed)
                 {
                     int.TryParse(settingsControl.seed_get(), out seed);
                     randomGenerator = new Random(seed);
                 }
-
-                //else, random seed
                 else
                 {
                     randomGenerator = new Random();
@@ -322,6 +323,7 @@ namespace LiveSplit.UI.Components
 
                 resetSources();
                 updateBannedSources();
+                Array.Clear(requirementMatrix, 0, requirementMatrix.Length);
                 randoSourceWatchers = new MemoryWatcherList();
 
                 //Key items are played in order: Cat Sphere, Crest Fragments, Garden Key, Cinder Key, Monastery Key, (Hazel Badge, Soft Tissue, Dirty Shroom, Ivory Bugs) 
@@ -335,6 +337,7 @@ namespace LiveSplit.UI.Components
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     if (requirementLists[i].Contains(index)) catRequires[i] = true;
+                    if (requirementLists[i].Contains(index)) requirementMatrix[0,i] = true;
                 }
                 #endregion
 
@@ -349,6 +352,11 @@ namespace LiveSplit.UI.Components
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     if (requirementLists[i].Contains(index)) crestRequires[i] = true;
+                    if (requirementLists[i].Contains(index))
+                    {
+                        for (int j = 0; j < 8; j++) requirementMatrix[1, j] = requirementMatrix[i, j];
+                        requirementMatrix[1, i] = true;
+                    }
                 }
 
                 index = randomGenerator.Next(possibleSources.Count);
@@ -358,6 +366,11 @@ namespace LiveSplit.UI.Components
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     if (requirementLists[i].Contains(index)) crestRequires[i] = true;
+                    if (requirementLists[i].Contains(index))
+                    {
+                        for (int j = 0; j < 8; j++) requirementMatrix[1, j] = requirementMatrix[i, j];
+                        requirementMatrix[1, i] = true;
+                    }
                 }
 
                 index = randomGenerator.Next(possibleSources.Count);
@@ -367,6 +380,11 @@ namespace LiveSplit.UI.Components
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     if (requirementLists[i].Contains(index)) crestRequires[i] = true;
+                    if (requirementLists[i].Contains(index))
+                    {
+                        for (int j = 0; j < 8; j++) requirementMatrix[1, j] = requirementMatrix[i, j];
+                        requirementMatrix[1, i] = true;
+                    }
                 }
 
                 index = randomGenerator.Next(possibleSources.Count);
@@ -376,6 +394,11 @@ namespace LiveSplit.UI.Components
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     if (requirementLists[i].Contains(index)) crestRequires[i] = true;
+                    if (requirementLists[i].Contains(index))
+                    {
+                        for (int j = 0; j < 8; j++) requirementMatrix[1, j] = requirementMatrix[i, j];
+                        requirementMatrix[1, i] = true;
+                    }
                 }
                 #endregion
 
@@ -389,6 +412,11 @@ namespace LiveSplit.UI.Components
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     if (requirementLists[i].Contains(index)) gardenRequires[i] = true;
+                    if (requirementLists[i].Contains(index))
+                    {
+                        for (int j = 0; j < 8; j++) requirementMatrix[2, j] = requirementMatrix[i, j];
+                        requirementMatrix[2, i] = true;
+                    }
                 }
                 #endregion
 
@@ -402,6 +430,11 @@ namespace LiveSplit.UI.Components
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     if (requirementLists[i].Contains(index)) cinderRequires[i] = true;
+                    if (requirementLists[i].Contains(index))
+                    {
+                        for (int j = 0; j < 8; j++) requirementMatrix[3, j] = requirementMatrix[i, j];
+                        requirementMatrix[3, i] = true;
+                    }
                 }
                 #endregion
 
@@ -415,6 +448,11 @@ namespace LiveSplit.UI.Components
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     if (requirementLists[i].Contains(index)) monasteryRequires[i] = true;
+                    if (requirementLists[i].Contains(index))
+                    {
+                        for (int j = 0; j < 8; j++) requirementMatrix[4, j] = requirementMatrix[i, j];
+                        requirementMatrix[4, i] = true;
+                    }
                 }
                 #endregion
 
@@ -428,6 +466,11 @@ namespace LiveSplit.UI.Components
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     if (requirementLists[i].Contains(index)) hazelRequires[i] = true;
+                    if (requirementLists[i].Contains(index))
+                    {
+                        for (int j = 0; j < 8; j++) requirementMatrix[5, j] = requirementMatrix[i, j];
+                        requirementMatrix[5, i] = true;
+                    }
                 }
                 #endregion
 
@@ -441,6 +484,11 @@ namespace LiveSplit.UI.Components
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     if (requirementLists[i].Contains(index)) softTissueRequires[i] = true;
+                    if (requirementLists[i].Contains(index))
+                    {
+                        for (int j = 0; j < 8; j++) requirementMatrix[6, j] = requirementMatrix[i, j];
+                        requirementMatrix[6, i] = true;
+                    }
                 }
                 #endregion
 
@@ -454,6 +502,11 @@ namespace LiveSplit.UI.Components
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     if (requirementLists[i].Contains(index)) dirtyShroomRequires[i] = true;
+                    if (requirementLists[i].Contains(index))
+                    {
+                        for (int j = 0; j < 8; j++) requirementMatrix[7, j] = requirementMatrix[i, j];
+                        requirementMatrix[7, i] = true;
+                    }
                 }
                 #endregion
 
@@ -529,7 +582,7 @@ namespace LiveSplit.UI.Components
         private void createMemoryWatcher(int giveItemID, int newSourceAddressIndex)
         {
             //Maybe change Debug.WriteLine to write to a file instead?
-            Debug.WriteLine("Item ID " + giveItemID + " generated at position " + newSourceAddressIndex);
+            Debug.WriteLine("Item " + Enum.GetName(typeof(Items),giveItemID) + " generated at position " + newSourceAddressIndex);
             MemoryWatcher<double> temp = new MemoryWatcher<double>(potentialSourcesPointers[newSourceAddressIndex]);
             temp.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
             temp.OnChanged += (old, current) =>
@@ -555,70 +608,70 @@ namespace LiveSplit.UI.Components
             else if (itemId == (int)Items.FragmentBowPow)
             {
                 impossibleSources.AddRange(requiresCrestFragments);
-                if (catRequires[0]) impossibleSources.AddRange(requiresCatSphere);
+                if (requirementMatrix[0,0]) impossibleSources.AddRange(requiresCatSphere);
             }
             else if (itemId == (int)Items.GardenKey)
             {
                 impossibleSources.AddRange(requiresGardenKey);
-                if (catRequires[1]) impossibleSources.AddRange(requiresCatSphere);
-                if (crestRequires[1]) impossibleSources.AddRange(requiresCrestFragments);
+                if (requirementMatrix[0, 1]) impossibleSources.AddRange(requiresCatSphere);
+                if (requirementMatrix[1, 1]) impossibleSources.AddRange(requiresCrestFragments);
             }
             else if (itemId == (int)Items.CinderKey)
             {
                 impossibleSources.AddRange(requiresCinderKey);
-                if (catRequires[2]) impossibleSources.AddRange(requiresCatSphere);
-                if (crestRequires[2]) impossibleSources.AddRange(requiresCrestFragments);
-                if (gardenRequires[2]) impossibleSources.AddRange(requiresGardenKey);
+                if (requirementMatrix[0, 2]) impossibleSources.AddRange(requiresCatSphere);
+                if (requirementMatrix[1, 2]) impossibleSources.AddRange(requiresCrestFragments);
+                if (requirementMatrix[2, 2]) impossibleSources.AddRange(requiresGardenKey);
             }
             else if (itemId == (int)Items.MonasteryKey)
             {
                 impossibleSources.AddRange(requiresMonasteryKey);
-                if (catRequires[3]) impossibleSources.AddRange(requiresCatSphere);
-                if (crestRequires[3]) impossibleSources.AddRange(requiresCrestFragments);
-                if (gardenRequires[3]) impossibleSources.AddRange(requiresGardenKey);
-                if (cinderRequires[3]) impossibleSources.AddRange(requiresCinderKey);
+                if (requirementMatrix[0, 3]) impossibleSources.AddRange(requiresCatSphere);
+                if (requirementMatrix[1, 3]) impossibleSources.AddRange(requiresCrestFragments);
+                if (requirementMatrix[2, 3]) impossibleSources.AddRange(requiresGardenKey);
+                if (requirementMatrix[3, 3]) impossibleSources.AddRange(requiresCinderKey);
             }
             else if (itemId == (int)Items.HazelBadge)
             {
                 impossibleSources.AddRange(requiresHazelBadge);
-                if (catRequires[4]) impossibleSources.AddRange(requiresCatSphere);
-                if (crestRequires[4]) impossibleSources.AddRange(requiresCrestFragments);
-                if (gardenRequires[4]) impossibleSources.AddRange(requiresGardenKey);
-                if (cinderRequires[4]) impossibleSources.AddRange(requiresCinderKey);
-                if (monasteryRequires[4]) impossibleSources.AddRange(requiresMonasteryKey);
+                if (requirementMatrix[0, 4]) impossibleSources.AddRange(requiresCatSphere);
+                if (requirementMatrix[1, 4]) impossibleSources.AddRange(requiresCrestFragments);
+                if (requirementMatrix[2, 4]) impossibleSources.AddRange(requiresGardenKey);
+                if (requirementMatrix[3, 4]) impossibleSources.AddRange(requiresCinderKey);
+                if (requirementMatrix[4, 4]) impossibleSources.AddRange(requiresMonasteryKey);
             }
             else if (itemId == (int)Items.SoftTissue)
             {
                 impossibleSources.AddRange(requiresSoftTissue);
-                if (catRequires[5]) impossibleSources.AddRange(requiresCatSphere);
-                if (crestRequires[5]) impossibleSources.AddRange(requiresCrestFragments);
-                if (gardenRequires[5]) impossibleSources.AddRange(requiresGardenKey);
-                if (cinderRequires[5]) impossibleSources.AddRange(requiresCinderKey);
-                if (monasteryRequires[5]) impossibleSources.AddRange(requiresMonasteryKey);
-                if (hazelRequires[5]) impossibleSources.AddRange(requiresHazelBadge);
+                if (requirementMatrix[0, 5]) impossibleSources.AddRange(requiresCatSphere);
+                if (requirementMatrix[1, 5]) impossibleSources.AddRange(requiresCrestFragments);
+                if (requirementMatrix[2, 5]) impossibleSources.AddRange(requiresGardenKey);
+                if (requirementMatrix[3, 5]) impossibleSources.AddRange(requiresCinderKey);
+                if (requirementMatrix[4, 5]) impossibleSources.AddRange(requiresMonasteryKey);
+                if (requirementMatrix[5, 5]) impossibleSources.AddRange(requiresHazelBadge);
             }
             else if (itemId == (int)Items.DirtyShroom)
             {
                 impossibleSources.AddRange(requiresDirtyShroom);
-                if (catRequires[6]) impossibleSources.AddRange(requiresCatSphere);
-                if (crestRequires[6]) impossibleSources.AddRange(requiresCrestFragments);
-                if (gardenRequires[6]) impossibleSources.AddRange(requiresGardenKey);
-                if (cinderRequires[6]) impossibleSources.AddRange(requiresCinderKey);
-                if (monasteryRequires[6]) impossibleSources.AddRange(requiresMonasteryKey);
-                if (hazelRequires[6]) impossibleSources.AddRange(requiresHazelBadge);
-                if (softTissueRequires[6]) impossibleSources.AddRange(requiresSoftTissue);
+                if (requirementMatrix[0, 6]) impossibleSources.AddRange(requiresCatSphere);
+                if (requirementMatrix[1, 6]) impossibleSources.AddRange(requiresCrestFragments);
+                if (requirementMatrix[2, 6]) impossibleSources.AddRange(requiresGardenKey);
+                if (requirementMatrix[3, 6]) impossibleSources.AddRange(requiresCinderKey);
+                if (requirementMatrix[4, 6]) impossibleSources.AddRange(requiresMonasteryKey);
+                if (requirementMatrix[5, 6]) impossibleSources.AddRange(requiresHazelBadge);
+                if (requirementMatrix[6, 6]) impossibleSources.AddRange(requiresSoftTissue);
             }
             else if (itemId == (int)Items.IvoryBug)
             {
                 impossibleSources.AddRange(requiresIvoryBugs);
-                if (catRequires[7]) impossibleSources.AddRange(requiresCatSphere);
-                if (crestRequires[7]) impossibleSources.AddRange(requiresCrestFragments);
-                if (gardenRequires[7]) impossibleSources.AddRange(requiresGardenKey);
-                if (cinderRequires[7]) impossibleSources.AddRange(requiresCinderKey);
-                if (monasteryRequires[7]) impossibleSources.AddRange(requiresMonasteryKey);
-                if (hazelRequires[7]) impossibleSources.AddRange(requiresHazelBadge);
-                if (softTissueRequires[7]) impossibleSources.AddRange(requiresSoftTissue);
-                if (dirtyShroomRequires[7]) impossibleSources.AddRange(requiresDirtyShroom);
+                if (requirementMatrix[0, 7]) impossibleSources.AddRange(requiresCatSphere);
+                if (requirementMatrix[1, 7]) impossibleSources.AddRange(requiresCrestFragments);
+                if (requirementMatrix[2, 7]) impossibleSources.AddRange(requiresGardenKey);
+                if (requirementMatrix[3, 7]) impossibleSources.AddRange(requiresCinderKey);
+                if (requirementMatrix[4, 7]) impossibleSources.AddRange(requiresMonasteryKey);
+                if (requirementMatrix[5, 7]) impossibleSources.AddRange(requiresHazelBadge);
+                if (requirementMatrix[6, 7]) impossibleSources.AddRange(requiresSoftTissue);
+                if (requirementMatrix[7, 7]) impossibleSources.AddRange(requiresDirtyShroom);
             }
         }
 
@@ -715,30 +768,31 @@ namespace LiveSplit.UI.Components
         {
             double currentMaxCharges;
             IntPtr maxValuePointer, saveValuePtr;
+            bool hasItem;
             switch (id)
             {
                 case (int)Items.Bellflower:
                     maxValuePointer = bellflowerMaxValuePointer;
                     saveValuePtr = bellflowerSaveValuePointer;
+                    hasItem = hasBellflower;
                     break;
                 case (int)Items.Passiflora:
                     maxValuePointer = passifloraMaxValuePointer;
                     saveValuePtr = passifloraSaveValuePointer;
+                    hasItem = hasPassiflora;
                     break;
                 case (int)Items.TaintedMissive:
                     maxValuePointer = taintedMissiveMaxValuePointer;
                     saveValuePtr = taintedMissiveSaveValuePointer;
+                    hasItem = hasMissive;
                     break;
                 default:
-                    //Defalut to bellflower, should probably be an error instead
-                    maxValuePointer = bellflowerMaxValuePointer;
-                    saveValuePtr = bellflowerSaveValuePointer;
-                    break;
+                    return;
             }
             currentMaxCharges = gameProc.ReadValue<double>(maxValuePointer);
             gameProc.WriteValue<double>(maxValuePointer, charges + currentMaxCharges);
             gameProc.WriteValue<double>(saveValuePtr, charges + currentMaxCharges);
-            if (currentMaxCharges == 0)
+            if (currentMaxCharges == 0 && !hasItem)
             {
                 addItem(id);
             }
@@ -764,26 +818,22 @@ namespace LiveSplit.UI.Components
                 case (int)Items.Bellflower:
                     maxValuePointer = bellflowerMaxValuePointer;
                     saveValuePtr = bellflowerSaveValuePointer;
+                    hasBellflower = true;
                     break;
                 case (int)Items.Passiflora:
                     maxValuePointer = passifloraMaxValuePointer;
                     saveValuePtr = passifloraSaveValuePointer;
+                    hasPassiflora = true;
                     break;
                 case (int)Items.TaintedMissive:
                     maxValuePointer = taintedMissiveMaxValuePointer;
                     saveValuePtr = taintedMissiveSaveValuePointer;
+                    hasMissive = true;
                     break;
                 default:
-                    //Default to bellflower, should probably handle this with an error or something
-                    maxValuePointer = bellflowerMaxValuePointer;
-                    saveValuePtr = bellflowerSaveValuePointer;
-                    break;
+                    return;
             }
             currentCharges = gameProc.ReadValue<double>(maxValuePointer);
-            if (currentCharges - charges == 0)
-            {
-                removeLastItem();
-            }
             gameProc.WriteValue<double>(maxValuePointer, currentCharges - charges);
             gameProc.WriteValue<double>(saveValuePtr, currentCharges - charges);
         }
