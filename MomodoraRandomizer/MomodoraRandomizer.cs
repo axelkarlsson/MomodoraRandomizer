@@ -143,6 +143,8 @@ namespace LiveSplit.UI.Components
 
         private List<int> vitalityFragments;
         private List<int> ivoryBugs;
+        private List<int> bossItems
+            ;
 
         public LiveSplitState state;
 
@@ -240,26 +242,43 @@ namespace LiveSplit.UI.Components
 
         #region misc pointers
         IntPtr difficultyPointer;
-        IntPtr levelID;
+        IntPtr levelIDPointer;
+        IntPtr inGamePointer;
+        IntPtr saveAmountPointer;
+        IntPtr deathAmountPointer;
         #endregion
         #endregion
 
-        MemoryWatcher<double> taintedMissiveWatcher;
-        MemoryWatcher<double> bellflowerWatcher;
-        MemoryWatcher<double> passifloraWatcher;
-        MemoryWatcher<double> ivoryBugWatcher;
-        MemoryWatcher<double> crestFragmentWatcher;
-        MemoryWatcher<double> vitalityFragmentWatcher;
-        MemoryWatcher<int> levelIDWatcher;
+        private MemoryWatcher<double> taintedMissiveWatcher;
+        private MemoryWatcher<double> bellflowerWatcher;
+        private MemoryWatcher<double> passifloraWatcher;
+        private MemoryWatcher<double> ivoryBugWatcher;
+        private MemoryWatcher<double> crestFragmentWatcher;
+        private MemoryWatcher<double> vitalityFragmentWatcher;
+        private MemoryWatcher<int> levelIDWatcher;
+        private MemoryWatcher<double> deathWatcher;
+        private MemoryWatcher<double> saveWatcher;
+        private MemoryWatcher<double> inGameWatcher;
+        private MemoryWatcherList specialWatchers;
         private bool randomizerRunning;
         private int itemGiven;
+
+        List<bool> hasChargeItem;
+        List<bool> hasSavedChargeItem;
+        private bool hasSavedMissive;
         private bool hasMissive;
+        private bool hasSavedPassiflora;
         private bool hasPassiflora;
+        private bool hasSavedBellflower;
         private bool hasBellflower;
 
         List<List<int>> doorLocations;
         private double unlocked;
-        List<int> hasKey = new List<int> { 0, 0, 0 };
+        List<int> hasSavedKey;
+        List<int> hasKey;
+
+        private bool inGame;
+
 
         public MomodoraRandomizer(LiveSplitState state)
         {
@@ -280,6 +299,11 @@ namespace LiveSplit.UI.Components
             for (int i = 56; i <= 75; i++)
             {
                 ivoryBugs.Add(i);
+            }
+            bossItems = new List<int>();
+            for (int i = 31; i <= 38; i++)
+            {
+                bossItems.Add(i);
             }
             requirementLists = new List<List<int>>();
             requiresCatSphere = new List<int> { 24, 27, 39, 47, 48, 55, 63, 64, 65, 66, 67, 68, 70, 74, 75, 79 };
@@ -334,10 +358,16 @@ namespace LiveSplit.UI.Components
                     randomGenerator = new Random(seed);
                 }
 
+                hasSavedChargeItem = new List<bool> { false, false, false };
+                hasChargeItem = new List<bool> { false, false, false };
+                hasSavedKey = new List<int> { 0, 0, 0 };
+                hasKey = new List<int> { 0, 0, 0 };
+
                 resetSources();
                 updateBannedSources();
                 Array.Clear(requirementMatrix, 0, requirementMatrix.Length);
                 randoSourceWatchers = new MemoryWatcherList();
+                specialWatchers = new MemoryWatcherList();
 
                 //Key items are played in order: Cat Sphere, Crest Fragments, Garden Key, Cinder Key, Monastery Key, (Hazel Badge, Soft Tissue, Dirty Shroom, Ivory Bugs) 
                 //1. Place Cat Sphere
@@ -579,13 +609,65 @@ namespace LiveSplit.UI.Components
                 vitalityFragmentWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
                 vitalityFragmentWatcher.Enabled = true;
 
-                levelIDWatcher = new MemoryWatcher<int>(levelID);
+                levelIDWatcher = new MemoryWatcher<int>(levelIDPointer);
                 levelIDWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
                 levelIDWatcher.Enabled = true;
                 levelIDWatcher.OnChanged += (old, current) =>
                 {
                     checkRoom(old, current);
                 };
+
+                inGameWatcher = new MemoryWatcher<double>(inGamePointer);
+                inGameWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                inGameWatcher.Enabled = true;
+                inGameWatcher.OnChanged += (old, current) =>
+                {
+                    inGame = Convert.ToBoolean(current);
+                    if(current == 0)
+                    {
+                        for(int i = 0; i < hasChargeItem.Count(); i++)
+                        {
+                            hasChargeItem[i] = hasSavedChargeItem[i];
+                            hasKey[i] = hasSavedKey[i];
+                        }
+                    }
+                };
+
+                deathWatcher = new MemoryWatcher<double>(deathAmountPointer);
+                deathWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                deathWatcher.Enabled = true;
+                deathWatcher.OnChanged += (old, current) =>
+                {
+                    if (current > old)
+                    {
+                        for (int i = 0; i < hasChargeItem.Count(); i++)
+                        {
+                            hasChargeItem[i] = hasSavedChargeItem[i];
+                            hasKey[i] = hasSavedKey[i];
+                        }
+                    }
+                };
+
+                saveWatcher = new MemoryWatcher<double>(saveAmountPointer);
+                saveWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                saveWatcher.Enabled = true;
+                saveWatcher.OnChanged += (old, current) =>
+                {
+                    if (current > old)
+                    {
+                        for (int i = 0; i < hasChargeItem.Count(); i++)
+                        {
+                            hasSavedChargeItem[i] = hasChargeItem[i];
+                            hasSavedKey[i] = hasKey[i];
+                        }
+                    }
+                };
+
+                specialWatchers.Add(levelIDWatcher);
+                specialWatchers.Add(saveWatcher);
+                specialWatchers.Add(deathWatcher);
+                specialWatchers.Add(inGameWatcher);
+
                 #endregion
 
                 randomizerRunning = true;
@@ -697,10 +779,10 @@ namespace LiveSplit.UI.Components
 
         private void updateBannedSources()
         {
-            //If !VitFragments
-            bannedSources.AddRange(vitalityFragments);
-            //If !Ivory Bugs
-            bannedSources.AddRange(ivoryBugs);
+            if (!settingsControl.VitalityFragmentsEnabled) bannedSources.AddRange(vitalityFragments);
+            if (!settingsControl.IvoryBugsEnabled) bannedSources.AddRange(ivoryBugs);
+            if (!settingsControl.HardModeEnabled) bannedSources.AddRange(bossItems);
+
         }
 
         private void updatePossibleSources()
@@ -793,22 +875,26 @@ namespace LiveSplit.UI.Components
             double currentMaxCharges;
             IntPtr maxValuePointer, saveValuePtr;
             bool hasItem;
+            int j;
             switch (id)
             {
                 case (int)Items.Bellflower:
+                    j = 0;
                     maxValuePointer = bellflowerMaxValuePointer;
                     saveValuePtr = bellflowerSaveValuePointer;
-                    hasItem = hasBellflower;
+                    hasItem = hasChargeItem[j];
                     break;
                 case (int)Items.Passiflora:
+                    j = 1;
                     maxValuePointer = passifloraMaxValuePointer;
                     saveValuePtr = passifloraSaveValuePointer;
-                    hasItem = hasPassiflora;
+                    hasItem = hasChargeItem[j];
                     break;
                 case (int)Items.TaintedMissive:
+                    j = 2;
                     maxValuePointer = taintedMissiveMaxValuePointer;
                     saveValuePtr = taintedMissiveSaveValuePointer;
-                    hasItem = hasMissive;
+                    hasItem = hasChargeItem[j];
                     break;
                 default:
                     return;
@@ -818,6 +904,7 @@ namespace LiveSplit.UI.Components
             gameProc.WriteValue<double>(saveValuePtr, charges + currentMaxCharges);
             if (currentMaxCharges == 0 && !hasItem)
             {
+                hasChargeItem[j] = true;
                 addItem(id);
             }
 
@@ -837,26 +924,28 @@ namespace LiveSplit.UI.Components
         {
             double currentCharges;
             IntPtr maxValuePointer, saveValuePtr;
+            int j = 0;
             switch (id)
             {
                 case (int)Items.Bellflower:
+                    j = 0;
                     maxValuePointer = bellflowerMaxValuePointer;
                     saveValuePtr = bellflowerSaveValuePointer;
-                    hasBellflower = true;
                     break;
                 case (int)Items.Passiflora:
+                    j = 1;
                     maxValuePointer = passifloraMaxValuePointer;
                     saveValuePtr = passifloraSaveValuePointer;
-                    hasPassiflora = true;
                     break;
                 case (int)Items.TaintedMissive:
+                    j = 2;
                     maxValuePointer = taintedMissiveMaxValuePointer;
                     saveValuePtr = taintedMissiveSaveValuePointer;
-                    hasMissive = true;
                     break;
                 default:
                     return;
             }
+            hasChargeItem[j] = true;
             currentCharges = gameProc.ReadValue<double>(maxValuePointer);
             gameProc.WriteValue<double>(maxValuePointer, currentCharges - charges);
             gameProc.WriteValue<double>(saveValuePtr, currentCharges - charges);
@@ -1035,10 +1124,14 @@ namespace LiveSplit.UI.Components
 
         public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
-            if (VerifyProcessRunning() && randomizerRunning)
+            if (VerifyProcessRunning() && inGame && randomizerRunning)
             {
 
                 //do update stuff here!
+                foreach (var watcher in specialWatchers)
+                {
+                    watcher.Update(gameProc);
+                }
                 foreach (var watcher in randoSourceWatchers)
                 {
                     watcher.Update(gameProc);
@@ -1083,203 +1176,88 @@ namespace LiveSplit.UI.Components
                         Debug.WriteLine("Setting up pointers");
                         #region setting up IntPtrs
                         potentialSourcesPointers = new IntPtr[RANDOMIZER_SOURCE_AMOUNT];
-                        //0-7 NO REQ PICKUPS
-                        //0 = Grove Bellflower
                         potentialSourcesPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0xF0);
-                        //1 = Astral Charm
                         potentialSourcesPointers[1] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x100);
-                        //2 = Karst Bellflower
                         potentialSourcesPointers[2] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x410);
-                        //3 = Magnet Stone
                         potentialSourcesPointers[3] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x430);
-                        //4 = Garden Key
                         potentialSourcesPointers[4] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x700);
-                        //5 = Cinder Key
                         potentialSourcesPointers[5] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x9B0);
-                        //6 = Monastery Key
                         potentialSourcesPointers[6] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x260);
-                        //7 = Tainted Missive Pickup
                         potentialSourcesPointers[7] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x420);
-                        //8-16 NO REQ SHOP ITEMS
-                        //Crystal Seed
                         potentialSourcesPointers[8] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4}).Deref<Int32>(gameProc), 0xcf0);
-                        //Faerie Tear
                         potentialSourcesPointers[9] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xcb0);
-                        //Ring of Candor
                         potentialSourcesPointers[10] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xd50);
-                        //Clarity Shard
                         potentialSourcesPointers[11] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xdd0);
-                        //Necklace of Sacrifice
                         potentialSourcesPointers[12] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc70);
-                        //Dull Pearl
                         potentialSourcesPointers[13] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x50);
-                        //Red Ring
                         potentialSourcesPointers[14] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x80);
-                        //Drilling Arrows
                         potentialSourcesPointers[15] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xeb0);
-                        //Impurity Flask
                         potentialSourcesPointers[16] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xcd0);
-                        //17-19 4CF SHOP ITEMS
-                        //Violet Sprite
                         potentialSourcesPointers[17] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xe00);
-                        //Quick Arrows
                         potentialSourcesPointers[18] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xea0);
-                        //Pocket Incensory
                         potentialSourcesPointers[19] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xb0);
-                        //PICKUPREQS
-                        //20-23 ALL CF REQ
-                        //Black Sachet
                         potentialSourcesPointers[20] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0xA00);
-                        //Sealed Wind
                         potentialSourcesPointers[21] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0xA90);
-                        //Castle Bellflower
                         potentialSourcesPointers[22] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x6D0);
-                        //Passiflora Cath
                         potentialSourcesPointers[23] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x690);
-                        //24 CAT SPHERE REQ
-                        //Dirty Shroom
                         potentialSourcesPointers[24] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x480);
-                        //25-26 GARDEN KEY OR *BACKMAN PATCH REQ
-                        //Cat Sphere
                         potentialSourcesPointers[25] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x720);
-                        //Bellflower Park
                         potentialSourcesPointers[26] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x7E0);
-                        //27 CAT SPHERE AND MONASTERY KEY REQ
-                        //Soft Tissue
                         potentialSourcesPointers[27] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x570);
-                        //28 SEALED WIND AND CAT SPHERE REQ
-                        //Green Leaf
                         potentialSourcesPointers[28] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x600);
-                        //29 HAZEL BADGE REQ
-                        //Blessed Charm
                         potentialSourcesPointers[29] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x840);
-                        //30 DIRTY SHROOM REQ
-                        //Rotten Shroom
                         potentialSourcesPointers[30] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x500);
-                        //31-34 NO REQ BOSS ITEMS
-                        //Edea's Pearl
                         potentialSourcesPointers[31] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x140);
-                        //Backman Patch
                         potentialSourcesPointers[32] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x450);
-                        //Sparse Thread
                         potentialSourcesPointers[33] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x7D0);
-                        //Pocket Incensory
                         potentialSourcesPointers[34] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x9F0);
-                        //35 GARDEN KEY OR *BACKMAN PATCH
-                        //Torn Branch
                         potentialSourcesPointers[35] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x580);
-                        //36 MONASTERY KEY REQ
-                        //Tainted Missive
                         potentialSourcesPointers[36] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x270);
-                        //37 SOFT TISSUE REQ
-                        //Bloodstained Tissue
                         potentialSourcesPointers[37] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x6B0);
-                        //38 ALL CF REQ
-                        //Heavy Arrows
                         potentialSourcesPointers[38] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x840);
-                        //39-46 NO REQ VIT FRAGMENTS
-                        //Grove behind first hidden wall
                         potentialSourcesPointers[39] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x150);
-                        //Grove behind second hidden wall
                         potentialSourcesPointers[40] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x190);
-                        //Karst City Dog Fragment
                         potentialSourcesPointers[41] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x170);
-                        //Karst City Boulder Fragment
                         potentialSourcesPointers[42] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x1B0);
-                        //Sub Graves
                         potentialSourcesPointers[43] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x180);
-                        //Memorial Park near Cinder Chambers
                         potentialSourcesPointers[44] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x8C0);
-                        //Cinder Chambers bottom text
                         potentialSourcesPointers[45] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x8D0);
-                        //Monastery near Cat
                         potentialSourcesPointers[46] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x160);
-                        //47-48 CAT SPHERE REQ
-                        //Grove Cat Room **WITH DAMAGE BOOST**
                         potentialSourcesPointers[47] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x940);
-                        //Frore Ciele
                         potentialSourcesPointers[48] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x1C0);
-                        //49 CINDER KEY REQ
-                        //Cinder Chambers Lever Room
                         potentialSourcesPointers[49] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x1A0);
-                        //50-54 ALL CF REQ
-                        //Pina Fragment 1
                         potentialSourcesPointers[50] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x8E0);
-                        //Pina Fragment Bellroom
                         potentialSourcesPointers[51] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x8F0);
-                        //Pina Fragment Bakaroom
                         potentialSourcesPointers[52] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x900);
-                        //Castle Far Right
                         potentialSourcesPointers[53] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x930);
-                        //Castle near Cath
                         potentialSourcesPointers[54] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x920);
-                        //55 ALL CF AND CAT SPHERE REQ
-                        //Castle after bridge 1
                         potentialSourcesPointers[55] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x910);
-                        //56-62 IVORY BUG NO REQ
-                        //Grove 2nd bell
                         potentialSourcesPointers[56] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x280);
-                        //Grove 3rd bug
                         potentialSourcesPointers[57] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x290);
-                        //Karst City Bridge
                         potentialSourcesPointers[58] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x3A0);
-                        //Karst Knight
                         potentialSourcesPointers[59] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x2A0);
-                        //Chambers Top Bug
                         potentialSourcesPointers[60] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x300);
-                        //Chambers Cinder Key Room
                         potentialSourcesPointers[61] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x310);
-                        //Chambers Hidden Ceiling
                         potentialSourcesPointers[62] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x2F0);
-                        //63-65 CAT SPHERE REQ
-                        //Grove room 2nd switch
                         potentialSourcesPointers[63] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x360);
-                        //Frore Ciele
                         potentialSourcesPointers[64] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x340);
-                        //Sub Graves
                         potentialSourcesPointers[65] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x2E0);
-                        //66-68 CAT SPHERE AND (GARDEN KEY OR *BACKMAN PATCH) REQ
-                        //Park Bug
                         potentialSourcesPointers[66] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x3B0);
-                        //After Lubella 2 bug 1
                         potentialSourcesPointers[67] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x2C0);
-                        //After Lubella 2 bug 2
                         potentialSourcesPointers[68] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x2D0);
-                        //69 MONASTERY KEY REQ
-                        //Pre Fennel no Cat
                         potentialSourcesPointers[69] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x2B0);
-                        //70 MONASTERY KEY AND CAT SPHERE REQ
-                        //Pre Fennel Cat
                         potentialSourcesPointers[70] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x390);
-                        //71-73 ALL CF REQ
-                        //Pina Skeleton room
                         potentialSourcesPointers[71] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x320);
-                        //Early Castle
                         potentialSourcesPointers[72] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x370);
-                        //Yeet Room
                         potentialSourcesPointers[73] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x380);
-                        //74-75 ALL CF AND CAT SPHERE REQ
-                        //Pina Fairy Code room
                         potentialSourcesPointers[74] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x350);
-                        //Pina Elevator room
                         potentialSourcesPointers[75] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x330);
-                        //76-77 NO REQ CF
-                        //Fast Charge
                         potentialSourcesPointers[76] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x5B0);
-                        //Dash
                         potentialSourcesPointers[77] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x5D0);
-                        //78 MONASTERY KEY
-                        //Charge Level
                         potentialSourcesPointers[78] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] {0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x5A0);
-                        //79 CAT SPHERE REQ
-                        //Warp Fragment
                         potentialSourcesPointers[79] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x5C0);
-                        //80-82 IB REQ
-                        //10 del, Bellflower?
                         potentialSourcesPointers[80] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x7A0);
-                        //15 del, Hazel Badge?
                         potentialSourcesPointers[81] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x7B0);
-                        //20 del, Passiflora?
                         potentialSourcesPointers[82] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x7C0);
 
                         oneDeliveredPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x780);
@@ -1305,8 +1283,12 @@ namespace LiveSplit.UI.Components
                         keyItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304ce8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x1100);
                         inventoryItemsStartPointer = (IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a4, 0xC }).Deref<int>(gameProc);
                         inventoryItemsChargeStartPointer = (IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a8, 0xC }).Deref<int>(gameProc);
-                        levelID = (IntPtr)new DeepPointer(0x230F1A0).Deref<int>(gameProc);
+                        levelIDPointer = (IntPtr)new DeepPointer(0x230F1A0).Deref<int>(gameProc);
+                        deathAmountPointer = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4}).Deref<int>(gameProc),0x540);
+                        inGamePointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0,0x4 }).Deref<int>(gameProc), 0x780);
+                        saveAmountPointer = (IntPtr)new DeepPointer(0x230C440, new int[] { 0x0,0x4,0x60,0x4,0x4 }).Deref<int>(gameProc);
                         #endregion
+                        RandomizerLabel.Text = "Randomizer ready to go!";
                         return true;
                     default:
                         RandomizerLabel.Text = "Unsupported game version for randomizer";
