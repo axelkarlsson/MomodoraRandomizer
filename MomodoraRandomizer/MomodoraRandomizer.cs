@@ -265,12 +265,9 @@ namespace LiveSplit.UI.Components
 
         List<bool> hasChargeItem;
         List<bool> hasSavedChargeItem;
-        private bool hasSavedMissive;
-        private bool hasMissive;
-        private bool hasSavedPassiflora;
-        private bool hasPassiflora;
-        private bool hasSavedBellflower;
-        private bool hasBellflower;
+        private bool hasPickedGreenLeaf;
+        private bool hasSavedPickedGreenLeaf;
+        private double pickedUpLeaf;
 
         List<List<int>> doorLocations;
         private double unlocked;
@@ -362,6 +359,7 @@ namespace LiveSplit.UI.Components
                 hasChargeItem = new List<bool> { false, false, false };
                 hasSavedKey = new List<int> { 0, 0, 0 };
                 hasKey = new List<int> { 0, 0, 0 };
+                hasPickedGreenLeaf = false;
 
                 resetSources();
                 updateBannedSources();
@@ -369,7 +367,8 @@ namespace LiveSplit.UI.Components
                 randoSourceWatchers = new MemoryWatcherList();
                 specialWatchers = new MemoryWatcherList();
 
-                //Key items are played in order: Cat Sphere, Crest Fragments, Garden Key, Cinder Key, Monastery Key, (Hazel Badge, Soft Tissue, Dirty Shroom, Ivory Bugs) 
+                //Key items are played in order: Cat Sphere, Crest Fragments, Garden Key, Cinder Key, Monastery Key, (Hazel Badge, Soft Tissue, Dirty Shroom, Ivory Bugs)
+                #region item placement
                 //1. Place Cat Sphere
                 #region cat sphere
                 updateImpossibleSources((int)Items.CatSphere);
@@ -554,6 +553,7 @@ namespace LiveSplit.UI.Components
                 #endregion
 
                 //9. Place Ivory Bugs
+                #region Ivory Bugs
                 updateImpossibleSources((int)Items.IvoryBug);
                 for (int i = 56; i < 76; i++)
                 {
@@ -562,8 +562,10 @@ namespace LiveSplit.UI.Components
                     createMemoryWatcher((int)Items.IvoryBug, possibleSources[index]);
                     usedSources.Add(index);
                 }
+                #endregion
 
                 //10. Place Vitality Fragments
+                #region vitality fragments
                 for (int i = 39; i < 56; i++)
                 {
                     updatePossibleSources();
@@ -571,8 +573,10 @@ namespace LiveSplit.UI.Components
                     createMemoryWatcher((int)Items.VitalityFragment, possibleSources[index]);
                     usedSources.Add(index);
                 }
+                #endregion
 
                 //11. Rest of items
+                #region rest of items
                 for (int i = 0; i < 39; i++)
                 {
                     if (!bannedSources.Contains(i))
@@ -583,6 +587,8 @@ namespace LiveSplit.UI.Components
                         usedSources.Add(index);
                     }
                 }
+                #endregion
+#endregion
 
                 #region Special memory watchers
                 taintedMissiveWatcher = new MemoryWatcher<double>(taintedMissiveMaxValuePointer);
@@ -629,6 +635,7 @@ namespace LiveSplit.UI.Components
                         {
                             hasChargeItem[i] = hasSavedChargeItem[i];
                             hasKey[i] = hasSavedKey[i];
+                            hasPickedGreenLeaf = hasSavedPickedGreenLeaf;
                         }
                     }
                 };
@@ -644,6 +651,7 @@ namespace LiveSplit.UI.Components
                         {
                             hasChargeItem[i] = hasSavedChargeItem[i];
                             hasKey[i] = hasSavedKey[i];
+                            hasPickedGreenLeaf = hasSavedPickedGreenLeaf;
                         }
                     }
                 };
@@ -659,6 +667,7 @@ namespace LiveSplit.UI.Components
                         {
                             hasSavedChargeItem[i] = hasChargeItem[i];
                             hasSavedKey[i] = hasKey[i];
+                            hasSavedPickedGreenLeaf = hasPickedGreenLeaf;
                         }
                     }
                 };
@@ -688,13 +697,25 @@ namespace LiveSplit.UI.Components
             Debug.WriteLine("Item " + Enum.GetName(typeof(Items),giveItemID) + " generated at position " + newSourceAddressIndex);
             MemoryWatcher<double> temp = new MemoryWatcher<double>(potentialSourcesPointers[newSourceAddressIndex]);
             temp.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
-            temp.OnChanged += (old, current) =>
-            {
-                if(current == 1)
+            if (potentialSourcesPointers[newSourceAddressIndex] != potentialSourcesPointers[28]) {
+                temp.OnChanged += (old, current) =>
                 {
-                    newItem(giveItemID);
-                }
-            };
+                    if (current == 1)
+                    {
+                        hasPickedGreenLeaf = true;
+                        newItem(giveItemID);
+                    }
+                };
+            }
+            else {
+                temp.OnChanged += (old, current) =>
+                {
+                    if (current == 1)
+                    {
+                        newItem(giveItemID);
+                    }
+                };
+            }
             temp.Enabled = true;
             randoSourceWatchers.Add(temp);
         }
@@ -823,10 +844,20 @@ namespace LiveSplit.UI.Components
             {
                 addKey(id);
             }
+            else if (id == (int)Items.FreshSpringLeaf)
+            {
+                addLeaf();
+            }
             else
             {
                 addItem(id);
             }
+        }
+
+        private void addLeaf()
+        {
+            gameProc.WriteValue<double>(potentialSourcesPointers[28], 1);
+            addItem((int)Items.FreshSpringLeaf);
         }
 
         private void removeItem()
@@ -1042,6 +1073,7 @@ namespace LiveSplit.UI.Components
 
         private void checkRoom(int old, int current)
         {
+            #region key logic
             int j;
 
             for (int i = 0; i < 3; i++)
@@ -1062,6 +1094,20 @@ namespace LiveSplit.UI.Components
                     gameProc.WriteValue<double>(potentialSourcesPointers[j], unlocked);
                 }
             }
+            #endregion
+
+            #region green leaf logic
+            if(current == 83)
+            {
+                pickedUpLeaf = gameProc.ReadValue<double>(potentialSourcesPointers[28]);
+                //If the state of "has picked green leaf source" is different from "found green leaf" invert
+                if (Convert.ToBoolean(pickedUpLeaf) != hasPickedGreenLeaf) gameProc.WriteValue<double>(potentialSourcesPointers[28], 1 - pickedUpLeaf);
+            }
+            else if (old == 83)
+            {
+                gameProc.WriteValue<double>(potentialSourcesPointers[28], pickedUpLeaf);
+            };
+            #endregion
         }
 
         public string ComponentName => "Momodora Randomizer";
