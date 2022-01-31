@@ -14,7 +14,7 @@ namespace LiveSplit.UI.Components
 {
     public class MomodoraRandomizer : IComponent
     {
-        public enum Items: int
+        public enum Items : int
         {
             AdornedRing = 1,
             NecklaceOfSacrifice = 2,
@@ -105,6 +105,92 @@ namespace LiveSplit.UI.Components
             [36] = (int)Items.BloodstainedTissue,
             [37] = (int)Items.HeavyArrows,
         };
+        private Dictionary<int, int[]> sourceToLevelMapping = new Dictionary<int, int[]>
+        {
+            [0] = new int[] { 25 },
+            [1] = new int[] { 37 },
+            [2] = new int[] { 70 },
+            [3] = new int[] { 90 },
+            [4] = new int[] { 134},
+            [5] = new int[] { 191},
+            [6] = new int[] { 113},
+            [7] = new int[] { 117},
+            [8] = new int[] { 63 },
+            [9] = new int[] { 63,111 },
+            [10] = new int[] { 63,181,187 },
+            [11] = new int[] { 127},
+            [12] = new int[] {127 },
+            [13] = new int[] { 160},
+            [14] = new int[] { 181},
+            [15] = new int[] { 187},
+            [16] = new int[] { 187},
+            [17] = new int[] { 199},
+            [18] = new int[] { 199},
+            [19] = new int[] { 199},
+            [20] = new int[] { 204},
+            [21] = new int[] { 220},
+            [22] = new int[] { 269},
+            [23] = new int[] { 261},
+            [24] = new int[] { 126},
+            [25] = new int[] { 149},
+            [26] = new int[] { 162},
+            [27] = new int[] { 103},
+            [28] = new int[] { 83},
+            [29] = new int[] { 52},
+            [30] = new int[] { 46},
+            [31] = new int[] { 53},
+            [32] = new int[] { 73},
+            [33] = new int[] { 141},
+            [34] = new int[] { 193},
+            [35] = new int[] { 153},
+            [36] = new int[] { 104},
+            [37] = new int[] { 97},
+            [38] = new int[] { 212},
+            [39] = new int[] { 39},
+            [40] = new int[] { 47},
+            [41] = new int[] { 67},
+            [42] = new int[] { 81},
+            [43] = new int[] { 144},
+            [44] = new int[] { 168},
+            [45] = new int[] { 191},
+            [46] = new int[] { 108},
+            [47] = new int[] { 35},
+            [48] = new int[] { 58},
+            [49] = new int[] { 185},
+            [50] = new int[] { 199},
+            [51] = new int[] { 205},
+            [52] = new int[] { 209},
+            [53] = new int[] { 270},
+            [54] = new int[] { 246},
+            [55] = new int[] { 264},
+            [56] = new int[] { 41},
+            [57] = new int[] { 50},
+            [58] = new int[] { 62},
+            [59] = new int[] { 78},
+            [60] = new int[] { 170},
+            [61] = new int[] { 191},
+            [62] = new int[] { 183},
+            [63] = new int[] { 40},
+            [64] = new int[] { 56},
+            [65] = new int[] { 123},
+            [66] = new int[] { 152},
+            [67] = new int[] { 155},
+            [68] = new int[] { 156},
+            [69] = new int[] { 102},
+            [70] = new int[] { 103},
+            [71] = new int[] { 211},
+            [72] = new int[] { 249},
+            [73] = new int[] { 255},
+            [74] = new int[] { 214},
+            [75] = new int[] { 213},
+            [76] = new int[] { 142},
+            [77] = new int[] { 195},
+            [78] = new int[] { 105},
+            [79] = new int[] { 60},
+            [80] = new int[] { 163},
+            [81] = new int[] { 163},
+            [82] = new int[] { 163},
+          };
 
         const int RANDOMIZER_SOURCE_AMOUNT = 83;
 
@@ -700,7 +786,8 @@ namespace LiveSplit.UI.Components
             if (potentialSourcesPointers[newSourceAddressIndex] != potentialSourcesPointers[28]) {
                 temp.OnChanged += (old, current) =>
                 {
-                    if (current == 1)
+                    int levelID = gameProc.ReadValue<int>(levelIDPointer);
+                    if (current == 1 && sourceToLevelMapping[newSourceAddressIndex].Contains(levelID))
                     {
                         hasPickedGreenLeaf = true;
                         newItem(giveItemID);
@@ -710,7 +797,8 @@ namespace LiveSplit.UI.Components
             else {
                 temp.OnChanged += (old, current) =>
                 {
-                    if (current == 1)
+                    int levelID = gameProc.ReadValue<int>(levelIDPointer);
+                    if (current == 1 && sourceToLevelMapping[newSourceAddressIndex].Contains(levelID))
                     {
                         newItem(giveItemID);
                     }
