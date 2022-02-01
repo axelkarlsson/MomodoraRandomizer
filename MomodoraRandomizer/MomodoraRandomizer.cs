@@ -811,78 +811,56 @@ namespace LiveSplit.UI.Components
         private void updateImpossibleSources(int itemId)
         {
             impossibleSources.Clear();
+            int j = 0;
             //Key items are played in order: Cat Sphere, Crest Fragments, Garden Key, Cinder Key, Monastery Key, (Hazel Badge, Soft Tissue, Dirty Shroom, Ivory Bug) 
             if (itemId == (int)Items.CatSphere)
             { 
                 impossibleSources.AddRange(requiresCatSphere);
+                return;
             }
             else if (itemId == (int)Items.FragmentBowPow)
             {
                 impossibleSources.AddRange(requiresCrestFragments);
-                if (requirementMatrix[0,0]) impossibleSources.AddRange(requiresCatSphere);
+                j = 0;
             }
             else if (itemId == (int)Items.GardenKey)
             {
                 impossibleSources.AddRange(requiresGardenKey);
-                if (requirementMatrix[0, 1]) impossibleSources.AddRange(requiresCatSphere);
-                if (requirementMatrix[1, 1]) impossibleSources.AddRange(requiresCrestFragments);
+                j = 1;
             }
             else if (itemId == (int)Items.CinderKey)
             {
                 impossibleSources.AddRange(requiresCinderKey);
-                if (requirementMatrix[0, 2]) impossibleSources.AddRange(requiresCatSphere);
-                if (requirementMatrix[1, 2]) impossibleSources.AddRange(requiresCrestFragments);
-                if (requirementMatrix[2, 2]) impossibleSources.AddRange(requiresGardenKey);
+                j = 2;
             }
             else if (itemId == (int)Items.MonasteryKey)
             {
                 impossibleSources.AddRange(requiresMonasteryKey);
-                if (requirementMatrix[0, 3]) impossibleSources.AddRange(requiresCatSphere);
-                if (requirementMatrix[1, 3]) impossibleSources.AddRange(requiresCrestFragments);
-                if (requirementMatrix[2, 3]) impossibleSources.AddRange(requiresGardenKey);
-                if (requirementMatrix[3, 3]) impossibleSources.AddRange(requiresCinderKey);
+                j = 3;
             }
             else if (itemId == (int)Items.HazelBadge)
             {
                 impossibleSources.AddRange(requiresHazelBadge);
-                if (requirementMatrix[0, 4]) impossibleSources.AddRange(requiresCatSphere);
-                if (requirementMatrix[1, 4]) impossibleSources.AddRange(requiresCrestFragments);
-                if (requirementMatrix[2, 4]) impossibleSources.AddRange(requiresGardenKey);
-                if (requirementMatrix[3, 4]) impossibleSources.AddRange(requiresCinderKey);
-                if (requirementMatrix[4, 4]) impossibleSources.AddRange(requiresMonasteryKey);
+                j = 4;
             }
             else if (itemId == (int)Items.SoftTissue)
             {
                 impossibleSources.AddRange(requiresSoftTissue);
-                if (requirementMatrix[0, 5]) impossibleSources.AddRange(requiresCatSphere);
-                if (requirementMatrix[1, 5]) impossibleSources.AddRange(requiresCrestFragments);
-                if (requirementMatrix[2, 5]) impossibleSources.AddRange(requiresGardenKey);
-                if (requirementMatrix[3, 5]) impossibleSources.AddRange(requiresCinderKey);
-                if (requirementMatrix[4, 5]) impossibleSources.AddRange(requiresMonasteryKey);
-                if (requirementMatrix[5, 5]) impossibleSources.AddRange(requiresHazelBadge);
+                j = 5;
             }
             else if (itemId == (int)Items.DirtyShroom)
             {
                 impossibleSources.AddRange(requiresDirtyShroom);
-                if (requirementMatrix[0, 6]) impossibleSources.AddRange(requiresCatSphere);
-                if (requirementMatrix[1, 6]) impossibleSources.AddRange(requiresCrestFragments);
-                if (requirementMatrix[2, 6]) impossibleSources.AddRange(requiresGardenKey);
-                if (requirementMatrix[3, 6]) impossibleSources.AddRange(requiresCinderKey);
-                if (requirementMatrix[4, 6]) impossibleSources.AddRange(requiresMonasteryKey);
-                if (requirementMatrix[5, 6]) impossibleSources.AddRange(requiresHazelBadge);
-                if (requirementMatrix[6, 6]) impossibleSources.AddRange(requiresSoftTissue);
+                j = 6;
             }
             else if (itemId == (int)Items.IvoryBug)
             {
                 impossibleSources.AddRange(requiresIvoryBugs);
-                if (requirementMatrix[0, 7]) impossibleSources.AddRange(requiresCatSphere);
-                if (requirementMatrix[1, 7]) impossibleSources.AddRange(requiresCrestFragments);
-                if (requirementMatrix[2, 7]) impossibleSources.AddRange(requiresGardenKey);
-                if (requirementMatrix[3, 7]) impossibleSources.AddRange(requiresCinderKey);
-                if (requirementMatrix[4, 7]) impossibleSources.AddRange(requiresMonasteryKey);
-                if (requirementMatrix[5, 7]) impossibleSources.AddRange(requiresHazelBadge);
-                if (requirementMatrix[6, 7]) impossibleSources.AddRange(requiresSoftTissue);
-                if (requirementMatrix[7, 7]) impossibleSources.AddRange(requiresDirtyShroom);
+                j = 7;
+            }
+            for(int i = 0; i < requirementMatrix.GetLength(0); i++)
+            {
+                if (requirementMatrix[i, j]) impossibleSources.AddRange(requirementLists[i]);
             }
         }
 
