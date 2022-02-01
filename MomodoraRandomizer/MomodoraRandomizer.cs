@@ -818,48 +818,17 @@ namespace LiveSplit.UI.Components
                 impossibleSources.AddRange(requiresCatSphere);
                 return;
             }
-            else if (itemId == (int)Items.FragmentBowPow)
-            {
-                impossibleSources.AddRange(requiresCrestFragments);
-                j = 0;
-            }
-            else if (itemId == (int)Items.GardenKey)
-            {
-                impossibleSources.AddRange(requiresGardenKey);
-                j = 1;
-            }
-            else if (itemId == (int)Items.CinderKey)
-            {
-                impossibleSources.AddRange(requiresCinderKey);
-                j = 2;
-            }
-            else if (itemId == (int)Items.MonasteryKey)
-            {
-                impossibleSources.AddRange(requiresMonasteryKey);
-                j = 3;
-            }
-            else if (itemId == (int)Items.HazelBadge)
-            {
-                impossibleSources.AddRange(requiresHazelBadge);
-                j = 4;
-            }
-            else if (itemId == (int)Items.SoftTissue)
-            {
-                impossibleSources.AddRange(requiresSoftTissue);
-                j = 5;
-            }
-            else if (itemId == (int)Items.DirtyShroom)
-            {
-                impossibleSources.AddRange(requiresDirtyShroom);
-                j = 6;
-            }
-            else if (itemId == (int)Items.IvoryBug)
-            {
-                impossibleSources.AddRange(requiresIvoryBugs);
-                j = 7;
-            }
+            else if (itemId == (int)Items.FragmentBowPow) j = 0;
+            else if (itemId == (int)Items.GardenKey) j = 1;
+            else if (itemId == (int)Items.CinderKey) j = 2;
+            else if (itemId == (int)Items.MonasteryKey) j = 3;
+            else if (itemId == (int)Items.HazelBadge) j = 4;
+            else if (itemId == (int)Items.SoftTissue) j = 5;
+            else if (itemId == (int)Items.DirtyShroom) j = 6;
+            else if (itemId == (int)Items.IvoryBug) j = 7;
             for(int i = 0; i < requirementMatrix.GetLength(0); i++)
             {
+                impossibleSources.AddRange(requirementLists[j]);
                 if (requirementMatrix[i, j]) impossibleSources.AddRange(requirementLists[i]);
             }
         }
