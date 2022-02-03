@@ -9,6 +9,7 @@ using System.Xml;
 using System.Windows.Forms;
 using LiveSplit.ComponentUtil;
 using LiveSplit.Model;
+using System.Drawing.Drawing2D;
 
 namespace LiveSplit.UI.Components
 {
@@ -231,8 +232,7 @@ namespace LiveSplit.UI.Components
 
         private List<int> vitalityFragments;
         private List<int> ivoryBugs;
-        private List<int> bossItems
-            ;
+        private List<int> bossItems;
 
         public LiveSplitState state;
 
@@ -368,7 +368,7 @@ namespace LiveSplit.UI.Components
         public MomodoraRandomizer(LiveSplitState state)
         {
             this.state = state;
-            RandomizerLabel = new SimpleLabel("Randomizer Go!");
+            RandomizerLabel = new SimpleLabel();
             settingsControl = new MomodoraRandomizerSettings();
             bannedSources = new List<int>();
             usedSources = new List<int>();
@@ -395,7 +395,7 @@ namespace LiveSplit.UI.Components
             requirementLists.Add(requiresCatSphere);
             requiresCrestFragments = new List<int> { 0, 2, 17, 18, 19, 20, 21, 22, 23, 38, 39, 47, 50, 51, 52, 53, 54, 55, 71, 72, 73, 74, 75 };
             requirementLists.Add(requiresCrestFragments);
-            requiresGardenKey = new List<int> { 66, 67, 68, 35, 26, 25 };
+            requiresGardenKey = new List<int> { 66, 67, 68, 35, 26, 25, 13 };
             requirementLists.Add(requiresGardenKey);
             requiresCinderKey = new List<int> { 49 };
             requirementLists.Add(requiresCinderKey);
@@ -857,6 +857,7 @@ namespace LiveSplit.UI.Components
             //testMagic
             itemGiven = 3;
 
+            RandomizerLabel.Text = "New item: " + Enum.GetName(typeof(Items), id);
             removeItem();
             if (id == (int)Items.IvoryBug)
             {
@@ -1178,13 +1179,44 @@ namespace LiveSplit.UI.Components
             var textHeight = g.MeasureString("A", state.LayoutSettings.TextFont).Height;
             VerticalHeight = textHeight * 1.5f;
 
+            prepareDraw(state);
             RandomizerLabel.SetActualWidth(g);
             RandomizerLabel.Width = RandomizerLabel.ActualWidth;
             RandomizerLabel.Height = VerticalHeight;
-            RandomizerLabel.X = width/2;
+            RandomizerLabel.X = width-PaddingRight-RandomizerLabel.Width;
             RandomizerLabel.Y = 3f;
 
+            DrawBackground(g, width, VerticalHeight);
+
             RandomizerLabel.Draw(g);
+        }
+
+        public void prepareDraw(LiveSplitState state)
+        {
+            RandomizerLabel.Font = settingsControl.OverrideTextFont ? settingsControl.TextFont : state.LayoutSettings.TextFont;
+            RandomizerLabel.ForeColor = settingsControl.OverrideTextColor ? settingsControl.TextColor : state.LayoutSettings.TextColor;
+
+            RandomizerLabel.VerticalAlignment = StringAlignment.Center;
+            RandomizerLabel.HorizontalAlignment = StringAlignment.Center;
+        }
+
+        private void DrawBackground(Graphics g, float width, float height)
+        {
+            if (settingsControl.BackgroundColor.A > 0
+                || settingsControl.BackgroundGradient != GradientType.Plain
+                && settingsControl.BackgroundColor2.A > 0)
+            {
+                var gradientBrush = new LinearGradientBrush(
+                            new PointF(0, 0),
+                            settingsControl.BackgroundGradient == GradientType.Horizontal
+                            ? new PointF(width, 0)
+                            : new PointF(0, height),
+                            settingsControl.BackgroundColor,
+                            settingsControl.BackgroundGradient == GradientType.Plain
+                            ? settingsControl.BackgroundColor
+                            : settingsControl.BackgroundColor2);
+                g.FillRectangle(gradientBrush, 0, 0, width, height);
+            }
         }
 
         public XmlNode GetSettings(XmlDocument document)
@@ -1192,7 +1224,7 @@ namespace LiveSplit.UI.Components
             return settingsControl.GetSettings(document);
         }
 
-        public System.Windows.Forms.Control GetSettingsControl(LayoutMode mode)
+        public Control GetSettingsControl(LayoutMode mode)
         {
             return settingsControl;
         }
@@ -1220,6 +1252,7 @@ namespace LiveSplit.UI.Components
                     UpdateItemWatchers();
                     itemGiven--;
                 }
+
 
                 if (invalidator != null)
                 {
@@ -1369,7 +1402,7 @@ namespace LiveSplit.UI.Components
                         inGamePointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0,0x4 }).Deref<int>(gameProc), 0x780);
                         saveAmountPointer = (IntPtr)new DeepPointer(0x230C440, new int[] { 0x0,0x4,0x60,0x4,0x4 }).Deref<int>(gameProc);
                         #endregion
-                        RandomizerLabel.Text = "Randomizer ready to go!";
+                        RandomizerLabel.Text = "1.05b randomizer ready to go!";
                         return true;
                     case 40222720:
                         //version 1.07
@@ -1490,7 +1523,8 @@ namespace LiveSplit.UI.Components
                         inGamePointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x780);
                         saveAmountPointer = (IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc);
                         #endregion
-                        break;
+                        RandomizerLabel.Text = "1.07 randomizer ready to go!";
+                        return true;
                     default:
                         RandomizerLabel.Text = "Unsupported game version for randomizer";
                         break;

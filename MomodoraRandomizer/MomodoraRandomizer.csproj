@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CustomFontDialog, Version=0.2.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="LiveSplit.Core">
       <HintPath>..\..\..\..\..\LiveSplit 1.8.6\LiveSplit.Core.dll</HintPath>
     </Reference>
