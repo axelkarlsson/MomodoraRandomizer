@@ -216,16 +216,18 @@ namespace LiveSplit.UI.Components
         private List<int> requiresSoftTissue;
         private List<int> requiresIvoryBugs;
 
-        //                                         Crest, Garden, Cinder, Mona, Haze, Soft, Dirty, Bugs
-        private bool[,] requirementMatrix = new bool[8,8];
-        private bool[] catRequires = new bool[8] { false, false, false, false, false, false, false, false };
-        private bool[] crestRequires = new bool[8] { false, false, false, false, false, false, false, false };
-        private bool[] gardenRequires = new bool[8] { false, false, false, false, false, false, false, false };
-        private bool[] cinderRequires = new bool[8] { false, false, false, false, false, false, false, false };
-        private bool[] monasteryRequires = new bool[8] { false, false, false, false, false, false, false, false };
-        private bool[] hazelRequires = new bool[8] { false, false, false, false, false, false, false, false };
-        private bool[] softTissueRequires = new bool[8] { false, false, false, false, false, false, false, false };
-        private bool[] dirtyShroomRequires = new bool[8] { false, false, false, false, false, false, false, false };
+        //                                         CatSphere, Crest, Garden, Cinder, Mona, Haze, Soft, Dirty, Bugs
+        private bool[,] requirementMatrix = new bool[8,9];
+        /*
+        private bool[] catRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
+        private bool[] crestRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
+        private bool[] gardenRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
+        private bool[] cinderRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
+        private bool[] monasteryRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
+        private bool[] hazelRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
+        private bool[] softTissueRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
+        private bool[] dirtyShroomRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
+        */
 
         private List<int> vitalityFragments;
         private List<int> ivoryBugs;
@@ -390,6 +392,7 @@ namespace LiveSplit.UI.Components
             }
             requirementLists = new List<List<int>>();
             requiresCatSphere = new List<int> { 24, 27, 39, 47, 48, 55, 63, 64, 65, 66, 67, 68, 70, 74, 75, 79 };
+            requirementLists.Add(requiresCatSphere);
             requiresCrestFragments = new List<int> { 0, 2, 17, 18, 19, 20, 21, 22, 23, 38, 39, 47, 50, 51, 52, 53, 54, 55, 71, 72, 73, 74, 75 };
             requirementLists.Add(requiresCrestFragments);
             requiresGardenKey = new List<int> { 66, 67, 68, 35, 26, 25 };
@@ -464,7 +467,7 @@ namespace LiveSplit.UI.Components
                 usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index)) catRequires[i] = true;
+                    //if (requirementLists[i].Contains(index)) catRequires[i] = true;
                     if (requirementLists[i].Contains(index)) requirementMatrix[0,i] = true;
                 }
                 #endregion
@@ -479,7 +482,7 @@ namespace LiveSplit.UI.Components
                 usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index)) crestRequires[i] = true;
+                    //if (requirementLists[i].Contains(index)) crestRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
                         for (int j = 0; j < 8; j++) requirementMatrix[1, j] = requirementMatrix[i, j];
@@ -493,7 +496,7 @@ namespace LiveSplit.UI.Components
                 usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index)) crestRequires[i] = true;
+                    //if (requirementLists[i].Contains(index)) crestRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
                         for (int j = 0; j < 8; j++) requirementMatrix[1, j] = requirementMatrix[i, j];
@@ -507,7 +510,7 @@ namespace LiveSplit.UI.Components
                 usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index)) crestRequires[i] = true;
+                    //if (requirementLists[i].Contains(index)) crestRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
                         for (int j = 0; j < 8; j++) requirementMatrix[1, j] = requirementMatrix[i, j];
@@ -521,7 +524,7 @@ namespace LiveSplit.UI.Components
                 usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index)) crestRequires[i] = true;
+                    //if (requirementLists[i].Contains(index)) crestRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
                         for (int j = 0; j < 8; j++) requirementMatrix[1, j] = requirementMatrix[i, j];
@@ -539,7 +542,7 @@ namespace LiveSplit.UI.Components
                 usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index)) gardenRequires[i] = true;
+                    //if (requirementLists[i].Contains(index)) gardenRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
                         for (int j = 0; j < 8; j++) requirementMatrix[2, j] = requirementMatrix[i, j];
@@ -557,7 +560,7 @@ namespace LiveSplit.UI.Components
                 usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index)) cinderRequires[i] = true;
+                    //if (requirementLists[i].Contains(index)) cinderRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
                         for (int j = 0; j < 8; j++) requirementMatrix[3, j] = requirementMatrix[i, j];
@@ -575,7 +578,7 @@ namespace LiveSplit.UI.Components
                 usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index)) monasteryRequires[i] = true;
+                    //if (requirementLists[i].Contains(index)) monasteryRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
                         for (int j = 0; j < 8; j++) requirementMatrix[4, j] = requirementMatrix[i, j];
@@ -593,7 +596,7 @@ namespace LiveSplit.UI.Components
                 usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index)) hazelRequires[i] = true;
+                    //if (requirementLists[i].Contains(index)) hazelRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
                         for (int j = 0; j < 8; j++) requirementMatrix[5, j] = requirementMatrix[i, j];
@@ -611,7 +614,7 @@ namespace LiveSplit.UI.Components
                 usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index)) softTissueRequires[i] = true;
+                    //if (requirementLists[i].Contains(index)) softTissueRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
                         for (int j = 0; j < 8; j++) requirementMatrix[6, j] = requirementMatrix[i, j];
@@ -629,7 +632,7 @@ namespace LiveSplit.UI.Components
                 usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index)) dirtyShroomRequires[i] = true;
+                    //if (requirementLists[i].Contains(index)) dirtyShroomRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
                         for (int j = 0; j < 8; j++) requirementMatrix[7, j] = requirementMatrix[i, j];
@@ -813,19 +816,15 @@ namespace LiveSplit.UI.Components
             impossibleSources.Clear();
             int j = 0;
             //Key items are played in order: Cat Sphere, Crest Fragments, Garden Key, Cinder Key, Monastery Key, (Hazel Badge, Soft Tissue, Dirty Shroom, Ivory Bug) 
-            if (itemId == (int)Items.CatSphere)
-            { 
-                impossibleSources.AddRange(requiresCatSphere);
-                return;
-            }
-            else if (itemId == (int)Items.FragmentBowPow) j = 0;
-            else if (itemId == (int)Items.GardenKey) j = 1;
-            else if (itemId == (int)Items.CinderKey) j = 2;
-            else if (itemId == (int)Items.MonasteryKey) j = 3;
-            else if (itemId == (int)Items.HazelBadge) j = 4;
-            else if (itemId == (int)Items.SoftTissue) j = 5;
-            else if (itemId == (int)Items.DirtyShroom) j = 6;
-            else if (itemId == (int)Items.IvoryBug) j = 7;
+            if (itemId == (int)Items.CatSphere) j = 0;
+            else if (itemId == (int)Items.FragmentBowPow) j = 1;
+            else if (itemId == (int)Items.GardenKey) j = 2;
+            else if (itemId == (int)Items.CinderKey) j = 3;
+            else if (itemId == (int)Items.MonasteryKey) j = 4;
+            else if (itemId == (int)Items.HazelBadge) j = 5;
+            else if (itemId == (int)Items.SoftTissue) j = 6;
+            else if (itemId == (int)Items.DirtyShroom) j = 7;
+            else if (itemId == (int)Items.IvoryBug) j = 8;
             for(int i = 0; i < requirementMatrix.GetLength(0); i++)
             {
                 impossibleSources.AddRange(requirementLists[j]);
