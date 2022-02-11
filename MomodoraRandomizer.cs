@@ -231,58 +231,6 @@ namespace LiveSplit.UI.Components
 
         public LiveSplitState state;
 
-        static int[] keyItems = { 
-            (int)Items.SmallCoin, 
-            (int)Items.HazelBadge,
-            (int)Items.MonasteryKey,
-            (int)Items.DirtyShroom,
-            (int)Items.IvoryBug,
-            (int)Items.GardenKey,
-            (int)Items.MapleLeaf,
-            (int)Items.FreshSpringLeaf,
-            (int)Items.Birthstone,
-            (int)Items.CinderKey,
-            (int)Items.FragmentBowPow,
-            (int)Items.FragmentBowQuick,
-            (int)Items.FragmentDash,
-            (int)Items.FragmentWarp
-        };
-        static int[] activeItems = { 
-            (int)Items.Bellflower,
-            (int)Items.RottenBellflower,
-            (int)Items.Passiflora,
-            (int)Items.CrystalSeed,
-            (int)Items.TaintedMissive,
-            (int)Items.BackmanPatch,
-            (int)Items.CatSphere,
-            (int)Items.ClarityShard,
-            (int)Items.VioletSprite,
-            (int)Items.SoftTissue,
-            (int)Items.SparseThread,
-            (int)Items.BlessingCharm,
-            (int)Items.BloodstainedTissue,
-            (int)Items.SealedWind
-        };
-        static int[] passiveItems = {
-            (int)Items.AdornedRing,
-            (int)Items.NecklaceOfSacrifice,
-            (int)Items.AstralCharm,
-            (int)Items.EdeaPearl,
-            (int)Items.DullPearl,
-            (int)Items.RedRing,
-            (int)Items.MagnetStone,
-            (int)Items.FaerieTear,
-            (int)Items.ImpurityFlask,
-            (int)Items.MedalOfEquivalence,
-            (int)Items.BlackSachet,
-            (int)Items.RingOfCandor,
-            (int)Items.TornBranch,
-            (int)Items.HeavyArrows,
-            (int)Items.PocketIncensory,
-            (int)Items.QuickArrows,
-            (int)Items.DrillingArrows
-        };
-
         #region pointers
         
         IntPtr[] potentialSourcesPointers;
@@ -619,9 +567,9 @@ namespace LiveSplit.UI.Components
                     new List<bool> { false, false, false },
                     new List<bool> { false },
                     new List<bool> { false, false },
-                    new List<bool> { false, false, false },
-                    new List<bool> { false, false },
                     new List<bool> { false },
+                    new List<bool> { false, false },
+                    new List<bool> { false, false, false },
                     new List<bool> { false, false, false }
                 };
                 hasSavedBoughtItem = new List<List<bool>>
@@ -822,21 +770,7 @@ namespace LiveSplit.UI.Components
                     if (!bannedSources.Contains(i) && !placedItems.Contains(i))
                     {
                         index = nextIndex();
-                        foreach (var list in originalShopItems)
-                        {
-                            if (list.Contains(possibleSources[index]))// If item is a shop item
-                            {
-                                Debug.WriteLine("Item " + Enum.GetName(typeof(Items), sourceIdMapping[i]) + " generated at position " + possibleSources[index] + "(In a shop)");
-                                //Should this be index and i?
-                                saveShopItem(index, i);
-                                break;
-                            }
-                            else
-                            {
-                                createMemoryWatcher(sourceIdMapping[i], possibleSources[index]);
-                                break;
-                            }
-                        }
+                        createMemoryWatcher(sourceIdMapping[i], possibleSources[index]);
                     }
                     
                 }
@@ -950,6 +884,7 @@ namespace LiveSplit.UI.Components
                 saveWatcher.Enabled = true;
                 saveWatcher.OnChanged += (old, current) =>
                 {
+                    Debug.WriteLine("Inventory Opened?");
                     checkPlaceholders(current);
                 };
 
@@ -960,6 +895,7 @@ namespace LiveSplit.UI.Components
                 {
                     if (current < old)
                     {
+                        Debug.WriteLine("Item bought?");
                         itemBought();
                     }
                 };
@@ -969,6 +905,7 @@ namespace LiveSplit.UI.Components
                 saveWatcher.Enabled = true;
                 saveWatcher.OnChanged += (old, current) =>
                 {
+                    Debug.WriteLine("InShop?");
                     inShop(current);
                 };
 
@@ -1009,7 +946,17 @@ namespace LiveSplit.UI.Components
         private void createMemoryWatcher(int giveItemID, int newSourceAddressIndex)
         {
             //Maybe change Debug.WriteLine to write to a file instead?
-            Debug.WriteLine("Item " + Enum.GetName(typeof(Items),giveItemID) + " generated at position " + newSourceAddressIndex);
+            foreach (var list in originalShopItems)
+            {
+                if (list.Contains(newSourceAddressIndex))// If item is a shop item
+                {
+                    Debug.WriteLine("Item " + Enum.GetName(typeof(Items), giveItemID) + " generated at position " + newSourceAddressIndex + "(In a shop)");
+                    //Should this be index and i?
+                    saveShopItem(newSourceAddressIndex, giveItemID);
+                    return;
+                }
+            }
+            Debug.WriteLine("Item " + Enum.GetName(typeof(Items), giveItemID) + " generated at position " + newSourceAddressIndex);
             MemoryWatcher<double> temp = new MemoryWatcher<double>(potentialSourcesPointers[newSourceAddressIndex]);
             temp.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
             if (potentialSourcesPointers[newSourceAddressIndex] != potentialSourcesPointers[28]) {
@@ -1316,17 +1263,17 @@ namespace LiveSplit.UI.Components
 
         private void addKey(int id)
         {
-            if(id == (int)Items.MonasteryKey)
+            if (id == (int)Items.GardenKey)
+            {
+                hasKey[0] = 1;
+            }
+            else if (id == (int)Items.MonasteryKey)
             {
                 hasKey[1] = 1;
             }
-            else if (id == (int)Items.GardenKey)
-            {
-                hasKey[2] = 1;
-            }
             else
             {
-                hasKey[3] = 1;
+                hasKey[2] = 1;
             }
 
             addItem(id);
@@ -1369,8 +1316,15 @@ namespace LiveSplit.UI.Components
                 gameProc.WriteValue<double>(potentialSourcesPointers[28], pickedUpLeaf);
             };
             #endregion
+
+            #region shop logic
+            if(shopLocations.Contains(current))
+            {
+                setShopItems(current);
+            }
+            #endregion
         }
-        
+
         private void inShop(double current)
         {
             int room = gameProc.ReadValue<int>(levelIDPointer);// Get current room
@@ -1379,7 +1333,6 @@ namespace LiveSplit.UI.Components
             {
                 if (current == 1)// If player is in a conversation with an npc (non shop npcs get handled by another function)
                 {
-                    setShopItems(room);
                     addPlaceholders(room);
                 }
                 else
@@ -1413,10 +1366,11 @@ namespace LiveSplit.UI.Components
             if (shopLocations.Contains(room))// If player is in a shop room
             {
                 List<int> shopItemsAux = shopItems[shopLocations.IndexOf(room)];// Get list storing what items correspond to the ones in the shop
-                int idPos = 0;// Position on the list
+                int idPos = 0;
+                int position = 0;
 
                 int invSize = gameProc.ReadValue<int>(totalItemsPointer);// Get inventory size
-                int placeholderId = (int)gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * invSize));// id of last aquired item
+                double placeholderId = gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * invSize));// id of last aquired item
 
                 // Index of last aquired item
                 switch (placeholderId)
@@ -1434,19 +1388,19 @@ namespace LiveSplit.UI.Components
                         break;
                 }
 
-                removePlaceholders(room);// remove all placeholders (avoid weird situations)
-                addItem(placeholderId);// add placeholder so it gets removed on newItem()
-                newItem(shopItemsAux[idPos]);
-                addPlaceholders(room);// re-add placeholders
-
                 for (int i = 0; i < shopItems.Count(); i++)// Update value of hasBoughtItem in all shops that sell it
                 {
                     if (shopItems[i].Contains(shopItemsAux[idPos]))
                     {
-                        idPos = shopItems[i].IndexOf(shopItemsAux[idPos]);
-                        hasBoughtItem[i][idPos] = true;
+                        position = shopItems[i].IndexOf(shopItemsAux[idPos]);
+                        hasBoughtItem[i][position] = true;
                     }
                 }
+
+                removePlaceholders(room);// remove all placeholders (avoid weird situations)
+                addItem((int)placeholderId);// add placeholder so it gets removed on newItem()
+                newItem(shopItemsAux[idPos]);
+                addPlaceholders(room);// re-add placeholders
             }
         }
 
@@ -1491,58 +1445,56 @@ namespace LiveSplit.UI.Components
 
         private void saveShopItem(int origin, int swapped)
         {
+            int itemPos, listPos;
             foreach (var list in originalShopItems)
             {
                 if (list.Contains(origin))
                 {
-                    shopItems[originalShopItems.IndexOf(list)][list.IndexOf(origin)] = swapped;// save what item to swap for when it gets bought
+                    listPos = originalShopItems.IndexOf(list);
+                    itemPos = list.IndexOf(origin);
+                    shopItems[listPos][itemPos] = swapped;
                 }
             }
         }
 
         private void setShopItems(int room)
         {
-            List<int> aux = shopOffsets[shopLocations.IndexOf(room)];// Get list of offsets of the current shop
+            IntPtr pointer;
+            List<int> list = shopOffsets[shopLocations.IndexOf(room)];
             List<int> shopItemsAux = shopItems[shopLocations.IndexOf(room)];// Get list of items of the current shop
-            int idAux = 19;
-            IntPtr pointerAux;
             byte[] bytes;
+            int id = 19;
             string text;
 
-            for (int i = 0; i < aux.Count(); i++)
+            for (int i = 0; i < list.Count(); i++)
             {
                 switch (i)
                 {
                     case 0:
-                        idAux = 19;
+                        id = 19;
                         break;
                     case 1:
-                        idAux = 20;
+                        id = 20;
                         break;
                     case 2:
-                        idAux = 30;
+                        id = 30;
                         break;
                 }
+                
+                pointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x10 * list[i]);// Get pointer to shop item
+                gameProc.WriteValue<double>(pointer, id);// Set shop placeholder to id
 
-                text = itemNames[shopItemsAux[i]];// Get Name of the item in position i
+                text = itemNames[shopItemsAux[i]];// Get name of the item that will get added late
                 bytes = Encoding.ASCII.GetBytes(text);
-                if (bytes.Length >= 239)
-                {
-                    Debug.WriteLine("Error, the item name is too long");
-                    continue;
-                }
-                pointerAux = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14, 0x0, 0x60 * idAux + 0x10, 0x0, 0x0 }).Deref<Int32>(gameProc);
-                gameProc.WriteBytes(pointerAux, bytes);// Set name of placeholder to the one that will get added later
+                pointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14, 0x0, ((0x60 * id) + 0x10), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item name
+                gameProc.WriteBytes(pointer, bytes);// Set name of placeholder to the one that will get added later
+                gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
 
-                text = itemEffects[shopItemsAux[i]];// Get Name of the item in position i
+               text = itemEffects[shopItemsAux[i]];// Get effect of the item that will get added late
                 bytes = Encoding.ASCII.GetBytes(text);
-                if (bytes.Length >= 79)
-                {
-                    Debug.WriteLine("Error, the item effect is too long");
-                    continue;
-                }
-                pointerAux = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14, 0x0, 0x60 * idAux + 0x20, 0x0, 0x0 }).Deref<Int32>(gameProc);
-                gameProc.WriteBytes(pointerAux, bytes);// Set name of placeholder to the one that will get added later
+                pointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14, 0x0, ((0x60 * id) + 0x20), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item effect
+                gameProc.WriteBytes(pointer, bytes);// Set effect of placeholder to the one that will get added later
+                gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
             }
         }
 
@@ -1674,26 +1626,26 @@ namespace LiveSplit.UI.Components
                     Debug.WriteLine("Setting up pointers");
                     #region setting up IntPtrs
                     potentialSourcesPointers = new IntPtr[RANDOMIZER_SOURCE_AMOUNT];
-                    potentialSourcesPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0xF0);
-                    potentialSourcesPointers[1] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x100);
-                    potentialSourcesPointers[2] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x410);
-                    potentialSourcesPointers[3] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x430);
-                    potentialSourcesPointers[4] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x700);
-                    potentialSourcesPointers[5] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x9B0);
-                    potentialSourcesPointers[6] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x260);
-                    potentialSourcesPointers[7] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x420);
+                    potentialSourcesPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x0230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0xF0);
+                    potentialSourcesPointers[1] = IntPtr.Add((IntPtr)new DeepPointer(0x0230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x100);
+                    potentialSourcesPointers[2] = IntPtr.Add((IntPtr)new DeepPointer(0x0230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x410);
+                    potentialSourcesPointers[3] = IntPtr.Add((IntPtr)new DeepPointer(0x0230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x430);
+                    potentialSourcesPointers[4] = IntPtr.Add((IntPtr)new DeepPointer(0x0230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x700);
+                    potentialSourcesPointers[5] = IntPtr.Add((IntPtr)new DeepPointer(0x0230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x9B0);
+                    potentialSourcesPointers[6] = IntPtr.Add((IntPtr)new DeepPointer(0x0230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x260);
+                    potentialSourcesPointers[7] = IntPtr.Add((IntPtr)new DeepPointer(0x0230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x420);
                     potentialSourcesPointers[8] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xcf0);
                     potentialSourcesPointers[9] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xcb0);
-                    potentialSourcesPointers[10] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xd50);
-                    potentialSourcesPointers[11] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xdd0);
-                    potentialSourcesPointers[12] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc70);
-                    potentialSourcesPointers[13] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x50);
-                    potentialSourcesPointers[14] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x80);
-                    potentialSourcesPointers[15] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xeb0);
-                    potentialSourcesPointers[16] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xcd0);
-                    potentialSourcesPointers[17] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xe00);
-                    potentialSourcesPointers[18] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xea0);
-                    potentialSourcesPointers[19] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xb0);
+                    potentialSourcesPointers[10] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xd50);
+                    potentialSourcesPointers[11] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xdd0);
+                    potentialSourcesPointers[12] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc70);
+                    potentialSourcesPointers[13] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x50);
+                    potentialSourcesPointers[14] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x80);
+                    potentialSourcesPointers[15] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xeb0);
+                    potentialSourcesPointers[16] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xcd0);
+                    potentialSourcesPointers[17] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xe00);
+                    potentialSourcesPointers[18] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xea0);
+                    potentialSourcesPointers[19] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xb0);
                     potentialSourcesPointers[20] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0xA00);
                     potentialSourcesPointers[21] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0xA90);
                     potentialSourcesPointers[22] = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x6D0);
@@ -1785,9 +1737,9 @@ namespace LiveSplit.UI.Components
                     deathAmountPointer = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<int>(gameProc), 0x540);
                     inGamePointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x780);
                     saveAmountPointer = (IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc);
-                    munneyPointer = (IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x550 }).Deref<int>(gameProc);
-                    invOpenPointer = (IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0xAC0 }).Deref<int>(gameProc);
-                    convOpenPointer = (IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x660 }).Deref<int>(gameProc);
+                    munneyPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x550);
+                    invOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0xAC0);
+                    convOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x660);
                     #endregion
                     RandomizerLabel.Text = "1.05b randomizer ready to go!";
                     break;
@@ -1797,26 +1749,26 @@ namespace LiveSplit.UI.Components
                     Debug.WriteLine("Setting up pointers");
                     #region setting up IntPtrs
                     potentialSourcesPointers = new IntPtr[RANDOMIZER_SOURCE_AMOUNT];
-                    potentialSourcesPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0xF0);
-                    potentialSourcesPointers[1] = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x100);
-                    potentialSourcesPointers[2] = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x410);
-                    potentialSourcesPointers[3] = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x430);
-                    potentialSourcesPointers[4] = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x700);
-                    potentialSourcesPointers[5] = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x9B0);
-                    potentialSourcesPointers[6] = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x260);
-                    potentialSourcesPointers[7] = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x420);
+                    potentialSourcesPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x02379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0xF0);
+                    potentialSourcesPointers[1] = IntPtr.Add((IntPtr)new DeepPointer(0x02379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x100);
+                    potentialSourcesPointers[2] = IntPtr.Add((IntPtr)new DeepPointer(0x02379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x410);
+                    potentialSourcesPointers[3] = IntPtr.Add((IntPtr)new DeepPointer(0x02379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x430);
+                    potentialSourcesPointers[4] = IntPtr.Add((IntPtr)new DeepPointer(0x02379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x700);
+                    potentialSourcesPointers[5] = IntPtr.Add((IntPtr)new DeepPointer(0x02379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x9B0);
+                    potentialSourcesPointers[6] = IntPtr.Add((IntPtr)new DeepPointer(0x02379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x260);
+                    potentialSourcesPointers[7] = IntPtr.Add((IntPtr)new DeepPointer(0x02379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x420);
                     potentialSourcesPointers[8] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xd00);
                     potentialSourcesPointers[9] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xcc0);
-                    potentialSourcesPointers[10] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xd60);
-                    potentialSourcesPointers[11] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xde0);
-                    potentialSourcesPointers[12] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc80);
-                    potentialSourcesPointers[13] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x60);
-                    potentialSourcesPointers[14] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x70);
-                    potentialSourcesPointers[15] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xec0);
-                    potentialSourcesPointers[16] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xce0);
-                    potentialSourcesPointers[17] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xe10);
-                    potentialSourcesPointers[18] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xeb0);
-                    potentialSourcesPointers[19] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xb0);
+                    potentialSourcesPointers[10] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xd60);
+                    potentialSourcesPointers[11] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xde0);
+                    potentialSourcesPointers[12] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc80);
+                    potentialSourcesPointers[13] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x60);
+                    potentialSourcesPointers[14] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x70);
+                    potentialSourcesPointers[15] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xec0);
+                    potentialSourcesPointers[16] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xce0);
+                    potentialSourcesPointers[17] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xe10);
+                    potentialSourcesPointers[18] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xeb0);
+                    potentialSourcesPointers[19] = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xb0);
                     potentialSourcesPointers[20] = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0xA00);
                     potentialSourcesPointers[21] = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0xA90);
                     potentialSourcesPointers[22] = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x6D0);
@@ -1908,6 +1860,9 @@ namespace LiveSplit.UI.Components
                     deathAmountPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<int>(gameProc), 0x540);
                     inGamePointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x780);
                     saveAmountPointer = (IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc);
+                    munneyPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x540);
+                    invOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0xAD0);
+                    convOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x670);
                     #endregion
                     RandomizerLabel.Text = "1.07 randomizer ready to go!";
                     break;

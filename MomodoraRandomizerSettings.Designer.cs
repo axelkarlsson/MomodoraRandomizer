@@ -131,7 +131,7 @@ namespace LiveSplit.UI.Components
             this.chkHard.TabIndex = 45;
             this.chkHard.Text = "HARD MODE";
             this.chkHard.UseVisualStyleBackColor = true;
-            this.chkHard.CheckedChanged += new System.EventHandler(this.chkHard_CheckedChanged);
+            this.chkHard.Click += new System.EventHandler(this.chkHard_CheckedChanged);
             // 
             // groupBoxSeed
             // 
@@ -469,8 +469,8 @@ namespace LiveSplit.UI.Components
         private System.Windows.Forms.ComboBox cmbGradientType;
         public System.Windows.Forms.CheckBox chkIvoryBugs;
         public System.Windows.Forms.CheckBox chkVitality;
-        private System.Windows.Forms.TextBox textSeed;
         public System.Windows.Forms.CheckBox chkHard;
         public System.Windows.Forms.CheckBox chkRandom;
+        private System.Windows.Forms.TextBox textSeed;
     }
 }

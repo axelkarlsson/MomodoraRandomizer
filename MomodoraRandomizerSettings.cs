@@ -64,7 +64,6 @@ namespace LiveSplit.UI.Components
             UseRandomSeed_CheckedChanged(null, null);
             chkVitality_CheckedChanged(null, null);
             chkIvoryBugs_CheckedChanged(null, null);
-            chkHard_CheckedChanged(null, null);
         }
 
         void chkColor_CheckedChanged(object sender, EventArgs e)
@@ -109,11 +108,13 @@ namespace LiveSplit.UI.Components
             VitalityFragmentsEnabled = SettingsHelper.ParseBool(element["VitalityFragmentsEnabled"], true);
             IvoryBugsEnabled = SettingsHelper.ParseBool(element["IvoryBugsEnabled"], true);
             HardModeEnabled = SettingsHelper.ParseBool(element["HardModeEnabled"], false);
+            RandomSeed = SettingsHelper.ParseBool(element["RandomSeed"], true);
             TextColor = SettingsHelper.ParseColor(element["TextColor"], Color.FromArgb(255, 255, 255, 255));
             OverrideTextColor = SettingsHelper.ParseBool(element["OverrideTextColor"], false);
             BackgroundColor = SettingsHelper.ParseColor(element["BackgroundColor"], Color.FromArgb(42, 42, 42, 255));
             BackgroundColor2 = SettingsHelper.ParseColor(element["BackgroundColor2"], Color.FromArgb(19, 19, 19, 255));
             GradientString = SettingsHelper.ParseString(element["BackgroundGradient"], GradientType.Plain.ToString());
+            this.textSeed.Text = SettingsHelper.ParseString(element["textSeed"], "");
         }
 
         public XmlNode GetSettings(XmlDocument document)
@@ -122,6 +123,7 @@ namespace LiveSplit.UI.Components
             SettingsHelper.CreateSetting(document, parent, "VitalityFragmentsEnabled", VitalityFragmentsEnabled);
             SettingsHelper.CreateSetting(document, parent, "IvoryBugsEnabled", IvoryBugsEnabled);
             SettingsHelper.CreateSetting(document, parent, "HardModeEnabled", HardModeEnabled);
+            SettingsHelper.CreateSetting(document, parent, "RandomSeed", RandomSeed);
             SettingsHelper.CreateSetting(document, parent, "OverrideTextFont", OverrideTextFont);
             SettingsHelper.CreateSetting(document, parent, "OverrideTextColor", OverrideTextColor);
             SettingsHelper.CreateSetting(document, parent, "TextFont", TextFont);
@@ -129,6 +131,7 @@ namespace LiveSplit.UI.Components
             SettingsHelper.CreateSetting(document, parent, "BackgroundColor", BackgroundColor);
             SettingsHelper.CreateSetting(document, parent, "BackgroundColor2", BackgroundColor2);
             SettingsHelper.CreateSetting(document, parent, "BackgroundGradient", BackgroundGradient);
+            SettingsHelper.CreateSetting(document, parent, "textSeed", this.textSeed.Text);
             return parent;
         }
 
