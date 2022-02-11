@@ -95,19 +95,20 @@ namespace LiveSplit.UI.Components
             [22] = (int)Items.Bellflower,
             [23] = (int)Items.Passiflora,
             [24] = (int)Items.DirtyShroom,
-            [25] = (int)Items.Bellflower,
-            [26] = (int)Items.SoftTissue,
-            [27] = (int)Items.FreshSpringLeaf,
-            [28] = (int)Items.BlessingCharm,
-            [29] = (int)Items.RottenBellflower,
-            [30] = (int)Items.EdeaPearl,
-            [31] = (int)Items.BackmanPatch,
-            [32] = (int)Items.SparseThread,
-            [33] = (int)Items.PocketIncensory,
-            [34] = (int)Items.TornBranch,
-            [35] = (int)Items.TaintedMissive,
-            [36] = (int)Items.BloodstainedTissue,
-            [37] = (int)Items.HeavyArrows,
+            [25] = (int)Items.CatSphere,
+            [26] = (int)Items.Bellflower,
+            [27] = (int)Items.SoftTissue,
+            [28] = (int)Items.FreshSpringLeaf,
+            [29] = (int)Items.BlessingCharm,
+            [30] = (int)Items.RottenBellflower,
+            [31] = (int)Items.EdeaPearl,
+            [32] = (int)Items.BackmanPatch,
+            [33] = (int)Items.SparseThread,
+            [34] = (int)Items.PocketIncensory,
+            [35] = (int)Items.TornBranch,
+            [36] = (int)Items.TaintedMissive,
+            [37] = (int)Items.BloodstainedTissue,
+            [38] = (int)Items.HeavyArrows,
         };
         private Dictionary<int, int[]> sourceToLevelMapping = new Dictionary<int, int[]>
         {
@@ -222,16 +223,7 @@ namespace LiveSplit.UI.Components
 
         //                                         CatSphere, Crest, Garden, Cinder, Mona, Haze, Soft, Dirty, Bugs
         private bool[,] requirementMatrix = new bool[8,9];
-        /*
-        private bool[] catRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
-        private bool[] crestRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
-        private bool[] gardenRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
-        private bool[] cinderRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
-        private bool[] monasteryRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
-        private bool[] hazelRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
-        private bool[] softTissueRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
-        private bool[] dirtyShroomRequires = new bool[9] { false, false, false, false, false, false, false, false, false };
-        */
+
 
         private List<int> vitalityFragments;
         private List<int> ivoryBugs;
@@ -824,7 +816,7 @@ namespace LiveSplit.UI.Components
                 //11. Rest of items
                 #region rest of items
                 List<int> placedItems = new List<int>{ 4, 5, 6, 24, 25, 27 };
-                for (int i = 0; i < 38; i++)
+                for (int i = 0; i < 39; i++)
                 {
                     if (!bannedSources.Contains(i) && !placedItems.Contains(i))
                     {
@@ -833,7 +825,8 @@ namespace LiveSplit.UI.Components
                         {
                             if (list.Contains(possibleSources[index]))// If item is a shop item
                             {
-                                Debug.WriteLine("Item " + Enum.GetName(typeof(Items), i) + " generated at position " + index + "(In a shop)");
+                                Debug.WriteLine("Item " + Enum.GetName(typeof(Items), sourceIdMapping[i]) + " generated at position " + possibleSources[index] + "(In a shop)");
+                                //Should this be index and i?
                                 saveShopItem(index, i);
                                 break;
                             }
@@ -847,8 +840,7 @@ namespace LiveSplit.UI.Components
                     
                 }
                 #endregion
-#endregion
-
+                #endregion
                 #region Special memory watchers
                 taintedMissiveWatcher = new MemoryWatcher<double>(taintedMissiveMaxValuePointer);
                 taintedMissiveWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
@@ -1089,6 +1081,7 @@ namespace LiveSplit.UI.Components
         {
             itemGiven = 3;
             RandomizerLabel.Text = "New item: " + Enum.GetName(typeof(Items), id);
+            Debug.WriteLine("Giving item id: " + id);
             removeItem();
             if (id == (int)Items.IvoryBug)
             {
