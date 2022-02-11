@@ -614,6 +614,8 @@ namespace LiveSplit.UI.Components
                     randomGenerator = new Random(seed);
                 }
 
+                Debug.WriteLine("Using seed " + seed);
+
                 hasSavedChargeItem = new List<bool> { false, false, false };
                 hasChargeItem = new List<bool> { false, false, false };
                 hasSavedKey = new List<int> { 0, 0, 0 };
@@ -650,11 +652,9 @@ namespace LiveSplit.UI.Components
                 #region item placement
                 //1. Place Cat Sphere
                 #region cat sphere
-                updateImpossibleSources((int)Items.CatSphere);
-                updatePossibleSources();
-                int index = randomGenerator.Next(possibleSources.Count); 
+
+                int index = nextIndex((int)Items.CatSphere);
                 createMemoryWatcher((int)Items.CatSphere, possibleSources[index]);
-                usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     //if (requirementLists[i].Contains(index)) catRequires[i] = true;
@@ -664,12 +664,8 @@ namespace LiveSplit.UI.Components
 
                 //2: Place Crest Fragments
                 #region crest Fragments
-                updateImpossibleSources((int)Items.FragmentBowPow);
-                updatePossibleSources();
-                index = randomGenerator.Next(possibleSources.Count);
+                index = nextIndex((int)Items.FragmentBowPow);
                 createMemoryWatcher((int)Items.FragmentBowPow, possibleSources[index]);
-                possibleSources.Remove(index);
-                usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     //if (requirementLists[i].Contains(index)) crestRequires[i] = true;
@@ -680,10 +676,8 @@ namespace LiveSplit.UI.Components
                     }
                 }
 
-                index = randomGenerator.Next(possibleSources.Count);
+                index = nextIndex((int)Items.FragmentBowPow);
                 createMemoryWatcher((int)Items.FragmentBowQuick, possibleSources[index]);
-                possibleSources.Remove(index);
-                usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     //if (requirementLists[i].Contains(index)) crestRequires[i] = true;
@@ -694,10 +688,8 @@ namespace LiveSplit.UI.Components
                     }
                 }
 
-                index = randomGenerator.Next(possibleSources.Count);
+                index = nextIndex((int)Items.FragmentBowPow);
                 createMemoryWatcher((int)Items.FragmentDash, possibleSources[index]);
-                possibleSources.Remove(index);
-                usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     //if (requirementLists[i].Contains(index)) crestRequires[i] = true;
@@ -708,10 +700,8 @@ namespace LiveSplit.UI.Components
                     }
                 }
 
-                index = randomGenerator.Next(possibleSources.Count);
+                index = nextIndex((int)Items.FragmentBowPow);
                 createMemoryWatcher((int)Items.FragmentWarp, possibleSources[index]);
-                possibleSources.Remove(index);
-                usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     //if (requirementLists[i].Contains(index)) crestRequires[i] = true;
@@ -725,11 +715,8 @@ namespace LiveSplit.UI.Components
 
                 //3: Garden Key
                 #region garden Key
-                updateImpossibleSources((int)Items.GardenKey);
-                updatePossibleSources();
-                index = randomGenerator.Next(possibleSources.Count);
+                index = nextIndex((int)Items.GardenKey);
                 createMemoryWatcher((int)Items.GardenKey, possibleSources[index]);
-                usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     //if (requirementLists[i].Contains(index)) gardenRequires[i] = true;
@@ -743,11 +730,8 @@ namespace LiveSplit.UI.Components
 
                 //4: Cinder Key
                 #region cinder Key
-                updateImpossibleSources((int)Items.CinderKey);
-                updatePossibleSources();
-                index = randomGenerator.Next(possibleSources.Count);
+                index = nextIndex((int)Items.CinderKey);
                 createMemoryWatcher((int)Items.CinderKey, possibleSources[index]);
-                usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     //if (requirementLists[i].Contains(index)) cinderRequires[i] = true;
@@ -761,11 +745,8 @@ namespace LiveSplit.UI.Components
 
                 //5: Monastery Key
                 #region monastery Key
-                updateImpossibleSources((int)Items.MonasteryKey);
-                updatePossibleSources();
-                index = randomGenerator.Next(possibleSources.Count);
+                index = nextIndex((int)Items.MonasteryKey);
                 createMemoryWatcher((int)Items.MonasteryKey, possibleSources[index]);
-                usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     //if (requirementLists[i].Contains(index)) monasteryRequires[i] = true;
@@ -779,11 +760,8 @@ namespace LiveSplit.UI.Components
 
                 //6: Hazel Badge
                 #region hazel badge
-                updateImpossibleSources((int)Items.HazelBadge);
-                updatePossibleSources();
-                index = randomGenerator.Next(possibleSources.Count);
+                index = nextIndex((int)Items.HazelBadge);
                 createMemoryWatcher((int)Items.HazelBadge, possibleSources[index]);
-                usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     //if (requirementLists[i].Contains(index)) hazelRequires[i] = true;
@@ -797,11 +775,8 @@ namespace LiveSplit.UI.Components
 
                 //7: Soft Tissue
                 #region soft tissue
-                updateImpossibleSources((int)Items.SoftTissue);
-                updatePossibleSources();
-                index = randomGenerator.Next(possibleSources.Count);
+                index = nextIndex((int)Items.SoftTissue);
                 createMemoryWatcher((int)Items.SoftTissue, possibleSources[index]);
-                usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     //if (requirementLists[i].Contains(index)) softTissueRequires[i] = true;
@@ -815,11 +790,8 @@ namespace LiveSplit.UI.Components
 
                 //8: Dirty Shroom
                 #region dirty shroom
-                updateImpossibleSources((int)Items.DirtyShroom);
-                updatePossibleSources();
-                index = randomGenerator.Next(possibleSources.Count);
+                index = nextIndex((int)Items.DirtyShroom);
                 createMemoryWatcher((int)Items.DirtyShroom, possibleSources[index]);
-                usedSources.Add(index);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     //if (requirementLists[i].Contains(index)) dirtyShroomRequires[i] = true;
@@ -833,13 +805,10 @@ namespace LiveSplit.UI.Components
 
                 //9. Place Ivory Bugs
                 #region Ivory Bugs
-                updateImpossibleSources((int)Items.IvoryBug);
                 for (int i = 56; i < 76; i++)
                 {
-                    updatePossibleSources();
-                    index = randomGenerator.Next(possibleSources.Count);
+                    index = nextIndex((int)Items.IvoryBug);
                     createMemoryWatcher((int)Items.IvoryBug, possibleSources[index]);
-                    usedSources.Add(index);
                 }
                 #endregion
 
@@ -847,21 +816,19 @@ namespace LiveSplit.UI.Components
                 #region vitality fragments
                 for (int i = 39; i < 56; i++)
                 {
-                    updatePossibleSources();
-                    index = randomGenerator.Next(possibleSources.Count);
+                    index = nextIndex();
                     createMemoryWatcher((int)Items.VitalityFragment, possibleSources[index]);
-                    usedSources.Add(index);
                 }
                 #endregion
 
                 //11. Rest of items
                 #region rest of items
+                List<int> placedItems = new List<int>{ 4, 5, 6, 24, 25, 27 };
                 for (int i = 0; i < 39; i++)
                 {
-                    if (!bannedSources.Contains(i))
+                    if (!bannedSources.Contains(i) && !placedItems.Contains(i))
                     {
-                        updatePossibleSources();
-                        index = randomGenerator.Next(possibleSources.Count);
+                        index = nextIndex();
                         foreach (var list in originalShopItems)
                         {
                             if (list.Contains(possibleSources[index]))// If item is a shop item
@@ -876,8 +843,8 @@ namespace LiveSplit.UI.Components
                                 break;
                             }
                         }
-                        usedSources.Add(index);
                     }
+                    
                 }
                 #endregion
 #endregion
@@ -1026,6 +993,21 @@ namespace LiveSplit.UI.Components
             }
         }
 
+        private int nextIndex(int itemId = 0)
+        {
+            if (itemId != 0) updateImpossibleSources(itemId);
+            updatePossibleSources();
+            string places = "";
+            foreach (int i in possibleSources)
+            {
+                places = places + i + " ";
+            }
+            Debug.WriteLine("Possible values: " + places);
+            int index = randomGenerator.Next(possibleSources.Count);
+            usedSources.Add(possibleSources[index]);
+            return index;
+        }
+
         private void resetSources()
         {
             bannedSources.Clear();
@@ -1096,10 +1078,12 @@ namespace LiveSplit.UI.Components
 
         private void updatePossibleSources()
         {
-            for(int i = 0;  i < RANDOMIZER_SOURCE_AMOUNT; i++)
+            possibleSources.Clear();
+            for (int i = 0;  i < RANDOMIZER_SOURCE_AMOUNT; i++)
             {
                 if(!bannedSources.Contains(i) && !impossibleSources.Contains(i) && !usedSources.Contains(i))
                 {
+                    Debug.WriteLine("Adding " + i + " to possible sources");
                     possibleSources.Add(i);
                 }
             }
