@@ -496,13 +496,13 @@ namespace LiveSplit.UI.Components
             //Karst City, Forlorn Monsatery, Subterranean Grave, Whiteleaf Memorial Park, Cinder Chambers 1, Cinder Chambers 2, Royal Pinacotheca
             originalShopItems = new List<List<int>>
             {
-                new List<int> { 15, 11, 21 },
-                new List<int> { 11 },
-                new List<int> { 31, 2 },
-                new List<int> { 7 },
-                new List<int> { 8, 21 },
-                new List<int> { 47, 21, 13 },
-                new List<int> { 35, 46, 44 }
+                new List<int> { 8, 9, 10 },
+                new List<int> { 9 },
+                new List<int> { 11, 12 },
+                new List<int> { 13 },
+                new List<int> { 10, 14 },
+                new List<int> { 16, 10, 15 },
+                new List<int> { 17, 18, 19 }
             };
             // Place original numbers for now, they get changed later
             shopItems = new List<List<int>>
@@ -569,7 +569,7 @@ namespace LiveSplit.UI.Components
                     new List<bool> { false, false },
                     new List<bool> { false },
                     new List<bool> { false, false },
-                    new List<bool> { false, false, false },
+                    new List<bool> { false },
                     new List<bool> { false, false, false }
                 };
                 hasSavedBoughtItem = new List<List<bool>>
@@ -823,7 +823,7 @@ namespace LiveSplit.UI.Components
                             hasKey[i] = hasSavedKey[i];
                             hasPickedGreenLeaf = hasSavedPickedGreenLeaf;
                         }
-                        for (int i = 0; i < 7; i++)
+                        for (int i = 0; i < hasBoughtItem.Count(); i++)
                         {
                             for (int j = 0; j < hasBoughtItem[i].Count(); j++)
                             {
@@ -846,7 +846,7 @@ namespace LiveSplit.UI.Components
                             hasKey[i] = hasSavedKey[i];
                             hasPickedGreenLeaf = hasSavedPickedGreenLeaf;
                         }
-                        for (int i = 0; i < 7; i++)
+                        for (int i = 0; i < hasBoughtItem.Count(); i++)
                         {
                             for (int j = 0; j < hasBoughtItem[i].Count(); j++)
                             {
@@ -869,7 +869,7 @@ namespace LiveSplit.UI.Components
                             hasSavedKey[i] = hasKey[i];
                             hasSavedPickedGreenLeaf = hasPickedGreenLeaf;
                         }
-                        for (int i = 0; i < 7; i++)
+                        for (int i = 0; i < hasBoughtItem.Count(); i++)
                         {
                             for (int j = 0; j < hasBoughtItem[i].Count(); j++)
                             {
@@ -880,32 +880,29 @@ namespace LiveSplit.UI.Components
                 };
 
                 invOpenWatcher = new MemoryWatcher<double>(invOpenPointer);
-                saveWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
-                saveWatcher.Enabled = true;
-                saveWatcher.OnChanged += (old, current) =>
+                invOpenWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                invOpenWatcher.Enabled = true;
+                invOpenWatcher.OnChanged += (old, current) =>
                 {
-                    Debug.WriteLine("Inventory Opened?");
                     checkPlaceholders(current);
                 };
 
                 munneyWatcher = new MemoryWatcher<double>(munneyPointer);
-                saveWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
-                saveWatcher.Enabled = true;
-                saveWatcher.OnChanged += (old, current) =>
+                munneyWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                munneyWatcher.Enabled = true;
+                munneyWatcher.OnChanged += (old, current) =>
                 {
                     if (current < old)
                     {
-                        Debug.WriteLine("Item bought?");
                         itemBought();
                     }
                 };
 
                 convOpenWatcher = new MemoryWatcher<double>(convOpenPointer);
-                saveWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
-                saveWatcher.Enabled = true;
-                saveWatcher.OnChanged += (old, current) =>
+                convOpenWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                convOpenWatcher.Enabled = true;
+                convOpenWatcher.OnChanged += (old, current) =>
                 {
-                    Debug.WriteLine("InShop?");
                     inShop(current);
                 };
 
@@ -1025,6 +1022,7 @@ namespace LiveSplit.UI.Components
             }
         }
 
+        #region add/remove items
         //Use newItem to give out an item [with charges] and remove the last item acquired
         private void newItem(int id, int addCharges = 2)
         {
@@ -1278,6 +1276,7 @@ namespace LiveSplit.UI.Components
 
             addItem(id);
         }
+        #endregion
 
         private void checkRoom(int old, int current)
         {
@@ -1350,10 +1349,12 @@ namespace LiveSplit.UI.Components
             {
                 if (current == 1)// If inventory is open, remove all placeholder items for shops
                 {
+                    Debug.WriteLine("removing placeholder items");
                     removePlaceholders(room);
                 }
                 else// If its closed place items back
                 {
+                    Debug.WriteLine("adding placeholder items");
                     addPlaceholders(room);
                 }
             }
@@ -1368,10 +1369,12 @@ namespace LiveSplit.UI.Components
                 List<int> shopItemsAux = shopItems[shopLocations.IndexOf(room)];// Get list storing what items correspond to the ones in the shop
                 int idPos = 0;
                 int position = 0;
+                foreach (var item in shopItemsAux) Debug.WriteLine("Items sold at shop: " + item);
 
                 int invSize = gameProc.ReadValue<int>(totalItemsPointer);// Get inventory size
-                double placeholderId = gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * invSize));// id of last aquired item
-
+                Debug.WriteLine("Items " + invSize);
+                double placeholderId = gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * (invSize - 1)));// id of last aquired item
+                Debug.WriteLine("Last acquired item: " + placeholderId);
                 // Index of last aquired item
                 switch (placeholderId)
                 {
@@ -1387,7 +1390,7 @@ namespace LiveSplit.UI.Components
                         idPos = 2;
                         break;
                 }
-
+                Debug.WriteLine("ID bought: " + shopItemsAux[idPos]);
                 for (int i = 0; i < shopItems.Count(); i++)// Update value of hasBoughtItem in all shops that sell it
                 {
                     if (shopItems[i].Contains(shopItemsAux[idPos]))
@@ -1398,7 +1401,6 @@ namespace LiveSplit.UI.Components
                 }
 
                 removePlaceholders(room);// remove all placeholders (avoid weird situations)
-                addItem((int)placeholderId);// add placeholder so it gets removed on newItem()
                 newItem(shopItemsAux[idPos]);
                 addPlaceholders(room);// re-add placeholders
             }
