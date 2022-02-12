@@ -1466,6 +1466,7 @@ namespace LiveSplit.UI.Components
             {
                 if (item == true)// If item was bought remove one placeholder
                 {
+                    Debug.WriteLine("Removing one placeholder item");
                     removeLastItem();
                 }
             }
