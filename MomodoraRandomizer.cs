@@ -1390,7 +1390,7 @@ namespace LiveSplit.UI.Components
                     Debug.WriteLine("removing placeholder items");
                     removePlaceholders(room);
                 }
-                else // If its closed place items back
+                else// If its closed place items back
                 {
                     Debug.WriteLine("adding placeholder items");
                     addPlaceholders(room);
@@ -1505,8 +1505,6 @@ namespace LiveSplit.UI.Components
 
         private void setShopItems(int room)
         {
-
-            System.Threading.Thread.Sleep(500);
 
             IntPtr pointer;
             List<int> list = shopOffsets[shopLocations.IndexOf(room)];
