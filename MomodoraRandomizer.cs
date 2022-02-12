@@ -500,31 +500,20 @@ namespace LiveSplit.UI.Components
                 new List<int> { 9 },
                 new List<int> { 11, 12 },
                 new List<int> { 13 },
-                new List<int> { 10, 14 },
-                new List<int> { 16, 10, 15 },
+                new List<int> { 14, 10 },
+                new List<int> { 15, 10, 16 },
                 new List<int> { 17, 18, 19 }
             };
             // Place original numbers for now, they get changed later
             shopItems = new List<List<int>>
             {
-                new List<int> { 15, 11, 21 },
-                new List<int> { 11 },
-                new List<int> { 31, 2 },
-                new List<int> { 7 },
-                new List<int> { 8, 21 },
-                new List<int> { 47, 21, 13 },
-                new List<int> { 35, 46, 44 }
-            };
-            //Karst City, Forlorn Monsatery, Subterranean Grave, Whiteleaf Memorial Park, Cinder Chambers 1, Cinder Chambers 2, Royal Pinacotheca
-            shopOffsets = new List<List<int>>
-            {
-                new List<int> { 207, 203, 213 },
-                new List<int> { 203 },
-                new List<int> { 221, 199 },
-                new List<int> { 5 },
-                new List<int> { 8, 213 },
-                new List<int> { 235, 213, 205 },
-                new List<int> { 224, 234, 11 }
+                new List<int> { 8, 9, 10 },
+                new List<int> { 9 },
+                new List<int> { 11, 12 },
+                new List<int> { 13 },
+                new List<int> { 14, 10 },
+                new List<int> { 15, 10, 16 },
+                new List<int> { 17, 18, 19 }
             };
 
             state.OnStart += onStart;
@@ -557,6 +546,36 @@ namespace LiveSplit.UI.Components
 
                 Debug.WriteLine("Using seed " + seed);
 
+
+                //Karst City, Forlorn Monsatery, Subterranean Grave, Whiteleaf Memorial Park, Cinder Chambers 1, Cinder Chambers 2, Royal Pinacotheca
+                switch (gameProc.MainModule.ModuleMemorySize)
+                {
+                    case 39690240:// 1.05
+                        shopOffsets = new List<List<int>>
+                        {
+                            new List<int> { 207, 203, 213 },
+                            new List<int> { 203 },
+                            new List<int> { 221, 199 },
+                            new List<int> { 5 },
+                            new List<int> { 8, 213 },
+                            new List<int> { 235, 213, 205 },
+                            new List<int> { 224, 234, 11 }
+                        };
+                        break;
+                    case 40222720:// 1.07
+                        shopOffsets = new List<List<int>>
+                        {
+                            new List<int> { 208, 204, 214 },
+                            new List<int> { 204 },
+                            new List<int> { 222, 200 },
+                            new List<int> { 5 },
+                            new List<int> { 8, 214 },
+                            new List<int> { 236, 214, 206 },
+                            new List<int> { 225, 235, 11 }
+                        };
+                        break;
+                }
+
                 hasSavedChargeItem = new List<bool> { false, false, false };
                 hasChargeItem = new List<bool> { false, false, false };
                 hasSavedKey = new List<int> { 0, 0, 0 };
@@ -569,7 +588,7 @@ namespace LiveSplit.UI.Components
                     new List<bool> { false, false },
                     new List<bool> { false },
                     new List<bool> { false, false },
-                    new List<bool> { false },
+                    new List<bool> { false, false, false },
                     new List<bool> { false, false, false }
                 };
                 hasSavedBoughtItem = new List<List<bool>>
@@ -577,11 +596,15 @@ namespace LiveSplit.UI.Components
                     new List<bool> { false, false, false },
                     new List<bool> { false },
                     new List<bool> { false, false },
-                    new List<bool> { false, false, false },
-                    new List<bool> { false, false },
                     new List<bool> { false },
+                    new List<bool> { false, false },
+                    new List<bool> { false, false, false },
                     new List<bool> { false, false, false }
                 };
+                foreach (var room in shopLocations)
+                {
+                    resetShopItems(room);
+                }
 
                 resetSources();
                 updateBannedSources();
@@ -746,19 +769,25 @@ namespace LiveSplit.UI.Components
 
                 //9. Place Ivory Bugs
                 #region Ivory Bugs
-                for (int i = 56; i < 76; i++)
+                if (settingsControl.IvoryBugsEnabled)
                 {
-                    index = nextIndex((int)Items.IvoryBug);
-                    createMemoryWatcher((int)Items.IvoryBug, possibleSources[index]);
+                    for (int i = 56; i < 76; i++)
+                    {
+                        index = nextIndex((int)Items.IvoryBug);
+                        createMemoryWatcher((int)Items.IvoryBug, possibleSources[index]);
+                    }
                 }
                 #endregion
 
                 //10. Place Vitality Fragments
                 #region vitality fragments
-                for (int i = 39; i < 56; i++)
+                if (settingsControl.VitalityFragmentsEnabled)
                 {
-                    index = nextIndex();
-                    createMemoryWatcher((int)Items.VitalityFragment, possibleSources[index]);
+                    for (int i = 39; i < 56; i++)
+                    {
+                        index = nextIndex();
+                        createMemoryWatcher((int)Items.VitalityFragment, possibleSources[index]);
+                    }
                 }
                 #endregion
 
@@ -829,6 +858,10 @@ namespace LiveSplit.UI.Components
                             {
                                 hasBoughtItem[i][j] = hasSavedBoughtItem[i][j];
                             }
+                        }
+                        foreach (var room in shopLocations)
+                        {
+                            resetShopItems(room);
                         }
                     }
                 };
@@ -1317,9 +1350,13 @@ namespace LiveSplit.UI.Components
             #endregion
 
             #region shop logic
-            if(shopLocations.Contains(current))
+            if(shopLocations.Contains(current))// If player is in a shop room
             {
                 setShopItems(current);
+            }
+            else if (shopLocations.Contains(old) && !shopLocations.Contains(current))// If player just left a shop room
+            {
+                resetShopItems(old);
             }
             #endregion
         }
@@ -1344,15 +1381,16 @@ namespace LiveSplit.UI.Components
         private void checkPlaceholders(double current)
         {
             int room = gameProc.ReadValue<int>(levelIDPointer);// Get current room
+            int inShop = (int)gameProc.ReadValue<double>(convOpenPointer);// Get if the player has a shop open
 
-            if (shopLocations.Contains(room))// If player is in a shop room
+            if (shopLocations.Contains(room) && inShop == 1)// If player is in a shop room and is shopping
             {
-                if (current == 1)// If inventory is open, remove all placeholder items for shops
+                if (current == 1)// If inventory is open remove all placeholder items for shops
                 {
                     Debug.WriteLine("removing placeholder items");
                     removePlaceholders(room);
                 }
-                else// If its closed place items back
+                else // If its closed place items back
                 {
                     Debug.WriteLine("adding placeholder items");
                     addPlaceholders(room);
@@ -1368,7 +1406,7 @@ namespace LiveSplit.UI.Components
             {
                 List<int> shopItemsAux = shopItems[shopLocations.IndexOf(room)];// Get list storing what items correspond to the ones in the shop
                 int idPos = 0;
-                int position = 0;
+                int position;
                 foreach (var item in shopItemsAux) Debug.WriteLine("Items sold at shop: " + item);
 
                 int invSize = gameProc.ReadValue<int>(totalItemsPointer);// Get inventory size
@@ -1376,20 +1414,10 @@ namespace LiveSplit.UI.Components
                 double placeholderId = gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * (invSize - 1)));// id of last aquired item
                 Debug.WriteLine("Last acquired item: " + placeholderId);
                 // Index of last aquired item
-                switch (placeholderId)
-                {
-                    case 19:
-                        idPos = 0;
-                        break;
+                if (placeholderId == 19) idPos = 0;
+                if (placeholderId == 20) idPos = 1;
+                if (placeholderId == 30) idPos = 2;
 
-                    case 20:
-                        idPos = 1;
-                        break;
-
-                    case 30:
-                        idPos = 2;
-                        break;
-                }
                 Debug.WriteLine("ID bought: " + shopItemsAux[idPos]);
                 for (int i = 0; i < shopItems.Count(); i++)// Update value of hasBoughtItem in all shops that sell it
                 {
@@ -1440,20 +1468,9 @@ namespace LiveSplit.UI.Components
             {
                 if (aux[i] == true)// If item was bought add the placeholder
                 {
-                    switch (i)
-                    {
-                        case 0:
-                            addItem(19);
-                            break;
-
-                        case 1:
-                            addItem(20);
-                            break;
-
-                        case 2:
-                            addItem(30);
-                            break;
-                    }
+                    if (i == 0) addItem(19);
+                    if (i == 1) addItem(20);
+                    if (i == 2) addItem(30);
                 }
             }
         }
@@ -1488,6 +1505,9 @@ namespace LiveSplit.UI.Components
 
         private void setShopItems(int room)
         {
+
+            System.Threading.Thread.Sleep(500);
+
             IntPtr pointer;
             List<int> list = shopOffsets[shopLocations.IndexOf(room)];
             List<int> shopItemsAux = shopItems[shopLocations.IndexOf(room)];// Get list of items of the current shop
@@ -1497,18 +1517,9 @@ namespace LiveSplit.UI.Components
 
             for (int i = 0; i < list.Count(); i++)
             {
-                switch (i)
-                {
-                    case 0:
-                        id = 19;
-                        break;
-                    case 1:
-                        id = 20;
-                        break;
-                    case 2:
-                        id = 30;
-                        break;
-                }
+                if (i == 0) id = 19;
+                if (i == 1) id = 20;
+                if (i == 2) id = 30;
                 
                 pointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x10 * list[i]);// Get pointer to shop item
                 gameProc.WriteValue<double>(pointer, id);// Set shop placeholder to id
@@ -1524,6 +1535,23 @@ namespace LiveSplit.UI.Components
                 pointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14, 0x0, ((0x60 * id) + 0x20), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item effect
                 gameProc.WriteBytes(pointer, bytes);// Set effect of placeholder to the one that will get added later
                 gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
+            }
+        }
+
+        private void resetShopItems(int room)
+        {
+            IntPtr pointer;
+            List<int> list = shopOffsets[shopLocations.IndexOf(room)];
+            List<int> shopItemsAux = originalShopItems[shopLocations.IndexOf(room)];// Get list of original items for the current shop
+            int id;
+
+            for (int i = 0; i < list.Count(); i++)
+            {
+
+                id = shopItemsAux[i];
+
+                pointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x10 * list[i]);// Get pointer to shop item
+                gameProc.WriteValue<double>(pointer, (double)sourceIdMapping[id]);// Set shop item id to original one
             }
         }
 
