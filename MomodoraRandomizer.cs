@@ -1400,9 +1400,35 @@ namespace LiveSplit.UI.Components
                     }
                 }
 
+                Debug.WriteLine("Items after buying, before removing placeholder:");
+                invSize = gameProc.ReadValue<int>(totalItemsPointer);
+                for (int i = 0; i < invSize; i++)
+                {
+                    Debug.WriteLine(gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * i)));
+                }
                 removePlaceholders(room);// remove all placeholders (avoid weird situations)
+                Debug.WriteLine("Items after buying, after removing placeholder:");
+                invSize = gameProc.ReadValue<int>(totalItemsPointer);
+                for (int i = 0; i < invSize; i++)
+                {
+                    Debug.WriteLine(gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * i)));
+                }
+
+                addItem((int)placeholderId);
                 newItem(shopItemsAux[idPos]);
+                Debug.WriteLine("Items after buying, After adding bought item:");
+                invSize = gameProc.ReadValue<int>(totalItemsPointer);
+                for (int i = 0; i < invSize; i++)
+                {
+                    Debug.WriteLine(gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * i)));
+                }
                 addPlaceholders(room);// re-add placeholders
+                Debug.WriteLine("Items after buying, after readding placeholders:");
+                invSize = gameProc.ReadValue<int>(totalItemsPointer);
+                for (int i = 0; i < invSize; i++)
+                {
+                    Debug.WriteLine(gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * i)));
+                }
             }
         }
 
