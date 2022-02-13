@@ -210,6 +210,7 @@ namespace LiveSplit.UI.Components
         private List<int> usedSources;
         private List<int> possibleSources;
         private List<int> impossibleSources;
+        private List<int> placedItems;
         private List<List<int>> requirementLists;
         private List<int> requiresCatSphere;
         private List<int> requiresCrestFragments;
@@ -446,6 +447,7 @@ namespace LiveSplit.UI.Components
             usedSources = new List<int>();
             possibleSources = new List<int>();
             impossibleSources = new List<int>();
+            placedItems = new List<int>();
 
             vitalityFragments = new List<int>();
             for (int i = 39; i <= 55; i++)
@@ -529,7 +531,7 @@ namespace LiveSplit.UI.Components
         {
             if (VerifyProcessRunning())
             {
-                SetupIntPtrs();
+                SetupVersionDifferences();
                 //If set seed ->
                 if (!settingsControl.RandomSeed)
                 {
@@ -545,36 +547,6 @@ namespace LiveSplit.UI.Components
                 }
 
                 Debug.WriteLine("Using seed " + seed);
-
-
-                //Karst City, Forlorn Monsatery, Subterranean Grave, Whiteleaf Memorial Park, Cinder Chambers 1, Cinder Chambers 2, Royal Pinacotheca
-                switch (gameProc.MainModule.ModuleMemorySize)
-                {
-                    case 39690240:// 1.05
-                        shopOffsets = new List<List<int>>
-                        {
-                            new List<int> { 207, 203, 213 },
-                            new List<int> { 203 },
-                            new List<int> { 221, 199 },
-                            new List<int> { 5 },
-                            new List<int> { 8, 213 },
-                            new List<int> { 235, 213, 205 },
-                            new List<int> { 224, 234, 11 }
-                        };
-                        break;
-                    case 40222720:// 1.07
-                        shopOffsets = new List<List<int>>
-                        {
-                            new List<int> { 208, 204, 214 },
-                            new List<int> { 204 },
-                            new List<int> { 222, 200 },
-                            new List<int> { 5 },
-                            new List<int> { 8, 214 },
-                            new List<int> { 236, 214, 206 },
-                            new List<int> { 225, 235, 11 }
-                        };
-                        break;
-                }
 
                 hasSavedChargeItem = new List<bool> { false, false, false };
                 hasChargeItem = new List<bool> { false, false, false };
@@ -624,6 +596,7 @@ namespace LiveSplit.UI.Components
                     //if (requirementLists[i].Contains(index)) catRequires[i] = true;
                     if (requirementLists[i].Contains(index)) requirementMatrix[0,i] = true;
                 }
+                placedItems.Add(25);
                 #endregion
 
                 //2: Place Crest Fragments
@@ -639,6 +612,7 @@ namespace LiveSplit.UI.Components
                         requirementMatrix[1, i] = true;
                     }
                 }
+                placedItems.Add(78);
 
                 index = nextIndex((int)Items.FragmentBowPow);
                 createMemoryWatcher((int)Items.FragmentBowQuick, possibleSources[index]);
@@ -651,6 +625,7 @@ namespace LiveSplit.UI.Components
                         requirementMatrix[1, i] = true;
                     }
                 }
+                placedItems.Add(76);
 
                 index = nextIndex((int)Items.FragmentBowPow);
                 createMemoryWatcher((int)Items.FragmentDash, possibleSources[index]);
@@ -663,6 +638,7 @@ namespace LiveSplit.UI.Components
                         requirementMatrix[1, i] = true;
                     }
                 }
+                placedItems.Add(77);
 
                 index = nextIndex((int)Items.FragmentBowPow);
                 createMemoryWatcher((int)Items.FragmentWarp, possibleSources[index]);
@@ -675,20 +651,54 @@ namespace LiveSplit.UI.Components
                         requirementMatrix[1, i] = true;
                     }
                 }
+                placedItems.Add(79);
                 #endregion
 
                 //3: Garden Key
                 #region garden Key
-                index = nextIndex((int)Items.GardenKey);
-                createMemoryWatcher((int)Items.GardenKey, possibleSources[index]);
-                for (int i = 0; i < requirementLists.Count; i++)
+                //If hard mode: decide to place garden key or bakman patch reachable first, and then place the other one "unreachable"
+                if (settingsControl.HardModeEnabled)
                 {
-                    //if (requirementLists[i].Contains(index)) gardenRequires[i] = true;
-                    if (requirementLists[i].Contains(index))
+                    bool gardenKeyFirst = Convert.ToBoolean(randomGenerator.Next(0, 1));
+
+                    index = nextIndex((int)Items.GardenKey);
+                    if (gardenKeyFirst) createMemoryWatcher((int)Items.GardenKey, possibleSources[index]);
+                    else createMemoryWatcher((int)Items.BackmanPatch, possibleSources[index]);
+
+                    for (int i = 0; i < requirementLists.Count; i++)
                     {
-                        for (int j = 0; j < 8; j++) requirementMatrix[2, j] = requirementMatrix[i, j];
-                        requirementMatrix[2, i] = true;
+                        //if (requirementLists[i].Contains(index)) gardenRequires[i] = true;
+                        if (requirementLists[i].Contains(index))
+                        {
+                            for (int j = 0; j < 8; j++) requirementMatrix[2, j] = requirementMatrix[i, j];
+                            requirementMatrix[2, i] = true;
+                        }
                     }
+                    alternatePossibleSources();
+                    index = randomGenerator.Next(possibleSources.Count());
+                    usedSources.Add(possibleSources[index]);
+
+                    if (gardenKeyFirst) createMemoryWatcher((int)Items.BackmanPatch, possibleSources[index]);   
+                    else createMemoryWatcher((int)Items.GardenKey, possibleSources[index]);
+
+                    placedItems.Add(4);
+                    placedItems.Add(32);
+
+                }
+                else
+                {
+                    index = nextIndex((int)Items.GardenKey);
+                    createMemoryWatcher((int)Items.GardenKey, possibleSources[index]);
+                    for (int i = 0; i < requirementLists.Count; i++)
+                    {
+                        //if (requirementLists[i].Contains(index)) gardenRequires[i] = true;
+                        if (requirementLists[i].Contains(index))
+                        {
+                            for (int j = 0; j < 8; j++) requirementMatrix[2, j] = requirementMatrix[i, j];
+                            requirementMatrix[2, i] = true;
+                        }
+                    }
+                    placedItems.Add(4);
                 }
                 #endregion
 
@@ -705,6 +715,7 @@ namespace LiveSplit.UI.Components
                         requirementMatrix[3, i] = true;
                     }
                 }
+                placedItems.Add(5);
                 #endregion
 
                 //5: Monastery Key
@@ -720,6 +731,7 @@ namespace LiveSplit.UI.Components
                         requirementMatrix[4, i] = true;
                     }
                 }
+                placedItems.Add(6);
                 #endregion
 
                 //6: Hazel Badge
@@ -735,6 +747,7 @@ namespace LiveSplit.UI.Components
                         requirementMatrix[5, i] = true;
                     }
                 }
+                placedItems.Add(81);
                 #endregion
 
                 //7: Soft Tissue
@@ -750,6 +763,7 @@ namespace LiveSplit.UI.Components
                         requirementMatrix[6, i] = true;
                     }
                 }
+                placedItems.Add(27);
                 #endregion
 
                 //8: Dirty Shroom
@@ -765,6 +779,7 @@ namespace LiveSplit.UI.Components
                         requirementMatrix[7, i] = true;
                     }
                 }
+                placedItems.Add(24);
                 #endregion
 
                 //9. Place Ivory Bugs
@@ -775,11 +790,12 @@ namespace LiveSplit.UI.Components
                     {
                         index = nextIndex((int)Items.IvoryBug);
                         createMemoryWatcher((int)Items.IvoryBug, possibleSources[index]);
+                        placedItems.Add(i);
                     }
                 }
                 #endregion
 
-                //10. Place Vitality Fragments
+                //10. Place vitality fragments
                 #region vitality fragments
                 if (settingsControl.VitalityFragmentsEnabled)
                 {
@@ -793,7 +809,6 @@ namespace LiveSplit.UI.Components
 
                 //11. Rest of items
                 #region rest of items
-                List<int> placedItems = new List<int>{ 4, 5, 6, 24, 25, 27 };
                 for (int i = 0; i < 39; i++)
                 {
                     if (!bannedSources.Contains(i) && !placedItems.Contains(i))
@@ -971,6 +986,7 @@ namespace LiveSplit.UI.Components
             impossibleSources.Clear();
             usedSources.Clear();
             possibleSources.Clear();
+            placedItems.Clear();
         }
 
         private void createMemoryWatcher(int giveItemID, int newSourceAddressIndex)
@@ -1049,6 +1065,18 @@ namespace LiveSplit.UI.Components
             for (int i = 0;  i < RANDOMIZER_SOURCE_AMOUNT; i++)
             {
                 if(!bannedSources.Contains(i) && !impossibleSources.Contains(i) && !usedSources.Contains(i))
+                {
+                    possibleSources.Add(i);
+                }
+            }
+        }
+
+        private void alternatePossibleSources()
+        {
+            possibleSources.Clear();
+            for (int i = 0; i < RANDOMIZER_SOURCE_AMOUNT; i++)
+            {
+                if (!bannedSources.Contains(i) && impossibleSources.Contains(i) && !usedSources.Contains(i))
                 {
                     possibleSources.Add(i);
                 }
@@ -1428,35 +1456,10 @@ namespace LiveSplit.UI.Components
                     }
                 }
 
-                Debug.WriteLine("Items after buying, before removing placeholder:");
-                invSize = gameProc.ReadValue<int>(totalItemsPointer);
-                for (int i = 0; i < invSize; i++)
-                {
-                    Debug.WriteLine(gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * i)));
-                }
                 removePlaceholders(room);// remove all placeholders (avoid weird situations)
-                Debug.WriteLine("Items after buying, after removing placeholder:");
-                invSize = gameProc.ReadValue<int>(totalItemsPointer);
-                for (int i = 0; i < invSize; i++)
-                {
-                    Debug.WriteLine(gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * i)));
-                }
-
                 addItem((int)placeholderId);
                 newItem(shopItemsAux[idPos]);
-                Debug.WriteLine("Items after buying, After adding bought item:");
-                invSize = gameProc.ReadValue<int>(totalItemsPointer);
-                for (int i = 0; i < invSize; i++)
-                {
-                    Debug.WriteLine(gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * i)));
-                }
                 addPlaceholders(room);// re-add placeholders
-                Debug.WriteLine("Items after buying, after readding placeholders:");
-                invSize = gameProc.ReadValue<int>(totalItemsPointer);
-                for (int i = 0; i < invSize; i++)
-                {
-                    Debug.WriteLine(gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * i)));
-                }
             }
         }
 
@@ -1528,7 +1531,7 @@ namespace LiveSplit.UI.Components
                 gameProc.WriteBytes(pointer, bytes);// Set name of placeholder to the one that will get added later
                 gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
 
-               text = itemEffects[shopItemsAux[i]];// Get effect of the item that will get added late
+                text = itemEffects[shopItemsAux[i]];// Get effect of the item that will get added late
                 bytes = Encoding.ASCII.GetBytes(text);
                 pointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14, 0x0, ((0x60 * id) + 0x20), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item effect
                 gameProc.WriteBytes(pointer, bytes);// Set effect of placeholder to the one that will get added later
@@ -1671,6 +1674,38 @@ namespace LiveSplit.UI.Components
             }
         }
 
+        private void SetupVersionDifferences()
+        {
+            SetupIntPtrs();
+            //Karst City, Forlorn Monsatery, Subterranean Grave, Whiteleaf Memorial Park, Cinder Chambers 1, Cinder Chambers 2, Royal Pinacotheca
+            switch (gameProc.MainModule.ModuleMemorySize)
+            {
+                    case 39690240:// 1.05
+                        shopOffsets = new List<List<int>>
+                            {
+                                new List<int> { 207, 203, 213 },
+                                new List<int> { 203 },
+                                new List<int> { 221, 199 },
+                                new List<int> { 5 },
+                                new List<int> { 8, 213 },
+                                new List<int> { 235, 213, 205 },
+                                new List<int> { 224, 234, 11 }
+                            };
+                        break;
+                    case 40222720:// 1.07
+                        shopOffsets = new List<List<int>>
+                            {
+                                new List<int> { 208, 204, 214 },
+                                new List<int> { 204 },
+                                new List<int> { 222, 200 },
+                                new List<int> { 5 },
+                                new List<int> { 8, 214 },
+                                new List<int> { 236, 214, 206 },
+                                new List<int> { 225, 235, 11 }
+                            };
+                        break;
+            }
+        }
         private void SetupIntPtrs()
         {
             switch (gameProc.MainModule.ModuleMemorySize)
