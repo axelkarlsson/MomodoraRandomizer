@@ -528,9 +528,12 @@ namespace LiveSplit.UI.Components
         private void onReset(object sender, TimerPhase value)
         {
             randomizerRunning = false;
-            foreach (var room in shopLocations)
+            if (VerifyProcessRunning())
             {
-                resetShopItems(room);
+                foreach (var room in shopLocations)
+                {
+                    resetShopItems(room);
+                }
             }
         }
 
