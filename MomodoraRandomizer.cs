@@ -286,6 +286,7 @@ namespace LiveSplit.UI.Components
         IntPtr inGamePointer;
         IntPtr saveAmountPointer;
         IntPtr deathAmountPointer;
+        IntPtr warpStartPointer;
         #endregion
         #endregion
 
@@ -440,6 +441,10 @@ namespace LiveSplit.UI.Components
             "Key Item. Inreases maximum health.",
         };
 
+        List<double> warpsActive;
+        private bool hasWarp;
+        private bool hasSavedWarp;
+
         private bool inGame;
 
 
@@ -585,6 +590,10 @@ namespace LiveSplit.UI.Components
                     new List<bool> { false, false, false },
                     new List<bool> { false, false, false }
                 };
+                //Grove, Karst City, Monsatery, Grave, Memorial Park, Cinder Chambers, Pinacotheca, Karst Castle
+                warpsActive = new List<double> { 0, 0, 0, 0, 0, 0, 0, 0 };
+                hasWarp = false;
+                hasSavedWarp = false;
 
                 resetSources();
                 updateBannedSources();
@@ -887,6 +896,7 @@ namespace LiveSplit.UI.Components
                         {
                             resetShopItems(room);
                         }
+                        hasWarp = hasSavedWarp;
                     }
                 };
 
@@ -910,6 +920,7 @@ namespace LiveSplit.UI.Components
                                 hasBoughtItem[i][j] = hasSavedBoughtItem[i][j];
                             }
                         }
+                        hasWarp = hasSavedWarp;
                     }
                 };
 
@@ -933,6 +944,7 @@ namespace LiveSplit.UI.Components
                                 hasSavedBoughtItem[i][j] = hasBoughtItem[i][j];
                             }
                         }
+                        hasSavedWarp = hasWarp;
                     }
                 };
 
@@ -1106,6 +1118,10 @@ namespace LiveSplit.UI.Components
             else if ((int)Items.FragmentWarp >= id && id >= (int)Items.FragmentBowPow)
             {
                 addCrestFragment(id);
+                if (id == 53)
+                {
+                    hasWarp = true;
+                }
             }
             else if (id == (int)Items.VitalityFragment)
             {
@@ -1398,13 +1414,13 @@ namespace LiveSplit.UI.Components
             #endregion
 
             #region Warp logic
-            if (current == 154)// If they are after Lubella 2
+            if (current == 154 && !hasWarp)// If they are after Lubella 2 and dont have the warps fragment
             {
-                addCrestFragment(53);// This ignores if the player already has the Warp fragment or not, but it shouldn matter (?)
+                antisoflock();
             }
-            else if (old == 154)
+            else if (old == 154 && !hasWarp)
             {
-                removeCrestFragment();
+                soflock();
             };
             #endregion
         }
@@ -1444,17 +1460,15 @@ namespace LiveSplit.UI.Components
                     addPlaceholders(room);
                 }
             }
-            else if(room == 154)
+            else if(room == 154 && !hasWarp)
             {
                 if (current == 1)// If inventory is open remove Warp Fragment
                 {
-                    Debug.WriteLine("Removing antisoftlock Warp");
-                    removeCrestFragment();
+                    soflock();
                 }
-                else// If inventory is closed place Warp Fragment back
+                else if (current == 0)// If inventory is closed place Warp Fragment back
                 {
-                    Debug.WriteLine("Adding antisoftlock Warp");
-                    addCrestFragment(53);
+                    antisoflock();
                 }
             }
         }
@@ -1601,6 +1615,30 @@ namespace LiveSplit.UI.Components
                 pointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14, 0x0, ((0x60 * idAux) + 0x20), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item effect
                 gameProc.WriteBytes(pointer, bytes);// Restore bytes
                 gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
+            }
+        }
+
+        private void antisoflock()
+        {
+            Debug.WriteLine("Adding Warp fragment");
+            addCrestFragment(53);
+            Debug.WriteLine("Restricting Warp locations");
+            for (int i = 0; i < 8; i++)
+            {
+                warpsActive[i] = gameProc.ReadValue<double>(warpStartPointer + (0x10 * i));
+                gameProc.WriteValue<double>(warpStartPointer + (0x10 * i), 0);
+            }
+            gameProc.WriteValue<double>(warpStartPointer + 0x40, 1);
+        }
+
+        private void soflock()
+        {
+            Debug.WriteLine("Removing Warp fragment");
+            removeCrestFragment();
+            Debug.WriteLine("Restoring Warp locations");
+            for (int i = 0; i < 8; i++)
+            {
+                gameProc.WriteValue<double>(warpStartPointer + (0x10 * i), warpsActive[i]);
             }
         }
 
@@ -1877,11 +1915,14 @@ namespace LiveSplit.UI.Components
                     deathAmountPointer = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<int>(gameProc), 0x540);
                     inGamePointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x780);
                     saveAmountPointer = (IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc);
+                    
                     munnyPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x550);
                     invOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0xAC0);
                     convOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x660);
                     shopPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8).Deref<Int32>(gameProc), 0x4);
                     itemInfoPointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14 }).Deref<Int32>(gameProc);
+
+                    warpStartPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0xB40);
                     #endregion
                     RandomizerLabel.Text = "1.05b randomizer ready to go!";
                     break;
@@ -2002,11 +2043,14 @@ namespace LiveSplit.UI.Components
                     deathAmountPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<int>(gameProc), 0x530);
                     inGamePointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x790);
                     saveAmountPointer = (IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc);
+                    
                     munnyPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x540);
                     invOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0xAD0);
                     convOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x670);
                     shopPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8).Deref<Int32>(gameProc), 0x4);
                     itemInfoPointer = (IntPtr)new DeepPointer(0x23782F4, new int[] { 0x14 }).Deref<Int32>(gameProc);
+
+                    warpStartPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0xB40);
                     #endregion
                     RandomizerLabel.Text = "1.07 randomizer ready to go!";
                     break;
