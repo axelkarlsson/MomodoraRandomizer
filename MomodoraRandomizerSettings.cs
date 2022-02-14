@@ -199,5 +199,10 @@ namespace LiveSplit.UI.Components
                                                      );
             }
         }
+
+        private void groupBoxSeed_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

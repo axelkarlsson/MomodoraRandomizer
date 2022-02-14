@@ -72,7 +72,7 @@ namespace LiveSplit.UI.Components
             // 
             // btnSeed
             // 
-            this.btnSeed.Location = new System.Drawing.Point(336, 28);
+            this.btnSeed.Location = new System.Drawing.Point(351, 28);
             this.btnSeed.Name = "btnSeed";
             this.btnSeed.Size = new System.Drawing.Size(88, 24);
             this.btnSeed.TabIndex = 0;
@@ -140,14 +140,14 @@ namespace LiveSplit.UI.Components
             this.groupBoxSeed.Controls.Add(this.tableLayoutPanel5);
             this.groupBoxSeed.Location = new System.Drawing.Point(3, 3);
             this.groupBoxSeed.Name = "groupBoxSeed";
-            this.groupBoxSeed.Size = new System.Drawing.Size(434, 82);
+            this.groupBoxSeed.Size = new System.Drawing.Size(460, 82);
             this.groupBoxSeed.TabIndex = 4;
             this.groupBoxSeed.TabStop = false;
             this.groupBoxSeed.Text = "Seed";
+            this.groupBoxSeed.Enter += new System.EventHandler(this.groupBoxSeed_Enter);
             // 
             // tableLayoutPanel5
             // 
-            this.tableLayoutPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel5.ColumnCount = 2;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.80374F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.19626F));
@@ -160,7 +160,7 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(428, 57);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(448, 57);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
             // groupBoxOptions
@@ -168,14 +168,13 @@ namespace LiveSplit.UI.Components
             this.groupBoxOptions.Controls.Add(this.tableLayoutPanel3);
             this.groupBoxOptions.Location = new System.Drawing.Point(3, 91);
             this.groupBoxOptions.Name = "groupBoxOptions";
-            this.groupBoxOptions.Size = new System.Drawing.Size(434, 75);
+            this.groupBoxOptions.Size = new System.Drawing.Size(460, 75);
             this.groupBoxOptions.TabIndex = 3;
             this.groupBoxOptions.TabStop = false;
             this.groupBoxOptions.Text = "Options";
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 153F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 64F));
@@ -188,7 +187,7 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(428, 48);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(448, 48);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // groupBoxFont
@@ -196,7 +195,7 @@ namespace LiveSplit.UI.Components
             this.groupBoxFont.Controls.Add(this.tableLayoutPanel6);
             this.groupBoxFont.Location = new System.Drawing.Point(3, 208);
             this.groupBoxFont.Name = "groupBoxFont";
-            this.groupBoxFont.Size = new System.Drawing.Size(434, 76);
+            this.groupBoxFont.Size = new System.Drawing.Size(460, 76);
             this.groupBoxFont.TabIndex = 48;
             this.groupBoxFont.TabStop = false;
             this.groupBoxFont.Text = "Text Font";
@@ -211,13 +210,12 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel6.Controls.Add(this.btnFont, 2, 1);
             this.tableLayoutPanel6.Controls.Add(this.chkFont, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.label1, 0, 1);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(428, 57);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(451, 57);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // lblFont
@@ -226,14 +224,14 @@ namespace LiveSplit.UI.Components
             this.lblFont.AutoSize = true;
             this.lblFont.Location = new System.Drawing.Point(160, 37);
             this.lblFont.Name = "lblFont";
-            this.lblFont.Size = new System.Drawing.Size(179, 13);
+            this.lblFont.Size = new System.Drawing.Size(202, 13);
             this.lblFont.TabIndex = 4;
             this.lblFont.Text = "Font";
             // 
             // btnFont
             // 
             this.btnFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFont.Location = new System.Drawing.Point(345, 32);
+            this.btnFont.Location = new System.Drawing.Point(368, 32);
             this.btnFont.Name = "btnFont";
             this.btnFont.Size = new System.Drawing.Size(80, 23);
             this.btnFont.TabIndex = 1;
@@ -249,7 +247,7 @@ namespace LiveSplit.UI.Components
             this.chkFont.Location = new System.Drawing.Point(7, 6);
             this.chkFont.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
             this.chkFont.Name = "chkFont";
-            this.chkFont.Size = new System.Drawing.Size(332, 17);
+            this.chkFont.Size = new System.Drawing.Size(355, 17);
             this.chkFont.TabIndex = 0;
             this.chkFont.Text = "Override Layout Settings";
             this.chkFont.UseVisualStyleBackColor = true;
@@ -270,7 +268,7 @@ namespace LiveSplit.UI.Components
             this.groupBoxColor.Controls.Add(this.tableLayoutPanel1);
             this.groupBoxColor.Location = new System.Drawing.Point(3, 290);
             this.groupBoxColor.Name = "groupBoxColor";
-            this.groupBoxColor.Size = new System.Drawing.Size(434, 76);
+            this.groupBoxColor.Size = new System.Drawing.Size(460, 76);
             this.groupBoxColor.TabIndex = 49;
             this.groupBoxColor.TabStop = false;
             this.groupBoxColor.Text = "Text Color";
@@ -279,21 +277,20 @@ namespace LiveSplit.UI.Components
             // 
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 157F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 67F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 182F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 172F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.tableLayoutPanel1.Controls.Add(this.chkColor, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnShadowColor, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnTextColor, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 2, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(428, 57);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(451, 57);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // chkColor
@@ -301,10 +298,10 @@ namespace LiveSplit.UI.Components
             this.chkColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.chkColor.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.chkColor, 2);
-            this.chkColor.Location = new System.Drawing.Point(7, 6);
+            this.chkColor.Location = new System.Drawing.Point(7, 5);
             this.chkColor.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
             this.chkColor.Name = "chkColor";
-            this.chkColor.Size = new System.Drawing.Size(214, 17);
+            this.chkColor.Size = new System.Drawing.Size(238, 17);
             this.chkColor.TabIndex = 0;
             this.chkColor.Text = "Override Layout Settings";
             this.chkColor.UseVisualStyleBackColor = true;
@@ -314,7 +311,7 @@ namespace LiveSplit.UI.Components
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 37);
+            this.label3.Location = new System.Drawing.Point(3, 36);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(151, 13);
             this.label3.TabIndex = 11;
@@ -325,9 +322,9 @@ namespace LiveSplit.UI.Components
             this.btnShadowColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btnShadowColor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnShadowColor.Location = new System.Drawing.Point(409, 32);
+            this.btnShadowColor.Location = new System.Drawing.Point(423, 31);
             this.btnShadowColor.Name = "btnShadowColor";
-            this.btnShadowColor.Size = new System.Drawing.Size(23, 23);
+            this.btnShadowColor.Size = new System.Drawing.Size(23, 24);
             this.btnShadowColor.TabIndex = 12;
             this.btnShadowColor.UseVisualStyleBackColor = false;
             this.btnShadowColor.Click += new System.EventHandler(this.colorButton_Click);
@@ -337,9 +334,9 @@ namespace LiveSplit.UI.Components
             this.btnTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btnTextColor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTextColor.Location = new System.Drawing.Point(160, 32);
+            this.btnTextColor.Location = new System.Drawing.Point(160, 31);
             this.btnTextColor.Name = "btnTextColor";
-            this.btnTextColor.Size = new System.Drawing.Size(22, 23);
+            this.btnTextColor.Size = new System.Drawing.Size(23, 24);
             this.btnTextColor.TabIndex = 1;
             this.btnTextColor.UseVisualStyleBackColor = false;
             this.btnTextColor.Click += new System.EventHandler(this.colorButton_Click);
@@ -348,9 +345,9 @@ namespace LiveSplit.UI.Components
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(227, 37);
+            this.label2.Location = new System.Drawing.Point(251, 36);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(176, 13);
+            this.label2.Size = new System.Drawing.Size(166, 13);
             this.label2.TabIndex = 13;
             this.label2.Text = "Shadow:";
             // 
@@ -363,7 +360,6 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel2.Controls.Add(this.groupBoxFont, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.groupBoxOptions, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 0, 2);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 5;
@@ -373,7 +369,7 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 82F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(447, 379);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(471, 379);
             this.tableLayoutPanel2.TabIndex = 50;
             // 
             // tableLayoutPanel4
@@ -382,7 +378,7 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 211F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 212F));
             this.tableLayoutPanel4.Controls.Add(this.btnColor1, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.label11, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.btnColor2, 1, 0);
@@ -391,7 +387,7 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(434, 30);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(460, 30);
             this.tableLayoutPanel4.TabIndex = 51;
             // 
             // btnColor1
@@ -439,7 +435,7 @@ namespace LiveSplit.UI.Components
             "Horizontal"});
             this.cmbGradientType.Location = new System.Drawing.Point(225, 4);
             this.cmbGradientType.Name = "cmbGradientType";
-            this.cmbGradientType.Size = new System.Drawing.Size(206, 21);
+            this.cmbGradientType.Size = new System.Drawing.Size(232, 21);
             this.cmbGradientType.TabIndex = 43;
             this.cmbGradientType.SelectedIndexChanged += new System.EventHandler(this.mbGradientType_SelectedIndexChanged);
             // 
@@ -449,7 +445,7 @@ namespace LiveSplit.UI.Components
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel2);
             this.Name = "MomodoraRandomizerSettings";
-            this.Size = new System.Drawing.Size(447, 379);
+            this.Size = new System.Drawing.Size(476, 379);
             this.Load += new System.EventHandler(this.MomodoraRandomizerSettings_Load);
             this.groupBoxSeed.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
