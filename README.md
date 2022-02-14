@@ -37,7 +37,7 @@
 | 52           | 29     | Blessed Charm            | Hazel Badge                                 |
 | 46           | 30     | Rotten Shroom            | Dirty Shroom                                |
 | 53           | 31     | Edea's Pearl             | Backman Patch(Hard)                         |
-| 73           | 32     | Backman Patch            | Backman Patch(Hard)                         |
+| 73           | 32     | Backman Patch            | None                                        |
 | 141          | 33     | Sparse Thread            | Backman Patch(Hard)                         |
 | 193          | 34     | Pocket Incensory         | Backman Patch(Hard)                         |
 | 153          | 35     | Torn Branch              | Garden Key, Backman Patch(Hard)             |
