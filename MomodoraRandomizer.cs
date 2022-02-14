@@ -941,7 +941,7 @@ namespace LiveSplit.UI.Components
                 invOpenWatcher.Enabled = true;
                 invOpenWatcher.OnChanged += (old, current) =>
                 {
-                    checkPlaceholders(current);
+                    InvOpen(current);
                 };
 
                 munnyWatcher = new MemoryWatcher<double>(munnyPointer);
@@ -1396,6 +1396,17 @@ namespace LiveSplit.UI.Components
                 resetShopItems(old);
             }
             #endregion
+
+            #region Warp logic
+            if (current == 154)// If they are after Lubella 2
+            {
+                addCrestFragment(53);// This ignores if the player already has the Warp fragment or not, but it shouldn matter (?)
+            }
+            else if (old == 154)
+            {
+                removeCrestFragment();
+            };
+            #endregion
         }
 
         private void inShop(double current)
@@ -1415,7 +1426,7 @@ namespace LiveSplit.UI.Components
             }
         }
 
-        private void checkPlaceholders(double current)
+        private void InvOpen(double current)
         {
             int room = gameProc.ReadValue<int>(levelIDPointer);// Get current room
             int inShop = (int)gameProc.ReadValue<double>(convOpenPointer);// Get if the player has a shop open
@@ -1431,6 +1442,19 @@ namespace LiveSplit.UI.Components
                 {
                     Debug.WriteLine("adding placeholder items");
                     addPlaceholders(room);
+                }
+            }
+            else if(room == 154)
+            {
+                if (current == 1)// If inventory is open remove Warp Fragment
+                {
+                    Debug.WriteLine("Removing antisoftlock Warp");
+                    removeCrestFragment();
+                }
+                else// If inventory is closed place Warp Fragment back
+                {
+                    Debug.WriteLine("Adding antisoftlock Warp");
+                    addCrestFragment(53);
                 }
             }
         }
@@ -1630,6 +1654,7 @@ namespace LiveSplit.UI.Components
         {
             RandomizerLabel.Font = settingsControl.OverrideTextFont ? settingsControl.TextFont : state.LayoutSettings.TextFont;
             RandomizerLabel.ForeColor = settingsControl.OverrideTextColor ? settingsControl.TextColor : state.LayoutSettings.TextColor;
+            RandomizerLabel.ShadowColor = settingsControl.OverrideTextColor ? settingsControl.ShadowColor : state.LayoutSettings.ShadowsColor;
 
             RandomizerLabel.VerticalAlignment = StringAlignment.Center;
             RandomizerLabel.HorizontalAlignment = StringAlignment.Center;
