@@ -1096,7 +1096,6 @@ namespace LiveSplit.UI.Components
         //Use newItem to give out an item [with charges] and remove the last item acquired
         private void newItem(int id, int addCharges = 2)
         {
-            itemGiven = 3;
             RandomizerLabel.Text = "New item: " + Enum.GetName(typeof(Items), id);
             Debug.WriteLine("Giving item id: " + id);
             removeItem();
@@ -1128,6 +1127,7 @@ namespace LiveSplit.UI.Components
             {
                 addItem(id);
             }
+            itemGiven = 2;
         }
 
         private void addLeaf()
