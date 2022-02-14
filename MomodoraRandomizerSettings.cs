@@ -14,6 +14,7 @@ namespace LiveSplit.UI.Components
         public bool RandomSeed { get; set; }
 
         public Color TextColor { get; set; }
+        public Color ShadowColor { get; set; }
         public bool OverrideTextColor { get; set; }
 
         public string TextFontString => SettingsHelper.FormatFont(TextFont);
@@ -39,9 +40,10 @@ namespace LiveSplit.UI.Components
             TextFont = new Font("Segoe UI", 13, FontStyle.Regular, GraphicsUnit.Pixel);
             OverrideTextFont = false;
             TextColor = Color.FromArgb(255, 255, 255, 255);
+            ShadowColor = Color.FromArgb(255, 255, 255, 255);
             OverrideTextColor = false;
-            BackgroundColor = Color.FromArgb(255, 42, 42, 42);
-            BackgroundColor2 = Color.FromArgb(255, 19, 19, 19);
+            BackgroundColor = Color.FromArgb(0, 255, 255, 255);
+            BackgroundColor2 = Color.FromArgb(0, 255, 255, 255);
             BackgroundGradient = GradientType.Plain;
 
             chkVitality.DataBindings.Add("Checked", this, "VitalityFragmentsEnabled", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -51,7 +53,8 @@ namespace LiveSplit.UI.Components
             chkFont.DataBindings.Add("Checked", this, "OverrideTextFont", false, DataSourceUpdateMode.OnPropertyChanged);
             lblFont.DataBindings.Add("Text", this, "TextFontString", false, DataSourceUpdateMode.OnPropertyChanged);
             chkColor.DataBindings.Add("Checked", this, "OverrideTextColor", false, DataSourceUpdateMode.OnPropertyChanged);
-            btnColor.DataBindings.Add("BackColor", this, "TextColor", false, DataSourceUpdateMode.OnPropertyChanged);
+            btnTextColor.DataBindings.Add("BackColor", this, "TextColor", false, DataSourceUpdateMode.OnPropertyChanged);
+            btnShadowColor.DataBindings.Add("BackColor", this, "ShadowColor", false, DataSourceUpdateMode.OnPropertyChanged);
             btnColor1.DataBindings.Add("BackColor", this, "BackgroundColor", false, DataSourceUpdateMode.OnPropertyChanged);
             btnColor2.DataBindings.Add("BackColor", this, "BackgroundColor2", false, DataSourceUpdateMode.OnPropertyChanged);
             cmbGradientType.DataBindings.Add("SelectedItem", this, "GradientString", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -68,7 +71,7 @@ namespace LiveSplit.UI.Components
 
         void chkColor_CheckedChanged(object sender, EventArgs e)
         {
-            label3.Enabled = btnColor.Enabled = chkColor.Checked;
+             label2.Enabled = btnShadowColor.Enabled = label3.Enabled = btnTextColor.Enabled = chkColor.Checked;
         }
 
         void chkFont_CheckedChanged(object sender, EventArgs e)
@@ -110,6 +113,7 @@ namespace LiveSplit.UI.Components
             HardModeEnabled = SettingsHelper.ParseBool(element["HardModeEnabled"], false);
             RandomSeed = SettingsHelper.ParseBool(element["RandomSeed"], true);
             TextColor = SettingsHelper.ParseColor(element["TextColor"], Color.FromArgb(255, 255, 255, 255));
+            ShadowColor = SettingsHelper.ParseColor(element["ShadowColor"], Color.FromArgb(255, 255, 255, 255));
             OverrideTextColor = SettingsHelper.ParseBool(element["OverrideTextColor"], false);
             BackgroundColor = SettingsHelper.ParseColor(element["BackgroundColor"], Color.FromArgb(42, 42, 42, 255));
             BackgroundColor2 = SettingsHelper.ParseColor(element["BackgroundColor2"], Color.FromArgb(19, 19, 19, 255));
@@ -128,6 +132,7 @@ namespace LiveSplit.UI.Components
             SettingsHelper.CreateSetting(document, parent, "OverrideTextColor", OverrideTextColor);
             SettingsHelper.CreateSetting(document, parent, "TextFont", TextFont);
             SettingsHelper.CreateSetting(document, parent, "TextColor", TextColor);
+            SettingsHelper.CreateSetting(document, parent, "ShadowColor", ShadowColor);
             SettingsHelper.CreateSetting(document, parent, "BackgroundColor", BackgroundColor);
             SettingsHelper.CreateSetting(document, parent, "BackgroundColor2", BackgroundColor2);
             SettingsHelper.CreateSetting(document, parent, "BackgroundGradient", BackgroundGradient);
@@ -143,7 +148,7 @@ namespace LiveSplit.UI.Components
             lblFont.Text = TextFontString;
         }
 
-        private void colorButtonClick(object sender, EventArgs e)
+        private void colorButton_Click(object sender, EventArgs e)
         {
             SettingsHelper.ColorButtonClick((Button)sender, this);
         }
