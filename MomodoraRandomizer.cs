@@ -33,8 +33,6 @@ namespace LiveSplit.UI.Components
             MedalOfEquivalence = 16,
             TaintedMissive = 17,
             BlackSachet = 18,
-            Nineteen = 19,
-            Twenty = 20,
             RingOfCandor = 21,
             SmallCoin = 22,
             BackmanPatch = 23,
@@ -42,7 +40,7 @@ namespace LiveSplit.UI.Components
             HazelBadge = 25,
             TornBranch = 26,
             MonasteryKey = 27,
-            thirty = 30,
+            Twentynine = 29,
             ClarityShard = 31,
             DirtyShroom = 32,
             IvoryBug = 34,
@@ -272,15 +270,20 @@ namespace LiveSplit.UI.Components
         IntPtr inventoryItemsChargeStartPointer;
         #endregion
 
+        #region Shop pointers
+        IntPtr munnyPointer;
+        IntPtr invOpenPointer;
+        IntPtr convOpenPointer;
+        IntPtr shopPointer;
+        IntPtr itemInfoPointer;
+        #endregion
+
         #region misc pointers
         IntPtr difficultyPointer;
         IntPtr levelIDPointer;
         IntPtr inGamePointer;
         IntPtr saveAmountPointer;
         IntPtr deathAmountPointer;
-        IntPtr munneyPointer;
-        IntPtr invOpenPointer;
-        IntPtr convOpenPointer;
         #endregion
         #endregion
 
@@ -294,7 +297,7 @@ namespace LiveSplit.UI.Components
         private MemoryWatcher<double> deathWatcher;
         private MemoryWatcher<double> saveWatcher;
         private MemoryWatcher<double> inGameWatcher;
-        private MemoryWatcher<double> munneyWatcher;
+        private MemoryWatcher<double> munnyWatcher;
         private MemoryWatcher<double> invOpenWatcher;
         private MemoryWatcher<double> convOpenWatcher;
         private MemoryWatcherList specialWatchers;
@@ -349,7 +352,7 @@ namespace LiveSplit.UI.Components
             "Torn Branch",
             "Monastery Key",
             "",
-            "",
+            "Karst Crest",
             "",
             "Clarity Shard",
             "Dirty Shroom",
@@ -386,7 +389,7 @@ namespace LiveSplit.UI.Components
             "Passive Effect: sometimes enemies will drop twice as much munny.",
             "Passive Effect: grants poison properties to your arrows.",
             "Passive Effect: grants poison properties to your arrows.",
-            "Passive Effect: restores a small amount of HP per kill, but#enemies won't drop ",
+            "Passive Effect: restores a small amount of HP per kill, but enemies won't drop munny.",
             "Passive Effect: attracts munny stars.",
             "Active Effect: inflicts poison on the user.",
             "Passive Effect: raises user's resistance to status ailments.",
@@ -395,8 +398,8 @@ namespace LiveSplit.UI.Components
             "Active Effect: fully restores the user's HP.",
             "Active Effect: temporarily increases attack by 50%.",
             "Passive Effect: slowly restores HP.",
-            "Active Effect: temporarily increases attack by 100%,#at the cost of HP.",
-            "Passive Effect: heavily increases attack power,#at the risk of losing HP.",
+            "Active Effect: temporarily increases attack by 100%, at the cost of HP.",
+            "Passive Effect: heavily increases attack power, at the risk of losing HP.",
             "",
             "",
             "Passive Effect: emits a sound when near secrecy.",
@@ -407,7 +410,7 @@ namespace LiveSplit.UI.Components
             "Passive Effect: restores a small amount of HP per kill.",
             "Key Item.",
             "",
-            "",
+            "Key Item. Allows warping when praying.",
             "",
             "Active Effect: increases visibility in dark areas.",
             "Key Item.",
@@ -525,6 +528,10 @@ namespace LiveSplit.UI.Components
         private void onReset(object sender, TimerPhase value)
         {
             randomizerRunning = false;
+            foreach (var room in shopLocations)
+            {
+                resetShopItems(room);
+            }
         }
 
         private void onStart(object sender, EventArgs e)
@@ -573,10 +580,6 @@ namespace LiveSplit.UI.Components
                     new List<bool> { false, false, false },
                     new List<bool> { false, false, false }
                 };
-                foreach (var room in shopLocations)
-                {
-                    resetShopItems(room);
-                }
 
                 resetSources();
                 updateBannedSources();
@@ -935,10 +938,10 @@ namespace LiveSplit.UI.Components
                     checkPlaceholders(current);
                 };
 
-                munneyWatcher = new MemoryWatcher<double>(munneyPointer);
-                munneyWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
-                munneyWatcher.Enabled = true;
-                munneyWatcher.OnChanged += (old, current) =>
+                munnyWatcher = new MemoryWatcher<double>(munnyPointer);
+                munnyWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                munnyWatcher.Enabled = true;
+                munnyWatcher.OnChanged += (old, current) =>
                 {
                     if (current < old)
                     {
@@ -958,7 +961,7 @@ namespace LiveSplit.UI.Components
                 specialWatchers.Add(saveWatcher);
                 specialWatchers.Add(deathWatcher);
                 specialWatchers.Add(inGameWatcher);
-                specialWatchers.Add(munneyWatcher);
+                specialWatchers.Add(munnyWatcher);
                 specialWatchers.Add(invOpenWatcher);
                 specialWatchers.Add(convOpenWatcher);
 
@@ -1442,9 +1445,9 @@ namespace LiveSplit.UI.Components
                 double placeholderId = gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * (invSize - 1)));// id of last aquired item
                 Debug.WriteLine("Last acquired item: " + placeholderId);
                 // Index of last aquired item
-                if (placeholderId == 19) idPos = 0;
-                if (placeholderId == 20) idPos = 1;
-                if (placeholderId == 30) idPos = 2;
+                if (placeholderId == 22) idPos = 0;
+                if (placeholderId == 29) idPos = 1;
+                if (placeholderId == 45) idPos = 2;
 
                 Debug.WriteLine("ID bought: " + shopItemsAux[idPos]);
                 for (int i = 0; i < shopItems.Count(); i++)// Update value of hasBoughtItem in all shops that sell it
@@ -1471,9 +1474,9 @@ namespace LiveSplit.UI.Components
             {
                 if (aux[i] == true)// If item was bought add the placeholder
                 {
-                    if (i == 0) addItem(19);
-                    if (i == 1) addItem(20);
-                    if (i == 2) addItem(30);
+                    if (i == 0) addItem(22);
+                    if (i == 1) addItem(29);
+                    if (i == 2) addItem(45);
                 }
             }
         }
@@ -1508,32 +1511,31 @@ namespace LiveSplit.UI.Components
 
         private void setShopItems(int room)
         {
-
             IntPtr pointer;
             List<int> list = shopOffsets[shopLocations.IndexOf(room)];
             List<int> shopItemsAux = shopItems[shopLocations.IndexOf(room)];// Get list of items of the current shop
             byte[] bytes;
-            int id = 19;
+            int id = 22;
             string text;
 
             for (int i = 0; i < list.Count(); i++)
             {
-                if (i == 0) id = 19;
-                if (i == 1) id = 20;
-                if (i == 2) id = 30;
+                if (i == 0) id = 22;
+                if (i == 1) id = 29;
+                if (i == 2) id = 45;
                 
-                pointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x10 * list[i]);// Get pointer to shop item
+                pointer = IntPtr.Add((IntPtr)new DeepPointer(shopPointer).Deref<Int32>(gameProc), 0x10 * list[i]);// Get pointer to shop item
                 gameProc.WriteValue<double>(pointer, id);// Set shop placeholder to id
 
                 text = itemNames[shopItemsAux[i]];// Get name of the item that will get added late
                 bytes = Encoding.ASCII.GetBytes(text);
-                pointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14, 0x0, ((0x60 * id) + 0x10), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item name
+                pointer = (IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * id) + 0x10), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item name
                 gameProc.WriteBytes(pointer, bytes);// Set name of placeholder to the one that will get added later
                 gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
 
                 text = itemEffects[shopItemsAux[i]];// Get effect of the item that will get added late
                 bytes = Encoding.ASCII.GetBytes(text);
-                pointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14, 0x0, ((0x60 * id) + 0x20), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item effect
+                pointer = (IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * id) + 0x20), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item effect
                 gameProc.WriteBytes(pointer, bytes);// Set effect of placeholder to the one that will get added later
                 gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
             }
@@ -1544,15 +1546,31 @@ namespace LiveSplit.UI.Components
             IntPtr pointer;
             List<int> list = shopOffsets[shopLocations.IndexOf(room)];
             List<int> shopItemsAux = originalShopItems[shopLocations.IndexOf(room)];// Get list of original items for the current shop
-            int id;
+            byte[] bytes;
+            int id, idAux = 22;
+            string text;
 
             for (int i = 0; i < list.Count(); i++)
             {
-
+                if (i == 0) idAux = 22;
+                if (i == 1) idAux = 29;
+                if (i == 2) idAux = 45;
                 id = shopItemsAux[i];
 
                 pointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x10 * list[i]);// Get pointer to shop item
                 gameProc.WriteValue<double>(pointer, (double)sourceIdMapping[id]);// Set shop item id to original one
+                
+                text = itemNames[idAux];// Get name of original placeholder
+                bytes = Encoding.ASCII.GetBytes(text);
+                pointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14, 0x0, ((0x60 * idAux) + 0x10), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item name
+                gameProc.WriteBytes(pointer, bytes);// Restore bytes
+                gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
+
+                text = itemEffects[idAux];// Get effect of original placeholder
+                bytes = Encoding.ASCII.GetBytes(text);
+                pointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14, 0x0, ((0x60 * idAux) + 0x20), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item effect
+                gameProc.WriteBytes(pointer, bytes);// Restore bytes
+                gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
             }
         }
 
@@ -1706,6 +1724,7 @@ namespace LiveSplit.UI.Components
                         break;
             }
         }
+        
         private void SetupIntPtrs()
         {
             switch (gameProc.MainModule.ModuleMemorySize)
@@ -1827,9 +1846,11 @@ namespace LiveSplit.UI.Components
                     deathAmountPointer = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<int>(gameProc), 0x540);
                     inGamePointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x780);
                     saveAmountPointer = (IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc);
-                    munneyPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x550);
+                    munnyPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x550);
                     invOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0xAC0);
                     convOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x660);
+                    shopPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8).Deref<Int32>(gameProc), 0x4);
+                    itemInfoPointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14 }).Deref<Int32>(gameProc);
                     #endregion
                     RandomizerLabel.Text = "1.05b randomizer ready to go!";
                     break;
@@ -1947,12 +1968,14 @@ namespace LiveSplit.UI.Components
                     inventoryItemsStartPointer = (IntPtr)new DeepPointer(0x23782DC, new int[] { 0x1ac, 0xC }).Deref<int>(gameProc);
                     inventoryItemsChargeStartPointer = (IntPtr)new DeepPointer(0x23782DC, new int[] { 0x1b0, 0xC }).Deref<int>(gameProc);
                     levelIDPointer = IntPtr.Add(gameProc.MainModule.BaseAddress, 0x237C360);
-                    deathAmountPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<int>(gameProc), 0x540);
-                    inGamePointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x780);
+                    deathAmountPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<int>(gameProc), 0x530);
+                    inGamePointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x790);
                     saveAmountPointer = (IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc);
-                    munneyPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x540);
+                    munnyPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x540);
                     invOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0xAD0);
                     convOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x670);
+                    shopPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8).Deref<Int32>(gameProc), 0x4);
+                    itemInfoPointer = (IntPtr)new DeepPointer(0x23782F4, new int[] { 0x14 }).Deref<Int32>(gameProc);
                     #endregion
                     RandomizerLabel.Text = "1.07 randomizer ready to go!";
                     break;
