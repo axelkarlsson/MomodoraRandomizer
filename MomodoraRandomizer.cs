@@ -107,6 +107,8 @@ namespace LiveSplit.UI.Components
             [36] = (int)Items.TaintedMissive,
             [37] = (int)Items.BloodstainedTissue,
             [38] = (int)Items.HeavyArrows,
+            [80] = (int)Items.Bellflower,
+            [82] = (int)Items.Passiflora
         };
         private Dictionary<int, int[]> sourceToLevelMapping = new Dictionary<int, int[]>
         {
@@ -809,13 +811,14 @@ namespace LiveSplit.UI.Components
                     {
                         index = nextIndex();
                         createMemoryWatcher((int)Items.VitalityFragment, possibleSources[index]);
+                        placedItems.Add(i);
                     }
                 }
                 #endregion
 
                 //11. Rest of items
                 #region rest of items
-                for (int i = 0; i < 39; i++)
+                for (int i = 0; i < RANDOMIZER_SOURCE_AMOUNT; i++)
                 {
                     if (!bannedSources.Contains(i) && !placedItems.Contains(i))
                     {
@@ -1871,8 +1874,8 @@ namespace LiveSplit.UI.Components
                     potentialSourcesPointers[5] = IntPtr.Add((IntPtr)new DeepPointer(0x02379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x9B0);
                     potentialSourcesPointers[6] = IntPtr.Add((IntPtr)new DeepPointer(0x02379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x260);
                     potentialSourcesPointers[7] = IntPtr.Add((IntPtr)new DeepPointer(0x02379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x420);
-                    potentialSourcesPointers[8] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xd00);
-                    potentialSourcesPointers[9] = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xcc0);
+                    potentialSourcesPointers[8] = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xd00);
+                    potentialSourcesPointers[9] = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xcc0);
                     potentialSourcesPointers[10] = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xd60);
                     potentialSourcesPointers[11] = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xde0);
                     potentialSourcesPointers[12] = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc80);
@@ -1977,7 +1980,7 @@ namespace LiveSplit.UI.Components
                     munnyPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x540);
                     invOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0xAD0);
                     convOpenPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4 }).Deref<int>(gameProc), 0x670);
-                    shopPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8).Deref<Int32>(gameProc), 0x4);
+                    shopPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8).Deref<Int32>(gameProc), 0x4);
                     itemInfoPointer = (IntPtr)new DeepPointer(0x23782F4, new int[] { 0x14 }).Deref<Int32>(gameProc);
                     #endregion
                     RandomizerLabel.Text = "1.07 randomizer ready to go!";
@@ -1990,12 +1993,21 @@ namespace LiveSplit.UI.Components
 
         private void UpdateItemWatchers()
         {
+            
             taintedMissiveWatcher.Update(gameProc);
             passifloraWatcher.Update(gameProc);
             bellflowerWatcher.Update(gameProc);
             ivoryBugWatcher.Update(gameProc);
             crestFragmentWatcher.Update(gameProc);
             vitalityFragmentWatcher.Update(gameProc);
+            
+            Debug.WriteLine("Updating item watchers");
+            Debug.WriteLine("VF: " + vitalityFragmentWatcher.Current + " " + vitalityFragmentWatcher.Old + " " + vitalityFragmentWatcher.Changed);
+            Debug.WriteLine("IB: " + ivoryBugWatcher.Current + " " + ivoryBugWatcher.Old + " " + ivoryBugWatcher.Changed);
+            Debug.WriteLine("CF: " + crestFragmentWatcher.Current + " " + crestFragmentWatcher.Old + " " + crestFragmentWatcher.Changed);
+            Debug.WriteLine("bellflower: " + bellflowerWatcher.Current + " " + bellflowerWatcher.Old + " " + bellflowerWatcher.Changed);
+            Debug.WriteLine("Passiflora: " + passifloraWatcher.Current + " " + passifloraWatcher.Old + " " + passifloraWatcher.Changed);
+            Debug.WriteLine("Missive: " + taintedMissiveWatcher.Current + " " + taintedMissiveWatcher.Old + " " + taintedMissiveWatcher.Changed);
         }
 
         private bool VerifyProcessRunning()
