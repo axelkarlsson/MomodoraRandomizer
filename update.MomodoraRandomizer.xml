@@ -4,7 +4,7 @@
       <file path="MomodoraRandomizer.dll" status="changed"/>
     </files>
     <changelog>
-      <change>Testing this functionality.</change>
+      <change>Added update functionality through LiveSplit.</change>
     </changelog>
   </update>
 </updates>
