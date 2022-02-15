@@ -18,9 +18,9 @@ namespace LiveSplit.UI.Components
 
         public string UpdateName => ComponentName;
 
-        public string XMLURL => UpdateURL + "blob/main/update.MomodoraRandomizer.xml";
+        public string XMLURL => UpdateURL + "update.MomodoraRandomizer.xml";
 
-        public string UpdateURL => "https://github.com/axelkarlsson/MomodoraRandomizer/";
+        public string UpdateURL => "https://raw.githubusercontent.com/axelkarlsson/MomodoraRandomizer/main/";
 
         public Version Version => Version.Parse("1.0.0");
 
