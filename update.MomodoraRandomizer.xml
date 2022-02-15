@@ -1,7 +1,15 @@
 ﻿<updates>
+    <update version="1.0.2">
+    <files>
+      <file path="LiveSplit.MomodoraRandomizer.dll" status="changed"/>
+    </files>
+    <changelog>
+      <change>Is this how to do it?.</change>
+    </changelog>
+  </update>
   <update version="1.0.1">
     <files>
-      <file path="MomodoraRandomizer.dll" status="changed"/>
+      <file path="LiveSplit.MomodoraRandomizer.dll" status="changed"/>
     </files>
     <changelog>
       <change>Added update functionality through LiveSplit.</change>
