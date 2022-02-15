@@ -1,7 +1,7 @@
 ﻿<updates>
-  <update version="1.0.0">
+  <update version="1.0.1">
     <files>
-      <file path="Components/LiveSplit.Counter.dll" status="changed"/>
+      <file path="/blob/main/update.MomodoraRandomizer.xml" status="changed"/>
     </files>
     <changelog>
       <change>Testing this functionality.</change>
