@@ -65,8 +65,6 @@ namespace LiveSplit.UI.Components
             chkColor_CheckedChanged(null, null);
             chkFont_CheckedChanged(null, null);
             UseRandomSeed_CheckedChanged(null, null);
-            chkVitality_CheckedChanged(null, null);
-            chkIvoryBugs_CheckedChanged(null, null);
         }
 
         void chkColor_CheckedChanged(object sender, EventArgs e)
@@ -182,14 +180,6 @@ namespace LiveSplit.UI.Components
             seed_set(random.Next());
         }
 
-        private void chkVitality_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void chkIvoryBugs_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
         private void chkHard_CheckedChanged(object sender, EventArgs e)
         {
             if (chkHard.Checked)
@@ -198,11 +188,6 @@ namespace LiveSplit.UI.Components
                                                      "\n\nTip: you can enter Whiteleaf Memorial Park through Cinder Chambers using Backman Patch"
                                                      );
             }
-        }
-
-        private void groupBoxSeed_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }

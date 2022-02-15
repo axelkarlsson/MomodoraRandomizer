@@ -100,7 +100,6 @@ namespace LiveSplit.UI.Components
             this.chkIvoryBugs.TabIndex = 4;
             this.chkIvoryBugs.Text = "Include Ivory Bugs";
             this.chkIvoryBugs.UseVisualStyleBackColor = true;
-            this.chkIvoryBugs.CheckedChanged += new System.EventHandler(this.chkIvoryBugs_CheckedChanged);
             // 
             // chkVitality
             // 
@@ -111,7 +110,6 @@ namespace LiveSplit.UI.Components
             this.chkVitality.TabIndex = 5;
             this.chkVitality.Text = "Include Vitality Fragments";
             this.chkVitality.UseVisualStyleBackColor = true;
-            this.chkVitality.CheckedChanged += new System.EventHandler(this.chkVitality_CheckedChanged);
             // 
             // textSeed
             // 
@@ -144,7 +142,6 @@ namespace LiveSplit.UI.Components
             this.groupBoxSeed.TabIndex = 4;
             this.groupBoxSeed.TabStop = false;
             this.groupBoxSeed.Text = "Seed";
-            this.groupBoxSeed.Enter += new System.EventHandler(this.groupBoxSeed_Enter);
             // 
             // tableLayoutPanel5
             // 
@@ -178,7 +175,7 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 153F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 64F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 211F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 231F));
             this.tableLayoutPanel3.Controls.Add(this.chkVitality, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.chkIvoryBugs, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.chkHard, 2, 0);
@@ -279,7 +276,7 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 157F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 172F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel1.Controls.Add(this.chkColor, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnShadowColor, 3, 1);
@@ -378,7 +375,7 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 212F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 238F));
             this.tableLayoutPanel4.Controls.Add(this.btnColor1, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.label11, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.btnColor2, 1, 0);
