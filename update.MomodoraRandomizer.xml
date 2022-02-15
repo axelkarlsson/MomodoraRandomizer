@@ -1,0 +1,10 @@
+﻿<updates>
+  <update version="1.0.0">
+    <files>
+      <file path="Components/LiveSplit.Counter.dll" status="changed"/>
+    </files>
+    <changelog>
+      <change>Testing this functionality.</change>
+    </changelog>
+  </update>
+</updates>
