@@ -58,6 +58,7 @@ namespace LiveSplit.UI.Components
             this.label11 = new System.Windows.Forms.Label();
             this.btnColor2 = new System.Windows.Forms.Button();
             this.cmbGradientType = new System.Windows.Forms.ComboBox();
+            this.btnClipboard = new System.Windows.Forms.Button();
             this.groupBoxSeed.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
@@ -72,7 +73,7 @@ namespace LiveSplit.UI.Components
             // 
             // btnSeed
             // 
-            this.btnSeed.Location = new System.Drawing.Point(351, 28);
+            this.btnSeed.Location = new System.Drawing.Point(165, 28);
             this.btnSeed.Name = "btnSeed";
             this.btnSeed.Size = new System.Drawing.Size(88, 24);
             this.btnSeed.TabIndex = 0;
@@ -145,18 +146,19 @@ namespace LiveSplit.UI.Components
             // 
             // tableLayoutPanel5
             // 
-            this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.80374F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.19626F));
+            this.tableLayoutPanel5.ColumnCount = 3;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 191F));
             this.tableLayoutPanel5.Controls.Add(this.chkRandom, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.btnSeed, 1, 1);
             this.tableLayoutPanel5.Controls.Add(this.textSeed, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.btnSeed, 1, 1);
+            this.tableLayoutPanel5.Controls.Add(this.btnClipboard, 2, 1);
             this.tableLayoutPanel5.Location = new System.Drawing.Point(6, 19);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(448, 57);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
@@ -436,6 +438,16 @@ namespace LiveSplit.UI.Components
             this.cmbGradientType.TabIndex = 43;
             this.cmbGradientType.SelectedIndexChanged += new System.EventHandler(this.mbGradientType_SelectedIndexChanged);
             // 
+            // btnClipboard
+            // 
+            this.btnClipboard.Location = new System.Drawing.Point(260, 28);
+            this.btnClipboard.Name = "btnClipboard";
+            this.btnClipboard.Size = new System.Drawing.Size(103, 24);
+            this.btnClipboard.TabIndex = 45;
+            this.btnClipboard.Text = "Copy to clipboard";
+            this.btnClipboard.UseVisualStyleBackColor = true;
+            this.btnClipboard.Click += new System.EventHandler(this.btnClipboard_Click);
+            // 
             // MomodoraRandomizerSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -494,5 +506,6 @@ namespace LiveSplit.UI.Components
         private System.Windows.Forms.TextBox textSeed;
         private System.Windows.Forms.Button btnShadowColor;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnClipboard;
     }
 }

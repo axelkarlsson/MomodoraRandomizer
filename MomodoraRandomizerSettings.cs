@@ -189,5 +189,13 @@ namespace LiveSplit.UI.Components
                                                      );
             }
         }
+
+        private void btnClipboard_Click(object sender, EventArgs e)
+        {
+            if(textSeed.TextLength > 0)
+            {
+                Clipboard.SetText(seed_get());
+            }
+        }
     }
 }

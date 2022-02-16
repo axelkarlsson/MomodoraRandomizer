@@ -287,6 +287,7 @@ namespace LiveSplit.UI.Components
         IntPtr saveAmountPointer;
         IntPtr deathAmountPointer;
         IntPtr warpStartPointer;
+        IntPtr playerFormPointer;
         #endregion
         #endregion
 
@@ -570,6 +571,7 @@ namespace LiveSplit.UI.Components
                 hasSavedKey = new List<int> { 0, 0, 0 };
                 hasKey = new List<int> { 0, 0, 0 };
                 hasPickedGreenLeaf = false;
+                hasSavedPickedGreenLeaf = false;
                 hasBoughtItem = new List<List<bool>>
                 {
                     new List<bool> { false, false, false },
@@ -1640,6 +1642,8 @@ namespace LiveSplit.UI.Components
             {
                 gameProc.WriteValue<double>(warpStartPointer + (0x10 * i), warpsActive[i]);
             }
+            Debug.WriteLine("Changing player form to human");
+            gameProc.WriteValue<double>(playerFormPointer, 0);
         }
 
         public string ComponentName => "Momodora Randomizer";
@@ -1923,6 +1927,7 @@ namespace LiveSplit.UI.Components
                     itemInfoPointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14 }).Deref<Int32>(gameProc);
 
                     warpStartPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0xB40);
+                    playerFormPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4}).Deref<int>(gameProc), 0x760);
                     #endregion
                     RandomizerLabel.Text = "1.05b randomizer ready to go!";
                     break;
@@ -2051,6 +2056,8 @@ namespace LiveSplit.UI.Components
                     itemInfoPointer = (IntPtr)new DeepPointer(0x23782F4, new int[] { 0x14 }).Deref<Int32>(gameProc);
 
                     warpStartPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0xB40);
+                    playerFormPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0x760);
+
                     #endregion
                     RandomizerLabel.Text = "1.07 randomizer ready to go!";
                     break;
