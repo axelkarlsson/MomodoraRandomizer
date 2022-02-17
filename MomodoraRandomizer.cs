@@ -258,6 +258,7 @@ namespace LiveSplit.UI.Components
         #region vitality fragment pointers
         IntPtr vitalityFragmentCountPointer;
         IntPtr maxHealthPointer;
+        IntPtr currentHealthPointer;
         #endregion
 
         #region crest fragment pointers
@@ -308,7 +309,6 @@ namespace LiveSplit.UI.Components
         private MemoryWatcher<double> invOpenWatcher;
         private MemoryWatcher<double> convOpenWatcher;
         private MemoryWatcher<double> playerYWatcher;
-        private MemoryWatcherList specialWatchers;
         private bool randomizerRunning;
         private int itemGiven;
 
@@ -450,7 +450,7 @@ namespace LiveSplit.UI.Components
         List<double> warpsActive;
         private bool hasWarp;
         private bool hasSavedWarp;
-
+        private MemoryWatcher<double> currentHealthWatcher;
         private bool inGame;
 
 
@@ -610,7 +610,6 @@ namespace LiveSplit.UI.Components
                 updateBannedSources();
                 Array.Clear(requirementMatrix, 0, requirementMatrix.Length);
                 randoSourceWatchers = new MemoryWatcherList();
-                specialWatchers = new MemoryWatcherList();
 
                 //Key items are played in order: Cat Sphere, Crest Fragments, Garden Key, Cinder Key, Monastery Key, (Hazel Badge, Soft Tissue, Dirty Shroom, Ivory Bugs)
                 #region item placement
@@ -1013,6 +1012,17 @@ namespace LiveSplit.UI.Components
                         }
   
                     };
+                };
+
+                currentHealthWatcher = new MemoryWatcher<double>(currentHealthPointer);
+                currentHealthWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                currentHealthWatcher.Enabled = false;
+                currentHealthWatcher.OnChanged += (old, current) =>
+                {
+                    if(old == 0 && current != 0)
+                    {
+                        itemGiven = 2;
+                    }
                 };
 
                 //Changed from using specialWatchers list to updating each one manually in update, makes it so you can use levelIDWatcher.current and stuff in other places if needed
@@ -1830,6 +1840,26 @@ namespace LiveSplit.UI.Components
             invOpenWatcher.Update(gameProc);
             convOpenWatcher.Update(gameProc);
             playerYWatcher.Update(gameProc);
+            currentHealthWatcher.Update(gameProc);
+        }
+
+        private void UpdateItemWatchers()
+        {
+
+            taintedMissiveWatcher.Update(gameProc);
+            passifloraWatcher.Update(gameProc);
+            bellflowerWatcher.Update(gameProc);
+            ivoryBugWatcher.Update(gameProc);
+            crestFragmentWatcher.Update(gameProc);
+            vitalityFragmentWatcher.Update(gameProc);
+
+            Debug.WriteLine("Updating item watchers");
+            Debug.WriteLine("VF: " + vitalityFragmentWatcher.Current + " " + vitalityFragmentWatcher.Old + " " + vitalityFragmentWatcher.Changed);
+            Debug.WriteLine("IB: " + ivoryBugWatcher.Current + " " + ivoryBugWatcher.Old + " " + ivoryBugWatcher.Changed);
+            Debug.WriteLine("CF: " + crestFragmentWatcher.Current + " " + crestFragmentWatcher.Old + " " + crestFragmentWatcher.Changed);
+            Debug.WriteLine("bellflower: " + bellflowerWatcher.Current + " " + bellflowerWatcher.Old + " " + bellflowerWatcher.Changed);
+            Debug.WriteLine("Passiflora: " + passifloraWatcher.Current + " " + passifloraWatcher.Old + " " + passifloraWatcher.Changed);
+            Debug.WriteLine("Missive: " + taintedMissiveWatcher.Current + " " + taintedMissiveWatcher.Old + " " + taintedMissiveWatcher.Changed);
         }
 
         private void SetupVersionDifferences()
@@ -1974,6 +2004,7 @@ namespace LiveSplit.UI.Components
                     passifloraSaveValuePointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x9d0);
                     difficultyPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x630);
                     maxHealthPointer = IntPtr.Add((IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xa0);
+                    currentHealthPointer = (IntPtr)new DeepPointer(0x02304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc);
 
                     totalItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a4 }).Deref<Int32>(gameProc), 0x4);
 
@@ -2106,6 +2137,7 @@ namespace LiveSplit.UI.Components
                     passifloraSaveValuePointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x9d0);
                     difficultyPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x630);
                     maxHealthPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xa0);
+                    currentHealthPointer = (IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<Int32>(gameProc);
 
                     totalItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x023782DC, new int[] { 0x1ac }).Deref<Int32>(gameProc), 0x4);
 
@@ -2137,25 +2169,6 @@ namespace LiveSplit.UI.Components
                     RandomizerLabel.Text = "Unsupported game version for randomizer";
                     break;
             }
-        }
-
-        private void UpdateItemWatchers()
-        {
-            
-            taintedMissiveWatcher.Update(gameProc);
-            passifloraWatcher.Update(gameProc);
-            bellflowerWatcher.Update(gameProc);
-            ivoryBugWatcher.Update(gameProc);
-            crestFragmentWatcher.Update(gameProc);
-            vitalityFragmentWatcher.Update(gameProc);
-            
-            Debug.WriteLine("Updating item watchers");
-            Debug.WriteLine("VF: " + vitalityFragmentWatcher.Current + " " + vitalityFragmentWatcher.Old + " " + vitalityFragmentWatcher.Changed);
-            Debug.WriteLine("IB: " + ivoryBugWatcher.Current + " " + ivoryBugWatcher.Old + " " + ivoryBugWatcher.Changed);
-            Debug.WriteLine("CF: " + crestFragmentWatcher.Current + " " + crestFragmentWatcher.Old + " " + crestFragmentWatcher.Changed);
-            Debug.WriteLine("bellflower: " + bellflowerWatcher.Current + " " + bellflowerWatcher.Old + " " + bellflowerWatcher.Changed);
-            Debug.WriteLine("Passiflora: " + passifloraWatcher.Current + " " + passifloraWatcher.Old + " " + passifloraWatcher.Changed);
-            Debug.WriteLine("Missive: " + taintedMissiveWatcher.Current + " " + taintedMissiveWatcher.Old + " " + taintedMissiveWatcher.Changed);
         }
 
         private bool VerifyProcessRunning()
