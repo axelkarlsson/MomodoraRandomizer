@@ -220,10 +220,11 @@ namespace LiveSplit.UI.Components
         private List<int> requiresHazelBadge;
         private List<int> requiresDirtyShroom;
         private List<int> requiresSoftTissue;
+        private List<int> requiresSealedWind;
         private List<int> requiresIvoryBugs;
 
-        //                                         CatSphere, Crest, Garden, Cinder, Mona, Haze, Soft, Dirty, Bugs
-        private bool[,] requirementMatrix = new bool[8,9];
+        //                                         CatSphere, Crest, Garden, Cinder, Mona, Haze, Soft, Dirty, Sealed Wind,Bugs
+        private bool[,] requirementMatrix = new bool[9,10];
 
 
         private List<int> vitalityFragments;
@@ -288,6 +289,8 @@ namespace LiveSplit.UI.Components
         IntPtr deathAmountPointer;
         IntPtr warpStartPointer;
         IntPtr playerFormPointer;
+        IntPtr playerXPointer;
+        IntPtr playerYPointer;
         #endregion
         #endregion
 
@@ -304,6 +307,7 @@ namespace LiveSplit.UI.Components
         private MemoryWatcher<double> munnyWatcher;
         private MemoryWatcher<double> invOpenWatcher;
         private MemoryWatcher<double> convOpenWatcher;
+        private MemoryWatcher<double> playerYWatcher;
         private MemoryWatcherList specialWatchers;
         private bool randomizerRunning;
         private int itemGiven;
@@ -312,7 +316,6 @@ namespace LiveSplit.UI.Components
         List<bool> hasSavedChargeItem;
         private bool hasPickedGreenLeaf;
         private bool hasSavedPickedGreenLeaf;
-        private double pickedUpLeaf;
 
         List<List<int>> doorLocations;
         private double unlocked;
@@ -492,6 +495,8 @@ namespace LiveSplit.UI.Components
             requirementLists.Add(requiresSoftTissue);
             requiresDirtyShroom = new List<int> { 30 };
             requirementLists.Add(requiresDirtyShroom);
+            requiresSealedWind = new List<int> { 28 };
+            requirementLists.Add(requiresSealedWind);
             requiresIvoryBugs = new List<int> { 80,81,82 };
             requirementLists.Add(requiresIvoryBugs);
             //GardenKey, MonasteryKey, CinderKey
@@ -612,7 +617,6 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.CatSphere, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    //if (requirementLists[i].Contains(index)) catRequires[i] = true;
                     if (requirementLists[i].Contains(index)) requirementMatrix[0,i] = true;
                 }
                 placedItems.Add(25);
@@ -624,10 +628,9 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.FragmentBowPow, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    //if (requirementLists[i].Contains(index)) crestRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
-                        for (int j = 0; j < 8; j++) requirementMatrix[1, j] = requirementMatrix[i, j];
+                        for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[1, j] = requirementMatrix[i, j];
                         requirementMatrix[1, i] = true;
                     }
                 }
@@ -637,10 +640,9 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.FragmentBowQuick, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    //if (requirementLists[i].Contains(index)) crestRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
-                        for (int j = 0; j < 8; j++) requirementMatrix[1, j] = requirementMatrix[i, j];
+                        for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[1, j] = requirementMatrix[i, j];
                         requirementMatrix[1, i] = true;
                     }
                 }
@@ -650,10 +652,9 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.FragmentDash, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    //if (requirementLists[i].Contains(index)) crestRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
-                        for (int j = 0; j < 8; j++) requirementMatrix[1, j] = requirementMatrix[i, j];
+                        for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[1, j] = requirementMatrix[i, j];
                         requirementMatrix[1, i] = true;
                     }
                 }
@@ -663,10 +664,9 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.FragmentWarp, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    //if (requirementLists[i].Contains(index)) crestRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
-                        for (int j = 0; j < 8; j++) requirementMatrix[1, j] = requirementMatrix[i, j];
+                        for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[1, j] = requirementMatrix[i, j];
                         requirementMatrix[1, i] = true;
                     }
                 }
@@ -686,10 +686,9 @@ namespace LiveSplit.UI.Components
 
                     for (int i = 0; i < requirementLists.Count; i++)
                     {
-                        //if (requirementLists[i].Contains(index)) gardenRequires[i] = true;
                         if (requirementLists[i].Contains(index))
                         {
-                            for (int j = 0; j < 8; j++) requirementMatrix[2, j] = requirementMatrix[i, j];
+                            for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[2, j] = requirementMatrix[i, j];
                             requirementMatrix[2, i] = true;
                         }
                     }
@@ -710,10 +709,9 @@ namespace LiveSplit.UI.Components
                     createMemoryWatcher((int)Items.GardenKey, possibleSources[index]);
                     for (int i = 0; i < requirementLists.Count; i++)
                     {
-                        //if (requirementLists[i].Contains(index)) gardenRequires[i] = true;
                         if (requirementLists[i].Contains(index))
                         {
-                            for (int j = 0; j < 8; j++) requirementMatrix[2, j] = requirementMatrix[i, j];
+                            for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[2, j] = requirementMatrix[i, j];
                             requirementMatrix[2, i] = true;
                         }
                     }
@@ -727,10 +725,9 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.CinderKey, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    //if (requirementLists[i].Contains(index)) cinderRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
-                        for (int j = 0; j < 8; j++) requirementMatrix[3, j] = requirementMatrix[i, j];
+                        for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[3, j] = requirementMatrix[i, j];
                         requirementMatrix[3, i] = true;
                     }
                 }
@@ -743,10 +740,9 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.MonasteryKey, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    //if (requirementLists[i].Contains(index)) monasteryRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
-                        for (int j = 0; j < 8; j++) requirementMatrix[4, j] = requirementMatrix[i, j];
+                        for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[4, j] = requirementMatrix[i, j];
                         requirementMatrix[4, i] = true;
                     }
                 }
@@ -759,10 +755,9 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.HazelBadge, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    //if (requirementLists[i].Contains(index)) hazelRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
-                        for (int j = 0; j < 8; j++) requirementMatrix[5, j] = requirementMatrix[i, j];
+                        for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[5, j] = requirementMatrix[i, j];
                         requirementMatrix[5, i] = true;
                     }
                 }
@@ -775,10 +770,9 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.SoftTissue, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    //if (requirementLists[i].Contains(index)) softTissueRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
-                        for (int j = 0; j < 8; j++) requirementMatrix[6, j] = requirementMatrix[i, j];
+                        for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[6, j] = requirementMatrix[i, j];
                         requirementMatrix[6, i] = true;
                     }
                 }
@@ -791,14 +785,28 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.DirtyShroom, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    //if (requirementLists[i].Contains(index)) dirtyShroomRequires[i] = true;
                     if (requirementLists[i].Contains(index))
                     {
-                        for (int j = 0; j < 8; j++) requirementMatrix[7, j] = requirementMatrix[i, j];
+                        for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[7, j] = requirementMatrix[i, j];
                         requirementMatrix[7, i] = true;
                     }
                 }
                 placedItems.Add(24);
+                #endregion
+
+                //8.5: Sealed Wind
+                #region sealed wind
+                index = nextIndex((int)Items.SealedWind);
+                createMemoryWatcher((int)Items.SealedWind, possibleSources[index]);
+                for (int i = 0; i < requirementLists.Count; i++)
+                {
+                    if (requirementLists[i].Contains(index))
+                    {
+                        for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[8, j] = requirementMatrix[i, j];
+                        requirementMatrix[8, i] = true;
+                    }
+                }
+                placedItems.Add(21);
                 #endregion
 
                 //9. Place Ivory Bugs
@@ -977,13 +985,29 @@ namespace LiveSplit.UI.Components
                     inShop(current);
                 };
 
-                specialWatchers.Add(levelIDWatcher);
-                specialWatchers.Add(saveWatcher);
-                specialWatchers.Add(deathWatcher);
-                specialWatchers.Add(inGameWatcher);
-                specialWatchers.Add(munnyWatcher);
-                specialWatchers.Add(invOpenWatcher);
-                specialWatchers.Add(convOpenWatcher);
+                //This needs to be setup whenever entering a new room, currently only used for green leaf stuff and only active in levelID 82. 
+                playerYWatcher = new MemoryWatcher<double>(playerYPointer);
+                playerYWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                playerYWatcher.Enabled = false;
+                playerYWatcher.OnChanged += (old, current) =>
+                {
+                    if (levelIDWatcher.Current == 82)
+                    {
+                        double pickedUpLeaf = gameProc.ReadValue<double>(potentialSourcesPointers[28]);
+                        double playerXPos = gameProc.ReadValue<double>(playerXPointer);
+                        if (playerYWatcher.Current > 176 && playerXPos > 410)
+                            Debug.WriteLine("In area to remove green leaf");
+                            //If the state of "has picked green leaf source" is different from "found green leaf" invert
+                            if (Convert.ToBoolean(pickedUpLeaf) != hasPickedGreenLeaf) gameProc.WriteValue<double>(potentialSourcesPointers[28], 1 - pickedUpLeaf);
+                        else { 
+                            gameProc.WriteValue<double>(potentialSourcesPointers[28], pickedUpLeaf);
+                            Debug.WriteLine("Restoring green leaf to found item");
+                        }
+  
+                    };
+                };
+
+                //Changed from using specialWatchers list to updating each one manually in update, makes it so you can use levelIDWatcher.current and stuff in other places if needed
 
                 #endregion
 
@@ -1014,13 +1038,11 @@ namespace LiveSplit.UI.Components
 
         private void createMemoryWatcher(int giveItemID, int newSourceAddressIndex)
         {
-            //Maybe change Debug.WriteLine to write to a file instead?
             foreach (var list in originalShopItems)
             {
                 if (list.Contains(newSourceAddressIndex))// If item is a shop item
                 {
                     Debug.WriteLine("Item " + Enum.GetName(typeof(Items), giveItemID) + " generated at position " + newSourceAddressIndex + "(In a shop)");
-                    //Should this be index and i?
                     saveShopItem(newSourceAddressIndex, giveItemID);
                     return;
                 }
@@ -1028,7 +1050,7 @@ namespace LiveSplit.UI.Components
             Debug.WriteLine("Item " + Enum.GetName(typeof(Items), giveItemID) + " generated at position " + newSourceAddressIndex);
             MemoryWatcher<double> temp = new MemoryWatcher<double>(potentialSourcesPointers[newSourceAddressIndex]);
             temp.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
-            if (potentialSourcesPointers[newSourceAddressIndex] != potentialSourcesPointers[28]) {
+            if (potentialSourcesPointers[newSourceAddressIndex] == potentialSourcesPointers[28]) {
                 temp.OnChanged += (old, current) =>
                 {
                     int levelID = gameProc.ReadValue<int>(levelIDPointer);
@@ -1066,7 +1088,8 @@ namespace LiveSplit.UI.Components
             else if (itemId == (int)Items.HazelBadge) j = 5;
             else if (itemId == (int)Items.SoftTissue) j = 6;
             else if (itemId == (int)Items.DirtyShroom) j = 7;
-            else if (itemId == (int)Items.IvoryBug) j = 8;
+            else if (itemId == (int)Items.SealedWind) j = 8;
+            else if (itemId == (int)Items.IvoryBug) j = 9;
             for(int i = 0; i < requirementMatrix.GetLength(0); i++)
             {
                 impossibleSources.AddRange(requirementLists[j]);
@@ -1391,19 +1414,6 @@ namespace LiveSplit.UI.Components
             }
             #endregion
 
-            #region green leaf logic
-            if(current == 83)
-            {
-                pickedUpLeaf = gameProc.ReadValue<double>(potentialSourcesPointers[28]);
-                //If the state of "has picked green leaf source" is different from "found green leaf" invert
-                if (Convert.ToBoolean(pickedUpLeaf) != hasPickedGreenLeaf) gameProc.WriteValue<double>(potentialSourcesPointers[28], 1 - pickedUpLeaf);
-            }
-            else if (old == 83)
-            {
-                gameProc.WriteValue<double>(potentialSourcesPointers[28], pickedUpLeaf);
-            };
-            #endregion
-
             #region shop logic
             if(shopLocations.Contains(current))// If player is in a shop room
             {
@@ -1424,6 +1434,44 @@ namespace LiveSplit.UI.Components
             {
                 soflock();
             };
+            #endregion
+
+            #region Green Leaf logic
+            //y/x pointers change each room, need to set it up again when entering the correct room
+            if(current == 82)
+            {
+                switch (gameProc.MainModule.ModuleMemorySize)
+                {
+                    case 39690240:
+                        playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x022C5A7C, new int[] { 0x310, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x120);
+                        playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x022C5A7C, new int[] { 0x310, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x130);
+                        break;
+                    case 40222720:
+                        playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x02332CB4, new int[] { 0x318, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x120);
+                        playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x02332CB4, new int[] { 0x318, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x130);
+                        break;
+                }
+
+                playerYWatcher = new MemoryWatcher<double>(playerYPointer);
+                playerYWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                playerYWatcher.Enabled = true;
+                playerYWatcher.OnChanged += (oldVal, currentVal) =>
+                {
+                    if (levelIDWatcher.Current == 82)
+                    {
+                        double pickedUpLeaf = gameProc.ReadValue<double>(potentialSourcesPointers[28]);
+                        double playerXPos = gameProc.ReadValue<double>(playerXPointer);
+                        if (playerYWatcher.Current > 176 && playerXPos > 410)
+                        //If the state of "has picked green leaf source" is different from "found green leaf" invert
+                        if (Convert.ToBoolean(pickedUpLeaf) != hasPickedGreenLeaf) gameProc.WriteValue<double>(potentialSourcesPointers[28], 1 - pickedUpLeaf);
+                        else
+                        {
+                            gameProc.WriteValue<double>(potentialSourcesPointers[28], pickedUpLeaf);
+                        }
+
+                    };
+                };
+            }
             #endregion
         }
 
@@ -1741,12 +1789,10 @@ namespace LiveSplit.UI.Components
             if (VerifyProcessRunning() && randomizerRunning)
             {
 
-                //do update stuff here!
-                foreach (var watcher in specialWatchers)
-                {
-                    watcher.Update(gameProc);
-                }
+
+                inGameWatcher.Update(gameProc);
                 if (inGame) {
+                    updateSpecialWatchers();
                     foreach (var watcher in randoSourceWatchers)
                     {
                         watcher.Update(gameProc);
@@ -1763,6 +1809,17 @@ namespace LiveSplit.UI.Components
                     invalidator.Invalidate(0, 0, width, height);
                 }
             }
+        }
+
+        private void updateSpecialWatchers()
+        {
+            levelIDWatcher.Update(gameProc);
+            saveWatcher.Update(gameProc);
+            deathWatcher.Update(gameProc);
+            munnyWatcher.Update(gameProc);
+            invOpenWatcher.Update(gameProc);
+            convOpenWatcher.Update(gameProc);
+            playerYWatcher.Update(gameProc);
         }
 
         private void SetupVersionDifferences()
@@ -1928,6 +1985,9 @@ namespace LiveSplit.UI.Components
 
                     warpStartPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0xB40);
                     playerFormPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4}).Deref<int>(gameProc), 0x760);
+                    playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x022C5A7C, new int[] { 0x310, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x120);
+                    playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x022C5A7C, new int[] { 0x310, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x130);
+
                     #endregion
                     RandomizerLabel.Text = "1.05b randomizer ready to go!";
                     break;
@@ -2057,6 +2117,8 @@ namespace LiveSplit.UI.Components
 
                     warpStartPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0xB40);
                     playerFormPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0x760);
+                    playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x02332CB4, new int[] { 0x318, 0xc, 0x13c, 0x4}).Deref<int>(gameProc), 0x120);
+                    playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x02332CB4, new int[] { 0x318, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x130);
 
                     #endregion
                     RandomizerLabel.Text = "1.07 randomizer ready to go!";
