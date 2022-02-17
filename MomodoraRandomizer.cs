@@ -505,8 +505,8 @@ namespace LiveSplit.UI.Components
             doorLocations = new List<List<int>>
             {
                 new List<int> { 145, 84},
-                new List<int> { 99 },
-                new List<int> { 183 }
+                new List<int> { 183 },
+                new List<int> { 99 }
             };
             //Karst City, Forlorn Monsatery, Subterranean Grave, Whiteleaf Memorial Park, Cinder Chambers 1, Cinder Chambers 2, Royal Pinacotheca
             shopLocations = new List<int>
@@ -1016,9 +1016,10 @@ namespace LiveSplit.UI.Components
 
                 currentHealthWatcher = new MemoryWatcher<double>(currentHealthPointer);
                 currentHealthWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
-                currentHealthWatcher.Enabled = false;
+                currentHealthWatcher.Enabled = true;
                 currentHealthWatcher.OnChanged += (old, current) =>
                 {
+                    //Debug.WriteLine("HELTH: " + currentHealthWatcher.Current + "  " + currentHealthWatcher.Old);
                     if(old == 0 && current != 0)
                     {
                         itemGiven = 2;
@@ -1396,7 +1397,7 @@ namespace LiveSplit.UI.Components
             {
                 hasKey[0] = 1;
             }
-            else if (id == (int)Items.MonasteryKey)
+            else if (id == (int)Items.CinderKey)
             {
                 hasKey[1] = 1;
             }
@@ -1414,6 +1415,9 @@ namespace LiveSplit.UI.Components
             #region key logic
             int j;
 
+            //Garden = 4,
+            //Cinder = 5,
+            //Monastery = 6
             for (int i = 0; i < 3; i++)
             {
                 j = i + 4;//Id for keys is 4-6
@@ -1448,11 +1452,11 @@ namespace LiveSplit.UI.Components
             #region Warp logic
             if (current == 154 && !hasWarp)// If they are after Lubella 2 and dont have the warps fragment
             {
-                antisoflock();
+                antiSoftlock();
             }
             else if (old == 154 && !hasWarp)
             {
-                soflock();
+                Softlock();
             };
             #endregion
 
@@ -1534,11 +1538,11 @@ namespace LiveSplit.UI.Components
             {
                 if (current == 1)// If inventory is open remove Warp Fragment
                 {
-                    soflock();
+                    Softlock();
                 }
                 else if (current == 0)// If inventory is closed place Warp Fragment back
                 {
-                    antisoflock();
+                    antiSoftlock();
                 }
             }
         }
@@ -1688,7 +1692,7 @@ namespace LiveSplit.UI.Components
             }
         }
 
-        private void antisoflock()
+        private void antiSoftlock()
         {
             Debug.WriteLine("Adding Warp fragment");
             addCrestFragment(53);
@@ -1701,7 +1705,7 @@ namespace LiveSplit.UI.Components
             gameProc.WriteValue<double>(warpStartPointer + 0x40, 1);
         }
 
-        private void soflock()
+        private void Softlock()
         {
             Debug.WriteLine("Removing Warp fragment");
             removeCrestFragment();
