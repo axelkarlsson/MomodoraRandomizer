@@ -1110,6 +1110,7 @@ namespace LiveSplit.UI.Components
             if (!settingsControl.VitalityFragmentsEnabled) bannedSources.AddRange(vitalityFragments);
             if (!settingsControl.IvoryBugsEnabled) bannedSources.AddRange(ivoryBugs);
             if (!settingsControl.HardModeEnabled) bannedSources.AddRange(bossItems);
+            bannedSources.Add(34);
 
         }
 
