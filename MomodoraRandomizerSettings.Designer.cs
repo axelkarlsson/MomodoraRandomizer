@@ -37,6 +37,7 @@ namespace LiveSplit.UI.Components
             this.chkHard = new System.Windows.Forms.CheckBox();
             this.groupBoxSeed = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnClipboard = new System.Windows.Forms.Button();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxFont = new System.Windows.Forms.GroupBox();
@@ -58,7 +59,8 @@ namespace LiveSplit.UI.Components
             this.label11 = new System.Windows.Forms.Label();
             this.btnColor2 = new System.Windows.Forms.Button();
             this.cmbGradientType = new System.Windows.Forms.ComboBox();
-            this.btnClipboard = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnOutlineColor = new System.Windows.Forms.Button();
             this.groupBoxSeed.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
@@ -161,6 +163,16 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(448, 57);
             this.tableLayoutPanel5.TabIndex = 2;
+            // 
+            // btnClipboard
+            // 
+            this.btnClipboard.Location = new System.Drawing.Point(260, 28);
+            this.btnClipboard.Name = "btnClipboard";
+            this.btnClipboard.Size = new System.Drawing.Size(103, 24);
+            this.btnClipboard.TabIndex = 45;
+            this.btnClipboard.Text = "Copy to clipboard";
+            this.btnClipboard.UseVisualStyleBackColor = true;
+            this.btnClipboard.Click += new System.EventHandler(this.btnClipboard_Click);
             // 
             // groupBoxOptions
             // 
@@ -280,10 +292,12 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 172F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel1.Controls.Add(this.chkColor, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnShadowColor, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnTextColor, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnTextColor, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnShadowColor, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnOutlineColor, 3, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -310,9 +324,9 @@ namespace LiveSplit.UI.Components
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 36);
+            this.label3.Location = new System.Drawing.Point(251, 7);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(151, 13);
+            this.label3.Size = new System.Drawing.Size(166, 13);
             this.label3.TabIndex = 11;
             this.label3.Text = "Inline:";
             // 
@@ -321,7 +335,7 @@ namespace LiveSplit.UI.Components
             this.btnShadowColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btnShadowColor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnShadowColor.Location = new System.Drawing.Point(423, 31);
+            this.btnShadowColor.Location = new System.Drawing.Point(160, 31);
             this.btnShadowColor.Name = "btnShadowColor";
             this.btnShadowColor.Size = new System.Drawing.Size(23, 24);
             this.btnShadowColor.TabIndex = 12;
@@ -333,9 +347,9 @@ namespace LiveSplit.UI.Components
             this.btnTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btnTextColor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTextColor.Location = new System.Drawing.Point(160, 31);
+            this.btnTextColor.Location = new System.Drawing.Point(423, 3);
             this.btnTextColor.Name = "btnTextColor";
-            this.btnTextColor.Size = new System.Drawing.Size(23, 24);
+            this.btnTextColor.Size = new System.Drawing.Size(23, 22);
             this.btnTextColor.TabIndex = 1;
             this.btnTextColor.UseVisualStyleBackColor = false;
             this.btnTextColor.Click += new System.EventHandler(this.colorButton_Click);
@@ -344,9 +358,9 @@ namespace LiveSplit.UI.Components
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(251, 36);
+            this.label2.Location = new System.Drawing.Point(3, 36);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(166, 13);
+            this.label2.Size = new System.Drawing.Size(151, 13);
             this.label2.TabIndex = 13;
             this.label2.Text = "Shadow:";
             // 
@@ -438,15 +452,27 @@ namespace LiveSplit.UI.Components
             this.cmbGradientType.TabIndex = 43;
             this.cmbGradientType.SelectedIndexChanged += new System.EventHandler(this.mbGradientType_SelectedIndexChanged);
             // 
-            // btnClipboard
+            // label4
             // 
-            this.btnClipboard.Location = new System.Drawing.Point(260, 28);
-            this.btnClipboard.Name = "btnClipboard";
-            this.btnClipboard.Size = new System.Drawing.Size(103, 24);
-            this.btnClipboard.TabIndex = 45;
-            this.btnClipboard.Text = "Copy to clipboard";
-            this.btnClipboard.UseVisualStyleBackColor = true;
-            this.btnClipboard.Click += new System.EventHandler(this.btnClipboard_Click);
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(251, 36);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(166, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Outline:";
+            // 
+            // btnOutlineColor
+            // 
+            this.btnOutlineColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnOutlineColor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOutlineColor.Location = new System.Drawing.Point(423, 31);
+            this.btnOutlineColor.Name = "btnOutlineColor";
+            this.btnOutlineColor.Size = new System.Drawing.Size(23, 24);
+            this.btnOutlineColor.TabIndex = 1;
+            this.btnOutlineColor.UseVisualStyleBackColor = false;
+            this.btnOutlineColor.Click += new System.EventHandler(this.colorButton_Click);
             // 
             // MomodoraRandomizerSettings
             // 
@@ -507,5 +533,7 @@ namespace LiveSplit.UI.Components
         private System.Windows.Forms.Button btnShadowColor;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnClipboard;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnOutlineColor;
     }
 }
