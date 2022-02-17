@@ -1788,13 +1788,13 @@ namespace LiveSplit.UI.Components
             crestFragmentWatcher.Update(gameProc);
             vitalityFragmentWatcher.Update(gameProc);
 
-            /*Debug.WriteLine("Updating item watchers");
+            Debug.WriteLine("Updating item watchers");
             Debug.WriteLine("VF: " + vitalityFragmentWatcher.Current + " " + vitalityFragmentWatcher.Old + " " + vitalityFragmentWatcher.Changed);
             Debug.WriteLine("IB: " + ivoryBugWatcher.Current + " " + ivoryBugWatcher.Old + " " + ivoryBugWatcher.Changed);
             Debug.WriteLine("CF: " + crestFragmentWatcher.Current + " " + crestFragmentWatcher.Old + " " + crestFragmentWatcher.Changed);
             Debug.WriteLine("bellflower: " + bellflowerWatcher.Current + " " + bellflowerWatcher.Old + " " + bellflowerWatcher.Changed);
             Debug.WriteLine("Passiflora: " + passifloraWatcher.Current + " " + passifloraWatcher.Old + " " + passifloraWatcher.Changed);
-            Debug.WriteLine("Missive: " + taintedMissiveWatcher.Current + " " + taintedMissiveWatcher.Old + " " + taintedMissiveWatcher.Changed);*/
+            Debug.WriteLine("Missive: " + taintedMissiveWatcher.Current + " " + taintedMissiveWatcher.Old + " " + taintedMissiveWatcher.Changed);
         }
 
         private void SetupVersionDifferences()
