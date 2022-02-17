@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="38">
+<CheatTable CheatEngineTableVersion="34">
   <CheatEntries>
     <CheatEntry>
       <ID>113</ID>
@@ -3752,7 +3752,7 @@
             <CheatEntry>
               <ID>0</ID>
               <Description>"LevelID"</Description>
-              <LastState Value="3805536982" RealAddress="0311F1A0"/>
+              <LastState Value="3805536982" RealAddress="02E3F1A0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>"MomodoraRUtM.exe"+230F1A0</Address>
@@ -3828,6 +3828,34 @@
               <Offsets>
                 <Offset>440</Offset>
                 <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1686</ID>
+              <Description>"Y-cord, lower screen, higher value"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+022C5A7C</Address>
+              <Offsets>
+                <Offset>130</Offset>
+                <Offset>4</Offset>
+                <Offset>13C</Offset>
+                <Offset>C</Offset>
+                <Offset>310</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1687</ID>
+              <Description>"x-cord, left = lower value"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+022C5A7C</Address>
+              <Offsets>
+                <Offset>120</Offset>
+                <Offset>4</Offset>
+                <Offset>13C</Offset>
+                <Offset>C</Offset>
+                <Offset>310</Offset>
               </Offsets>
             </CheatEntry>
           </CheatEntries>
@@ -6531,7 +6559,7 @@
               <ID>700</ID>
               <Description>"Adorned Ring"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A078"/>
+              <LastState RealAddress="172CD4C8"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -6550,7 +6578,7 @@
                 <CheatEntry>
                   <ID>701</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1766C7D0"/>
+                  <LastState RealAddress="0E8B2E68"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -6569,7 +6597,7 @@
                 <CheatEntry>
                   <ID>702</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="140939F8"/>
+                  <LastState RealAddress="10A87490"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -6591,7 +6619,7 @@
               <ID>703</ID>
               <Description>"Necklade of Sacrifice"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="15FE2E30"/>
+              <LastState RealAddress="10F595D0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -6610,7 +6638,7 @@
                 <CheatEntry>
                   <ID>704</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1766C880"/>
+                  <LastState RealAddress="0E8B29F0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -6629,7 +6657,7 @@
                 <CheatEntry>
                   <ID>705</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11EBD488"/>
+                  <LastState RealAddress="0E7816C0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -6651,7 +6679,7 @@
               <ID>706</ID>
               <Description>"Bellflower"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="17779E70"/>
+              <LastState RealAddress="172CD400"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -6670,7 +6698,7 @@
                 <CheatEntry>
                   <ID>707</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="142751B8"/>
+                  <LastState RealAddress="1476CD38"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -6689,7 +6717,7 @@
                 <CheatEntry>
                   <ID>708</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11F8CB98"/>
+                  <LastState RealAddress="1609CA28"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -6711,7 +6739,7 @@
               <ID>709</ID>
               <Description>"Astral Charm"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A118"/>
+              <LastState RealAddress="172CD2C0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -6730,7 +6758,7 @@
                 <CheatEntry>
                   <ID>710</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="143E52A8"/>
+                  <LastState RealAddress="1094B0F8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -6749,7 +6777,7 @@
                 <CheatEntry>
                   <ID>711</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="13FCE238"/>
+                  <LastState RealAddress="1476DD28"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -6771,7 +6799,7 @@
               <ID>712</ID>
               <Description>"Edea's Pearl"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="17779D80"/>
+              <LastState RealAddress="172CD428"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -6790,7 +6818,7 @@
                 <CheatEntry>
                   <ID>713</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1766C358"/>
+                  <LastState RealAddress="0E8B2BA8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -6809,7 +6837,7 @@
                 <CheatEntry>
                   <ID>714</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="111D75B0"/>
+                  <LastState RealAddress="0E57BCB8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -6831,7 +6859,7 @@
               <ID>715</ID>
               <Description>"Dull Pearl"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A028"/>
+              <LastState RealAddress="172CD540"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -6850,7 +6878,7 @@
                 <CheatEntry>
                   <ID>716</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1766C670"/>
+                  <LastState RealAddress="0E8B2EC0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -6869,7 +6897,7 @@
                 <CheatEntry>
                   <ID>717</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="13FCE2D8"/>
+                  <LastState RealAddress="1476D5A8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -6891,7 +6919,7 @@
               <ID>718</ID>
               <Description>"Red Ring"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A410"/>
+              <LastState RealAddress="172CD950"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -6910,7 +6938,7 @@
                 <CheatEntry>
                   <ID>719</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="11FD3E00"/>
+                  <LastState RealAddress="0E59F778"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -6929,7 +6957,7 @@
                 <CheatEntry>
                   <ID>720</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="150C3130"/>
+                  <LastState RealAddress="0E59F858"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -6951,7 +6979,7 @@
               <ID>721</ID>
               <Description>"Magnet Stone"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A320"/>
+              <LastState RealAddress="172CD798"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -6970,7 +6998,7 @@
                 <CheatEntry>
                   <ID>722</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14091908"/>
+                  <LastState RealAddress="1609C568"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -6989,7 +7017,7 @@
                 <CheatEntry>
                   <ID>723</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11F69EF0"/>
+                  <LastState RealAddress="0E89BF30"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7011,7 +7039,7 @@
               <ID>724</ID>
               <Description>"Rotten Bellflower"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="15FE2C20"/>
+              <LastState RealAddress="10F59480"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7030,7 +7058,7 @@
                 <CheatEntry>
                   <ID>725</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="11F69C20"/>
+                  <LastState RealAddress="0E89BEE8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7049,7 +7077,7 @@
                 <CheatEntry>
                   <ID>726</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="13F5DFA0"/>
+                  <LastState RealAddress="10F24678"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7071,7 +7099,7 @@
               <ID>727</ID>
               <Description>"Faerie Tear"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A370"/>
+              <LastState RealAddress="172CDBF8"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7090,7 +7118,7 @@
                 <CheatEntry>
                   <ID>728</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1766BDD8"/>
+                  <LastState RealAddress="0E8B2F70"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7109,7 +7137,7 @@
                 <CheatEntry>
                   <ID>729</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="1408F400"/>
+                  <LastState RealAddress="10A7BAD0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7131,7 +7159,7 @@
               <ID>730</ID>
               <Description>"Impurity Flask"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A618"/>
+              <LastState RealAddress="172CD9A0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7150,7 +7178,7 @@
                 <CheatEntry>
                   <ID>731</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14274B78"/>
+                  <LastState RealAddress="1476CDD8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7169,7 +7197,7 @@
                 <CheatEntry>
                   <ID>732</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11EBDFD0"/>
+                  <LastState RealAddress="0E781AE8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7191,7 +7219,7 @@
               <ID>733</ID>
               <Description>"Passiflora"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A398"/>
+              <LastState RealAddress="172CDB58"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7210,7 +7238,7 @@
                 <CheatEntry>
                   <ID>734</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="11F69CB0"/>
+                  <LastState RealAddress="0E89B948"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7229,7 +7257,7 @@
                 <CheatEntry>
                   <ID>735</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="13FCE008"/>
+                  <LastState RealAddress="1476DCD8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7251,7 +7279,7 @@
               <ID>736</ID>
               <Description>"Crytal Seed"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A5A0"/>
+              <LastState RealAddress="172CDB80"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7270,7 +7298,7 @@
                 <CheatEntry>
                   <ID>737</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14274FD8"/>
+                  <LastState RealAddress="1476CF18"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7289,7 +7317,7 @@
                 <CheatEntry>
                   <ID>738</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="140907C0"/>
+                  <LastState RealAddress="0E807900"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7311,7 +7339,7 @@
               <ID>739</ID>
               <Description>"Medal of Equivalence"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="15FE2C50"/>
+              <LastState RealAddress="10F59660"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7330,7 +7358,7 @@
                 <CheatEntry>
                   <ID>740</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14091288"/>
+                  <LastState RealAddress="1609C2A8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7349,7 +7377,7 @@
                 <CheatEntry>
                   <ID>741</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11FC9E58"/>
+                  <LastState RealAddress="10A84FE8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7371,7 +7399,7 @@
               <ID>742</ID>
               <Description>"Tainted Missive"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777AB40"/>
+              <LastState RealAddress="172CE058"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7390,7 +7418,7 @@
                 <CheatEntry>
                   <ID>743</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="143E5428"/>
+                  <LastState RealAddress="1094AFD8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7409,7 +7437,7 @@
                 <CheatEntry>
                   <ID>744</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11E8AF48"/>
+                  <LastState RealAddress="0E6E1910"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7431,7 +7459,7 @@
               <ID>745</ID>
               <Description>"Black Sachet"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A960"/>
+              <LastState RealAddress="172CE030"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7450,7 +7478,7 @@
                 <CheatEntry>
                   <ID>746</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1408F6D8"/>
+                  <LastState RealAddress="10A7BA68"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7469,7 +7497,7 @@
                 <CheatEntry>
                   <ID>747</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="1408F330"/>
+                  <LastState RealAddress="10A7B860"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7491,7 +7519,7 @@
               <ID>754</ID>
               <Description>"Ring of Candor"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A820"/>
+              <LastState RealAddress="172CDE50"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7510,7 +7538,7 @@
                 <CheatEntry>
                   <ID>755</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14274BC8"/>
+                  <LastState RealAddress="1476DB48"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7529,7 +7557,7 @@
                 <CheatEntry>
                   <ID>756</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="1408F468"/>
+                  <LastState RealAddress="10A7B728"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7551,7 +7579,7 @@
               <ID>757</ID>
               <Description>"Small Coin"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777AB90"/>
+              <LastState RealAddress="172CDDD8"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7570,7 +7598,7 @@
                 <CheatEntry>
                   <ID>758</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1777C940"/>
+                  <LastState RealAddress="172CF7C8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7589,7 +7617,7 @@
                 <CheatEntry>
                   <ID>759</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="15D8F2B8"/>
+                  <LastState RealAddress="1609CF68"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7611,7 +7639,7 @@
               <ID>760</ID>
               <Description>"Bakman Patch"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A910"/>
+              <LastState RealAddress="172CDD88"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7630,7 +7658,7 @@
                 <CheatEntry>
                   <ID>761</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="11F69DD0"/>
+                  <LastState RealAddress="0E89BDC8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7649,7 +7677,7 @@
                 <CheatEntry>
                   <ID>762</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11E8AEC8"/>
+                  <LastState RealAddress="0E6E1990"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7671,7 +7699,7 @@
               <ID>763</ID>
               <Description>"Cat Sphere"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A988"/>
+              <LastState RealAddress="172CE0F8"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7690,7 +7718,7 @@
                 <CheatEntry>
                   <ID>764</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14275028"/>
+                  <LastState RealAddress="1476D8C8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7709,7 +7737,7 @@
                 <CheatEntry>
                   <ID>765</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="1766C3B0"/>
+                  <LastState RealAddress="0E8B26D8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7731,7 +7759,7 @@
               <ID>766</ID>
               <Description>"Hazle Badge"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777A938"/>
+              <LastState RealAddress="172CDC98"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7750,7 +7778,7 @@
                 <CheatEntry>
                   <ID>767</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1777C6C0"/>
+                  <LastState RealAddress="172CF840"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7769,7 +7797,7 @@
                 <CheatEntry>
                   <ID>768</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="111D61B0"/>
+                  <LastState RealAddress="0E57CD98"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7791,7 +7819,7 @@
               <ID>769</ID>
               <Description>"Torn Branch"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777AA28"/>
+              <LastState RealAddress="172CDE00"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7810,7 +7838,7 @@
                 <CheatEntry>
                   <ID>770</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14275078"/>
+                  <LastState RealAddress="1476D558"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7829,7 +7857,7 @@
                 <CheatEntry>
                   <ID>771</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="1205FBF8"/>
+                  <LastState RealAddress="0E8BBB30"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7851,7 +7879,7 @@
               <ID>772</ID>
               <Description>"Monastery Key"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777AFF0"/>
+              <LastState RealAddress="172CE350"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7870,7 +7898,7 @@
                 <CheatEntry>
                   <ID>773</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1777CAD0"/>
+                  <LastState RealAddress="172CFAC0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7889,7 +7917,7 @@
                 <CheatEntry>
                   <ID>774</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11F43288"/>
+                  <LastState RealAddress="109BFEE0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7911,7 +7939,7 @@
               <ID>775</ID>
               <Description>"Karst Crest"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777AFA0"/>
+              <LastState RealAddress="172CE3C8"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7930,7 +7958,7 @@
                 <CheatEntry>
                   <ID>776</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14091148"/>
+                  <LastState RealAddress="1609C4E8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -7949,7 +7977,7 @@
                 <CheatEntry>
                   <ID>777</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11EBDB10"/>
+                  <LastState RealAddress="0E781B80"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -7971,7 +7999,7 @@
               <ID>781</ID>
               <Description>"Clarity Shard"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777B108"/>
+              <LastState RealAddress="172CE558"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -7990,7 +8018,7 @@
                 <CheatEntry>
                   <ID>782</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14275ED8"/>
+                  <LastState RealAddress="1476DC38"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8009,7 +8037,7 @@
                 <CheatEntry>
                   <ID>783</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="1205DAC8"/>
+                  <LastState RealAddress="0E8BE708"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8031,7 +8059,7 @@
               <ID>784</ID>
               <Description>"Dirty Shroom"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777B130"/>
+              <LastState RealAddress="172CE170"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8050,7 +8078,7 @@
                 <CheatEntry>
                   <ID>785</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1777CEB8"/>
+                  <LastState RealAddress="172CFEA8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8069,7 +8097,7 @@
                 <CheatEntry>
                   <ID>786</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="143E5FC8"/>
+                  <LastState RealAddress="1094A978"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8091,7 +8119,7 @@
               <ID>787</ID>
               <Description>"Ivory Bug"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777AE38"/>
+              <LastState RealAddress="172CE468"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8110,7 +8138,7 @@
                 <CheatEntry>
                   <ID>788</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1777CE68"/>
+                  <LastState RealAddress="172CFED0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8129,7 +8157,7 @@
                 <CheatEntry>
                   <ID>789</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="13F5DC70"/>
+                  <LastState RealAddress="10F241B0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8151,7 +8179,7 @@
               <ID>790</ID>
               <Description>"Violet Sprite"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777AD70"/>
+              <LastState RealAddress="172CE198"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8170,7 +8198,7 @@
                 <CheatEntry>
                   <ID>791</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="11F6A130"/>
+                  <LastState RealAddress="0E89BAB0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8189,7 +8217,7 @@
                 <CheatEntry>
                   <ID>792</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="1205DEE8"/>
+                  <LastState RealAddress="0E8BD948"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8211,7 +8239,7 @@
               <ID>793</ID>
               <Description>"Soft Tissue"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777AE60"/>
+              <LastState RealAddress="172CE4B8"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8230,7 +8258,7 @@
                 <CheatEntry>
                   <ID>794</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14275F28"/>
+                  <LastState RealAddress="1476D918"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8249,7 +8277,7 @@
                 <CheatEntry>
                   <ID>795</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="1766BE30"/>
+                  <LastState RealAddress="0E8B2730"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8271,7 +8299,7 @@
               <ID>796</ID>
               <Description>"Garden Key"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777B568"/>
+              <LastState RealAddress="172CE508"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8290,7 +8318,7 @@
                 <CheatEntry>
                   <ID>797</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1777CC60"/>
+                  <LastState RealAddress="172CFCA0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8309,7 +8337,7 @@
                 <CheatEntry>
                   <ID>798</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="140905E0"/>
+                  <LastState RealAddress="0E807018"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8331,7 +8359,7 @@
               <ID>799</ID>
               <Description>"Sparse Thread"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777B4A0"/>
+              <LastState RealAddress="172CE878"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8350,7 +8378,7 @@
                 <CheatEntry>
                   <ID>800</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14274628"/>
+                  <LastState RealAddress="1476DC88"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8369,7 +8397,7 @@
                 <CheatEntry>
                   <ID>801</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11F425C8"/>
+                  <LastState RealAddress="109C0720"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8391,7 +8419,7 @@
               <ID>802</ID>
               <Description>"Blessing Charm"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777B608"/>
+              <LastState RealAddress="172CE968"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8410,7 +8438,7 @@
                 <CheatEntry>
                   <ID>803</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="11F69D40"/>
+                  <LastState RealAddress="0E89BA20"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8429,7 +8457,7 @@
                 <CheatEntry>
                   <ID>804</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="143E5F08"/>
+                  <LastState RealAddress="1094B4B8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8451,7 +8479,7 @@
               <ID>805</ID>
               <Description>"Heavy Arrows"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777B4C8"/>
+              <LastState RealAddress="172CE6C0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8470,7 +8498,7 @@
                 <CheatEntry>
                   <ID>806</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="11F69E18"/>
+                  <LastState RealAddress="0E89BCA8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8489,7 +8517,7 @@
                 <CheatEntry>
                   <ID>807</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="1205ECA8"/>
+                  <LastState RealAddress="0E8BE918"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8511,7 +8539,7 @@
               <ID>808</ID>
               <Description>"Blodstained Tissue"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="15FE3490"/>
+              <LastState RealAddress="10F593F0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8530,7 +8558,7 @@
                 <CheatEntry>
                   <ID>809</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14092048"/>
+                  <LastState RealAddress="1609C828"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8549,7 +8577,7 @@
                 <CheatEntry>
                   <ID>810</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="171A8998"/>
+                  <LastState RealAddress="140E5490"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8571,7 +8599,7 @@
               <ID>811</ID>
               <Description>"Maple Leaf"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777B4F0"/>
+              <LastState RealAddress="172CE940"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8590,7 +8618,7 @@
                 <CheatEntry>
                   <ID>812</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1777D048"/>
+                  <LastState RealAddress="172D0100"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8609,7 +8637,7 @@
                 <CheatEntry>
                   <ID>813</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11E327B0"/>
+                  <LastState RealAddress="0E6830F8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8631,7 +8659,7 @@
               <ID>814</ID>
               <Description>"Fresh Spring Leaf"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="15FE3190"/>
+              <LastState RealAddress="10F598A0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8650,7 +8678,7 @@
                 <CheatEntry>
                   <ID>815</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1777D390"/>
+                  <LastState RealAddress="172D0038"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8669,7 +8697,7 @@
                 <CheatEntry>
                   <ID>816</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11F42A48"/>
+                  <LastState RealAddress="109BF760"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8691,7 +8719,7 @@
               <ID>817</ID>
               <Description>"Pocket Incensory"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="15FE31C0"/>
+              <LastState RealAddress="10F595A0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8710,7 +8738,7 @@
                 <CheatEntry>
                   <ID>818</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14275AC8"/>
+                  <LastState RealAddress="1476D5F8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8729,7 +8757,7 @@
                 <CheatEntry>
                   <ID>819</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="13FCE198"/>
+                  <LastState RealAddress="1476D6E8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8751,7 +8779,7 @@
               <ID>820</ID>
               <Description>"Birthstone"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777B6D0"/>
+              <LastState RealAddress="172CE828"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8770,7 +8798,7 @@
                 <CheatEntry>
                   <ID>821</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1777D160"/>
+                  <LastState RealAddress="172D0268"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8789,7 +8817,7 @@
                 <CheatEntry>
                   <ID>822</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11F42B08"/>
+                  <LastState RealAddress="109C0360"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8811,7 +8839,7 @@
               <ID>823</ID>
               <Description>"Quick Arrows"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777B900"/>
+              <LastState RealAddress="172CE788"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8830,7 +8858,7 @@
                 <CheatEntry>
                   <ID>824</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14275B68"/>
+                  <LastState RealAddress="1476DDC8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8849,7 +8877,7 @@
                 <CheatEntry>
                   <ID>825</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="13FCDD88"/>
+                  <LastState RealAddress="1476DD78"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8871,7 +8899,7 @@
               <ID>826</ID>
               <Description>"Drilling Arrows"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777B9C8"/>
+              <LastState RealAddress="172CEE18"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8890,7 +8918,7 @@
                 <CheatEntry>
                   <ID>827</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="11F69E60"/>
+                  <LastState RealAddress="0E89BA68"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8909,7 +8937,7 @@
                 <CheatEntry>
                   <ID>828</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="13FCDE28"/>
+                  <LastState RealAddress="1476DE18"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8931,7 +8959,7 @@
               <ID>829</ID>
               <Description>"Sealed Wind"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777B6F8"/>
+              <LastState RealAddress="172CEBE8"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -8950,7 +8978,7 @@
                 <CheatEntry>
                   <ID>830</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14090F48"/>
+                  <LastState RealAddress="1609C7E8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -8969,7 +8997,7 @@
                 <CheatEntry>
                   <ID>831</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="1766BE88"/>
+                  <LastState RealAddress="0E8B2788"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -8991,7 +9019,7 @@
               <ID>832</ID>
               <Description>"Cinder Key"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777BAE0"/>
+              <LastState RealAddress="172CED28"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -9010,7 +9038,7 @@
                 <CheatEntry>
                   <ID>833</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="1777D4A8"/>
+                  <LastState RealAddress="172D08F8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -9029,7 +9057,7 @@
                 <CheatEntry>
                   <ID>834</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="11E32880"/>
+                  <LastState RealAddress="0E682CE8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -9051,7 +9079,7 @@
               <ID>835</ID>
               <Description>"Crest Fragment(BCL)"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777B7E8"/>
+              <LastState RealAddress="172CEC10"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -9070,7 +9098,7 @@
                 <CheatEntry>
                   <ID>836</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="11F6A298"/>
+                  <LastState RealAddress="0E89BE10"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -9089,7 +9117,7 @@
                 <CheatEntry>
                   <ID>837</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="14094D00"/>
+                  <LastState RealAddress="10A87688"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -9111,7 +9139,7 @@
               <ID>838</ID>
               <Description>"Crest Fragment(BCS)"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777BFE0"/>
+              <LastState RealAddress="172CEE90"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -9130,7 +9158,7 @@
                 <CheatEntry>
                   <ID>839</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="11F69EA8"/>
+                  <LastState RealAddress="0E89BCF0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -9149,7 +9177,7 @@
                 <CheatEntry>
                   <ID>840</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="14094280"/>
+                  <LastState RealAddress="10A877D8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -9171,7 +9199,7 @@
               <ID>841</ID>
               <Description>"Crest Fragment(Dash)"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777BEA0"/>
+              <LastState RealAddress="172CEBC0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -9190,7 +9218,7 @@
                 <CheatEntry>
                   <ID>842</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="14090F88"/>
+                  <LastState RealAddress="1609CAE8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -9209,7 +9237,7 @@
                 <CheatEntry>
                   <ID>843</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="140947C0"/>
+                  <LastState RealAddress="10A87BC8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -9231,7 +9259,7 @@
               <ID>844</ID>
               <Description>"Crest Fragment(Warp)"</Description>
               <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-              <LastState RealAddress="1777BE28"/>
+              <LastState RealAddress="172CEF30"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>String</VariableType>
               <Length>239</Length>
@@ -9250,7 +9278,7 @@
                 <CheatEntry>
                   <ID>845</ID>
                   <Description>"Effect"</Description>
-                  <LastState RealAddress="08B5E260"/>
+                  <LastState RealAddress="1609C9E8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>85</Length>
@@ -9269,7 +9297,7 @@
                 <CheatEntry>
                   <ID>846</ID>
                   <Description>"Description"</Description>
-                  <LastState RealAddress="14093F38"/>
+                  <LastState RealAddress="10A86620"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>String</VariableType>
                   <Length>530</Length>
@@ -9307,7 +9335,7 @@
                   <ID>1159</ID>
                   <Description>"Item[1]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="15" RealAddress="08B77228"/>
+                  <LastState Value="15" RealAddress="0D624D80"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9320,7 +9348,7 @@
                   <ID>1160</ID>
                   <Description>"Item[2]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="11" RealAddress="08B771E8"/>
+                  <LastState Value="11" RealAddress="0D624D40"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9333,7 +9361,7 @@
                   <ID>1161</ID>
                   <Description>"Item[3]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="21" RealAddress="08B77288"/>
+                  <LastState Value="21" RealAddress="0D624DE0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9355,7 +9383,7 @@
                   <ID>1163</ID>
                   <Description>"Item[1]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="31" RealAddress="08B77308"/>
+                  <LastState Value="31" RealAddress="0D624E60"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9368,7 +9396,7 @@
                   <ID>681</ID>
                   <Description>"Item[2]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="2" RealAddress="08B771A8"/>
+                  <LastState Value="2" RealAddress="0D624D00"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9390,7 +9418,7 @@
                   <ID>683</ID>
                   <Description>"Item[1]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="7" RealAddress="08B76578"/>
+                  <LastState Value="7" RealAddress="0D6240D0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9412,7 +9440,7 @@
                   <ID>1164</ID>
                   <Description>"Item[1]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="8" RealAddress="08B765A8"/>
+                  <LastState Value="8" RealAddress="0D624100"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9425,7 +9453,7 @@
                   <ID>686</ID>
                   <Description>"Item[2]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="21" RealAddress="08B77288"/>
+                  <LastState Value="21" RealAddress="0D624DE0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9447,7 +9475,7 @@
                   <ID>688</ID>
                   <Description>"Item[1]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="47" RealAddress="08B773E8"/>
+                  <LastState Value="47" RealAddress="0D624F40"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+02371EA8</Address>
@@ -9460,7 +9488,7 @@
                   <ID>1166</ID>
                   <Description>"Item[2]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="21" RealAddress="08B77288"/>
+                  <LastState Value="21" RealAddress="0D624DE0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9473,7 +9501,7 @@
                   <ID>690</ID>
                   <Description>"Item[3]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="13" RealAddress="08B77208"/>
+                  <LastState Value="13" RealAddress="0D624D60"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9495,7 +9523,7 @@
                   <ID>692</ID>
                   <Description>"Item[1]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="11" RealAddress="08B771E8"/>
+                  <LastState Value="11" RealAddress="0D624D40"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9517,7 +9545,7 @@
                   <ID>1167</ID>
                   <Description>"Item[1]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="35" RealAddress="08B77338"/>
+                  <LastState Value="35" RealAddress="0D624E90"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9530,7 +9558,7 @@
                   <ID>695</ID>
                   <Description>"Item[2]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="46" RealAddress="08B773D8"/>
+                  <LastState Value="46" RealAddress="0D624F30"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9543,7 +9571,7 @@
                   <ID>696</ID>
                   <Description>"Item[3]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="44" RealAddress="08B765D8"/>
+                  <LastState Value="44" RealAddress="0D624130"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9566,7 +9594,7 @@
             <CheatEntry>
               <ID>917</ID>
               <Description>"Collected"</Description>
-              <LastState Value="0" RealAddress="11775698"/>
+              <LastState Value="12" RealAddress="0DFBB070"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9582,7 +9610,7 @@
             <CheatEntry>
               <ID>918</ID>
               <Description>"IB[1]"</Description>
-              <LastState Value="0" RealAddress="11775558"/>
+              <LastState Value="1" RealAddress="0DFBAF30"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9598,7 +9626,7 @@
             <CheatEntry>
               <ID>919</ID>
               <Description>"IB[2]"</Description>
-              <LastState Value="0" RealAddress="11775568"/>
+              <LastState Value="0" RealAddress="0DFBAF40"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9614,7 +9642,7 @@
             <CheatEntry>
               <ID>920</ID>
               <Description>"IB[3]"</Description>
-              <LastState Value="0" RealAddress="11775578"/>
+              <LastState Value="1" RealAddress="0DFBAF50"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9630,7 +9658,7 @@
             <CheatEntry>
               <ID>921</ID>
               <Description>"IB[4]"</Description>
-              <LastState Value="0" RealAddress="11775588"/>
+              <LastState Value="1" RealAddress="0DFBAF60"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9646,7 +9674,7 @@
             <CheatEntry>
               <ID>922</ID>
               <Description>"IB[5]"</Description>
-              <LastState Value="0" RealAddress="11775598"/>
+              <LastState Value="1" RealAddress="0DFBAF70"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9662,7 +9690,7 @@
             <CheatEntry>
               <ID>923</ID>
               <Description>"IB[6]"</Description>
-              <LastState Value="0" RealAddress="117755A8"/>
+              <LastState Value="1" RealAddress="0DFBAF80"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9678,7 +9706,7 @@
             <CheatEntry>
               <ID>924</ID>
               <Description>"IB[7]"</Description>
-              <LastState Value="0" RealAddress="117755B8"/>
+              <LastState Value="0" RealAddress="0DFBAF90"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9694,7 +9722,7 @@
             <CheatEntry>
               <ID>925</ID>
               <Description>"IB[8]"</Description>
-              <LastState Value="0" RealAddress="117755C8"/>
+              <LastState Value="0" RealAddress="0DFBAFA0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9710,7 +9738,7 @@
             <CheatEntry>
               <ID>926</ID>
               <Description>"IB[9]"</Description>
-              <LastState Value="0" RealAddress="117755D8"/>
+              <LastState Value="1" RealAddress="0DFBAFB0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9726,7 +9754,7 @@
             <CheatEntry>
               <ID>927</ID>
               <Description>"IB[10]"</Description>
-              <LastState Value="0" RealAddress="117755E8"/>
+              <LastState Value="1" RealAddress="0DFBAFC0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9742,7 +9770,7 @@
             <CheatEntry>
               <ID>928</ID>
               <Description>"IB[11]"</Description>
-              <LastState Value="0" RealAddress="117755F8"/>
+              <LastState Value="1" RealAddress="0DFBAFD0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9758,7 +9786,7 @@
             <CheatEntry>
               <ID>929</ID>
               <Description>"IB[12]"</Description>
-              <LastState Value="0" RealAddress="11775608"/>
+              <LastState Value="1" RealAddress="0DFBAFE0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9774,7 +9802,7 @@
             <CheatEntry>
               <ID>930</ID>
               <Description>"IB[13]"</Description>
-              <LastState Value="0" RealAddress="11775618"/>
+              <LastState Value="1" RealAddress="0DFBAFF0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9790,7 +9818,7 @@
             <CheatEntry>
               <ID>931</ID>
               <Description>"IB[14]"</Description>
-              <LastState Value="0" RealAddress="11775628"/>
+              <LastState Value="0" RealAddress="0DFBB000"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9806,7 +9834,7 @@
             <CheatEntry>
               <ID>932</ID>
               <Description>"IB[15]"</Description>
-              <LastState Value="0" RealAddress="11775638"/>
+              <LastState Value="0" RealAddress="0DFBB010"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9822,7 +9850,7 @@
             <CheatEntry>
               <ID>933</ID>
               <Description>"IB[16]"</Description>
-              <LastState Value="0" RealAddress="11775648"/>
+              <LastState Value="0" RealAddress="0DFBB020"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9838,7 +9866,7 @@
             <CheatEntry>
               <ID>934</ID>
               <Description>"IB[17]"</Description>
-              <LastState Value="0" RealAddress="11775658"/>
+              <LastState Value="0" RealAddress="0DFBB030"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9854,7 +9882,7 @@
             <CheatEntry>
               <ID>935</ID>
               <Description>"IB[18]"</Description>
-              <LastState Value="0" RealAddress="11775668"/>
+              <LastState Value="1" RealAddress="0DFBB040"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9870,7 +9898,7 @@
             <CheatEntry>
               <ID>936</ID>
               <Description>"IB[19]"</Description>
-              <LastState Value="0" RealAddress="11775678"/>
+              <LastState Value="0" RealAddress="0DFBB050"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9886,7 +9914,7 @@
             <CheatEntry>
               <ID>937</ID>
               <Description>"IB[20]"</Description>
-              <LastState Value="0" RealAddress="11775688"/>
+              <LastState Value="1" RealAddress="0DFBB060"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -9918,7 +9946,7 @@
                 <CheatEntry>
                   <ID>940</ID>
                   <Description>"Bellflower"</Description>
-                  <LastState Value="2" RealAddress="1410C1D8"/>
+                  <LastState Value="2" RealAddress="10AE8000"/>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+023782F4</Address>
                   <Offsets>
@@ -9930,7 +9958,7 @@
                 <CheatEntry>
                   <ID>941</ID>
                   <Description>"Tainted Missive"</Description>
-                  <LastState Value="2" RealAddress="1410C6B8"/>
+                  <LastState Value="4" RealAddress="10AE84E0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+023782F4</Address>
@@ -9943,7 +9971,7 @@
                 <CheatEntry>
                   <ID>942</ID>
                   <Description>"Passiflora"</Description>
-                  <LastState Value="3" RealAddress="1410C598"/>
+                  <LastState Value="0" RealAddress="10AE83C0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+023782F4</Address>
@@ -9965,7 +9993,7 @@
                 <CheatEntry>
                   <ID>1171</ID>
                   <Description>"Active"</Description>
-                  <LastState Value="3" RealAddress="08B77168"/>
+                  <LastState Value="3" RealAddress="0D624CC0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9977,7 +10005,7 @@
                 <CheatEntry>
                   <ID>1172</ID>
                   <Description>"Passive"</Description>
-                  <LastState Value="3" RealAddress="08B77178"/>
+                  <LastState Value="3" RealAddress="0D624CD0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -9989,7 +10017,7 @@
                 <CheatEntry>
                   <ID>1173</ID>
                   <Description>"Key"</Description>
-                  <LastState Value="8" RealAddress="08B77638"/>
+                  <LastState Value="8" RealAddress="0D625190"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2371EA8</Address>
@@ -10001,7 +10029,7 @@
                 <CheatEntry>
                   <ID>1174</ID>
                   <Description>"Total"</Description>
-                  <LastState Value="0" RealAddress="140A2674"/>
+                  <LastState Value="14" RealAddress="109D30B4"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>4 Bytes</VariableType>
                   <Address>"MomodoraRUtM.exe"+023782DC</Address>
@@ -10022,7 +10050,7 @@
                 <CheatEntry>
                   <ID>1176</ID>
                   <Description>"Charges for inventory slot [2]"</Description>
-                  <LastState Value="0" RealAddress="115C1DE0"/>
+                  <LastState Value="0" RealAddress="10E40C40"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10035,7 +10063,7 @@
                 <CheatEntry>
                   <ID>1177</ID>
                   <Description>"Total size"</Description>
-                  <LastState Value="1024" RealAddress="115C10E8"/>
+                  <LastState Value="512" RealAddress="10E3E100"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>4 Bytes</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10103,7 +10131,7 @@
 52:CF(Dash)
 53:CF(Warp)
 </DropDownList>
-                  <LastState Value="34" RealAddress="115C10F8"/>
+                  <LastState Value="34" RealAddress="10E3E110"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10117,7 +10145,7 @@
                   <ID>779</ID>
                   <Description>"Item[1]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="16" RealAddress="115C1108"/>
+                  <LastState Value="52" RealAddress="10E3E120"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10185,7 +10213,7 @@
 52:CF(Dash)
 53:CF(Warp)
 </DropDownList>
-                  <LastState Value="1" RealAddress="115C1118"/>
+                  <LastState Value="49" RealAddress="10E3E130"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10199,7 +10227,7 @@
                   <ID>1180</ID>
                   <Description>"Item[3]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="52" RealAddress="115C1128"/>
+                  <LastState Value="26" RealAddress="10E3E140"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10267,7 +10295,7 @@
 52:CF(Dash)
 53:CF(Warp)
 </DropDownList>
-                  <LastState Value="49" RealAddress="115C1138"/>
+                  <LastState Value="53" RealAddress="10E3E150"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10281,7 +10309,7 @@
                   <ID>1182</ID>
                   <Description>"Item[5]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="53" RealAddress="115C1148"/>
+                  <LastState Value="51" RealAddress="10E3E160"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10349,7 +10377,7 @@
 52:CF(Dash)
 53:CF(Warp)
 </DropDownList>
-                  <LastState Value="51" RealAddress="115C1158"/>
+                  <LastState Value="27" RealAddress="10E3E170"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10363,7 +10391,7 @@
                   <ID>1184</ID>
                   <Description>"Item[7]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="27" RealAddress="115C1168"/>
+                  <LastState Value="50" RealAddress="10E3E180"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10431,7 +10459,7 @@
 52:CF(Dash)
 53:CF(Warp)
 </DropDownList>
-                  <LastState Value="50" RealAddress="115C1178"/>
+                  <LastState Value="43" RealAddress="10E3E190"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10445,7 +10473,7 @@
                   <ID>1186</ID>
                   <Description>"Item[9]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="15" RealAddress="115C1188"/>
+                  <LastState Value="6" RealAddress="10E3E1A0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10513,7 +10541,7 @@
 52:CF(Dash)
 53:CF(Warp)
 </DropDownList>
-                  <LastState Value="43" RealAddress="115C1198"/>
+                  <LastState Value="23" RealAddress="10E3E1B0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10527,7 +10555,7 @@
                   <ID>1188</ID>
                   <Description>"Item[11]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="6" RealAddress="115C11A8"/>
+                  <LastState Value="44" RealAddress="10E3E1C0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10595,7 +10623,7 @@
 52:CF(Dash)
 53:CF(Warp)
 </DropDownList>
-                  <LastState Value="48" RealAddress="115C11B8"/>
+                  <LastState Value="4" RealAddress="10E3E1D0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10609,7 +10637,7 @@
                   <ID>1190</ID>
                   <Description>"Item[13]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="23" RealAddress="115C11C8"/>
+                  <LastState Value="38" RealAddress="10E3E1E0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10677,7 +10705,7 @@
 52:CF(Dash)
 53:CF(Warp)
 </DropDownList>
-                  <LastState Value="4" RealAddress="115C11D8"/>
+                  <LastState Value="48" RealAddress="10E3E1F0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10691,7 +10719,7 @@
                   <ID>1192</ID>
                   <Description>"Item[15]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="25" RealAddress="115C11E8"/>
+                  <LastState Value="15" RealAddress="10E3E200"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10759,7 +10787,7 @@
 52:CF(Dash)
 53:CF(Warp)
 </DropDownList>
-                  <LastState Value="25" RealAddress="115C11E8"/>
+                  <LastState Value="15" RealAddress="10E3E200"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10773,7 +10801,7 @@
                   <ID>1194</ID>
                   <Description>"Item[17]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="14" RealAddress="115C11F8"/>
+                  <LastState Value="29" RealAddress="10E3E210"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10841,7 +10869,7 @@
 52:CF(Dash)
 53:CF(Warp)
 </DropDownList>
-                  <LastState Value="15" RealAddress="115C1208"/>
+                  <LastState Value="0" RealAddress="10E3E220"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10855,7 +10883,7 @@
                   <ID>1196</ID>
                   <Description>"Item[19]"</Description>
                   <DropDownListLink>Item[0]</DropDownListLink>
-                  <LastState Value="16" RealAddress="115C1218"/>
+                  <LastState Value="0" RealAddress="10E3E230"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10923,7 +10951,7 @@
 52:CF(Dash)
 53:CF(Warp)
 </DropDownList>
-                  <LastState Value="17" RealAddress="115C1228"/>
+                  <LastState Value="0" RealAddress="10E3E240"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+23782DC</Address>
@@ -10947,7 +10975,7 @@
             <CheatEntry>
               <ID>1199</ID>
               <Description>"CurrentDifficulty"</Description>
-              <LastState Value="0" RealAddress="11775908"/>
+              <LastState Value="2" RealAddress="0DFBB2E0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -10963,7 +10991,7 @@
             <CheatEntry>
               <ID>1499</ID>
               <Description>"MaxHealth"</Description>
-              <LastState Value="30" RealAddress="08B765C8"/>
+              <LastState Value="52" RealAddress="0D624120"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+02371EA8</Address>
@@ -10975,7 +11003,7 @@
             <CheatEntry>
               <ID>1500</ID>
               <Description>"CurrentHealth"</Description>
-              <LastState Value="30" RealAddress="08B76528"/>
+              <LastState Value="52" RealAddress="0D624080"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+02371EA8</Address>
@@ -10996,7 +11024,7 @@
             <CheatEntry>
               <ID>1157</ID>
               <Description>"InGame"</Description>
-              <LastState Value="0" RealAddress="08B76CB8"/>
+              <LastState Value="1" RealAddress="0D624810"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+02379600</Address>
@@ -11009,14 +11037,14 @@
             <CheatEntry>
               <ID>1156</ID>
               <Description>"LevelID"</Description>
-              <LastState Value="1" RealAddress="0318C360"/>
+              <LastState Value="82" RealAddress="02EAC360"/>
               <VariableType>4 Bytes</VariableType>
               <Address>MomodoraRUtM.exe+237C360</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>687</ID>
               <Description>"Munny"</Description>
-              <LastState Value="0" RealAddress="08B76A68"/>
+              <LastState Value="86" RealAddress="0D6245C0"/>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+02379600</Address>
               <Offsets>
@@ -11028,7 +11056,7 @@
             <CheatEntry>
               <ID>689</ID>
               <Description>"Conversation"</Description>
-              <LastState Value="0" RealAddress="08B76B98"/>
+              <LastState Value="0" RealAddress="0D6246F0"/>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+02379600</Address>
               <Offsets>
@@ -11040,7 +11068,7 @@
             <CheatEntry>
               <ID>685</ID>
               <Description>"Inventory Open"</Description>
-              <LastState Value="0" RealAddress="08B76FF8"/>
+              <LastState Value="0" RealAddress="0D624B50"/>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+02379600</Address>
               <Offsets>
@@ -11052,7 +11080,7 @@
             <CheatEntry>
               <ID>1489</ID>
               <Description>"NPC's palette"</Description>
-              <LastState Value="0" RealAddress="174D60F8"/>
+              <LastState Value="3" RealAddress="14978630"/>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+02332CB4</Address>
               <Offsets>
@@ -11066,13 +11094,43 @@
             <CheatEntry>
               <ID>1214</ID>
               <Description>"Control Type"</Description>
-              <LastState Value="1" RealAddress="08B76968"/>
+              <LastState Value="1" RealAddress="0D6244C0"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
               <Address>"MomodoraRUtM.exe"+02371EA8</Address>
               <Offsets>
                 <Offset>440</Offset>
                 <Offset>4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1684</ID>
+              <Description>"Y-cord, lower screen, higher value"</Description>
+              <LastState Value="176" RealAddress="14976150"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02332CB4</Address>
+              <Offsets>
+                <Offset>130</Offset>
+                <Offset>4</Offset>
+                <Offset>13C</Offset>
+                <Offset>C</Offset>
+                <Offset>318</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1685</ID>
+              <Description>"x-cord, left = lower value"</Description>
+              <LastState Value="402" RealAddress="14976140"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02332CB4</Address>
+              <Offsets>
+                <Offset>120</Offset>
+                <Offset>4</Offset>
+                <Offset>13C</Offset>
+                <Offset>C</Offset>
+                <Offset>318</Offset>
               </Offsets>
             </CheatEntry>
           </CheatEntries>
@@ -11094,7 +11152,7 @@
                 <CheatEntry>
                   <ID>1503</ID>
                   <Description>"First Grove Chest(20)"</Description>
-                  <LastState Value="0" RealAddress="11775308"/>
+                  <LastState Value="0" RealAddress="0DFBACE0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11110,7 +11168,7 @@
                 <CheatEntry>
                   <ID>1504</ID>
                   <Description>"Grove Bellflower"</Description>
-                  <LastState Value="0" RealAddress="117753C8"/>
+                  <LastState Value="0" RealAddress="0DFBADA0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11126,7 +11184,7 @@
                 <CheatEntry>
                   <ID>1505</ID>
                   <Description>"Grove First Switch"</Description>
-                  <LastState Value="0" RealAddress="117753E8"/>
+                  <LastState Value="1" RealAddress="0DFBADC0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11142,7 +11200,7 @@
                 <CheatEntry>
                   <ID>1506</ID>
                   <Description>"First Grove Bell (WARP)"</Description>
-                  <LastState Value="0" RealAddress="11775E18"/>
+                  <LastState Value="1" RealAddress="0DFBB7F0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11158,7 +11216,7 @@
                 <CheatEntry>
                   <ID>1507</ID>
                   <Description>"Grove Second Chest(20)"</Description>
-                  <LastState Value="0" RealAddress="117752F8"/>
+                  <LastState Value="0" RealAddress="0DFBACD0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11174,7 +11232,7 @@
                 <CheatEntry>
                   <ID>1508</ID>
                   <Description>"Vit Fragment Cat Room"</Description>
-                  <LastState Value="0" RealAddress="11775C18"/>
+                  <LastState Value="1" RealAddress="0DFBB5F0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11190,7 +11248,7 @@
                 <CheatEntry>
                   <ID>1509</ID>
                   <Description>"Grove First Hidden Wall"</Description>
-                  <LastState Value="0" RealAddress="117754A8"/>
+                  <LastState Value="1" RealAddress="0DFBAE80"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11206,7 +11264,7 @@
                 <CheatEntry>
                   <ID>1510</ID>
                   <Description>"Grove Fragment Behind First H Wall"</Description>
-                  <LastState Value="0" RealAddress="11775428"/>
+                  <LastState Value="1" RealAddress="0DFBAE00"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11222,7 +11280,7 @@
                 <CheatEntry>
                   <ID>1511</ID>
                   <Description>"Astral Charm(Grove)"</Description>
-                  <LastState Value="0" RealAddress="117753D8"/>
+                  <LastState Value="1" RealAddress="0DFBADB0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11238,7 +11296,7 @@
                 <CheatEntry>
                   <ID>1512</ID>
                   <Description>"Grove Second Switch"</Description>
-                  <LastState Value="0" RealAddress="11775388"/>
+                  <LastState Value="1" RealAddress="0DFBAD60"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11254,7 +11312,7 @@
                 <CheatEntry>
                   <ID>1513</ID>
                   <Description>"IB 2nd Switch Room (Cat Form Required)"</Description>
-                  <LastState Value="0" RealAddress="11775638"/>
+                  <LastState Value="0" RealAddress="0DFBB010"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11270,7 +11328,7 @@
                 <CheatEntry>
                   <ID>1514</ID>
                   <Description>"Grove 2nd Bell Ivory Bug"</Description>
-                  <LastState Value="0" RealAddress="11775558"/>
+                  <LastState Value="1" RealAddress="0DFBAF30"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11286,7 +11344,7 @@
                 <CheatEntry>
                   <ID>1515</ID>
                   <Description>"Grove Second Hidden Wall"</Description>
-                  <LastState Value="0" RealAddress="117754E8"/>
+                  <LastState Value="1" RealAddress="0DFBAEC0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11302,7 +11360,7 @@
                 <CheatEntry>
                   <ID>1516</ID>
                   <Description>"Grove Fragment Behind Second H Wall"</Description>
-                  <LastState Value="0" RealAddress="11775468"/>
+                  <LastState Value="1" RealAddress="0DFBAE40"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11318,7 +11376,7 @@
                 <CheatEntry>
                   <ID>1517</ID>
                   <Description>"Dirty SHroom Delivery"</Description>
-                  <LastState Value="0" RealAddress="117757D8"/>
+                  <LastState Value="0" RealAddress="0DFBB1B0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11334,7 +11392,7 @@
                 <CheatEntry>
                   <ID>1518</ID>
                   <Description>"Grove 3rd Chest(40)"</Description>
-                  <LastState Value="0" RealAddress="11775808"/>
+                  <LastState Value="0" RealAddress="0DFBB1E0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11350,7 +11408,7 @@
                 <CheatEntry>
                   <ID>1519</ID>
                   <Description>"Grove Final Ivory Bug"</Description>
-                  <LastState Value="0" RealAddress="11775568"/>
+                  <LastState Value="0" RealAddress="0DFBAF40"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11366,7 +11424,7 @@
                 <CheatEntry>
                   <ID>1520</ID>
                   <Description>"Grove 4th chest(20)"</Description>
-                  <LastState Value="0" RealAddress="11775318"/>
+                  <LastState Value="0" RealAddress="0DFBACF0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11382,7 +11440,7 @@
                 <CheatEntry>
                   <ID>1521</ID>
                   <Description>"Edea"</Description>
-                  <LastState Value="0" RealAddress="117753B8"/>
+                  <LastState Value="1" RealAddress="0DFBAD90"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11398,7 +11456,7 @@
                 <CheatEntry>
                   <ID>1522</ID>
                   <Description>"Edea's Pearl"</Description>
-                  <LastState Value="0" RealAddress="11775418"/>
+                  <LastState Value="1" RealAddress="0DFBADF0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11414,7 +11472,7 @@
                 <CheatEntry>
                   <ID>1523</ID>
                   <Description>"Give Hazel Badge to Eri"</Description>
-                  <LastState Value="0" RealAddress="11775B18"/>
+                  <LastState Value="0" RealAddress="0DFBB4F0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11439,7 +11497,7 @@
                 <CheatEntry>
                   <ID>1525</ID>
                   <Description>"Vit Fragment Ciele"</Description>
-                  <LastState Value="0" RealAddress="11775498"/>
+                  <LastState Value="1" RealAddress="0DFBAE70"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11455,7 +11513,7 @@
                 <CheatEntry>
                   <ID>1526</ID>
                   <Description>"Crest Fragment Ciele (Warp)"</Description>
-                  <LastState Value="0" RealAddress="11775898"/>
+                  <LastState Value="1" RealAddress="0DFBB270"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11471,7 +11529,7 @@
                 <CheatEntry>
                   <ID>1527</ID>
                   <Description>"IB Ciele"</Description>
-                  <LastState Value="0" RealAddress="11775618"/>
+                  <LastState Value="1" RealAddress="0DFBAFF0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11496,7 +11554,7 @@
                 <CheatEntry>
                   <ID>1529</ID>
                   <Description>"Askorn dialogue count (value = dialogues finished)"</Description>
-                  <LastState Value="0" RealAddress="117752E8"/>
+                  <LastState Value="0" RealAddress="0DFBACC0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11512,7 +11570,7 @@
                 <CheatEntry>
                   <ID>1530</ID>
                   <Description>"Karst City Bell (WARP)"</Description>
-                  <LastState Value="0" RealAddress="11775E28"/>
+                  <LastState Value="1" RealAddress="0DFBB800"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11528,7 +11586,7 @@
                 <CheatEntry>
                   <ID>1531</ID>
                   <Description>"Karst City Entrance Bug"</Description>
-                  <LastState Value="0" RealAddress="11775678"/>
+                  <LastState Value="0" RealAddress="0DFBB050"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11544,7 +11602,7 @@
                 <CheatEntry>
                   <ID>1532</ID>
                   <Description>"Karst City Vitality Fragment 1"</Description>
-                  <LastState Value="0" RealAddress="11775448"/>
+                  <LastState Value="0" RealAddress="0DFBAE20"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11560,7 +11618,7 @@
                 <CheatEntry>
                   <ID>1533</ID>
                   <Description>"Karst City Chest 1 (20)"</Description>
-                  <LastState Value="0" RealAddress="11775328"/>
+                  <LastState Value="0" RealAddress="0DFBAD00"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11576,7 +11634,7 @@
                 <CheatEntry>
                   <ID>1534</ID>
                   <Description>"Karst City Bellflower"</Description>
-                  <LastState Value="0" RealAddress="117756E8"/>
+                  <LastState Value="0" RealAddress="0DFBB0C0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11592,7 +11650,7 @@
                 <CheatEntry>
                   <ID>1535</ID>
                   <Description>"Lubella Shortcut"</Description>
-                  <LastState Value="0" RealAddress="117753F8"/>
+                  <LastState Value="1" RealAddress="0DFBADD0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11608,7 +11666,7 @@
                 <CheatEntry>
                   <ID>1536</ID>
                   <Description>"Fight started?"</Description>
-                  <LastState Value="0" RealAddress="11775798"/>
+                  <LastState Value="1" RealAddress="0DFBB170"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11624,7 +11682,7 @@
                 <CheatEntry>
                   <ID>1537</ID>
                   <Description>"Bakman Patch"</Description>
-                  <LastState Value="0" RealAddress="11775728"/>
+                  <LastState Value="1" RealAddress="0DFBB100"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11640,7 +11698,7 @@
                 <CheatEntry>
                   <ID>1538</ID>
                   <Description>"Kath Karst City Dialogue Counter"</Description>
-                  <LastState Value="0" RealAddress="11775378"/>
+                  <LastState Value="0" RealAddress="0DFBAD50"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11656,7 +11714,7 @@
                 <CheatEntry>
                   <ID>1539</ID>
                   <Description>"Magnet Stone"</Description>
-                  <LastState Value="0" RealAddress="11775708"/>
+                  <LastState Value="0" RealAddress="0DFBB0E0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11672,7 +11730,7 @@
                 <CheatEntry>
                   <ID>1540</ID>
                   <Description>"Sebastian Dialogue"</Description>
-                  <LastState Value="0" RealAddress="11775528"/>
+                  <LastState Value="1" RealAddress="0DFBAF00"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11688,7 +11746,7 @@
                 <CheatEntry>
                   <ID>1541</ID>
                   <Description>"Garden Upper Door"</Description>
-                  <LastState Value="0" RealAddress="11775AC8"/>
+                  <LastState Value="0" RealAddress="0DFBB4A0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11704,7 +11762,7 @@
                 <CheatEntry>
                   <ID>1542</ID>
                   <Description>"City Boulder Switch 1"</Description>
-                  <LastState Value="0" RealAddress="11775778"/>
+                  <LastState Value="0" RealAddress="0DFBB150"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11720,7 +11778,7 @@
                 <CheatEntry>
                   <ID>1543</ID>
                   <Description>"City Boulder Switch 2"</Description>
-                  <LastState Value="0" RealAddress="11775788"/>
+                  <LastState Value="0" RealAddress="0DFBB160"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11736,7 +11794,7 @@
                 <CheatEntry>
                   <ID>1544</ID>
                   <Description>"Vit Fragment Boulder Room"</Description>
-                  <LastState Value="0" RealAddress="11775488"/>
+                  <LastState Value="1" RealAddress="0DFBAE60"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11752,7 +11810,7 @@
                 <CheatEntry>
                   <ID>1545</ID>
                   <Description>"Good (K)night!"</Description>
-                  <LastState Value="0" RealAddress="117757A8"/>
+                  <LastState Value="1" RealAddress="0DFBB180"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11768,7 +11826,7 @@
                 <CheatEntry>
                   <ID>1546</ID>
                   <Description>"Hidden Wall Knight Room"</Description>
-                  <LastState Value="0" RealAddress="117754D8"/>
+                  <LastState Value="1" RealAddress="0DFBAEB0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11784,7 +11842,7 @@
                 <CheatEntry>
                   <ID>1547</ID>
                   <Description>"IB Knight Room"</Description>
-                  <LastState Value="0" RealAddress="11775578"/>
+                  <LastState Value="1" RealAddress="0DFBAF50"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11800,7 +11858,7 @@
                 <CheatEntry>
                   <ID>1548</ID>
                   <Description>"Eri Entrance Dialogue"</Description>
-                  <LastState Value="0" RealAddress="11775B08"/>
+                  <LastState Value="0" RealAddress="0DFBB4E0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11816,7 +11874,7 @@
                 <CheatEntry>
                   <ID>1549</ID>
                   <Description>"Open Fragment Barrier"</Description>
-                  <LastState Value="0" RealAddress="11775E08"/>
+                  <LastState Value="1" RealAddress="0DFBB7E0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11832,7 +11890,7 @@
                 <CheatEntry>
                   <ID>1550</ID>
                   <Description>"Sealed Wind Gate Open"</Description>
-                  <LastState Value="0" RealAddress="11775928"/>
+                  <LastState Value="1" RealAddress="0DFBB300"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11848,7 +11906,7 @@
                 <CheatEntry>
                   <ID>1551</ID>
                   <Description>"Green Leaf"</Description>
-                  <LastState Value="0" RealAddress="117758D8"/>
+                  <LastState Value="0" RealAddress="0DFBB2B0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11873,7 +11931,7 @@
                 <CheatEntry>
                   <ID>1553</ID>
                   <Description>"Subterranean Grave Fake Chest (1)"</Description>
-                  <LastState Value="0" RealAddress="11775338"/>
+                  <LastState Value="0" RealAddress="0DFBAD10"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11889,7 +11947,7 @@
                 <CheatEntry>
                   <ID>1554</ID>
                   <Description>"Eri Cutscene"</Description>
-                  <LastState Value="0" RealAddress="117757C8"/>
+                  <LastState Value="1" RealAddress="0DFBB1A0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11905,7 +11963,7 @@
                 <CheatEntry>
                   <ID>1555</ID>
                   <Description>"Subterranean Graves Bell Warp"</Description>
-                  <LastState Value="0" RealAddress="11775E48"/>
+                  <LastState Value="1" RealAddress="0DFBB820"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11921,7 +11979,7 @@
                 <CheatEntry>
                   <ID>1556</ID>
                   <Description>"Subterranean Graves Chest 2(100)"</Description>
-                  <LastState Value="0" RealAddress="11775348"/>
+                  <LastState Value="0" RealAddress="0DFBAD20"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11937,7 +11995,7 @@
                 <CheatEntry>
                   <ID>1557</ID>
                   <Description>"Subterranean Graves Hidden Wall 1"</Description>
-                  <LastState Value="0" RealAddress="117754C8"/>
+                  <LastState Value="0" RealAddress="0DFBAEA0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11953,7 +12011,7 @@
                 <CheatEntry>
                   <ID>1558</ID>
                   <Description>"Subterranean Grave Jail Switch"</Description>
-                  <LastState Value="0" RealAddress="117757F8"/>
+                  <LastState Value="0" RealAddress="0DFBB1D0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11969,7 +12027,7 @@
                 <CheatEntry>
                   <ID>1559</ID>
                   <Description>"IB Subterranean Graves"</Description>
-                  <LastState Value="0" RealAddress="117755B8"/>
+                  <LastState Value="0" RealAddress="0DFBAF90"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -11985,7 +12043,7 @@
                 <CheatEntry>
                   <ID>1560</ID>
                   <Description>"Askorn Subterranean Grave Dialogue Counter"</Description>
-                  <LastState Value="0" RealAddress="117757E8"/>
+                  <LastState Value="0" RealAddress="0DFBB1C0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12001,7 +12059,7 @@
                 <CheatEntry>
                   <ID>1561</ID>
                   <Description>"Subterranean Graves Cursed Chest(40)"</Description>
-                  <LastState Value="0" RealAddress="11775368"/>
+                  <LastState Value="0" RealAddress="0DFBAD40"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12017,7 +12075,7 @@
                 <CheatEntry>
                   <ID>1562</ID>
                   <Description>"Subterranean Grave Fake Chest 2 (1)"</Description>
-                  <LastState Value="0" RealAddress="11775358"/>
+                  <LastState Value="0" RealAddress="0DFBAD30"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12033,7 +12091,7 @@
                 <CheatEntry>
                   <ID>1563</ID>
                   <Description>"Garden Key + Unlock Garden Doors"</Description>
-                  <LastState Value="0" RealAddress="117759D8"/>
+                  <LastState Value="0" RealAddress="0DFBB3B0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12049,7 +12107,7 @@
                 <CheatEntry>
                   <ID>1564</ID>
                   <Description>"Dirty Shroom"</Description>
-                  <LastState Value="0" RealAddress="11775758"/>
+                  <LastState Value="0" RealAddress="0DFBB130"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12065,7 +12123,7 @@
                 <CheatEntry>
                   <ID>1565</ID>
                   <Description>"West Garden Door"</Description>
-                  <LastState Value="0" RealAddress="117759E8"/>
+                  <LastState Value="0" RealAddress="0DFBB3C0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12081,7 +12139,7 @@
                 <CheatEntry>
                   <ID>1566</ID>
                   <Description>"Graves Hidden Wall Vit Fragment"</Description>
-                  <LastState Value="0" RealAddress="11775AF8"/>
+                  <LastState Value="1" RealAddress="0DFBB4D0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12097,7 +12155,7 @@
                 <CheatEntry>
                   <ID>1567</ID>
                   <Description>"Graves Vitality Fragment"</Description>
-                  <LastState Value="0" RealAddress="11775458"/>
+                  <LastState Value="1" RealAddress="0DFBAE30"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12113,7 +12171,7 @@
                 <CheatEntry>
                   <ID>1568</ID>
                   <Description>"Graves Trapdoor Switch"</Description>
-                  <LastState Value="0" RealAddress="11775AD8"/>
+                  <LastState Value="1" RealAddress="0DFBB4B0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12129,7 +12187,7 @@
                 <CheatEntry>
                   <ID>1569</ID>
                   <Description>"Graves Frida Shortcut"</Description>
-                  <LastState Value="0" RealAddress="11775818"/>
+                  <LastState Value="1" RealAddress="0DFBB1F0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12145,7 +12203,7 @@
                 <CheatEntry>
                   <ID>1570</ID>
                   <Description>"Frida Start"</Description>
-                  <LastState Value="0" RealAddress="11775A18"/>
+                  <LastState Value="1" RealAddress="0DFBB3F0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12161,7 +12219,7 @@
                 <CheatEntry>
                   <ID>1571</ID>
                   <Description>"Sparse Thread"</Description>
-                  <LastState Value="0" RealAddress="11775AA8"/>
+                  <LastState Value="1" RealAddress="0DFBB480"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12177,7 +12235,7 @@
                 <CheatEntry>
                   <ID>1572</ID>
                   <Description>"Crest Fragment Frida (FC)"</Description>
-                  <LastState Value="0" RealAddress="11775888"/>
+                  <LastState Value="1" RealAddress="0DFBB260"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12202,7 +12260,7 @@
                 <CheatEntry>
                   <ID>1574</ID>
                   <Description>"Whiteleaf Memorial Park Bell Warp"</Description>
-                  <LastState Value="0" RealAddress="11775E58"/>
+                  <LastState Value="0" RealAddress="0DFBB830"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12218,7 +12276,7 @@
                 <CheatEntry>
                   <ID>1575</ID>
                   <Description>"Park West Hidden Wall"</Description>
-                  <LastState Value="0" RealAddress="117754F8"/>
+                  <LastState Value="0" RealAddress="0DFBAED0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12234,7 +12292,7 @@
                 <CheatEntry>
                   <ID>1576</ID>
                   <Description>"Lubella 2 Start"</Description>
-                  <LastState Value="0" RealAddress="11775838"/>
+                  <LastState Value="1" RealAddress="0DFBB210"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12250,7 +12308,7 @@
                 <CheatEntry>
                   <ID>1577</ID>
                   <Description>"Lubella 2 Perfect Kill"</Description>
-                  <LastState Value="0" RealAddress="11775868"/>
+                  <LastState Value="1" RealAddress="0DFBB240"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12266,7 +12324,7 @@
                 <CheatEntry>
                   <ID>1578</ID>
                   <Description>"Lubella 2 Get back control fter cat?"</Description>
-                  <LastState Value="0" RealAddress="11775A28"/>
+                  <LastState Value="1" RealAddress="0DFBB400"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12282,7 +12340,7 @@
                 <CheatEntry>
                   <ID>1579</ID>
                   <Description>"Lubella 2 Post Battle spawn as cat?"</Description>
-                  <LastState Value="0" RealAddress="11775A38"/>
+                  <LastState Value="1" RealAddress="0DFBB410"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12298,7 +12356,7 @@
                 <CheatEntry>
                   <ID>1580</ID>
                   <Description>"Torn Branch"</Description>
-                  <LastState Value="0" RealAddress="11775858"/>
+                  <LastState Value="1" RealAddress="0DFBB230"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12314,7 +12372,7 @@
                 <CheatEntry>
                   <ID>1581</ID>
                   <Description>"IB Post Lubella 1"</Description>
-                  <LastState Value="0" RealAddress="11775598"/>
+                  <LastState Value="1" RealAddress="0DFBAF70"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12330,7 +12388,7 @@
                 <CheatEntry>
                   <ID>1582</ID>
                   <Description>"IB Post Lubella 2"</Description>
-                  <LastState Value="0" RealAddress="117755A8"/>
+                  <LastState Value="1" RealAddress="0DFBAF80"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12346,7 +12404,7 @@
                 <CheatEntry>
                   <ID>1583</ID>
                   <Description>"Cat Sphere Best Item OC Do Not Steal!"</Description>
-                  <LastState Value="0" RealAddress="117759F8"/>
+                  <LastState Value="1" RealAddress="0DFBB3D0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12362,7 +12420,7 @@
                 <CheatEntry>
                   <ID>1584</ID>
                   <Description>"IB Memorial Park Middle"</Description>
-                  <LastState Value="0" RealAddress="11775688"/>
+                  <LastState Value="1" RealAddress="0DFBB060"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12378,7 +12436,7 @@
                 <CheatEntry>
                   <ID>1585</ID>
                   <Description>"Park Bellflower"</Description>
-                  <LastState Value="0" RealAddress="11775AB8"/>
+                  <LastState Value="1" RealAddress="0DFBB490"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12394,7 +12452,7 @@
                 <CheatEntry>
                   <ID>1586</ID>
                   <Description>"Askorn move to grave?"</Description>
-                  <LastState Value="0" RealAddress="117759C8"/>
+                  <LastState Value="0" RealAddress="0DFBB3A0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12410,7 +12468,7 @@
                 <CheatEntry>
                   <ID>1587</ID>
                   <Description>"Askorn spoken to at Grave (disappears after you leave screen)"</Description>
-                  <LastState Value="0" RealAddress="11775C28"/>
+                  <LastState Value="0" RealAddress="0DFBB600"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12426,7 +12484,7 @@
                 <CheatEntry>
                   <ID>1588</ID>
                   <Description>"Park Cinder Chambers backdoor"</Description>
-                  <LastState Value="0" RealAddress="11775B58"/>
+                  <LastState Value="1" RealAddress="0DFBB530"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12442,7 +12500,7 @@
                 <CheatEntry>
                   <ID>1589</ID>
                   <Description>"Vit Fragment Park"</Description>
-                  <LastState Value="0" RealAddress="11775B98"/>
+                  <LastState Value="0" RealAddress="0DFBB570"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12467,7 +12525,7 @@
                 <CheatEntry>
                   <ID>1591</ID>
                   <Description>"IB Chambers Top"</Description>
-                  <LastState Value="0" RealAddress="117755D8"/>
+                  <LastState Value="1" RealAddress="0DFBAFB0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12483,7 +12541,7 @@
                 <CheatEntry>
                   <ID>1592</ID>
                   <Description>"Chambers Bell Warp"</Description>
-                  <LastState Value="0" RealAddress="11775E68"/>
+                  <LastState Value="1" RealAddress="0DFBB840"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12499,7 +12557,7 @@
                 <CheatEntry>
                   <ID>1593</ID>
                   <Description>"Spider Merchant!"</Description>
-                  <LastState Value="0" RealAddress="11775B38"/>
+                  <LastState Value="0" RealAddress="0DFBB510"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12515,7 +12573,7 @@
                 <CheatEntry>
                   <ID>1594</ID>
                   <Description>"No Idea,Spider Merchant related?"</Description>
-                  <LastState Value="0" RealAddress="11775DC8"/>
+                  <LastState Value="2" RealAddress="0DFBB7A0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12531,7 +12589,7 @@
                 <CheatEntry>
                   <ID>1595</ID>
                   <Description>"Dead Arsonist"</Description>
-                  <LastState Value="0" RealAddress="11775CB8"/>
+                  <LastState Value="1" RealAddress="0DFBB690"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12547,7 +12605,7 @@
                 <CheatEntry>
                   <ID>1596</ID>
                   <Description>"Pocket Incensory"</Description>
-                  <LastState Value="0" RealAddress="11775CC8"/>
+                  <LastState Value="1" RealAddress="0DFBB6A0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12563,7 +12621,7 @@
                 <CheatEntry>
                   <ID>1597</ID>
                   <Description>"Said Yes to Cath"</Description>
-                  <LastState Value="0" RealAddress="11775828"/>
+                  <LastState Value="0" RealAddress="0DFBB200"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12579,7 +12637,7 @@
                 <CheatEntry>
                   <ID>1598</ID>
                   <Description>"Crest Fragment Arsonist (Dash)"</Description>
-                  <LastState Value="0" RealAddress="117758A8"/>
+                  <LastState Value="1" RealAddress="0DFBB280"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12595,7 +12653,7 @@
                 <CheatEntry>
                   <ID>1599</ID>
                   <Description>"Chambers Blowing Up Wall"</Description>
-                  <LastState Value="0" RealAddress="11775C78"/>
+                  <LastState Value="1" RealAddress="0DFBB650"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12611,7 +12669,7 @@
                 <CheatEntry>
                   <ID>1600</ID>
                   <Description>"Chambers Hidden Wall Far Down"</Description>
-                  <LastState Value="0" RealAddress="11775D78"/>
+                  <LastState Value="1" RealAddress="0DFBB750"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12627,7 +12685,7 @@
                 <CheatEntry>
                   <ID>1601</ID>
                   <Description>"IB Chambers Lower"</Description>
-                  <LastState Value="0" RealAddress="117755E8"/>
+                  <LastState Value="1" RealAddress="0DFBAFC0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12643,7 +12701,7 @@
                 <CheatEntry>
                   <ID>1602</ID>
                   <Description>"Vit Fragment Chambers Lower"</Description>
-                  <LastState Value="0" RealAddress="11775BA8"/>
+                  <LastState Value="1" RealAddress="0DFBB580"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12659,7 +12717,7 @@
                 <CheatEntry>
                   <ID>1603</ID>
                   <Description>"Cinder Key"</Description>
-                  <LastState Value="0" RealAddress="11775C88"/>
+                  <LastState Value="1" RealAddress="0DFBB660"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12675,7 +12733,7 @@
                 <CheatEntry>
                   <ID>1604</ID>
                   <Description>"IB Chambers Hidden Ceiling"</Description>
-                  <LastState Value="0" RealAddress="117755C8"/>
+                  <LastState Value="0" RealAddress="0DFBAFA0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12691,7 +12749,7 @@
                 <CheatEntry>
                   <ID>1605</ID>
                   <Description>"Chambers Ball Switch Room Door"</Description>
-                  <LastState Value="0" RealAddress="11775C98"/>
+                  <LastState Value="0" RealAddress="0DFBB670"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12707,7 +12765,7 @@
                 <CheatEntry>
                   <ID>1606</ID>
                   <Description>"Vit Fragment Chambers Lever Room"</Description>
-                  <LastState Value="0" RealAddress="11775478"/>
+                  <LastState Value="0" RealAddress="0DFBAE50"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12723,7 +12781,7 @@
                 <CheatEntry>
                   <ID>1607</ID>
                   <Description>"Chambers Ball Switch"</Description>
-                  <LastState Value="0" RealAddress="11775B48"/>
+                  <LastState Value="0" RealAddress="0DFBB520"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12748,7 +12806,7 @@
                 <CheatEntry>
                   <ID>1609</ID>
                   <Description>"Ladder Boss Chest (50)"</Description>
-                  <LastState Value="0" RealAddress="11775AE8"/>
+                  <LastState Value="0" RealAddress="0DFBB4C0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12764,7 +12822,7 @@
                 <CheatEntry>
                   <ID>1610</ID>
                   <Description>"Monastery Bell Warp"</Description>
-                  <LastState Value="0" RealAddress="11775E38"/>
+                  <LastState Value="1" RealAddress="0DFBB810"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12780,7 +12838,7 @@
                 <CheatEntry>
                   <ID>1611</ID>
                   <Description>"Monastery Key"</Description>
-                  <LastState Value="0" RealAddress="11775538"/>
+                  <LastState Value="1" RealAddress="0DFBAF10"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12796,7 +12854,7 @@
                 <CheatEntry>
                   <ID>1612</ID>
                   <Description>"Vit Fragment Cat Lady Area"</Description>
-                  <LastState Value="0" RealAddress="11775438"/>
+                  <LastState Value="1" RealAddress="0DFBAE10"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12812,7 +12870,7 @@
                 <CheatEntry>
                   <ID>1613</ID>
                   <Description>"Why is this 80?"</Description>
-                  <LastState Value="0" RealAddress="117756B8"/>
+                  <LastState Value="80" RealAddress="0DFBB090"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12828,7 +12886,7 @@
                 <CheatEntry>
                   <ID>1614</ID>
                   <Description>"Monastery Tainted Missive Pickup"</Description>
-                  <LastState Value="0" RealAddress="117756F8"/>
+                  <LastState Value="1" RealAddress="0DFBB0D0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12844,7 +12902,7 @@
                 <CheatEntry>
                   <ID>1615</ID>
                   <Description>"Monastery Priest miniboss"</Description>
-                  <LastState Value="0" RealAddress="117757B8"/>
+                  <LastState Value="0" RealAddress="0DFBB190"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12860,7 +12918,7 @@
                 <CheatEntry>
                   <ID>1616</ID>
                   <Description>"Monastery Bell Chest (12)"</Description>
-                  <LastState Value="0" RealAddress="11775748"/>
+                  <LastState Value="1" RealAddress="0DFBB120"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12876,7 +12934,7 @@
                 <CheatEntry>
                   <ID>1617</ID>
                   <Description>"Monastery Fennel Door Unlock"</Description>
-                  <LastState Value="0" RealAddress="11775718"/>
+                  <LastState Value="1" RealAddress="0DFBB0F0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12892,7 +12950,7 @@
                 <CheatEntry>
                   <ID>1618</ID>
                   <Description>"Fennel Hidden Wall"</Description>
-                  <LastState Value="0" RealAddress="117754B8"/>
+                  <LastState Value="1" RealAddress="0DFBAE90"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12908,7 +12966,7 @@
                 <CheatEntry>
                   <ID>1619</ID>
                   <Description>"IB Fennel Hidden 1"</Description>
-                  <LastState Value="0" RealAddress="11775588"/>
+                  <LastState Value="1" RealAddress="0DFBAF60"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12924,7 +12982,7 @@
                 <CheatEntry>
                   <ID>1620</ID>
                   <Description>"Soft Tissue"</Description>
-                  <LastState Value="0" RealAddress="11775848"/>
+                  <LastState Value="1" RealAddress="0DFBB220"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12940,7 +12998,7 @@
                 <CheatEntry>
                   <ID>1621</ID>
                   <Description>"IB Fennel Hidden 2"</Description>
-                  <LastState Value="0" RealAddress="11775668"/>
+                  <LastState Value="1" RealAddress="0DFBB040"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12956,7 +13014,7 @@
                 <CheatEntry>
                   <ID>1622</ID>
                   <Description>"Fennel Death"</Description>
-                  <LastState Value="0" RealAddress="117756A8"/>
+                  <LastState Value="1" RealAddress="0DFBB080"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12972,7 +13030,7 @@
                 <CheatEntry>
                   <ID>1623</ID>
                   <Description>"Fennel Tainted Missive"</Description>
-                  <LastState Value="0" RealAddress="11775548"/>
+                  <LastState Value="1" RealAddress="0DFBAF20"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -12988,7 +13046,7 @@
                 <CheatEntry>
                   <ID>1624</ID>
                   <Description>"Crest Fragment (Bow Level)"</Description>
-                  <LastState Value="0" RealAddress="11775878"/>
+                  <LastState Value="1" RealAddress="0DFBB250"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13004,7 +13062,7 @@
                 <CheatEntry>
                   <ID>1625</ID>
                   <Description>"Unlock Choir Fight"</Description>
-                  <LastState Value="0" RealAddress="11775C58"/>
+                  <LastState Value="1" RealAddress="0DFBB630"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13020,7 +13078,7 @@
                 <CheatEntry>
                   <ID>1626</ID>
                   <Description>"Choir Dead"</Description>
-                  <LastState Value="0" RealAddress="11775978"/>
+                  <LastState Value="0" RealAddress="0DFBB350"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13036,7 +13094,7 @@
                 <CheatEntry>
                   <ID>1627</ID>
                   <Description>"Bloodstained Tissue"</Description>
-                  <LastState Value="0" RealAddress="11775988"/>
+                  <LastState Value="0" RealAddress="0DFBB360"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13061,7 +13119,7 @@
                 <CheatEntry>
                   <ID>1629</ID>
                   <Description>"Pinacotheca Bell Warp"</Description>
-                  <LastState Value="0" RealAddress="11775E78"/>
+                  <LastState Value="1" RealAddress="0DFBB850"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13077,7 +13135,7 @@
                 <CheatEntry>
                   <ID>1630</ID>
                   <Description>"Receptionist Dialogue"</Description>
-                  <LastState Value="0" RealAddress="11775A08"/>
+                  <LastState Value="0" RealAddress="0DFBB3E0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13093,7 +13151,7 @@
                 <CheatEntry>
                   <ID>1631</ID>
                   <Description>"Vit Fragment Pina 1"</Description>
-                  <LastState Value="0" RealAddress="11775BB8"/>
+                  <LastState Value="1" RealAddress="0DFBB590"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13109,7 +13167,7 @@
                 <CheatEntry>
                   <ID>1632</ID>
                   <Description>"Pina Music Box Wall"</Description>
-                  <LastState Value="0" RealAddress="11775D88"/>
+                  <LastState Value="0" RealAddress="0DFBB760"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13125,7 +13183,7 @@
                 <CheatEntry>
                   <ID>1633</ID>
                   <Description>"Vit Fragment Pina Midpoint"</Description>
-                  <LastState Value="0" RealAddress="11775BC8"/>
+                  <LastState Value="0" RealAddress="0DFBB5A0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13141,7 +13199,7 @@
                 <CheatEntry>
                   <ID>1634</ID>
                   <Description>"Vit Frag Pina BIG BAKA"</Description>
-                  <LastState Value="0" RealAddress="11775BD8"/>
+                  <LastState Value="1" RealAddress="0DFBB5B0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13157,7 +13215,7 @@
                 <CheatEntry>
                   <ID>1635</ID>
                   <Description>"IB Skeleton Room"</Description>
-                  <LastState Value="0" RealAddress="117755F8"/>
+                  <LastState Value="1" RealAddress="0DFBAFD0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13173,7 +13231,7 @@
                 <CheatEntry>
                   <ID>1636</ID>
                   <Description>"IB Konami Room"</Description>
-                  <LastState Value="0" RealAddress="11775628"/>
+                  <LastState Value="0" RealAddress="0DFBB000"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13189,7 +13247,7 @@
                 <CheatEntry>
                   <ID>1637</ID>
                   <Description>"Pina Elevator"</Description>
-                  <LastState Value="0" RealAddress="11775D58"/>
+                  <LastState Value="1" RealAddress="0DFBB730"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13205,7 +13263,7 @@
                 <CheatEntry>
                   <ID>1638</ID>
                   <Description>"Pina Switch 1"</Description>
-                  <LastState Value="0" RealAddress="11775D48"/>
+                  <LastState Value="0" RealAddress="0DFBB720"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13221,7 +13279,7 @@
                 <CheatEntry>
                   <ID>1639</ID>
                   <Description>"Pina Switch 2"</Description>
-                  <LastState Value="0" RealAddress="11775D38"/>
+                  <LastState Value="0" RealAddress="0DFBB710"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13237,7 +13295,7 @@
                 <CheatEntry>
                   <ID>1640</ID>
                   <Description>"IB Pina Switches"</Description>
-                  <LastState Value="0" RealAddress="11775608"/>
+                  <LastState Value="1" RealAddress="0DFBAFE0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13253,7 +13311,7 @@
                 <CheatEntry>
                   <ID>1641</ID>
                   <Description>"Pina Switch 3"</Description>
-                  <LastState Value="0" RealAddress="11775D28"/>
+                  <LastState Value="0" RealAddress="0DFBB700"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13269,7 +13327,7 @@
                 <CheatEntry>
                   <ID>1642</ID>
                   <Description>"Pina Chest 1 (100)"</Description>
-                  <LastState Value="0" RealAddress="11775CF8"/>
+                  <LastState Value="0" RealAddress="0DFBB6D0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13285,7 +13343,7 @@
                 <CheatEntry>
                   <ID>1643</ID>
                   <Description>"Pina Chest 2 (100)"</Description>
-                  <LastState Value="0" RealAddress="11775CE8"/>
+                  <LastState Value="0" RealAddress="0DFBB6C0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13301,7 +13359,7 @@
                 <CheatEntry>
                   <ID>1644</ID>
                   <Description>"Black Sachet"</Description>
-                  <LastState Value="0" RealAddress="11775CD8"/>
+                  <LastState Value="0" RealAddress="0DFBB6B0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13317,7 +13375,7 @@
                 <CheatEntry>
                   <ID>1645</ID>
                   <Description>"Sealed Wind"</Description>
-                  <LastState Value="0" RealAddress="11775D68"/>
+                  <LastState Value="1" RealAddress="0DFBB740"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13333,7 +13391,7 @@
                 <CheatEntry>
                   <ID>1646</ID>
                   <Description>"Pina Midpoint Shortcut"</Description>
-                  <LastState Value="0" RealAddress="11775D08"/>
+                  <LastState Value="1" RealAddress="0DFBB6E0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13349,7 +13407,7 @@
                 <CheatEntry>
                   <ID>1647</ID>
                   <Description>"Lupiar Lever"</Description>
-                  <LastState Value="0" RealAddress="11775C58"/>
+                  <LastState Value="1" RealAddress="0DFBB630"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13365,7 +13423,7 @@
                 <CheatEntry>
                   <ID>1648</ID>
                   <Description>"Lupiar Shortcut"</Description>
-                  <LastState Value="0" RealAddress="11775D18"/>
+                  <LastState Value="0" RealAddress="0DFBB6F0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13381,7 +13439,7 @@
                 <CheatEntry>
                   <ID>1649</ID>
                   <Description>"L+M Death"</Description>
-                  <LastState Value="0" RealAddress="11775938"/>
+                  <LastState Value="1" RealAddress="0DFBB310"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13397,7 +13455,7 @@
                 <CheatEntry>
                   <ID>1650</ID>
                   <Description>"Heavy Arrows"</Description>
-                  <LastState Value="0" RealAddress="11775948"/>
+                  <LastState Value="1" RealAddress="0DFBB320"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13422,7 +13480,7 @@
                 <CheatEntry>
                   <ID>1652</ID>
                   <Description>"Cat Owl Dialogue"</Description>
-                  <LastState Value="0" RealAddress="11775C38"/>
+                  <LastState Value="0" RealAddress="0DFBB610"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13438,7 +13496,7 @@
                 <CheatEntry>
                   <ID>1653</ID>
                   <Description>"Castle Drawbridge"</Description>
-                  <LastState Value="0" RealAddress="11775B78"/>
+                  <LastState Value="0" RealAddress="0DFBB550"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13454,7 +13512,7 @@
                 <CheatEntry>
                   <ID>1654</ID>
                   <Description>"IB Castle 1"</Description>
-                  <LastState Value="0" RealAddress="11775648"/>
+                  <LastState Value="0" RealAddress="0DFBB020"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13470,7 +13528,7 @@
                 <CheatEntry>
                   <ID>1655</ID>
                   <Description>"Castle Bell Warp"</Description>
-                  <LastState Value="0" RealAddress="11775E88"/>
+                  <LastState Value="1" RealAddress="0DFBB860"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13486,7 +13544,7 @@
                 <CheatEntry>
                   <ID>1656</ID>
                   <Description>"Castle Bell Ladder Shortcut"</Description>
-                  <LastState Value="0" RealAddress="11775B88"/>
+                  <LastState Value="1" RealAddress="0DFBB560"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13502,7 +13560,7 @@
                 <CheatEntry>
                   <ID>1657</ID>
                   <Description>"Vit Fragment Castle 1"</Description>
-                  <LastState Value="0" RealAddress="11775BE8"/>
+                  <LastState Value="0" RealAddress="0DFBB5C0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13518,7 +13576,7 @@
                 <CheatEntry>
                   <ID>1658</ID>
                   <Description>"Bellflower"</Description>
-                  <LastState Value="0" RealAddress="117759A8"/>
+                  <LastState Value="0" RealAddress="0DFBB380"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13534,7 +13592,7 @@
                 <CheatEntry>
                   <ID>1659</ID>
                   <Description>"Vit Fragment Castle 2"</Description>
-                  <LastState Value="0" RealAddress="11775C08"/>
+                  <LastState Value="0" RealAddress="0DFBB5E0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13550,7 +13608,7 @@
                 <CheatEntry>
                   <ID>1660</ID>
                   <Description>"Castle Chest (200)"</Description>
-                  <LastState Value="0" RealAddress="11775DD8"/>
+                  <LastState Value="0" RealAddress="0DFBB7B0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13566,7 +13624,7 @@
                 <CheatEntry>
                   <ID>1661</ID>
                   <Description>"Talked to Kath"</Description>
-                  <LastState Value="0" RealAddress="11775958"/>
+                  <LastState Value="0" RealAddress="0DFBB330"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13582,7 +13640,7 @@
                 <CheatEntry>
                   <ID>1662</ID>
                   <Description>"Yes to Kath"</Description>
-                  <LastState Value="0" RealAddress="11775E98"/>
+                  <LastState Value="0" RealAddress="0DFBB870"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13598,7 +13656,7 @@
                 <CheatEntry>
                   <ID>1663</ID>
                   <Description>"Passiflora Cath"</Description>
-                  <LastState Value="0" RealAddress="11775968"/>
+                  <LastState Value="0" RealAddress="0DFBB340"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13614,7 +13672,7 @@
                 <CheatEntry>
                   <ID>1664</ID>
                   <Description>"Hidden Wall post Cath"</Description>
-                  <LastState Value="0" RealAddress="11775DA8"/>
+                  <LastState Value="0" RealAddress="0DFBB780"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13630,7 +13688,7 @@
                 <CheatEntry>
                   <ID>1665</ID>
                   <Description>"Vit Fragment post Cath"</Description>
-                  <LastState Value="0" RealAddress="11775BF8"/>
+                  <LastState Value="0" RealAddress="0DFBB5D0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13646,7 +13704,7 @@
                 <CheatEntry>
                   <ID>1666</ID>
                   <Description>"Clone Angel Deadf"</Description>
-                  <LastState Value="0" RealAddress="11775918"/>
+                  <LastState Value="0" RealAddress="0DFBB2F0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13662,7 +13720,7 @@
                 <CheatEntry>
                   <ID>1667</ID>
                   <Description>"IB Top of Castle"</Description>
-                  <LastState Value="0" RealAddress="11775658"/>
+                  <LastState Value="0" RealAddress="0DFBB030"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13687,7 +13745,7 @@
                 <CheatEntry>
                   <ID>1669</ID>
                   <Description>"How many Bellflowers should be written to savefile"</Description>
-                  <LastState Value="0" RealAddress="117756C8"/>
+                  <LastState Value="2" RealAddress="0DFBB0A0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13703,7 +13761,7 @@
                 <CheatEntry>
                   <ID>1670</ID>
                   <Description>"Tainted Missive Charges to save to file"</Description>
-                  <LastState Value="0" RealAddress="117756D8"/>
+                  <LastState Value="4" RealAddress="0DFBB0B0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13719,7 +13777,7 @@
                 <CheatEntry>
                   <ID>1671</ID>
                   <Description>"Passiflora amount to write to save"</Description>
-                  <LastState Value="0" RealAddress="11775CA8"/>
+                  <LastState Value="0" RealAddress="0DFBB680"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13735,7 +13793,7 @@
                 <CheatEntry>
                   <ID>1672</ID>
                   <Description>"Enemies Killed"</Description>
-                  <LastState Value="0" RealAddress="11775768"/>
+                  <LastState Value="14" RealAddress="0DFBB140"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13751,7 +13809,7 @@
                 <CheatEntry>
                   <ID>1673</ID>
                   <Description>"Healt Fragments Collected"</Description>
-                  <LastState Value="0" RealAddress="11775DB8"/>
+                  <LastState Value="11" RealAddress="0DFBB790"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13767,7 +13825,7 @@
                 <CheatEntry>
                   <ID>1674</ID>
                   <Description>"Ivory Bug Count"</Description>
-                  <LastState Value="0" RealAddress="11775698"/>
+                  <LastState Value="12" RealAddress="0DFBB070"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13783,7 +13841,7 @@
                 <CheatEntry>
                   <ID>1675</ID>
                   <Description>"Karst City Merchant?"</Description>
-                  <LastState Value="0" RealAddress="11775738"/>
+                  <LastState Value="1" RealAddress="0DFBB110"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13799,7 +13857,7 @@
                 <CheatEntry>
                   <ID>1676</ID>
                   <Description>"Crest Fragment Counter"</Description>
-                  <LastState Value="0" RealAddress="117758C8"/>
+                  <LastState Value="4" RealAddress="0DFBB2A0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13815,7 +13873,7 @@
                 <CheatEntry>
                   <ID>1677</ID>
                   <Description>"IB merchant spoken to"</Description>
-                  <LastState Value="0" RealAddress="11775A48"/>
+                  <LastState Value="1" RealAddress="0DFBB420"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13831,7 +13889,7 @@
                 <CheatEntry>
                   <ID>1678</ID>
                   <Description>"1 bug delivered (10)"</Description>
-                  <LastState Value="0" RealAddress="11775A58"/>
+                  <LastState Value="0" RealAddress="0DFBB430"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13847,7 +13905,7 @@
                 <CheatEntry>
                   <ID>1679</ID>
                   <Description>"5 bugs delivered (200)"</Description>
-                  <LastState Value="0" RealAddress="11775A68"/>
+                  <LastState Value="0" RealAddress="0DFBB440"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13863,7 +13921,7 @@
                 <CheatEntry>
                   <ID>1680</ID>
                   <Description>"10 bugs delivered (bellflower)"</Description>
-                  <LastState Value="0" RealAddress="11775A78"/>
+                  <LastState Value="0" RealAddress="0DFBB450"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13879,7 +13937,7 @@
                 <CheatEntry>
                   <ID>1681</ID>
                   <Description>"15 bugs delivered (Hazel Badge)"</Description>
-                  <LastState Value="0" RealAddress="11775A88"/>
+                  <LastState Value="0" RealAddress="0DFBB460"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13895,7 +13953,7 @@
                 <CheatEntry>
                   <ID>1682</ID>
                   <Description>"20 bugs delivered (Passiflora)"</Description>
-                  <LastState Value="0" RealAddress="11775A98"/>
+                  <LastState Value="0" RealAddress="0DFBB470"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13911,7 +13969,7 @@
                 <CheatEntry>
                   <ID>1683</ID>
                   <Description>"Small Coin (Perfect Queen)"</Description>
-                  <LastState Value="0" RealAddress="117758F8"/>
+                  <LastState Value="0" RealAddress="0DFBB2D0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>Double</VariableType>
                   <Address>"MomodoraRUtM.exe"+2379600</Address>
@@ -13932,7 +13990,7 @@
     </CheatEntry>
   </CheatEntries>
   <CheatCodes>
-    <CodeEntry>
+    <CodeEntry Color="20000000">
       <Description>Change of fstp qword ptr [ebp+00]</Description>
       <AddressString>MomodoraRUtM.exe+5F027A</AddressString>
       <Before>
@@ -13955,7 +14013,7 @@
         <Byte>83</Byte>
       </After>
     </CodeEntry>
-    <CodeEntry>
+    <CodeEntry Color="20000000">
       <Description>Change of mov byte ptr [ebp+0F],00</Description>
       <AddressString>MomodoraRUtM.exe+5F0276</AddressString>
       <Before>
@@ -13979,7 +14037,7 @@
         <Byte>5F</Byte>
       </After>
     </CodeEntry>
-    <CodeEntry>
+    <CodeEntry Color="20000000">
       <Description>Change of fld qword ptr [esi]</Description>
       <AddressString>MomodoraRUtM.exe+5F0274</AddressString>
       <Before>
@@ -14001,7 +14059,7 @@
         <Byte>DD</Byte>
       </After>
     </CodeEntry>
-    <CodeEntry>
+    <CodeEntry Color="20000000">
       <Description>Change of jne MomodoraRUtM.exe+5F02DB</Description>
       <AddressString>MomodoraRUtM.exe+5F0263</AddressString>
       <Before>
