@@ -330,121 +330,18 @@ namespace LiveSplit.UI.Components
         List<List<int>> shopOffsets;
         List<List<bool>> hasBoughtItem;
         List<List<bool>> hasSavedBoughtItem;
+        List<List<int>> pointerValues;
         List<string> itemNames = new List<string>
         {
-            "",
-            "Adorned Ring",
-            "Necklace of Sacrifice",
-            "",
-            "Bellflower",
-            "Astral Charm",
-            "Edea's Pearl",
-            "Dull Pearl",
-            "Red Ring",
-            "Magnet Stone",
-            "Rotten Bellflower",
-            "Faerie Tear",
-            "",
-            "Impurity Flask",
-            "Passiflora",
-            "Crystal Seed",
-            "Medal of Equivalence",
-            "Tainted Missive",
-            "Black Sachet",
-            "",
-            "",
-            "Ring of Candor",
             "Small Coin",
-            "Backman Patch",
-            "Cat Sphere",
-            "Hazel Badge",
-            "Torn Branch",
-            "Monastery Key",
-            "",
             "Karst Crest",
-            "",
-            "Clarity Shard",
-            "Dirty Shroom",
-            "",
-            "IvoryBug",
-            "Violet Sprite",
-            "Soft Tissue",
-            "Garden Key",
-            "Sparse Thread",
-            "Blessing Charm",
-            "Heavy Arrows",
-            "Blodstained Tissue",
-            "Maple Leaf",
-            "Fresh Spring Leaf",
-            "Pocket Incensory",
             "Birthstone",
-            "Quick Arrows",
-            "Drilling Arrows",
-            "Sealed Wind",
-            "Cinder Key",
-            "CF(bow lvl charge)",
-            "CF(Charging speed)",
-            "CF(Dash)",
-            "CF(Warp)",
-            "Vitality Fragment",
         };
         List<string> itemEffects = new List<string>
         {
-            "",
-            "Passive Effect: increases invincibility frames and defense.",
-            "Passive Effect: increases attack by 100% when in low health.",
-            "",
-            "Active Effect: restores a small amount of HP per use.",
-            "Passive Effect: sometimes enemies will drop twice as much munny.",
-            "Passive Effect: grants poison properties to your arrows.",
-            "Passive Effect: grants poison properties to your arrows.",
-            "Passive Effect: restores a small amount of HP per kill, but enemies won't drop munny.",
-            "Passive Effect: attracts munny stars.",
-            "Active Effect: inflicts poison on the user.",
-            "Passive Effect: raises user's resistance to status ailments.",
-            "",
-            "Passive Effect: restores HP whenever user is poisoned.",
-            "Active Effect: fully restores the user's HP.",
-            "Active Effect: temporarily increases attack by 50%.",
-            "Passive Effect: slowly restores HP.",
-            "Active Effect: temporarily increases attack by 100%, at the cost of HP.",
-            "Passive Effect: heavily increases attack power, at the risk of losing HP.",
-            "",
-            "",
-            "Passive Effect: emits a sound when near secrecy.",
             "Key Item.",
-            "Active Effect: summons several Bak blocks.",
-            "Active Effect: alternates between cat and human forms.",
-            "Key Item.",
-            "Passive Effect: restores a small amount of HP per kill.",
-            "Key Item.",
-            "",
             "Key Item. Allows warping when praying.",
-            "",
-            "Active Effect: increases visibility in dark areas.",
             "Key Item.",
-            "",
-            "Key Item.",
-            "Active Effect: casts protective dark sorcery.",
-            "Active Effect: creates an artificial healing zone.",
-            "Key Item.",
-            "Active Effect: casts a powerful burst of energy.",
-            "Active Effect: casts protective light sorcery.",
-            "Passive Effect: increases power of arrows.",
-            "Active Effect: casts offensive sorcery.",
-            "Key Item.",
-            "Key Item.",
-            "Passive Effect: adds flame damage to your attacks.",
-            "Key Item.",
-            "Passive Effect: drastically increases speed of arrows.",
-            "Passive Effect: arrows pierce through enemies.",
-            "Active Effect: casts wind sorcery.",
-            "Key Item.",
-            "Key Item. Grants a new bow charge level.",
-            "Key Item. Increases arrow charging speed.",
-            "Key Item. Allows mid-air dodging.",
-            "Key Item. Allows warping when praying.",
-            "Key Item. Inreases maximum health.",
         };
 
         List<double> warpsActive;
@@ -600,6 +497,12 @@ namespace LiveSplit.UI.Components
                     new List<bool> { false, false },
                     new List<bool> { false, false, false },
                     new List<bool> { false, false, false }
+                };
+                pointerValues = new List<List<int>>
+                {
+                    new List<int> { },
+                    new List<int> { },
+                    new List<int> { }
                 };
                 //Grove, Karst City, Monsatery, Grave, Memorial Park, Cinder Chambers, Pinacotheca, Karst Castle
                 warpsActive = new List<double> { 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -1554,9 +1457,8 @@ namespace LiveSplit.UI.Components
             if (shopLocations.Contains(room))// If player is in a shop room
             {
                 List<int> shopItemsAux = shopItems[shopLocations.IndexOf(room)];// Get list storing what items correspond to the ones in the shop
-                int idPos = 0;
+                int idPos = 0, itemAux;
                 int position;
-                foreach (var item in shopItemsAux) Debug.WriteLine("Items sold at shop: " + item);
 
                 int invSize = gameProc.ReadValue<int>(totalItemsPointer);// Get inventory size
                 Debug.WriteLine("Items " + invSize);
@@ -1568,11 +1470,12 @@ namespace LiveSplit.UI.Components
                 if (placeholderId == 45) idPos = 2;
 
                 Debug.WriteLine("ID bought: " + shopItemsAux[idPos]);
-                for (int i = 0; i < shopItems.Count(); i++)// Update value of hasBoughtItem in all shops that sell it
+                itemAux = originalShopItems[shopLocations.IndexOf(room)][idPos];// Get what is the id that would have been bought
+                for (int i = 0; i < originalShopItems.Count(); i++)// Update value of hasBoughtItem in all shops that "sell" itemAux
                 {
-                    if (shopItems[i].Contains(shopItemsAux[idPos]))
+                    if (originalShopItems[i].Contains(itemAux))
                     {
-                        position = shopItems[i].IndexOf(shopItemsAux[idPos]);
+                        position = originalShopItems[i].IndexOf(itemAux);
                         hasBoughtItem[i][position] = true;
                     }
                 }
@@ -1629,33 +1532,52 @@ namespace LiveSplit.UI.Components
 
         private void setShopItems(int room)
         {
-            IntPtr pointer;
+            IntPtr pointer, itemPointer;
             List<int> list = shopOffsets[shopLocations.IndexOf(room)];
             List<int> shopItemsAux = shopItems[shopLocations.IndexOf(room)];// Get list of items of the current shop
+            int id = 22, pValue;
             byte[] bytes;
-            int id = 22;
-            string text;
 
+            foreach (var item in shopItemsAux) Debug.WriteLine("Items sold at shop: " + item);
             for (int i = 0; i < list.Count(); i++)
             {
                 if (i == 0) id = 22;
                 if (i == 1) id = 29;
                 if (i == 2) id = 45;
-                
+
                 pointer = IntPtr.Add((IntPtr)new DeepPointer(shopPointer).Deref<Int32>(gameProc), 0x10 * list[i]);// Get pointer to shop item
                 gameProc.WriteValue<double>(pointer, id);// Set shop placeholder to id
 
-                text = itemNames[shopItemsAux[i]];// Get name of the item that will get added late
-                bytes = Encoding.ASCII.GetBytes(text);
-                pointer = (IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * id) + 0x10), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item name
-                gameProc.WriteBytes(pointer, bytes);// Set name of placeholder to the one that will get added later
-                gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
+                // Vitality Fragment doesnt have a name or effect so we have to write to memory (trying to write as few bytes as possible)
+                if (shopItemsAux[i] == 54)
+                {
+                    double[] healthChange = { 0, 2, 1, 1 };
+                    double difficulty = gameProc.ReadValue<double>(difficultyPointer);
 
-                text = itemEffects[shopItemsAux[i]];// Get effect of the item that will get added late
-                bytes = Encoding.ASCII.GetBytes(text);
-                pointer = (IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * id) + 0x20), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item effect
-                gameProc.WriteBytes(pointer, bytes);// Set effect of placeholder to the one that will get added later
-                gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
+                    bytes = Encoding.ASCII.GetBytes("Vit. Frag.");
+                    pointer = (IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * id) + 0x10), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item name
+                    gameProc.WriteBytes(pointer, bytes);// Set name of placeholder to the one that will get added later
+                    gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
+
+                    bytes = Encoding.ASCII.GetBytes("+" + healthChange[(int)difficulty - 1] + " Max Hp");
+                    pointer = (IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * id) + 0x20), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item effect
+                    gameProc.WriteBytes(pointer, bytes);// Set effect of placeholder to the one that will get added later
+                    gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
+                }
+                else
+                {
+                    pointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * id) + 0x10) }).Deref<Int32>(gameProc), 0x0);// Get pointer of placeholder
+                    pointerValues[i].Add(gameProc.ReadValue<int>(pointer));// Save value of original pointer
+                    itemPointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * shopItemsAux[i]) + 0x10) }).Deref<Int32>(gameProc), 0x0);// Get pointer of real item
+                    pValue = gameProc.ReadValue<int>(itemPointer);
+                    gameProc.WriteValue(pointer, pValue);// Make placeholder pointer point to the real item's name
+
+                    pointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * id) + 0x20) }).Deref<Int32>(gameProc), 0x0);// Get pointer of placeholder
+                    pointerValues[i].Add(gameProc.ReadValue<int>(pointer));// Save value of original pointer
+                    itemPointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * shopItemsAux[i]) + 0x20) }).Deref<Int32>(gameProc), 0x0);// Get pointer of real item
+                    pValue = gameProc.ReadValue<int>(itemPointer);
+                    gameProc.WriteValue(pointer, pValue);// Make placeholder pointer point to the real item's effect
+                }
             }
         }
 
@@ -1664,9 +1586,9 @@ namespace LiveSplit.UI.Components
             IntPtr pointer;
             List<int> list = shopOffsets[shopLocations.IndexOf(room)];
             List<int> shopItemsAux = originalShopItems[shopLocations.IndexOf(room)];// Get list of original items for the current shop
-            byte[] bytes;
+            List<int> shopItemsAux2 = shopItems[shopLocations.IndexOf(room)];// Get list of items of the current shop
             int id, idAux = 22;
-            string text;
+            byte[] bytes;
 
             for (int i = 0; i < list.Count(); i++)
             {
@@ -1675,20 +1597,30 @@ namespace LiveSplit.UI.Components
                 if (i == 2) idAux = 45;
                 id = shopItemsAux[i];
 
-                pointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x10 * list[i]);// Get pointer to shop item
-                gameProc.WriteValue<double>(pointer, (double)sourceIdMapping[id]);// Set shop item id to original one
-                
-                text = itemNames[idAux];// Get name of original placeholder
-                bytes = Encoding.ASCII.GetBytes(text);
-                pointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14, 0x0, ((0x60 * idAux) + 0x10), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item name
-                gameProc.WriteBytes(pointer, bytes);// Restore bytes
-                gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
+                // Vitality Fragment doesnt have a name or effect so we have to write to memory (trying to write as few bytes as possible)
+                if (shopItemsAux2[i] == 54)
+                {
+                    bytes = Encoding.ASCII.GetBytes(itemNames[i]);
+                    pointer = (IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * idAux) + 0x10), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item name
+                    gameProc.WriteBytes(pointer, bytes);// Restore name
+                    gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
 
-                text = itemEffects[idAux];// Get effect of original placeholder
-                bytes = Encoding.ASCII.GetBytes(text);
-                pointer = (IntPtr)new DeepPointer(0x230B134, new int[] { 0x14, 0x0, ((0x60 * idAux) + 0x20), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item effect
-                gameProc.WriteBytes(pointer, bytes);// Restore bytes
-                gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
+                    bytes = Encoding.ASCII.GetBytes(itemEffects[i]);
+                    pointer = (IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * idAux) + 0x20), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item effect
+                    gameProc.WriteBytes(pointer, bytes);// Restore effect
+                    gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
+                }
+                else
+                {
+                    pointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x10 * list[i]);// Get pointer to shop item
+                    gameProc.WriteValue<double>(pointer, (double)sourceIdMapping[id]);// Set shop item id to original one
+
+                    pointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * idAux) + 0x10) }).Deref<Int32>(gameProc), 0x0);// Get pointer of placeholder
+                    gameProc.WriteValue(pointer, pointerValues[i][0]);// Restore placeholder pointer value
+
+                    pointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * idAux) + 0x20) }).Deref<Int32>(gameProc), 0x0);// Get pointer of placeholder
+                    gameProc.WriteValue(pointer, pointerValues[i][1]);// Restore placeholder pointer value
+                }
             }
         }
 
@@ -1768,6 +1700,7 @@ namespace LiveSplit.UI.Components
         {
             RandomizerLabel.Font = settingsControl.OverrideTextFont ? settingsControl.TextFont : state.LayoutSettings.TextFont;
             RandomizerLabel.ForeColor = settingsControl.OverrideTextColor ? settingsControl.TextColor : state.LayoutSettings.TextColor;
+            RandomizerLabel.OutlineColor = settingsControl.OverrideTextColor ? settingsControl.OutlineColor : state.LayoutSettings.TextOutlineColor;
             RandomizerLabel.ShadowColor = settingsControl.OverrideTextColor ? settingsControl.ShadowColor : state.LayoutSettings.ShadowsColor;
 
             RandomizerLabel.VerticalAlignment = StringAlignment.Center;
@@ -1812,8 +1745,6 @@ namespace LiveSplit.UI.Components
         {
             if (VerifyProcessRunning() && randomizerRunning)
             {
-
-
                 inGameWatcher.Update(gameProc);
                 if (inGame) {
                     updateSpecialWatchers();
@@ -1857,13 +1788,13 @@ namespace LiveSplit.UI.Components
             crestFragmentWatcher.Update(gameProc);
             vitalityFragmentWatcher.Update(gameProc);
 
-            Debug.WriteLine("Updating item watchers");
+            /*Debug.WriteLine("Updating item watchers");
             Debug.WriteLine("VF: " + vitalityFragmentWatcher.Current + " " + vitalityFragmentWatcher.Old + " " + vitalityFragmentWatcher.Changed);
             Debug.WriteLine("IB: " + ivoryBugWatcher.Current + " " + ivoryBugWatcher.Old + " " + ivoryBugWatcher.Changed);
             Debug.WriteLine("CF: " + crestFragmentWatcher.Current + " " + crestFragmentWatcher.Old + " " + crestFragmentWatcher.Changed);
             Debug.WriteLine("bellflower: " + bellflowerWatcher.Current + " " + bellflowerWatcher.Old + " " + bellflowerWatcher.Changed);
             Debug.WriteLine("Passiflora: " + passifloraWatcher.Current + " " + passifloraWatcher.Old + " " + passifloraWatcher.Changed);
-            Debug.WriteLine("Missive: " + taintedMissiveWatcher.Current + " " + taintedMissiveWatcher.Old + " " + taintedMissiveWatcher.Changed);
+            Debug.WriteLine("Missive: " + taintedMissiveWatcher.Current + " " + taintedMissiveWatcher.Old + " " + taintedMissiveWatcher.Changed);*/
         }
 
         private void SetupVersionDifferences()
