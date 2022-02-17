@@ -314,8 +314,10 @@ namespace LiveSplit.UI.Components
 
         List<bool> hasChargeItem;
         List<bool> hasSavedChargeItem;
-        private bool hasPickedGreenLeaf;
-        private bool hasSavedPickedGreenLeaf;
+        private bool hasFoundGreenLeaf;
+        private bool hasSavedFoundGreenLeaf;
+        private bool hasBathedLeaf;
+        private bool hasSavedBathedLeaf;
 
         List<List<int>> doorLocations;
         private double unlocked;
@@ -575,8 +577,10 @@ namespace LiveSplit.UI.Components
                 hasChargeItem = new List<bool> { false, false, false };
                 hasSavedKey = new List<int> { 0, 0, 0 };
                 hasKey = new List<int> { 0, 0, 0 };
-                hasPickedGreenLeaf = false;
-                hasSavedPickedGreenLeaf = false;
+                hasBathedLeaf = false;
+                hasSavedBathedLeaf = false;
+                hasFoundGreenLeaf = false;
+                hasSavedFoundGreenLeaf = false;
                 hasBoughtItem = new List<List<bool>>
                 {
                     new List<bool> { false, false, false },
@@ -893,7 +897,8 @@ namespace LiveSplit.UI.Components
                         {
                             hasChargeItem[i] = hasSavedChargeItem[i];
                             hasKey[i] = hasSavedKey[i];
-                            hasPickedGreenLeaf = hasSavedPickedGreenLeaf;
+                            hasBathedLeaf = hasSavedBathedLeaf;
+                            hasFoundGreenLeaf = hasSavedFoundGreenLeaf;
                         }
                         for (int i = 0; i < hasBoughtItem.Count(); i++)
                         {
@@ -921,7 +926,8 @@ namespace LiveSplit.UI.Components
                         {
                             hasChargeItem[i] = hasSavedChargeItem[i];
                             hasKey[i] = hasSavedKey[i];
-                            hasPickedGreenLeaf = hasSavedPickedGreenLeaf;
+                            hasBathedLeaf = hasSavedBathedLeaf;
+                            hasFoundGreenLeaf = hasSavedFoundGreenLeaf;
                         }
                         for (int i = 0; i < hasBoughtItem.Count(); i++)
                         {
@@ -945,7 +951,8 @@ namespace LiveSplit.UI.Components
                         {
                             hasSavedChargeItem[i] = hasChargeItem[i];
                             hasSavedKey[i] = hasKey[i];
-                            hasSavedPickedGreenLeaf = hasPickedGreenLeaf;
+                            hasSavedBathedLeaf = hasBathedLeaf;
+                            hasSavedFoundGreenLeaf = hasFoundGreenLeaf;
                         }
                         for (int i = 0; i < hasBoughtItem.Count(); i++)
                         {
@@ -986,6 +993,7 @@ namespace LiveSplit.UI.Components
                 };
 
                 //This needs to be setup whenever entering a new room, currently only used for green leaf stuff and only active in levelID 82. 
+                //This is set up in the checkRoom function
                 playerYWatcher = new MemoryWatcher<double>(playerYPointer);
                 playerYWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
                 playerYWatcher.Enabled = false;
@@ -998,7 +1006,7 @@ namespace LiveSplit.UI.Components
                         if (playerYWatcher.Current > 176 && playerXPos > 410)
                             Debug.WriteLine("In area to remove green leaf");
                             //If the state of "has picked green leaf source" is different from "found green leaf" invert
-                            if (Convert.ToBoolean(pickedUpLeaf) != hasPickedGreenLeaf) gameProc.WriteValue<double>(potentialSourcesPointers[28], 1 - pickedUpLeaf);
+                            if (Convert.ToBoolean(pickedUpLeaf) != hasBathedLeaf) gameProc.WriteValue<double>(potentialSourcesPointers[28], 1 - pickedUpLeaf);
                         else { 
                             gameProc.WriteValue<double>(potentialSourcesPointers[28], pickedUpLeaf);
                             Debug.WriteLine("Restoring green leaf to found item");
@@ -1056,7 +1064,7 @@ namespace LiveSplit.UI.Components
                     int levelID = gameProc.ReadValue<int>(levelIDPointer);
                     if (current == 1 && sourceToLevelMapping[newSourceAddressIndex].Contains(levelID))
                     {
-                        hasPickedGreenLeaf = true;
+                        hasBathedLeaf = true;
                         newItem(giveItemID);
                     }
                 };
@@ -1174,6 +1182,7 @@ namespace LiveSplit.UI.Components
         private void addLeaf()
         {
             gameProc.WriteValue<double>(potentialSourcesPointers[28], 1);
+            hasFoundGreenLeaf = true;
             addItem((int)Items.FreshSpringLeaf);
         }
 
@@ -1438,7 +1447,7 @@ namespace LiveSplit.UI.Components
 
             #region Green Leaf logic
             //y/x pointers change each room, need to set it up again when entering the correct room
-            if(current == 82)
+            if (current == 82)
             {
                 switch (gameProc.MainModule.ModuleMemorySize)
                 {
@@ -1457,21 +1466,21 @@ namespace LiveSplit.UI.Components
                 playerYWatcher.Enabled = true;
                 playerYWatcher.OnChanged += (oldVal, currentVal) =>
                 {
-                    if (levelIDWatcher.Current == 82)
+                    double pickedUpLeaf = gameProc.ReadValue<double>(potentialSourcesPointers[28]);
+                    double playerXPos = gameProc.ReadValue<double>(playerXPointer);
+                    if (playerYWatcher.Current > 176 && playerXPos > 410)
                     {
-                        double pickedUpLeaf = gameProc.ReadValue<double>(potentialSourcesPointers[28]);
-                        double playerXPos = gameProc.ReadValue<double>(playerXPointer);
-                        if (playerYWatcher.Current > 176 && playerXPos > 410)
                         //If the state of "has picked green leaf source" is different from "found green leaf" invert
-                        if (Convert.ToBoolean(pickedUpLeaf) != hasPickedGreenLeaf) gameProc.WriteValue<double>(potentialSourcesPointers[28], 1 - pickedUpLeaf);
-                        else
-                        {
-                            gameProc.WriteValue<double>(potentialSourcesPointers[28], pickedUpLeaf);
-                        }
-
-                    };
+                        if (!hasBathedLeaf) gameProc.WriteValue<double>(potentialSourcesPointers[28], 0);
+                    }
+                    else
+                    {
+                        gameProc.WriteValue<double>(potentialSourcesPointers[28], Convert.ToDouble(hasFoundGreenLeaf));
+                    }
                 };
+
             }
+            else playerYWatcher.Enabled = false;
             #endregion
         }
 
