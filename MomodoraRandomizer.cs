@@ -311,6 +311,7 @@ namespace LiveSplit.UI.Components
         private MemoryWatcher<double> playerYWatcher;
         private bool randomizerRunning;
         private int itemGiven;
+        private double[] healthChange;
 
         List<bool> hasChargeItem;
         List<bool> hasSavedChargeItem;
@@ -1266,7 +1267,6 @@ namespace LiveSplit.UI.Components
 
         private void addVitalityFragment()
         {
-            double[] healthChange = { 0, 2, 1, 1 };
             double difficulty = gameProc.ReadValue<double>(difficultyPointer);
             double fragments = gameProc.ReadValue<double>(vitalityFragmentCountPointer);
             double health = gameProc.ReadValue<double>(maxHealthPointer);
@@ -1551,7 +1551,6 @@ namespace LiveSplit.UI.Components
                 // Vitality Fragment doesnt have a name or effect so we have to write to memory (trying to write as few bytes as possible)
                 if (shopItemsAux[i] == 54)
                 {
-                    double[] healthChange = { 0, 2, 1, 1 };
                     double difficulty = gameProc.ReadValue<double>(difficultyPointer);
 
                     bytes = Encoding.ASCII.GetBytes("Vit. Frag.");
@@ -1597,6 +1596,9 @@ namespace LiveSplit.UI.Components
                 if (i == 2) idAux = 45;
                 id = shopItemsAux[i];
 
+                pointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x10 * list[i]);// Get pointer to shop item
+                gameProc.WriteValue<double>(pointer, (double)sourceIdMapping[id]);// Set shop item id to original one
+
                 // Vitality Fragment doesnt have a name or effect so we have to write to memory (trying to write as few bytes as possible)
                 if (shopItemsAux2[i] == 54)
                 {
@@ -1612,14 +1614,17 @@ namespace LiveSplit.UI.Components
                 }
                 else
                 {
-                    pointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x10 * list[i]);// Get pointer to shop item
-                    gameProc.WriteValue<double>(pointer, (double)sourceIdMapping[id]);// Set shop item id to original one
+                    if(pointerValues[i].Count > 0)
+                    {
 
-                    pointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * idAux) + 0x10) }).Deref<Int32>(gameProc), 0x0);// Get pointer of placeholder
-                    gameProc.WriteValue(pointer, pointerValues[i][0]);// Restore placeholder pointer value
+                        pointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * idAux) + 0x10) }).Deref<Int32>(gameProc), 0x0);// Get pointer of placeholder
+                        gameProc.WriteValue(pointer, pointerValues[i][0]);// Restore placeholder pointer value
 
-                    pointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * idAux) + 0x20) }).Deref<Int32>(gameProc), 0x0);// Get pointer of placeholder
-                    gameProc.WriteValue(pointer, pointerValues[i][1]);// Restore placeholder pointer value
+                        pointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * idAux) + 0x20) }).Deref<Int32>(gameProc), 0x0);// Get pointer of placeholder
+                        gameProc.WriteValue(pointer, pointerValues[i][1]);// Restore placeholder pointer value
+
+                        pointerValues[i].Clear();// Remove placeholder pointer values
+                    }
                 }
             }
         }
@@ -1803,30 +1808,32 @@ namespace LiveSplit.UI.Components
             //Karst City, Forlorn Monsatery, Subterranean Grave, Whiteleaf Memorial Park, Cinder Chambers 1, Cinder Chambers 2, Royal Pinacotheca
             switch (gameProc.MainModule.ModuleMemorySize)
             {
-                    case 39690240:// 1.05
-                        shopOffsets = new List<List<int>>
-                            {
-                                new List<int> { 207, 203, 213 },
-                                new List<int> { 203 },
-                                new List<int> { 221, 199 },
-                                new List<int> { 5 },
-                                new List<int> { 8, 213 },
-                                new List<int> { 235, 213, 205 },
-                                new List<int> { 224, 234, 11 }
-                            };
-                        break;
-                    case 40222720:// 1.07
-                        shopOffsets = new List<List<int>>
-                            {
-                                new List<int> { 208, 204, 214 },
-                                new List<int> { 204 },
-                                new List<int> { 222, 200 },
-                                new List<int> { 5 },
-                                new List<int> { 8, 214 },
-                                new List<int> { 236, 214, 206 },
-                                new List<int> { 225, 235, 11 }
-                            };
-                        break;
+                case 39690240:// 1.05
+                    shopOffsets = new List<List<int>>
+                    {
+                        new List<int> { 207, 203, 213 },
+                        new List<int> { 203 },
+                        new List<int> { 221, 199 },
+                        new List<int> { 5 },
+                        new List<int> { 8, 213 },
+                        new List<int> { 235, 213, 205 },
+                        new List<int> { 224, 234, 11 }
+                    };
+                    healthChange = new double[] { 0, 2, 1, 1 };
+                    break;
+                case 40222720:// 1.07
+                    shopOffsets = new List<List<int>>
+                    {
+                        new List<int> { 208, 204, 214 },
+                        new List<int> { 204 },
+                        new List<int> { 222, 200 },
+                        new List<int> { 5 },
+                        new List<int> { 8, 214 },
+                        new List<int> { 236, 214, 206 },
+                        new List<int> { 225, 235, 11 }
+                    };
+                    healthChange = new double[] { 2, 2, 1, 1 };
+                    break;
             }
         }
         
