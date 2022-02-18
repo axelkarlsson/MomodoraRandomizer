@@ -4,15 +4,13 @@
       <file path="Components/MomodoraRandomizer.dll" status="changed"/>
     </files>
     <changelog>
-      <change>
-              -Fixed issues caused by acquiring Green Leaf<br/>
-              -Softlock after Lubella2 fight has been fixed by giving the possibility to warp out of the area ( dont forget to collect all the items tho ;) )<br/>
-              -Fixed issue where shops would not give the appropriate item<br/>
-              -Fixed issue where the game would crash when retrying after dying or loading a savefile<br/>
-              -Fixed issue where some doors that require a key would open without it<br/>
-              -Pocket incensory is no longer randomized due to some issues with the boss drop<br/>
-              -Minor changes on the layout settings<br/>
-      </change>
+      <change>Fixed issues caused by acquiring Green Leaf</change>
+      <change> Softlock after Lubella2 fight has been fixed by giving the possibility to warp out of the area ( dont forget to collect all the items tho ;) )</change>
+      <change>Fixed issue where shops would not give the appropriate item</change>
+      <change>Fixed issue where the game would crash when retrying after dying or loading a savefile</change>
+      <change>Fixed issue where some doors that require a key would open without it</change>
+      <change>Pocket incensory is no longer randomized due to some issues with the boss drop</change>
+      <change>Minor changes on the layout settings</change>
     </changelog>
   </update>
     <update version="1.0.2">
