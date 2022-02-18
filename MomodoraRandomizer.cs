@@ -1370,12 +1370,12 @@ namespace LiveSplit.UI.Components
                 switch (gameProc.MainModule.ModuleMemorySize)
                 {
                     case 39690240:
-                        playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x022C5A7C, new int[] { 0x310, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x120);
-                        playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x022C5A7C, new int[] { 0x310, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x130);
+                        playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x120);
+                        playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
                         break;
                     case 40222720:
-                        playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x02332CB4, new int[] { 0x318, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x120);
-                        playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x02332CB4, new int[] { 0x318, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x130);
+                        playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x120);
+                        playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
                         break;
                 }
 
@@ -1964,8 +1964,8 @@ namespace LiveSplit.UI.Components
 
                     warpStartPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0xB40);
                     playerFormPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4}).Deref<int>(gameProc), 0x760);
-                    playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x022C5A7C, new int[] { 0x310, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x120);
-                    playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x022C5A7C, new int[] { 0x310, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x130);
+                    playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x120);
+                    playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
 
                     #endregion
                     RandomizerLabel.Text = "1.05b randomizer ready to go!";
@@ -2097,8 +2097,8 @@ namespace LiveSplit.UI.Components
 
                     warpStartPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0xB40);
                     playerFormPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0x760);
-                    playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x02332CB4, new int[] { 0x318, 0xc, 0x13c, 0x4}).Deref<int>(gameProc), 0x120);
-                    playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x02332CB4, new int[] { 0x318, 0xc, 0x13c, 0x4 }).Deref<int>(gameProc), 0x130);
+                    playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4}).Deref<int>(gameProc), 0x120);
+                    playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
 
                     #endregion
                     RandomizerLabel.Text = "1.07 randomizer ready to go!";
