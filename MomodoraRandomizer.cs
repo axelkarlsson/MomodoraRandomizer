@@ -1599,8 +1599,8 @@ namespace LiveSplit.UI.Components
                 pointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304CE8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x10 * list[i]);// Get pointer to shop item
                 gameProc.WriteValue<double>(pointer, (double)sourceIdMapping[id]);// Set shop item id to original one
 
-                // Vitality Fragment doesnt have a name or effect so we have to write to memory (trying to write as few bytes as possible)
-                if (shopItemsAux2[i] == 54)
+                // check pointerValues[i] so livesplit doesnt freeze on onReset()
+                if (shopItemsAux2[i] == 54 && pointerValues[i].Count == 0)
                 {
                     bytes = Encoding.ASCII.GetBytes(itemNames[i]);
                     pointer = (IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * idAux) + 0x10), 0x0 }).Deref<Int32>(gameProc);// Get pointer to item name
@@ -1612,19 +1612,15 @@ namespace LiveSplit.UI.Components
                     gameProc.WriteBytes(pointer, bytes);// Restore effect
                     gameProc.WriteValue<int>(pointer + bytes.Length, 0x0);// Add end of string
                 }
-                else
+                else if (pointerValues[i].Count > 0)
                 {
-                    if(pointerValues[i].Count > 0)
-                    {
+                    pointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * idAux) + 0x10) }).Deref<Int32>(gameProc), 0x0);// Get pointer of placeholder
+                    gameProc.WriteValue(pointer, pointerValues[i][0]);// Restore placeholder pointer value
 
-                        pointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * idAux) + 0x10) }).Deref<Int32>(gameProc), 0x0);// Get pointer of placeholder
-                        gameProc.WriteValue(pointer, pointerValues[i][0]);// Restore placeholder pointer value
+                    pointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * idAux) + 0x20) }).Deref<Int32>(gameProc), 0x0);// Get pointer of placeholder
+                    gameProc.WriteValue(pointer, pointerValues[i][1]);// Restore placeholder pointer value
 
-                        pointer = IntPtr.Add((IntPtr)new DeepPointer(itemInfoPointer, new int[] { ((0x60 * idAux) + 0x20) }).Deref<Int32>(gameProc), 0x0);// Get pointer of placeholder
-                        gameProc.WriteValue(pointer, pointerValues[i][1]);// Restore placeholder pointer value
-
-                        pointerValues[i].Clear();// Remove placeholder pointer values
-                    }
+                    pointerValues[i].Clear();// Remove placeholder pointer values
                 }
             }
         }
