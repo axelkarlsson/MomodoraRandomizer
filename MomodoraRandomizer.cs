@@ -124,7 +124,7 @@ namespace LiveSplit.UI.Components
             [9] = new int[] { 63,111 },
             [10] = new int[] { 63,181,187 },
             [11] = new int[] { 127},
-            [12] = new int[] {127 },
+            [12] = new int[] { 127},
             [13] = new int[] { 160},
             [14] = new int[] { 181},
             [15] = new int[] { 187},
@@ -926,7 +926,7 @@ namespace LiveSplit.UI.Components
                     //Debug.WriteLine("HELTH: " + currentHealthWatcher.Current + "  " + currentHealthWatcher.Old);
                     if(old == 0 && current != 0)
                     {
-                        itemGiven = 2;
+                        itemGiven = 3;
                     }
                 };
 
@@ -1092,7 +1092,7 @@ namespace LiveSplit.UI.Components
             {
                 addItem(id);
             }
-            itemGiven = 2;
+            itemGiven = 3;
         }
 
         private void addLeaf()
@@ -1179,17 +1179,6 @@ namespace LiveSplit.UI.Components
             {
                 hasChargeItem[j] = true;
                 addItem(id);
-            }
-
-            //Update charges if item in inventory, otherwise /shrug
-            var totalItemAmount = gameProc.ReadValue<int>(totalItemsPointer);
-            for(int i = 0; i > totalItemAmount; i++)
-            {
-                if (gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer,0x10*i)) == (double)id)
-                {
-                    double currentCharges = gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsChargeStartPointer, 0x10 * i));
-                    gameProc.WriteValue<double>(IntPtr.Add(inventoryItemsChargeStartPointer, 0x10 * i), currentCharges + charges);
-                }
             }
         }
 
@@ -1789,14 +1778,6 @@ namespace LiveSplit.UI.Components
             ivoryBugWatcher.Update(gameProc);
             crestFragmentWatcher.Update(gameProc);
             vitalityFragmentWatcher.Update(gameProc);
-
-            Debug.WriteLine("Updating item watchers");
-            Debug.WriteLine("VF: " + vitalityFragmentWatcher.Current + " " + vitalityFragmentWatcher.Old + " " + vitalityFragmentWatcher.Changed);
-            Debug.WriteLine("IB: " + ivoryBugWatcher.Current + " " + ivoryBugWatcher.Old + " " + ivoryBugWatcher.Changed);
-            Debug.WriteLine("CF: " + crestFragmentWatcher.Current + " " + crestFragmentWatcher.Old + " " + crestFragmentWatcher.Changed);
-            Debug.WriteLine("bellflower: " + bellflowerWatcher.Current + " " + bellflowerWatcher.Old + " " + bellflowerWatcher.Changed);
-            Debug.WriteLine("Passiflora: " + passifloraWatcher.Current + " " + passifloraWatcher.Old + " " + passifloraWatcher.Changed);
-            Debug.WriteLine("Missive: " + taintedMissiveWatcher.Current + " " + taintedMissiveWatcher.Old + " " + taintedMissiveWatcher.Changed);
         }
 
         private void SetupVersionDifferences()
