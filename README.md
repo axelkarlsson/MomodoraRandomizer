@@ -4,7 +4,7 @@
  ## Installation
  First, make sure that you have a LiveSplit installation http://livesplit.org/downloads/.
  
- 1. Download the "MomodoraRandomizer.dll" from releases.
+ 1. Download the "MomodoraRandomizer.dll" from releases. https://github.com/axelkarlsson/MomodoraRandomizer/releases
  2. Navigate to your LiveSplit install, and put "MomodoraRandomizer.dll" in <LiveSplitDir>/Components
  3. Launch LiveSplit and Edit Layout, add the Momodora Randomizer component from the "Other" category
 ![image](https://user-images.githubusercontent.com/26115597/154794577-4dd8d8fb-a589-4a48-b257-a73940f76956.png)
