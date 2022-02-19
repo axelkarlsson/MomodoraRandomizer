@@ -114,7 +114,7 @@ namespace LiveSplit.UI.Components
         {
             [0] = new int[] { 25 },
             [1] = new int[] { 37 },
-            [2] = new int[] { 70 },
+            [2] = new int[] { 70, 64 },
             [3] = new int[] { 90 },
             [4] = new int[] { 134},
             [5] = new int[] { 191},
@@ -1389,7 +1389,8 @@ namespace LiveSplit.UI.Components
                     if (playerYWatcher.Current > 176 && playerXPos > 410)
                     {
                         //If the state of "has picked green leaf source" is different from "found green leaf" invert
-                        if (!hasBathedLeaf) gameProc.WriteValue<double>(potentialSourcesPointers[28], 0);
+                        gameProc.WriteValue<double>(potentialSourcesPointers[28], Convert.ToDouble(hasBathedLeaf));
+
                     }
                     else
                     {

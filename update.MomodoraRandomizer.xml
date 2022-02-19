@@ -1,4 +1,13 @@
 ﻿<updates>
+  <update version="1.0.4">
+    <files>
+      <file path="Components/MomodoraRandomizer.dll" status="changed"/>
+    </files>
+    <changelog>
+      <change> Fixed more issues caused by acquiring Green Leaf</change>
+      <change> Added support for the changed location for Karst Bellflower in 1.07</change>
+    </changelog>
+  </update>
     <update version="1.0.3">
     <files>
       <file path="Components/MomodoraRandomizer.dll" status="changed"/>
