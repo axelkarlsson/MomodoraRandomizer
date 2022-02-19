@@ -411,6 +411,10 @@ namespace LiveSplit.UI.Components
             {
                 63, 111, 127, 160, 181, 187, 205
             };
+            shopLocations = new List<int>
+            {
+                0,0,0,0,0,0,0
+            };
             //Karst City, Forlorn Monsatery, Subterranean Grave, Whiteleaf Memorial Park, Cinder Chambers 1, Cinder Chambers 2, Royal Pinacotheca
             originalShopItems = new List<List<int>>
             {
@@ -1026,7 +1030,18 @@ namespace LiveSplit.UI.Components
             if (!settingsControl.IvoryBugsEnabled) bannedSources.AddRange(ivoryBugs);
             if (!settingsControl.HardModeEnabled) bannedSources.AddRange(bossItems);
             bannedSources.Add(34);
-
+            bannedSources.Add(8);
+            bannedSources.Add(9);
+            bannedSources.Add(10);
+            bannedSources.Add(11);
+            bannedSources.Add(12);
+            bannedSources.Add(13);
+            bannedSources.Add(14);
+            bannedSources.Add(15);
+            bannedSources.Add(16);
+            bannedSources.Add(17);
+            bannedSources.Add(18);
+            bannedSources.Add(19);
         }
 
         private void updatePossibleSources()

@@ -1,4 +1,12 @@
 ﻿<updates>
+    <update version="1.0.5">
+    <files>
+      <file path="Components/MomodoraRandomizer.dll" status="changed"/>
+    </files>
+    <changelog>
+      <change> Disabled randomizing shop items for now</change>
+    </changelog>
+  </update>
   <update version="1.0.4">
     <files>
       <file path="Components/MomodoraRandomizer.dll" status="changed"/>

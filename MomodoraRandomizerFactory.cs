@@ -22,7 +22,7 @@ namespace LiveSplit.UI.Components
 
         public string UpdateURL => "https://raw.githubusercontent.com/axelkarlsson/MomodoraRandomizer/main/";
 
-        public Version Version => Version.Parse("1.0.4");
+        public Version Version => Version.Parse("1.0.5");
 
         public IComponent Create(LiveSplitState state)
         {
