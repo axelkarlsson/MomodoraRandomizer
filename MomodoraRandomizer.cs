@@ -196,6 +196,7 @@ namespace LiveSplit.UI.Components
             [81] = new int[] { 163},
             [82] = new int[] { 163},
           };
+        private Queue<int> queuedItems;
 
         const int RANDOMIZER_SOURCE_AMOUNT = 83;
 
@@ -513,6 +514,7 @@ namespace LiveSplit.UI.Components
                 warpsActive = new List<double> { 0, 0, 0, 0, 0, 0, 0, 0 };
                 hasWarp = false;
                 hasSavedWarp = false;
+                queuedItems = new Queue<int>();
 
                 resetSources();
                 updateBannedSources();
@@ -1067,9 +1069,59 @@ namespace LiveSplit.UI.Components
         //Use newItem to give out an item [with charges] and remove the last item acquired
         private void newItem(int id, int addCharges = 2)
         {
+            SetupItemPtrs();
             RandomizerLabel.Text = "New item: " + Enum.GetName(typeof(Items), id);
             Debug.WriteLine("Giving item id: " + id);
             removeItem();
+            int allocatedMemory = gameProc.ReadValue<int>(IntPtr.Subtract(inventoryItemsStartPointer, 0x10));
+            int totalItems = (int)gameProc.ReadValue<double>(totalItemsPointer);
+
+            if (id == (int)Items.IvoryBug)
+            {
+                addIvoryBug();
+            }
+            else if (id == (int)Items.VitalityFragment)
+            {
+                addVitalityFragment();
+            }
+            else if (totalItems * 16 != allocatedMemory)
+                {
+                if ((int)Items.FragmentWarp >= id && id >= (int)Items.FragmentBowPow)
+                {
+                    addCrestFragment(id);
+                    if (id == 53)
+                    {
+                        hasWarp = true;
+                    }
+                }
+                else if (id == (int)Items.Bellflower || id == (int)Items.Passiflora || id == (int)Items.TaintedMissive)
+                {
+                    addChargeItem(id, addCharges);
+                }
+                else if (id == (int)Items.MonasteryKey || id == (int)Items.GardenKey || id == (int)Items.CinderKey)
+                {
+                    addKey(id);
+                }
+                else if (id == (int)Items.FreshSpringLeaf)
+                {
+                    addLeaf();
+                }
+                else
+                {
+                    addItem(id);
+                }
+            }
+            else
+            {
+                queuedItems.Enqueue(id);
+            }
+            itemGiven = 3;
+        }
+
+        private void newQueuedItem(int id, int addCharges = 2)
+        {
+            RandomizerLabel.Text = "New item: " + Enum.GetName(typeof(Items), id);
+            Debug.WriteLine("Giving queued item id: " + id);
             if (id == (int)Items.IvoryBug)
             {
                 addIvoryBug();
@@ -1230,6 +1282,7 @@ namespace LiveSplit.UI.Components
         {
             //To add an item: Increase total item counter by one
             //and set the inventory value for the next item slot to the id of the item given
+            SetupItemPtrs();
             var totalItemAmount = gameProc.ReadValue<int>(totalItemsPointer);
             gameProc.WriteValue<int>(totalItemsPointer, (int)totalItemAmount + 1);
             gameProc.WriteValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * totalItemAmount), id);
@@ -1238,6 +1291,7 @@ namespace LiveSplit.UI.Components
         private void removeLastItem()
         {
             //To remove last item, decrease total item counter by one
+            SetupItemPtrs();
             var totalItemAmount = gameProc.ReadValue<int>(totalItemsPointer);
             gameProc.WriteValue<int>(totalItemsPointer, (int)totalItemAmount - 1);
             
@@ -1761,6 +1815,7 @@ namespace LiveSplit.UI.Components
             {
                 inGameWatcher.Update(gameProc);
                 if (inGame) {
+                    Debug.WriteLine(gameProc.ReadValue<int>(totalItemsPointer));
                     updateSpecialWatchers();
                     foreach (var watcher in randoSourceWatchers)
                     {
@@ -1770,6 +1825,18 @@ namespace LiveSplit.UI.Components
                     {
                         UpdateItemWatchers();
                         itemGiven--;
+                    }
+                    if(queuedItems.Count > 0)
+                    {
+                        SetupItemPtrs();
+                        int allocatedMemory = gameProc.ReadValue<int>(IntPtr.Subtract(inventoryItemsStartPointer, 0x10));
+                        int totalItems = (int)gameProc.ReadValue<double>(totalItemsPointer);
+                        while (totalItems * 16 != allocatedMemory)
+                        {
+                            newItem(queuedItems.Dequeue());
+                            allocatedMemory = gameProc.ReadValue<int>(IntPtr.Subtract(inventoryItemsStartPointer, 0x10));
+                            totalItems = (int)gameProc.ReadValue<double>(totalItemsPointer);
+                        }
                     }
                 }
 
@@ -2110,6 +2177,29 @@ namespace LiveSplit.UI.Components
                     break;
                 default:
                     RandomizerLabel.Text = "Unsupported game version for randomizer";
+                    break;
+            }
+        }
+
+        private void SetupItemPtrs()
+        {
+            switch (gameProc.MainModule.ModuleMemorySize)
+            {
+                case 39690240:
+                    totalItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a4 }).Deref<Int32>(gameProc), 0x4);
+                    activeItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304ce8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc30);
+                    passiveItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304ce8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc40);
+                    keyItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304ce8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x1100);
+                    inventoryItemsStartPointer = (IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a4, 0xC }).Deref<int>(gameProc);
+                    inventoryItemsChargeStartPointer = (IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a8, 0xC }).Deref<int>(gameProc);
+                    break;
+                case 40222720:
+                    totalItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x023782DC, new int[] { 0x1ac }).Deref<Int32>(gameProc), 0x4);
+                    activeItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc40);
+                    passiveItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc50);
+                    keyItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0x1110);
+                    inventoryItemsStartPointer = (IntPtr)new DeepPointer(0x23782DC, new int[] { 0x1ac, 0xC }).Deref<int>(gameProc);
+                    inventoryItemsChargeStartPointer = (IntPtr)new DeepPointer(0x23782DC, new int[] { 0x1b0, 0xC }).Deref<int>(gameProc);
                     break;
             }
         }
