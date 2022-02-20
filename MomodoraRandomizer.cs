@@ -800,25 +800,7 @@ namespace LiveSplit.UI.Components
                     inGame = Convert.ToBoolean(current);
                     if (current == 0)
                     {
-                        for (int i = 0; i < hasChargeItem.Count(); i++)
-                        {
-                            hasChargeItem[i] = hasSavedChargeItem[i];
-                            hasKey[i] = hasSavedKey[i];
-                            hasBathedLeaf = hasSavedBathedLeaf;
-                            hasFoundGreenLeaf = hasSavedFoundGreenLeaf;
-                        }
-                        for (int i = 0; i < hasBoughtItem.Count(); i++)
-                        {
-                            for (int j = 0; j < hasBoughtItem[i].Count(); j++)
-                            {
-                                hasBoughtItem[i][j] = hasSavedBoughtItem[i][j];
-                            }
-                        }
-                        foreach (var room in shopLocations)
-                        {
-                            resetShopItems(room);
-                        }
-                        hasWarp = hasSavedWarp;
+                        loadSavedVariables();
                     }
                 };
 
@@ -829,21 +811,7 @@ namespace LiveSplit.UI.Components
                 {
                     if (current > old)
                     {
-                        for (int i = 0; i < hasChargeItem.Count(); i++)
-                        {
-                            hasChargeItem[i] = hasSavedChargeItem[i];
-                            hasKey[i] = hasSavedKey[i];
-                            hasBathedLeaf = hasSavedBathedLeaf;
-                            hasFoundGreenLeaf = hasSavedFoundGreenLeaf;
-                        }
-                        for (int i = 0; i < hasBoughtItem.Count(); i++)
-                        {
-                            for (int j = 0; j < hasBoughtItem[i].Count(); j++)
-                            {
-                                hasBoughtItem[i][j] = hasSavedBoughtItem[i][j];
-                            }
-                        }
-                        hasWarp = hasSavedWarp;
+                        loadSavedVariables();
                     }
                 };
 
@@ -854,21 +822,7 @@ namespace LiveSplit.UI.Components
                 {
                     if (current > old)
                     {
-                        for (int i = 0; i < hasChargeItem.Count(); i++)
-                        {
-                            hasSavedChargeItem[i] = hasChargeItem[i];
-                            hasSavedKey[i] = hasKey[i];
-                            hasSavedBathedLeaf = hasBathedLeaf;
-                            hasSavedFoundGreenLeaf = hasFoundGreenLeaf;
-                        }
-                        for (int i = 0; i < hasBoughtItem.Count(); i++)
-                        {
-                            for (int j = 0; j < hasBoughtItem[i].Count(); j++)
-                            {
-                                hasSavedBoughtItem[i][j] = hasBoughtItem[i][j];
-                            }
-                        }
-                        hasSavedWarp = hasWarp;
+                        saveVariables();
                     }
                 };
 
@@ -911,12 +865,10 @@ namespace LiveSplit.UI.Components
                         double pickedUpLeaf = gameProc.ReadValue<double>(potentialSourcesPointers[28]);
                         double playerXPos = gameProc.ReadValue<double>(playerXPointer);
                         if (playerYWatcher.Current > 176 && playerXPos > 410)
-                            Debug.WriteLine("In area to remove green leaf");
                             //If the state of "has picked green leaf source" is different from "found green leaf" invert
                             if (Convert.ToBoolean(pickedUpLeaf) != hasBathedLeaf) gameProc.WriteValue<double>(potentialSourcesPointers[28], 1 - pickedUpLeaf);
                         else { 
                             gameProc.WriteValue<double>(potentialSourcesPointers[28], pickedUpLeaf);
-                            Debug.WriteLine("Restoring green leaf to found item");
                         }
   
                     };
@@ -927,9 +879,9 @@ namespace LiveSplit.UI.Components
                 currentHealthWatcher.Enabled = true;
                 currentHealthWatcher.OnChanged += (old, current) =>
                 {
-                    //Debug.WriteLine("HELTH: " + currentHealthWatcher.Current + "  " + currentHealthWatcher.Old);
                     if(old == 0 && current != 0)
                     {
+                        Debug.WriteLine("Respawning");
                         itemGiven = 3;
                     }
                 };
@@ -938,10 +890,51 @@ namespace LiveSplit.UI.Components
 
                 #endregion
 
+                addItem((int)Items.IvoryBug);
                 inGame = true;
                 randomizerRunning = true;
                 itemGiven = 3;
             }
+        }
+
+        private void saveVariables()
+        {
+            Debug.WriteLine("Saving variables");
+            for (int i = 0; i < hasChargeItem.Count(); i++)
+            {
+                hasSavedChargeItem[i] = hasChargeItem[i];
+                hasSavedKey[i] = hasKey[i];
+            }
+            for (int i = 0; i < hasBoughtItem.Count(); i++)
+            {
+                for (int j = 0; j < hasBoughtItem[i].Count(); j++)
+                {
+                    hasSavedBoughtItem[i][j] = hasBoughtItem[i][j];
+                }
+            }
+            hasSavedBathedLeaf = hasBathedLeaf;
+            hasSavedFoundGreenLeaf = hasFoundGreenLeaf;
+            hasSavedWarp = hasWarp;
+        }
+
+        private void loadSavedVariables()
+        {
+            Debug.WriteLine("Loading saved variables");
+            for (int i = 0; i < hasChargeItem.Count(); i++)
+            {
+                hasChargeItem[i] = hasSavedChargeItem[i];
+                hasKey[i] = hasSavedKey[i];
+            }
+            for (int i = 0; i < hasBoughtItem.Count(); i++)
+            {
+                for (int j = 0; j < hasBoughtItem[i].Count(); j++)
+                {
+                    hasBoughtItem[i][j] = hasSavedBoughtItem[i][j];
+                }
+            }
+            hasWarp = hasSavedWarp;
+            hasBathedLeaf = hasSavedBathedLeaf;
+            hasFoundGreenLeaf = hasSavedFoundGreenLeaf;
         }
 
         private int nextIndex(int itemId = 0)
@@ -1029,7 +1022,9 @@ namespace LiveSplit.UI.Components
             if (!settingsControl.VitalityFragmentsEnabled) bannedSources.AddRange(vitalityFragments);
             if (!settingsControl.IvoryBugsEnabled) bannedSources.AddRange(ivoryBugs);
             if (!settingsControl.HardModeEnabled) bannedSources.AddRange(bossItems);
+            //Arsonist boss item doesn't work if you get it from somewhere else
             bannedSources.Add(34);
+            //disabled shop items for now
             bannedSources.Add(8);
             bannedSources.Add(9);
             bannedSources.Add(10);
@@ -1143,7 +1138,7 @@ namespace LiveSplit.UI.Components
             }
             else if (crestFragmentWatcher.Changed)
             {
-                Debug.WriteLine("Crest Frag");
+                Debug.WriteLine("Removing Crest Frag");
                 removeCrestFragment();
             }
             else if (vitalityFragmentWatcher.Changed)
@@ -1151,9 +1146,12 @@ namespace LiveSplit.UI.Components
                 Debug.WriteLine("Removing Vit Frag");
                 removeVitalityFragment();
             }
+            else if (levelIDWatcher.Current == 83)
+            {
+                Debug.WriteLine("Green leaf upgraded, do not remove stuff");
+            }
             else
             {
-                Debug.WriteLine("Removing General Item");
                 removeLastItem();
             }
         }
@@ -1282,20 +1280,12 @@ namespace LiveSplit.UI.Components
         {
             double bugs = gameProc.ReadValue<double>(ivoryBugCountPointer);
             gameProc.WriteValue<double>(ivoryBugCountPointer, bugs + 1);
-            if(bugs == 0)
-            {
-                addItem((int)Items.IvoryBug);
-            }
         }
 
         private void removeIvoryBug()
         {
             double bugs = gameProc.ReadValue<double>(ivoryBugCountPointer);
             gameProc.WriteValue<double>(ivoryBugCountPointer, bugs - 1);
-            if (bugs == 1)
-            {
-                removeLastItem();
-            }
         }
 
         private void addKey(int id)
@@ -1359,10 +1349,12 @@ namespace LiveSplit.UI.Components
             #region Warp logic
             if (current == 154 && !hasWarp)// If they are after Lubella 2 and dont have the warps fragment
             {
+                Debug.WriteLine("Lubella 2 anti softlock");
                 antiSoftlock();
             }
             else if (old == 154 && !hasWarp)
             {
+                Debug.WriteLine("Lubella 2 remove anti softlock");
                 Softlock();
             };
             #endregion
@@ -1415,10 +1407,12 @@ namespace LiveSplit.UI.Components
             {
                 if (current == 1)// If player is in a conversation with an npc (non shop npcs get handled by another function)
                 {
+                    Debug.WriteLine("Adding placeholders (in shop)");
                     addPlaceholders(room);
                 }
                 else
                 {
+                    Debug.WriteLine("Removing placeholders (in shop)");
                     removePlaceholders(room);
                 }
             }
@@ -1446,10 +1440,12 @@ namespace LiveSplit.UI.Components
             {
                 if (current == 1)// If inventory is open remove Warp Fragment
                 {
+                    Debug.WriteLine("Lubella 2 remove anti softlock");
                     Softlock();
                 }
                 else if (current == 0)// If inventory is closed place Warp Fragment back
                 {
+                    Debug.WriteLine("Lubella 2 anti softlock");
                     antiSoftlock();
                 }
             }
@@ -1500,9 +1496,21 @@ namespace LiveSplit.UI.Components
             {
                 if (aux[i] == true)// If item was bought add the placeholder
                 {
-                    if (i == 0) addItem(22);
-                    if (i == 1) addItem(29);
-                    if (i == 2) addItem(45);
+                    if (i == 0)
+                    {
+                        addItem(22);
+                        Debug.WriteLine("Adding placeholder id 22");
+                    }
+                    if (i == 1)
+                    {
+                        addItem(29);
+                        Debug.WriteLine("Adding placeholder id 29");
+                    }
+                    if (i == 2)
+                    {
+                        addItem(45);
+                        Debug.WriteLine("Adding placeholder id 45");
+                    }
                 }
             }
         }
