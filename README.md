@@ -1,6 +1,11 @@
 # MomodoraRandomizer
  A LiveSplit component that is a randomizer for Momodora: Reverie Under the Moonlight. Currently supporting game versions v1.05b and v1.07
  
+ ## Known issues/quirks:
+ Active items may have incorrect amount of uses when equipped, this is fixed when saving.
+ Game may crash sometimes when opening key items menu.
+ Fresh Spring Leaf may be in your inventory, but the green leaf effect is tied to a flag so unless the randomizer tells you that you have found Fresh Spring Leaf you shouldn't have it.
+ 
  ## Installation
  First, make sure that you have a LiveSplit installation http://livesplit.org/downloads/.
  
@@ -21,7 +26,7 @@ To start a randomizer, simply start the timer. This should be done when you have
  ## Settings
  ![image](https://user-images.githubusercontent.com/26115597/154794956-cbdb9425-c023-44cd-9604-e1e5614f6d84.png)
  You can either use a set seed, or get a random seed.
-In the settings you can toggle wether Ivory Bugs and Vitality Fragments are included in the randomization process or not, and enabling Hard Mode allows bosses to drop key items and assumes that either Garden Key or Bakman Patch is enough to get into Whiteleaf Memorial Park.
+In the settings you can toggle whether Ivory Bugs and Vitality Fragments are included in the randomization process or not, and enabling Hard Mode allows bosses to drop key items and assumes that either Garden Key or Bakman Patch is enough to get into Whiteleaf Memorial Park.
  Shop items and rewards from NPC's (giving the Dirty Shroom to the imp, Ivory Bugs to the bunny and Hazel Badge to Eri) are all randomized.
  Arsonist boss item is not randomized.
  
