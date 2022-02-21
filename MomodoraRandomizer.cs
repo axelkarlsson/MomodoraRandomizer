@@ -1113,6 +1113,7 @@ namespace LiveSplit.UI.Components
             }
             else
             {
+                Debug.WriteLine("Enqueueing " + id);
                 queuedItems.Enqueue(id);
             }
             itemGiven = 3;
@@ -1826,10 +1827,15 @@ namespace LiveSplit.UI.Components
                         UpdateItemWatchers();
                         itemGiven--;
                     }
-                    if(queuedItems.Count > 0)
+                    SetupItemPtrs();
+                    int ballocatedMemory = gameProc.ReadValue<int>(IntPtr.Subtract(inventoryItemsStartPointer, 0x10));
+                    Debug.WriteLine(ballocatedMemory);
+                    if (queuedItems.Count > 0)
                     {
+                        Debug.WriteLine(queuedItems.Count + " items in the queue");
                         SetupItemPtrs();
                         int allocatedMemory = gameProc.ReadValue<int>(IntPtr.Subtract(inventoryItemsStartPointer, 0x10));
+                        Debug.WriteLine(allocatedMemory);
                         int totalItems = (int)gameProc.ReadValue<double>(totalItemsPointer);
                         while (totalItems * 16 != allocatedMemory)
                         {
