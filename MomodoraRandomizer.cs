@@ -40,7 +40,6 @@ namespace LiveSplit.UI.Components
             HazelBadge = 25,
             TornBranch = 26,
             MonasteryKey = 27,
-            Twentynine = 29,
             ClarityShard = 31,
             DirtyShroom = 32,
             IvoryBug = 34,
@@ -196,6 +195,16 @@ namespace LiveSplit.UI.Components
             [81] = new int[] { 163},
             [82] = new int[] { 163},
           };
+        public enum shops : int
+        {
+            KarstCity = 0,
+            ForlornMonsatery = 1,
+            SubterraneanGrave = 2,
+            WhiteleafMemorialPark = 3,
+            CinderChambers_1 = 4,
+            CinderChambers_2 = 5,
+            RoyalPinacotheca = 6,
+        }
         private Queue<int> queuedItems;
 
         const int RANDOMIZER_SOURCE_AMOUNT = 83;
@@ -412,23 +421,8 @@ namespace LiveSplit.UI.Components
             {
                 63, 111, 127, 160, 181, 187, 205
             };
-            shopLocations = new List<int>
-            {
-                0,0,0,0,0,0,0
-            };
             //Karst City, Forlorn Monsatery, Subterranean Grave, Whiteleaf Memorial Park, Cinder Chambers 1, Cinder Chambers 2, Royal Pinacotheca
             originalShopItems = new List<List<int>>
-            {
-                new List<int> { 8, 9, 10 },
-                new List<int> { 9 },
-                new List<int> { 11, 12 },
-                new List<int> { 13 },
-                new List<int> { 14, 10 },
-                new List<int> { 15, 10, 16 },
-                new List<int> { 17, 18, 19 }
-            };
-            // Place original numbers for now, they get changed later
-            shopItems = new List<List<int>>
             {
                 new List<int> { 8, 9, 10 },
                 new List<int> { 9 },
@@ -484,6 +478,17 @@ namespace LiveSplit.UI.Components
                 hasSavedBathedLeaf = false;
                 hasFoundGreenLeaf = false;
                 hasSavedFoundGreenLeaf = false;
+                // Place original numbers for now, they get changed later
+                shopItems = new List<List<int>>
+                {
+                    new List<int> { 15, 11, 21 },
+                    new List<int> { 11 },
+                    new List<int> { 31, 2 },
+                    new List<int> { 7 },
+                    new List<int> { 8, 21 },
+                    new List<int> { 47, 21, 13 },
+                    new List<int> { 35, 46, 44 }
+                };
                 hasBoughtItem = new List<List<bool>>
                 {
                     new List<bool> { false, false, false },
@@ -760,6 +765,15 @@ namespace LiveSplit.UI.Components
                     
                 }
                 #endregion
+                for(int i = 0; i < shopItems.Count(); i++)
+                {
+                    Debug.WriteLine("At shop " + Enum.GetName(typeof(shops), i));
+                    for (int j = 0; j < shopItems[i].Count(); j++)
+                    {
+                        Debug.WriteLine("\t-" + Enum.GetName(typeof(Items), shopItems[i][j]) + " generated at " +
+                                        Enum.GetName(typeof(Items), sourceIdMapping[originalShopItems[i][j]]));
+                    }
+                }
                 #endregion
                 #region Special memory watchers
                 taintedMissiveWatcher = new MemoryWatcher<double>(taintedMissiveMaxValuePointer);
@@ -960,41 +974,41 @@ namespace LiveSplit.UI.Components
 
         private void createMemoryWatcher(int giveItemID, int newSourceAddressIndex)
         {
-            foreach (var list in originalShopItems)
+            if (8 <= newSourceAddressIndex && newSourceAddressIndex <= 19)// If item is a shop item
             {
-                if (list.Contains(newSourceAddressIndex))// If item is a shop item
+                saveShopItem(newSourceAddressIndex, giveItemID);
+            }
+            else
+            {
+                Debug.WriteLine("Item " + Enum.GetName(typeof(Items), giveItemID) + " generated at position " + newSourceAddressIndex);
+                MemoryWatcher<double> temp = new MemoryWatcher<double>(potentialSourcesPointers[newSourceAddressIndex]);
+                temp.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                if (potentialSourcesPointers[newSourceAddressIndex] == potentialSourcesPointers[28])
                 {
-                    Debug.WriteLine("Item " + Enum.GetName(typeof(Items), giveItemID) + " generated at position " + newSourceAddressIndex + "(In a shop)");
-                    saveShopItem(newSourceAddressIndex, giveItemID);
-                    return;
+                    temp.OnChanged += (old, current) =>
+                    {
+                        int levelID = gameProc.ReadValue<int>(levelIDPointer);
+                        if (current == 1 && sourceToLevelMapping[newSourceAddressIndex].Contains(levelID))
+                        {
+                            hasBathedLeaf = true;
+                            newItem(giveItemID);
+                        }
+                    };
                 }
-            }
-            Debug.WriteLine("Item " + Enum.GetName(typeof(Items), giveItemID) + " generated at position " + newSourceAddressIndex);
-            MemoryWatcher<double> temp = new MemoryWatcher<double>(potentialSourcesPointers[newSourceAddressIndex]);
-            temp.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
-            if (potentialSourcesPointers[newSourceAddressIndex] == potentialSourcesPointers[28]) {
-                temp.OnChanged += (old, current) =>
+                else
                 {
-                    int levelID = gameProc.ReadValue<int>(levelIDPointer);
-                    if (current == 1 && sourceToLevelMapping[newSourceAddressIndex].Contains(levelID))
+                    temp.OnChanged += (old, current) =>
                     {
-                        hasBathedLeaf = true;
-                        newItem(giveItemID);
-                    }
-                };
+                        int levelID = gameProc.ReadValue<int>(levelIDPointer);
+                        if (current == 1 && sourceToLevelMapping[newSourceAddressIndex].Contains(levelID))
+                        {
+                            newItem(giveItemID);
+                        }
+                    };
+                }
+                temp.Enabled = true;
+                randoSourceWatchers.Add(temp);
             }
-            else {
-                temp.OnChanged += (old, current) =>
-                {
-                    int levelID = gameProc.ReadValue<int>(levelIDPointer);
-                    if (current == 1 && sourceToLevelMapping[newSourceAddressIndex].Contains(levelID))
-                    {
-                        newItem(giveItemID);
-                    }
-                };
-            }
-            temp.Enabled = true;
-            randoSourceWatchers.Add(temp);
         }
 
         private void updateImpossibleSources(int itemId)
@@ -1026,6 +1040,7 @@ namespace LiveSplit.UI.Components
             if (!settingsControl.HardModeEnabled) bannedSources.AddRange(bossItems);
             //Arsonist boss item doesn't work if you get it from somewhere else
             bannedSources.Add(34);
+            bannedSources.Add(19);
             //disabled shop items for now
             bannedSources.Add(8);
             bannedSources.Add(9);
@@ -1038,7 +1053,6 @@ namespace LiveSplit.UI.Components
             bannedSources.Add(16);
             bannedSources.Add(17);
             bannedSources.Add(18);
-            bannedSources.Add(19);
         }
 
         private void updatePossibleSources()
@@ -1071,8 +1085,8 @@ namespace LiveSplit.UI.Components
         {
             SetupItemPtrs();
             RandomizerLabel.Text = "New item: " + Enum.GetName(typeof(Items), id);
-            Debug.WriteLine("Giving item id: " + id);
             removeItem();
+            Debug.WriteLine("Giving item id: " + id);
             int allocatedMemory = gameProc.ReadValue<int>(IntPtr.Subtract(inventoryItemsStartPointer, 0x10));
             int totalItems = (int)gameProc.ReadValue<double>(totalItemsPointer);
 
@@ -1085,7 +1099,7 @@ namespace LiveSplit.UI.Components
                 addVitalityFragment();
             }
             else if (totalItems * 16 != allocatedMemory)
-                {
+            {
                 if ((int)Items.FragmentWarp >= id && id >= (int)Items.FragmentBowPow)
                 {
                     addCrestFragment(id);
@@ -1295,7 +1309,6 @@ namespace LiveSplit.UI.Components
             SetupItemPtrs();
             var totalItemAmount = gameProc.ReadValue<int>(totalItemsPointer);
             gameProc.WriteValue<int>(totalItemsPointer, (int)totalItemAmount - 1);
-            
         }
 
         private void removeCrestFragment()
@@ -1512,27 +1525,30 @@ namespace LiveSplit.UI.Components
 
             if (shopLocations.Contains(room))// If player is in a shop room
             {
-                List<int> shopItemsAux = shopItems[shopLocations.IndexOf(room)];// Get list storing what items correspond to the ones in the shop
+                int currentShopLocation = shopLocations.IndexOf(room);
+                List<int> shopItemsAux = shopItems[currentShopLocation];// Get list storing what items correspond to the ones in the shop
                 int idPos = 0, itemAux;
-                int position;
 
                 int invSize = gameProc.ReadValue<int>(totalItemsPointer);// Get inventory size
                 Debug.WriteLine("Items " + invSize);
-                double placeholderId = gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * (invSize - 1)));// id of last aquired item
+                int placeholderId = (int)gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * (invSize - 1)));// id of last aquired item
                 Debug.WriteLine("Last acquired item: " + placeholderId);
                 // Index of last aquired item
                 if (placeholderId == 22) idPos = 0;
                 if (placeholderId == 29) idPos = 1;
                 if (placeholderId == 45) idPos = 2;
 
-                Debug.WriteLine("ID bought: " + shopItemsAux[idPos]);
-                itemAux = originalShopItems[shopLocations.IndexOf(room)][idPos];// Get what is the id that would have been bought
+                Debug.WriteLine("Item bought: " + Enum.GetName(typeof(Items), shopItems[currentShopLocation][idPos]));
+                itemAux = originalShopItems[currentShopLocation][idPos];// Get what is the id that would have been bought
                 for (int i = 0; i < originalShopItems.Count(); i++)// Update value of hasBoughtItem in all shops that "sell" itemAux
                 {
-                    if (originalShopItems[i].Contains(itemAux))
+                    for (int j = 0; j < originalShopItems[i].Count(); j++)
                     {
-                        position = originalShopItems[i].IndexOf(itemAux);
-                        hasBoughtItem[i][position] = true;
+                        if (originalShopItems[i][j] == itemAux)
+                        {
+                            Debug.WriteLine("Updating shop " + Enum.GetName(typeof(shops), i) + ": position " + j);
+                            hasBoughtItem[i][j] = true;
+                        }
                     }
                 }
 
@@ -1540,6 +1556,10 @@ namespace LiveSplit.UI.Components
                 addItem((int)placeholderId);
                 newItem(shopItemsAux[idPos]);
                 addPlaceholders(room);// re-add placeholders
+                Debug.WriteLine("At shop " + Enum.GetName(typeof(shops), currentShopLocation));
+                foreach (var item in shopItems[currentShopLocation])
+                    Debug.WriteLine("Items sold: " + Enum.GetName(typeof(Items), item) +
+                    (hasBoughtItem[currentShopLocation][shopItems[currentShopLocation].IndexOf(item)] ? " was bought" : " wasn't bought"));
             }
         }
 
@@ -1601,12 +1621,16 @@ namespace LiveSplit.UI.Components
         private void setShopItems(int room)
         {
             IntPtr pointer, itemPointer;
-            List<int> list = shopOffsets[shopLocations.IndexOf(room)];
-            List<int> shopItemsAux = shopItems[shopLocations.IndexOf(room)];// Get list of items of the current shop
+            int currentShopLocation = shopLocations.IndexOf(room);
+            List<int> list = shopOffsets[currentShopLocation];
+            List<int> shopItemsAux = shopItems[currentShopLocation];// Get list of items of the current shop
             int id = 22, pValue;
             byte[] bytes;
 
-            foreach (var item in shopItemsAux) Debug.WriteLine("Items sold at shop: " + item);
+            Debug.WriteLine("At shop " + Enum.GetName(typeof(shops), currentShopLocation));
+            foreach (var item in shopItemsAux)
+                Debug.WriteLine("Items sold: " + Enum.GetName(typeof(Items), item) +
+                (hasBoughtItem[currentShopLocation][shopItemsAux.IndexOf(item)] ? ": bought" : ": not bought"));
             for (int i = 0; i < list.Count(); i++)
             {
                 if (i == 0) id = 22;
@@ -1651,9 +1675,10 @@ namespace LiveSplit.UI.Components
         private void resetShopItems(int room)
         {
             IntPtr pointer;
-            List<int> list = shopOffsets[shopLocations.IndexOf(room)];
-            List<int> shopItemsAux = originalShopItems[shopLocations.IndexOf(room)];// Get list of original items for the current shop
-            List<int> shopItemsAux2 = shopItems[shopLocations.IndexOf(room)];// Get list of items of the current shop
+            int currentShopLocation = shopLocations.IndexOf(room);
+            List<int> list = shopOffsets[currentShopLocation];
+            List<int> shopItemsAux = originalShopItems[currentShopLocation];// Get list of original items for the current shop
+            List<int> shopItemsAux2 = shopItems[currentShopLocation];// Get list of items of the current shop
             int id, idAux = 22;
             byte[] bytes;
 
