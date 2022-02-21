@@ -421,6 +421,10 @@ namespace LiveSplit.UI.Components
             {
                 63, 111, 127, 160, 181, 187, 205
             };
+            shopLocations = new List<int>
+            {
+                0,0,0,0,0,0,0
+            };
             //Karst City, Forlorn Monsatery, Subterranean Grave, Whiteleaf Memorial Park, Cinder Chambers 1, Cinder Chambers 2, Royal Pinacotheca
             originalShopItems = new List<List<int>>
             {
