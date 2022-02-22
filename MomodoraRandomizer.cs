@@ -425,6 +425,7 @@ namespace LiveSplit.UI.Components
             {
                 0,0,0,0,0,0,0
             };
+            */
             //Karst City, Forlorn Monsatery, Subterranean Grave, Whiteleaf Memorial Park, Cinder Chambers 1, Cinder Chambers 2, Royal Pinacotheca
             originalShopItems = new List<List<int>>
             {
@@ -700,11 +701,9 @@ namespace LiveSplit.UI.Components
                 }
                 placedItems.Add(27);
                 #endregion
-
-                //8: Dirty Shroom
+                //8: Dirty Shroom - don't randomize, just update requirement matrix
                 #region dirty shroom
-                index = nextIndex((int)Items.DirtyShroom);
-                createMemoryWatcher((int)Items.DirtyShroom, possibleSources[index]);
+                index = 24;
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
                     if (requirementLists[i].Contains(index))
@@ -713,7 +712,6 @@ namespace LiveSplit.UI.Components
                         requirementMatrix[7, i] = true;
                     }
                 }
-                placedItems.Add(24);
                 #endregion
 
                 //8.5: Sealed Wind
@@ -1042,10 +1040,12 @@ namespace LiveSplit.UI.Components
             if (!settingsControl.VitalityFragmentsEnabled) bannedSources.AddRange(vitalityFragments);
             if (!settingsControl.IvoryBugsEnabled) bannedSources.AddRange(ivoryBugs);
             if (!settingsControl.HardModeEnabled) bannedSources.AddRange(bossItems);
-            //Arsonist boss item doesn't work if you get it from somewhere else
+            //Pocket incensory and Dirty Shroom don't work all the time when randomizing
             bannedSources.Add(34);
             bannedSources.Add(19);
+            bannedSources.Add(24);
             //disabled shop items for now
+            /*
             bannedSources.Add(8);
             bannedSources.Add(9);
             bannedSources.Add(10);
@@ -1057,6 +1057,7 @@ namespace LiveSplit.UI.Components
             bannedSources.Add(16);
             bannedSources.Add(17);
             bannedSources.Add(18);
+            */
         }
 
         private void updatePossibleSources()
@@ -1091,8 +1092,11 @@ namespace LiveSplit.UI.Components
             RandomizerLabel.Text = "New item: " + Enum.GetName(typeof(Items), id);
             removeItem();
             Debug.WriteLine("Giving item id: " + id);
+            
             int allocatedMemory = gameProc.ReadValue<int>(IntPtr.Subtract(inventoryItemsStartPointer, 0x10));
+            Debug.WriteLine("Allocated memory: " + allocatedMemory);
             int totalItems = (int)gameProc.ReadValue<double>(totalItemsPointer);
+            Debug.WriteLine("Total items: " + totalItems);
 
             if (id == (int)Items.IvoryBug)
             {
@@ -1845,7 +1849,6 @@ namespace LiveSplit.UI.Components
             {
                 inGameWatcher.Update(gameProc);
                 if (inGame) {
-                    Debug.WriteLine(gameProc.ReadValue<int>(totalItemsPointer));
                     updateSpecialWatchers();
                     foreach (var watcher in randoSourceWatchers)
                     {
@@ -1856,9 +1859,6 @@ namespace LiveSplit.UI.Components
                         UpdateItemWatchers();
                         itemGiven--;
                     }
-                    SetupItemPtrs();
-                    int ballocatedMemory = gameProc.ReadValue<int>(IntPtr.Subtract(inventoryItemsStartPointer, 0x10));
-                    Debug.WriteLine(ballocatedMemory);
                     if (queuedItems.Count > 0)
                     {
                         Debug.WriteLine(queuedItems.Count + " items in the queue");
