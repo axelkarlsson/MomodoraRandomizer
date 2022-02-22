@@ -205,7 +205,6 @@ namespace LiveSplit.UI.Components
             CinderChambers_2 = 5,
             RoyalPinacotheca = 6,
         }
-        private Queue<int> queuedItems;
 
         const int RANDOMIZER_SOURCE_AMOUNT = 83;
 
@@ -425,7 +424,6 @@ namespace LiveSplit.UI.Components
             {
                 0,0,0,0,0,0,0
             };
-            */
             //Karst City, Forlorn Monsatery, Subterranean Grave, Whiteleaf Memorial Park, Cinder Chambers 1, Cinder Chambers 2, Royal Pinacotheca
             originalShopItems = new List<List<int>>
             {
@@ -524,7 +522,6 @@ namespace LiveSplit.UI.Components
                 warpsActive = new List<double> { 0, 0, 0, 0, 0, 0, 0, 0 };
                 hasWarp = false;
                 hasSavedWarp = false;
-                queuedItems = new Queue<int>();
 
                 resetSources();
                 updateBannedSources();
@@ -993,7 +990,7 @@ namespace LiveSplit.UI.Components
                         if (current == 1 && sourceToLevelMapping[newSourceAddressIndex].Contains(levelID))
                         {
                             hasBathedLeaf = true;
-                            newItem(giveItemID);
+                            newItem(giveItemID,potentialSourcesPointers[newSourceAddressIndex]);
                         }
                     };
                 }
@@ -1004,7 +1001,7 @@ namespace LiveSplit.UI.Components
                         int levelID = gameProc.ReadValue<int>(levelIDPointer);
                         if (current == 1 && sourceToLevelMapping[newSourceAddressIndex].Contains(levelID))
                         {
-                            newItem(giveItemID);
+                            newItem(giveItemID, potentialSourcesPointers[newSourceAddressIndex]);
                         }
                     };
                 }
@@ -1086,8 +1083,9 @@ namespace LiveSplit.UI.Components
 
         #region add/remove items
         //Use newItem to give out an item [with charges] and remove the last item acquired
-        private void newItem(int id, int addCharges = 2)
+        private bool newItem(int id, IntPtr addr, int addCharges = 2)
         {
+            bool res = true;
             SetupItemPtrs();
             RandomizerLabel.Text = "New item: " + Enum.GetName(typeof(Items), id);
             removeItem();
@@ -1095,7 +1093,7 @@ namespace LiveSplit.UI.Components
             
             int allocatedMemory = gameProc.ReadValue<int>(IntPtr.Subtract(inventoryItemsStartPointer, 0x10));
             Debug.WriteLine("Allocated memory: " + allocatedMemory);
-            int totalItems = (int)gameProc.ReadValue<double>(totalItemsPointer);
+            int totalItems = gameProc.ReadValue<int>(totalItemsPointer);
             Debug.WriteLine("Total items: " + totalItems);
 
             if (id == (int)Items.IvoryBug)
@@ -1135,51 +1133,15 @@ namespace LiveSplit.UI.Components
             }
             else
             {
-                Debug.WriteLine("Enqueueing " + id);
-                queuedItems.Enqueue(id);
+                if (addr != IntPtr.Zero) gameProc.WriteValue<double>(addr, 0);
+                RandomizerLabel.Text = "Item was not picked up";
+                res = false;
             }
             itemGiven = 3;
+            return res;
         }
 
-        private void newQueuedItem(int id, int addCharges = 2)
-        {
-            RandomizerLabel.Text = "New item: " + Enum.GetName(typeof(Items), id);
-            Debug.WriteLine("Giving queued item id: " + id);
-            if (id == (int)Items.IvoryBug)
-            {
-                addIvoryBug();
-            }
-            else if ((int)Items.FragmentWarp >= id && id >= (int)Items.FragmentBowPow)
-            {
-                addCrestFragment(id);
-                if (id == 53)
-                {
-                    hasWarp = true;
-                }
-            }
-            else if (id == (int)Items.VitalityFragment)
-            {
-                addVitalityFragment();
-            }
-            else if (id == (int)Items.Bellflower || id == (int)Items.Passiflora || id == (int)Items.TaintedMissive)
-            {
-                addChargeItem(id, addCharges);
-            }
-            else if (id == (int)Items.MonasteryKey || id == (int)Items.GardenKey || id == (int)Items.CinderKey)
-            {
-                addKey(id);
-            }
-            else if (id == (int)Items.FreshSpringLeaf)
-            {
-                addLeaf();
-            }
-            else
-            {
-                addItem(id);
-            }
-            itemGiven = 3;
-        }
-
+      
         private void addLeaf()
         {
             gameProc.WriteValue<double>(potentialSourcesPointers[28], 1);
@@ -1562,7 +1524,7 @@ namespace LiveSplit.UI.Components
 
                 removePlaceholders(room);// remove all placeholders (avoid weird situations)
                 addItem((int)placeholderId);
-                newItem(shopItemsAux[idPos]);
+                newItem(shopItemsAux[idPos],IntPtr.Zero);
                 addPlaceholders(room);// re-add placeholders
                 Debug.WriteLine("At shop " + Enum.GetName(typeof(shops), currentShopLocation));
                 foreach (var item in shopItems[currentShopLocation])
@@ -1858,20 +1820,6 @@ namespace LiveSplit.UI.Components
                     {
                         UpdateItemWatchers();
                         itemGiven--;
-                    }
-                    if (queuedItems.Count > 0)
-                    {
-                        Debug.WriteLine(queuedItems.Count + " items in the queue");
-                        SetupItemPtrs();
-                        int allocatedMemory = gameProc.ReadValue<int>(IntPtr.Subtract(inventoryItemsStartPointer, 0x10));
-                        Debug.WriteLine(allocatedMemory);
-                        int totalItems = (int)gameProc.ReadValue<double>(totalItemsPointer);
-                        while (totalItems * 16 != allocatedMemory)
-                        {
-                            newItem(queuedItems.Dequeue());
-                            allocatedMemory = gameProc.ReadValue<int>(IntPtr.Subtract(inventoryItemsStartPointer, 0x10));
-                            totalItems = (int)gameProc.ReadValue<double>(totalItemsPointer);
-                        }
                     }
                 }
 
