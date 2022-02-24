@@ -539,7 +539,7 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.CatSphere, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index)) requirementMatrix[0,i] = true;
+                    if (requirementLists[i].Contains(possibleSources[index])) requirementMatrix[0,i] = true;
                 }
                 placedItems.Add(25);
                 #endregion
@@ -550,7 +550,7 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.FragmentBowPow, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index))
+                    if (requirementLists[i].Contains(possibleSources[index]))
                     {
                         for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[1, j] = requirementMatrix[i, j];
                         requirementMatrix[1, i] = true;
@@ -562,7 +562,7 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.FragmentBowQuick, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index))
+                    if (requirementLists[i].Contains(possibleSources[index]))
                     {
                         for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[1, j] = requirementMatrix[i, j];
                         requirementMatrix[1, i] = true;
@@ -574,7 +574,7 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.FragmentDash, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index))
+                    if (requirementLists[i].Contains(possibleSources[index]))
                     {
                         for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[1, j] = requirementMatrix[i, j];
                         requirementMatrix[1, i] = true;
@@ -586,7 +586,7 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.FragmentWarp, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index))
+                    if (requirementLists[i].Contains(possibleSources[index]))
                     {
                         for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[1, j] = requirementMatrix[i, j];
                         requirementMatrix[1, i] = true;
@@ -608,7 +608,7 @@ namespace LiveSplit.UI.Components
 
                     for (int i = 0; i < requirementLists.Count; i++)
                     {
-                        if (requirementLists[i].Contains(index))
+                        if (requirementLists[i].Contains(possibleSources[index]))
                         {
                             for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[2, j] = requirementMatrix[i, j];
                             requirementMatrix[2, i] = true;
@@ -631,7 +631,7 @@ namespace LiveSplit.UI.Components
                     createMemoryWatcher((int)Items.GardenKey, possibleSources[index]);
                     for (int i = 0; i < requirementLists.Count; i++)
                     {
-                        if (requirementLists[i].Contains(index))
+                        if (requirementLists[i].Contains(possibleSources[index]))
                         {
                             for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[2, j] = requirementMatrix[i, j];
                             requirementMatrix[2, i] = true;
@@ -647,7 +647,7 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.CinderKey, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index))
+                    if (requirementLists[i].Contains(possibleSources[index]))
                     {
                         for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[3, j] = requirementMatrix[i, j];
                         requirementMatrix[3, i] = true;
@@ -662,7 +662,7 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.MonasteryKey, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index))
+                    if (requirementLists[i].Contains(possibleSources[index]))
                     {
                         for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[4, j] = requirementMatrix[i, j];
                         requirementMatrix[4, i] = true;
@@ -677,7 +677,7 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.HazelBadge, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index))
+                    if (requirementLists[i].Contains(possibleSources[index]))
                     {
                         for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[5, j] = requirementMatrix[i, j];
                         requirementMatrix[5, i] = true;
@@ -692,7 +692,7 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.SoftTissue, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index))
+                    if (requirementLists[i].Contains(possibleSources[index]))
                     {
                         for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[6, j] = requirementMatrix[i, j];
                         requirementMatrix[6, i] = true;
@@ -705,7 +705,7 @@ namespace LiveSplit.UI.Components
                 index = 24;
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index))
+                    if (requirementLists[i].Contains(possibleSources[index]))
                     {
                         for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[7, j] = requirementMatrix[i, j];
                         requirementMatrix[7, i] = true;
@@ -719,7 +719,7 @@ namespace LiveSplit.UI.Components
                 createMemoryWatcher((int)Items.SealedWind, possibleSources[index]);
                 for (int i = 0; i < requirementLists.Count; i++)
                 {
-                    if (requirementLists[i].Contains(index))
+                    if (requirementLists[i].Contains(possibleSources[index]))
                     {
                         for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[8, j] = requirementMatrix[i, j];
                         requirementMatrix[8, i] = true;

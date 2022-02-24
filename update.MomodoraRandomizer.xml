@@ -1,4 +1,12 @@
 ﻿<updates>
+  <update version="1.0.7">
+    <files>
+      <file path="Components/MomodoraRandomizer.dll" status="changed"/>
+    </files>
+    <changelog>
+      <change> Fixed a logic issue where it would not correctly recognize that an item is placed in a location where it requires something else</change>
+    </changelog>
+  </update>
   <update version="1.0.6">
     <files>
       <file path="Components/MomodoraRandomizer.dll" status="changed"/>
