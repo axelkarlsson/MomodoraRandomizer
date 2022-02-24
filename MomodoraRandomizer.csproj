@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ItemTrackerConnection.cs" />
     <Compile Include="MomodoraRandomizer.cs" />
     <Compile Include="MomodoraRandomizerFactory.cs" />
     <Compile Include="MomodoraRandomizerSettings.cs">

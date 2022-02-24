@@ -15,6 +15,7 @@ namespace LiveSplit.UI.Components
 {
     public class MomodoraRandomizer : IComponent
     {
+        private ItemTrackerConnection itemTracker;
         public enum Items : int
         {
             AdornedRing = 1,
@@ -371,6 +372,7 @@ namespace LiveSplit.UI.Components
             possibleSources = new List<int>();
             impossibleSources = new List<int>();
             placedItems = new List<int>();
+            itemTracker = new ItemTrackerConnection("http://localhost:8000/tracker/momo4");
 
             vitalityFragments = new List<int>();
             for (int i = 39; i <= 55; i++)
@@ -472,7 +474,7 @@ namespace LiveSplit.UI.Components
                 }
 
                 Debug.WriteLine("Using seed " + seed);
-
+                itemTracker.set_bool("Passiflora", true);
                 hasSavedChargeItem = new List<bool> { false, false, false };
                 hasChargeItem = new List<bool> { false, false, false };
                 hasSavedKey = new List<int> { 0, 0, 0 };
