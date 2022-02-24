@@ -1,4 +1,13 @@
 ﻿<updates>
+  <update version="1.0.6">
+    <files>
+      <file path="Components/MomodoraRandomizer.dll" status="changed"/>
+    </files>
+    <changelog>
+      <change> Fixed an issue when picking up more items than the game had currently allocated inventory space for. Picking up more items than you can currently carry will place the item back on the ground.</change>
+      <change> Changed Lubella 2 anti-softlock to change you into human form when you exit and back into cat form if you try to go back to the post-Lubella 2 area</change>
+    </changelog>
+  </update>
     <update version="1.0.5">
     <files>
       <file path="Components/MomodoraRandomizer.dll" status="changed"/>
