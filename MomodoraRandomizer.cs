@@ -328,6 +328,8 @@ namespace LiveSplit.UI.Components
         private bool hasSavedFoundGreenLeaf;
         private bool hasBathedLeaf;
         private bool hasSavedBathedLeaf;
+        private bool hasCatSphere;
+        private bool hasSavedCatSphere;
 
         List<List<int>> doorLocations;
         private double unlocked;
@@ -930,6 +932,7 @@ namespace LiveSplit.UI.Components
             hasSavedBathedLeaf = hasBathedLeaf;
             hasSavedFoundGreenLeaf = hasFoundGreenLeaf;
             hasSavedWarp = hasWarp;
+            hasSavedCatSphere = hasCatSphere;
         }
 
         private void loadSavedVariables()
@@ -950,6 +953,7 @@ namespace LiveSplit.UI.Components
             hasWarp = hasSavedWarp;
             hasBathedLeaf = hasSavedBathedLeaf;
             hasFoundGreenLeaf = hasSavedFoundGreenLeaf;
+            hasCatSphere = hasSavedCatSphere;
         }
 
         private int nextIndex(int itemId = 0)
@@ -1042,7 +1046,6 @@ namespace LiveSplit.UI.Components
             bannedSources.Add(19);
             bannedSources.Add(24);
             //disabled shop items for now
-            /*
             bannedSources.Add(8);
             bannedSources.Add(9);
             bannedSources.Add(10);
@@ -1054,7 +1057,6 @@ namespace LiveSplit.UI.Components
             bannedSources.Add(16);
             bannedSources.Add(17);
             bannedSources.Add(18);
-            */
         }
 
         private void updatePossibleSources()
@@ -1269,6 +1271,7 @@ namespace LiveSplit.UI.Components
             //and set the inventory value for the next item slot to the id of the item given
             SetupItemPtrs();
             var totalItemAmount = gameProc.ReadValue<int>(totalItemsPointer);
+            if (id == (int)Items.CatSphere) hasCatSphere = true;
             gameProc.WriteValue<int>(totalItemsPointer, (int)totalItemAmount + 1);
             gameProc.WriteValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * totalItemAmount), id);
         }
@@ -1384,17 +1387,43 @@ namespace LiveSplit.UI.Components
             }
             #endregion
 
-            #region Warp logic
-            if (current == 154 && !hasWarp)// If they are after Lubella 2 and dont have the warps fragment
+            #region LubellaAntiSoftlock
+            if(current == 149) Debug.WriteLine("room for anti-lubella softlock");
+            if (current == 149 && !hasCatSphere && !hasWarp)
             {
-                Debug.WriteLine("Lubella 2 anti softlock");
-                antiSoftlock();
+                Debug.WriteLine("Don't have tools");
+                switch (gameProc.MainModule.ModuleMemorySize)
+                {
+                    case 39690240:
+                        playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x120);
+                        playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                        break;
+                    case 40222720:
+                        playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x120);
+                        playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                        break;
+                }
+
+                playerYWatcher = new MemoryWatcher<double>(playerYPointer);
+                playerYWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                playerYWatcher.Enabled = true;
+                playerYWatcher.OnChanged += (oldVal, currentVal) =>
+                {
+    
+                    double playerXPos = gameProc.ReadValue<double>(playerXPointer);
+                    Debug.WriteLine(playerXPos + "   " + currentVal);
+                    if (currentVal > 180 && playerXPos > 120)
+                    {
+                        gameProc.WriteValue<double>(playerFormPointer, 1);
+                    }
+                    else
+                    {
+                        gameProc.WriteValue<double>(playerFormPointer, 0);
+                    }
+                };
+
             }
-            else if (old == 154 && !hasWarp)
-            {
-                Debug.WriteLine("Lubella 2 remove anti softlock");
-                Softlock();
-            };
+            else if (old == 149) playerYWatcher.Enabled = false;
             #endregion
 
             #region Green Leaf logic
@@ -1433,7 +1462,7 @@ namespace LiveSplit.UI.Components
                 };
 
             }
-            else playerYWatcher.Enabled = false;
+            else if (old == 82) playerYWatcher.Enabled = false;
             #endregion
         }
 
@@ -1472,19 +1501,6 @@ namespace LiveSplit.UI.Components
                 {
                     Debug.WriteLine("adding placeholder items");
                     addPlaceholders(room);
-                }
-            }
-            else if(room == 154 && !hasWarp)
-            {
-                if (current == 1)// If inventory is open remove Warp Fragment
-                {
-                    Debug.WriteLine("Lubella 2 remove anti softlock");
-                    Softlock();
-                }
-                else if (current == 0)// If inventory is closed place Warp Fragment back
-                {
-                    Debug.WriteLine("Lubella 2 anti softlock");
-                    antiSoftlock();
                 }
             }
         }
@@ -1688,31 +1704,6 @@ namespace LiveSplit.UI.Components
             }
         }
 
-        private void antiSoftlock()
-        {
-            Debug.WriteLine("Adding Warp fragment");
-            addCrestFragment(53);
-            Debug.WriteLine("Restricting Warp locations");
-            for (int i = 0; i < 8; i++)
-            {
-                warpsActive[i] = gameProc.ReadValue<double>(warpStartPointer + (0x10 * i));
-                gameProc.WriteValue<double>(warpStartPointer + (0x10 * i), 0);
-            }
-            gameProc.WriteValue<double>(warpStartPointer + 0x40, 1);
-        }
-
-        private void Softlock()
-        {
-            Debug.WriteLine("Removing Warp fragment");
-            removeCrestFragment();
-            Debug.WriteLine("Restoring Warp locations");
-            for (int i = 0; i < 8; i++)
-            {
-                gameProc.WriteValue<double>(warpStartPointer + (0x10 * i), warpsActive[i]);
-            }
-            Debug.WriteLine("Changing player form to human");
-            gameProc.WriteValue<double>(playerFormPointer, 0);
-        }
 
         public string ComponentName => "Momodora Randomizer";
 
