@@ -206,7 +206,8 @@ namespace LiveSplit.UI.Components
             {
                 DialogResult dialogResult = System.Windows.Forms.MessageBox.Show(
                                 "Key Items can drop from boss fights." +
-                                "\n\nTip: you can enter Whiteleaf Memorial Park through Cinder Chambers using Backman Patch\n\n",
+                                "\n\nTip: you can enter Whiteleaf Memorial Park through Cinder Chambers using Backman Patch\n\n" +
+                                "Enable?",
                                 "Hard Mode",
                                 MessageBoxButtons.OKCancel);
                 if (dialogResult == DialogResult.OK)
@@ -229,12 +230,13 @@ namespace LiveSplit.UI.Components
         private void LogWarning()
         {
             DialogResult dialogResult = System.Windows.Forms.MessageBox.Show(
-                                "With this option enabled a log file will be generated upon stoping the timer.\n" +
-                                "This file will be located in the \"Components\" folder inside LiveSplit with" +
-                                " the name MomodoraRandomizer.log. Each subsequent run will overwrite this file.\n" +
-                                "This file will contain important events that occur during a run and nothing else.\n\n",
-                                "Event logging system",
-                                MessageBoxButtons.OKCancel);
+                    "With this option enabled a log file will be generated upon stoping the timer.\n" +
+                    "This file will be located in the \"Components\" folder inside LiveSplit with" +
+                    " the name MomodoraRandomizer.log. Each subsequent run will overwrite this file.\n" +
+                    "This file will contain important events that occur during a run but are only useful for debugging purposes.\n\n" +
+                    "Enable?",
+                    "Event logging system",
+                    MessageBoxButtons.OKCancel);
             showLogWarning = false;
             if(dialogResult == DialogResult.OK)
                 chkLog.Checked = true;
