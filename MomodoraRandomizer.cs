@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using LiveSplit.ComponentUtil;
 using LiveSplit.Model;
 using System.Drawing.Drawing2D;
+using System.IO;
 
 namespace LiveSplit.UI.Components
 {
@@ -81,6 +82,7 @@ namespace LiveSplit.UI.Components
         private Process gameProc = null;
         private Random randomGenerator = null;
         private int seed = 0;
+        private double gameVersion;
         private MomodoraRandomizerSettings settingsControl;
         public LiveSplitState state;
 
@@ -137,6 +139,43 @@ namespace LiveSplit.UI.Components
             [36] = (int)Items.TaintedMissive,
             [37] = (int)Items.BloodstainedTissue,
             [38] = (int)Items.HeavyArrows,
+            [39] = (int)Items.VitalityFragment,
+            [40] = (int)Items.VitalityFragment,
+            [41] = (int)Items.VitalityFragment,
+            [42] = (int)Items.VitalityFragment,
+            [43] = (int)Items.VitalityFragment,
+            [44] = (int)Items.VitalityFragment,
+            [45] = (int)Items.VitalityFragment,
+            [46] = (int)Items.VitalityFragment,
+            [47] = (int)Items.VitalityFragment,
+            [48] = (int)Items.VitalityFragment,
+            [49] = (int)Items.VitalityFragment,
+            [50] = (int)Items.VitalityFragment,
+            [51] = (int)Items.VitalityFragment,
+            [52] = (int)Items.VitalityFragment,
+            [53] = (int)Items.VitalityFragment,
+            [54] = (int)Items.VitalityFragment,
+            [55] = (int)Items.VitalityFragment,
+            [56] = (int)Items.IvoryBug,
+            [57] = (int)Items.IvoryBug,
+            [58] = (int)Items.IvoryBug,
+            [59] = (int)Items.IvoryBug,
+            [60] = (int)Items.IvoryBug,
+            [61] = (int)Items.IvoryBug,
+            [62] = (int)Items.IvoryBug,
+            [63] = (int)Items.IvoryBug,
+            [64] = (int)Items.IvoryBug,
+            [65] = (int)Items.IvoryBug,
+            [66] = (int)Items.IvoryBug,
+            [67] = (int)Items.IvoryBug,
+            [68] = (int)Items.IvoryBug,
+            [69] = (int)Items.IvoryBug,
+            [70] = (int)Items.IvoryBug,
+            [71] = (int)Items.IvoryBug,
+            [72] = (int)Items.IvoryBug,
+            [73] = (int)Items.IvoryBug,
+            [74] = (int)Items.IvoryBug,
+            [75] = (int)Items.IvoryBug,
             [80] = (int)Items.Bellflower,
             [82] = (int)Items.Passiflora
         };
@@ -226,6 +265,10 @@ namespace LiveSplit.UI.Components
             [81] = new int[] { 163 },
             [82] = new int[] { 163 },
         };
+        #endregion
+
+        #region log	
+        private List<string> Events;
         #endregion
 
         private List<int> vitalityFragments;
@@ -461,6 +504,7 @@ namespace LiveSplit.UI.Components
                     ResetShopItems(room);
                 }
             }
+            logResults();
         }
 
         private void OnStart(object sender, EventArgs e)
@@ -531,6 +575,7 @@ namespace LiveSplit.UI.Components
                 };
                 hasWarp = false;
                 hasSavedWarp = false;
+                Events = new List<string> { };
 
                 ResetSources();
                 UpdateBannedSources();
@@ -720,7 +765,7 @@ namespace LiveSplit.UI.Components
                 placedItems.Add(27);
                 #endregion
 
-                //8.5: Sealed Wind
+                //8: Sealed Wind
                 #region sealed wind
                 index = NextIndex((int)Items.SealedWind);
                 CreateMemoryWatcher((int)Items.SealedWind, possibleSources[index]);
@@ -739,6 +784,7 @@ namespace LiveSplit.UI.Components
                 #region Ivory Bugs
                 if (settingsControl.IvoryBugsEnabled)
                 {
+                    Event("\nIvory Bug randomization enabled\n");
                     for (int i = 56; i < 76; i++)
                     {
                         index = NextIndex((int)Items.IvoryBug);
@@ -746,12 +792,14 @@ namespace LiveSplit.UI.Components
                         placedItems.Add(i);
                     }
                 }
+                else Event("\nIvory Bug randomization disabled\n");
                 #endregion
 
                 //10. Place vitality fragments
                 #region vitality fragments
                 if (settingsControl.VitalityFragmentsEnabled)
                 {
+                    Event("\nVitality Fragment randomization enabled\n");
                     for (int i = 39; i < 56; i++)
                     {
                         index = NextIndex();
@@ -759,6 +807,7 @@ namespace LiveSplit.UI.Components
                         placedItems.Add(i);
                     }
                 }
+                else Event("Vitality Fragment randomization disabled\n");
                 #endregion
 
                 //11. Rest of items
@@ -924,44 +973,68 @@ namespace LiveSplit.UI.Components
 
         private void SaveVariables()
         {
-            Debug.WriteLine("Saving variables");
+            Event("\nSaving variables\n");
+            Events.Add("Item Charges & keys:\n");
             for (int i = 0; i < hasChargeItem.Count(); i++)
             {
+                Events.Add("SavedChargeItem[" + i+"]: " + hasSavedChargeItem[i] + " = ChargeItem["+i+"]: " + hasChargeItem[i] + "\n");
+                Events.Add("SavedKey["+i+"]: " + hasSavedKey[i] + " = Key["+i+"]: " + hasKey[i] + "\n");
                 hasSavedChargeItem[i] = hasChargeItem[i];
                 hasSavedKey[i] = hasKey[i];
             }
+            Events.Add("\nShop items:\n");
             for (int i = 0; i < hasBoughtItem.Count(); i++)
             {
+                Events.Add("\n" + Enum.GetName(typeof(shops), i) + " shop:\n");
                 for (int j = 0; j < hasBoughtItem[i].Count(); j++)
                 {
+                    Events.Add("SavedItemBought["+i+"]["+j+"]: " + hasSavedBoughtItem[i][j] +
+                               " = ItemBought["+i+"]["+j+"]: " + hasBoughtItem[i][j] + "\n");
                     hasSavedBoughtItem[i][j] = hasBoughtItem[i][j];
                 }
             }
+            Events.Add("\nSavedLeafBathed: " + hasSavedBathedLeaf + " = LeafBathed: " + hasBathedLeaf + "\n");
             hasSavedBathedLeaf = hasBathedLeaf;
+            Events.Add("SavedLeafFound: " + hasSavedFoundGreenLeaf + " = LeafFound: " + hasFoundGreenLeaf + "\n");
             hasSavedFoundGreenLeaf = hasFoundGreenLeaf;
+            Events.Add("SavedhasWarp: " + hasSavedWarp + " = hasWarp: " + hasWarp + "\n");
             hasSavedWarp = hasWarp;
+            Events.Add("SavedhasCatSphere: " + hasSavedCatSphere + " = hasCatSphere: " + hasCatSphere + "\n");
             hasSavedCatSphere = hasCatSphere;
+            Events.Add("\nFinished saving variables\n");
         }
 
         private void LoadVariables()
         {
-            Debug.WriteLine("Loading saved variables");
+            Event("\nLoading saved variables\n");
+            Events.Add("Item Charges & keys:\n");
             for (int i = 0; i < hasChargeItem.Count(); i++)
             {
+                Events.Add("ChargeItem["+i+"]: " + hasChargeItem[i] + " = SavedChargeItem["+i+"]: " + hasSavedChargeItem[i] + "\n");
+                Events.Add("Key["+i+"]: " + hasKey[i] +  " = SavedKey["+i+"]: " + hasSavedKey[i] + "\n");
                 hasChargeItem[i] = hasSavedChargeItem[i];
                 hasKey[i] = hasSavedKey[i];
             }
+            Events.Add("\nShop items:\n");
             for (int i = 0; i < hasBoughtItem.Count(); i++)
             {
+                Events.Add("\n" + Enum.GetName(typeof(shops), i) + " shop:\n");
                 for (int j = 0; j < hasBoughtItem[i].Count(); j++)
                 {
+                    Events.Add("hasBoughtItem["+i+"]["+j+"]: " + hasBoughtItem[i][j] + 
+                               " = Saved["+i+"]["+j+"]: " + hasSavedBoughtItem[i][j] + "\n");
                     hasBoughtItem[i][j] = hasSavedBoughtItem[i][j];
                 }
             }
-            hasWarp = hasSavedWarp;
+            Events.Add("LeafBathed: " + hasBathedLeaf + " = SavedLeafBathed: " + hasSavedFoundGreenLeaf + "\n");
             hasBathedLeaf = hasSavedBathedLeaf;
+            Events.Add("LeafFound: " + hasFoundGreenLeaf + " = SavedLeafFound: " + hasSavedWarp + "\n");
             hasFoundGreenLeaf = hasSavedFoundGreenLeaf;
+            Events.Add("hasWarp: " + hasWarp + " = SavedSavedhasWarp: " + hasSavedBathedLeaf + "\n");
+            hasWarp = hasSavedWarp;
+            Events.Add("hasCatSphere: " + hasCatSphere + " = SavedhasCatSphere: " + hasSavedCatSphere + "\n");
             hasCatSphere = hasSavedCatSphere;
+            Events.Add("\nFinished loading variables\n");
         }
 
         private int NextIndex(int itemId = 0)
@@ -991,7 +1064,10 @@ namespace LiveSplit.UI.Components
             }
             else
             {
-                Debug.WriteLine("Item " + Enum.GetName(typeof(Items), giveItemID) + " generated at position " + newSourceAddressIndex);
+                if(sourceIdMapping.ContainsKey(newSourceAddressIndex))
+                    Debug.WriteLine("Item " + Enum.GetName(typeof(Items), giveItemID) + " generated at " + Enum.GetName(typeof(Items), sourceIdMapping[newSourceAddressIndex]));
+                else
+                    Debug.WriteLine("Item " + Enum.GetName(typeof(Items), giveItemID) + " generated at position " + newSourceAddressIndex);
                 MemoryWatcher<double> temp = new MemoryWatcher<double>(potentialSourcesPointers[newSourceAddressIndex]);
                 temp.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
                 if (potentialSourcesPointers[newSourceAddressIndex] == potentialSourcesPointers[28])
@@ -1148,10 +1224,11 @@ namespace LiveSplit.UI.Components
             else
             {
                 if (addr != IntPtr.Zero) gameProc.WriteValue<double>(addr, 0);
-                RandomizerLabel.Text = "Item was not picked up";
                 res = false;
             }
             itemGiven = 3;
+            if(res == true) Event("\nItem " + id + " given, total items: " + totalItems + "\n");
+            else Event("\nUnable to give item " + id + ", total items: " + totalItems + "\n");
             return res;
         }
       
@@ -1168,40 +1245,41 @@ namespace LiveSplit.UI.Components
 
             if (taintedMissiveWatcher.Changed)
             {
-                Debug.WriteLine("Removing missive");
+                Event("Removing missive\n");
                 RemoveChargeItem((int)Items.TaintedMissive, taintedMissiveWatcher.Current - taintedMissiveWatcher.Old);
             }
             else if (bellflowerWatcher.Changed)
             {
-                Debug.WriteLine("Removing bellflower");
+                Event("\nRemoving bellflower\n");
                 RemoveChargeItem((int)Items.Bellflower, bellflowerWatcher.Current - bellflowerWatcher.Old);
             }
             else if (passifloraWatcher.Changed)
             {
-                Debug.WriteLine("Removing passi");
+                Event("\nRemoving passiflora\n");
                 RemoveChargeItem((int)Items.Passiflora, passifloraWatcher.Current - passifloraWatcher.Old);
             }
             else if (ivoryBugWatcher.Changed)
             {
-                Debug.WriteLine("Removing IB");
+                Event("\nRemoving IB\n");
                 RemoveIvoryBug();
             }
             else if (crestFragmentWatcher.Changed)
             {
-                Debug.WriteLine("Removing Crest Frag");
+                Event("\nRemoving Crest Frag\n");
                 RemoveCrestFragment();
             }
             else if (vitalityFragmentWatcher.Changed)
             {
-                Debug.WriteLine("Removing Vit Frag");
+                Event("\nRemoving Vit Frag\n");
                 RemoveVitalityFragment();
             }
             else if (levelIDWatcher.Current == 83)
             {
-                Debug.WriteLine("Green leaf upgraded, do not remove stuff");
+                Event("\nGreen leaf upgraded, do not remove stuff\n");
             }
             else
             {
+                Event("\nRemoving last item in inventory\n");
                 RemoveLastItem();
             }
         }
@@ -1360,9 +1438,9 @@ namespace LiveSplit.UI.Components
         {
             int totalItems = gameProc.ReadValue<int>(totalItemsPointer);
             int fragments = 0;
-            for(int i = 0; i < totalItems; i++)
+            for (int i = 0; i < totalItems; i++)
             {
-                double itemId = gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer,0x10 * i));
+                double itemId = gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * i));
                 if ((int)Items.FragmentWarp >= itemId && itemId >= (int)Items.FragmentBowPow)
                 {
                     fragments++;
@@ -1393,6 +1471,8 @@ namespace LiveSplit.UI.Components
 
                     if (unlocked != hasKey[i])//If the state of "key acquired" is different than it should be invert value
                     {
+                        Event("\nApplying door logic\n");
+                        Event("Door " + ((unlocked == 1) ? "closed" : "opened") + "\n");
                         gameProc.WriteValue<double>(potentialSourcesPointers[j], 1-unlocked);//1-0=1; 1-1=0
                     }
                 }
@@ -1416,16 +1496,16 @@ namespace LiveSplit.UI.Components
 
             #region LubellaAntiSoftlock
             bool lubellaDefeated = Convert.ToBoolean(gameProc.ReadValue<double>(lubella2Pointer));
-            if (current == 149 && lubellaDefeated && !hasCatSphere && !hasWarp )
+            if (current == 149 && lubellaDefeated && !hasCatSphere && !hasWarp)
             {
-                Debug.WriteLine("Don't have tools");
-                switch (gameProc.MainModule.ModuleMemorySize)
+                Event("\nApplying antisoftlock logic\n");
+                switch (gameVersion)
                 {
-                    case 39690240:
+                    case 1.05:
                         playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x120);
                         playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
                         break;
-                    case 40222720:
+                    case 1.07:
                         playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x120);
                         playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
                         break;
@@ -1436,10 +1516,9 @@ namespace LiveSplit.UI.Components
                 playerYWatcher.Enabled = true;
                 playerYWatcher.OnChanged += (oldVal, currentVal) =>
                 {
-    
                     double playerXPos = gameProc.ReadValue<double>(playerXPointer);
                     Debug.WriteLine(playerXPos + "   " + currentVal);
-                    if (currentVal > 180 && playerXPos > 120)
+                    if (currentVal > 195 && playerXPos > 120)
                     {
                         gameProc.WriteValue<double>(playerFormPointer, 1);
                     }
@@ -1450,25 +1529,30 @@ namespace LiveSplit.UI.Components
                 };
 
             }
-            else if (old == 149) playerYWatcher.Enabled = false;
+            else if (old == 149)
+            {
+                playerYWatcher.Enabled = false;
+                Event("\nEnding antisoftlock logic\n");
+            }
             #endregion
 
             #region Green Leaf logic
             //y/x pointers change each room, need to set it up again when entering the correct room
             if (current == 82)
             {
-                switch (gameProc.MainModule.ModuleMemorySize)
+                switch (gameVersion)
                 {
-                    case 39690240:
+                    case 1.05:
                         playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x120);
                         playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
                         break;
-                    case 40222720:
+                    case 1.07:
                         playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x120);
                         playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
                         break;
                 }
 
+                Event("\nApplying green leaf logic\n");
                 playerYWatcher = new MemoryWatcher<double>(playerYPointer);
                 playerYWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
                 playerYWatcher.Enabled = true;
@@ -1489,7 +1573,11 @@ namespace LiveSplit.UI.Components
                 };
 
             }
-            else if (old == 82) playerYWatcher.Enabled = false;
+            else if (old == 82)
+            {
+                playerYWatcher.Enabled = false;
+                Event("\nEnding green leaf logic\n");
+            }
             #endregion
         }
 
@@ -1499,14 +1587,14 @@ namespace LiveSplit.UI.Components
 
             if (shopLocations.Contains(room))// If player is in a shop room
             {
+                Event("\nEntered shop room\n");
                 if (current == 1)// If player is in a conversation with an npc (non shop npcs get handled by another function)
                 {
-                    Debug.WriteLine("Adding placeholders (in shop)");
+                    SetShopItems(room);
                     AddPlaceholders(room);
                 }
                 else
                 {
-                    Debug.WriteLine("Removing placeholders (in shop)");
                     RemovePlaceholders(room);
                 }
             }
@@ -1519,14 +1607,13 @@ namespace LiveSplit.UI.Components
 
             if (shopLocations.Contains(room) && inShop == 1)// If player is in a shop room and is shopping
             {
+                Event("\nOpened inventory while in shop\n");
                 if (current == 1)// If inventory is open remove all placeholder items for shops
                 {
-                    Debug.WriteLine("removing placeholder items");
                     RemovePlaceholders(room);
                 }
                 else// If its closed place items back
                 {
-                    Debug.WriteLine("adding placeholder items");
                     AddPlaceholders(room);
                 }
             }
@@ -1543,15 +1630,15 @@ namespace LiveSplit.UI.Components
                 int idPos = 0, itemAux;
 
                 int invSize = gameProc.ReadValue<int>(totalItemsPointer);// Get inventory size
-                Debug.WriteLine("Items " + invSize);
+                Event("\nCurrent items " + invSize + "\n");
                 int placeholderId = (int)gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * (invSize - 1)));// id of last aquired item
-                Debug.WriteLine("Last acquired item: " + placeholderId);
+                Event("Last acquired item: " + placeholderId + "\n");
                 // Index of last aquired item
                 if (placeholderId == 22) idPos = 0;
                 if (placeholderId == 29) idPos = 1;
                 if (placeholderId == 45) idPos = 2;
 
-                Debug.WriteLine("Item bought: " + Enum.GetName(typeof(Items), shopItems[currentShopLocation][idPos]));
+                Event("Item bought: " + Enum.GetName(typeof(Items), shopItems[currentShopLocation][idPos]) + "\n");
                 itemAux = originalShopItems[currentShopLocation][idPos];// Get what is the id that would have been bought
                 for (int i = 0; i < originalShopItems.Count(); i++)// Update value of hasBoughtItem in all shops that "sell" itemAux
                 {
@@ -1559,7 +1646,7 @@ namespace LiveSplit.UI.Components
                     {
                         if (originalShopItems[i][j] == itemAux)
                         {
-                            Debug.WriteLine("Updating shop " + Enum.GetName(typeof(shops), i) + ": position " + j);
+                            Event("Updating shop " + Enum.GetName(typeof(shops), i) + ": position " + j + "\n");
                             hasBoughtItem[i][j] = true;
                         }
                     }
@@ -1569,10 +1656,12 @@ namespace LiveSplit.UI.Components
                 AddItem((int)placeholderId);
                 NewItem(shopItemsAux[idPos],IntPtr.Zero);
                 AddPlaceholders(room);// re-add placeholders
-                Debug.WriteLine("At shop " + Enum.GetName(typeof(shops), currentShopLocation));
+                Event("\nAt shop " + Enum.GetName(typeof(shops), currentShopLocation) + "\n");
                 foreach (var item in shopItems[currentShopLocation])
-                    Debug.WriteLine("Items sold: " + Enum.GetName(typeof(Items), item) +
-                    (hasBoughtItem[currentShopLocation][shopItems[currentShopLocation].IndexOf(item)] ? " was bought" : " wasn't bought"));
+                {
+                    Event("Items sold: " + Enum.GetName(typeof(Items), item) +
+                        (hasBoughtItem[currentShopLocation][shopItems[currentShopLocation].IndexOf(item)] ? " was bought" : " wasn't bought") + "\n");
+                }
             }
         }
 
@@ -1587,17 +1676,17 @@ namespace LiveSplit.UI.Components
                     if (i == 0)
                     {
                         AddItem(22);
-                        Debug.WriteLine("Adding placeholder id 22");
+                        Event("Adding placholder id 22\n");
                     }
                     if (i == 1)
                     {
                         AddItem(29);
-                        Debug.WriteLine("Adding placeholder id 29");
+                        Event("Adding placholder id 29\n");
                     }
                     if (i == 2)
                     {
                         AddItem(45);
-                        Debug.WriteLine("Adding placeholder id 45");
+                        Event("Adding placholder id 45\n");
                     }
                 }
             }
@@ -1611,7 +1700,7 @@ namespace LiveSplit.UI.Components
             {
                 if (item == true)// If item was bought remove one placeholder
                 {
-                    Debug.WriteLine("Removing one placeholder item");
+                    Event("Removing one placeholder item\n");
                     RemoveLastItem();
                 }
             }
@@ -1640,10 +1729,10 @@ namespace LiveSplit.UI.Components
             int id = 22, pValue;
             byte[] bytes;
 
-            Debug.WriteLine("At shop " + Enum.GetName(typeof(shops), currentShopLocation));
+            Event("\nSetting items for " + Enum.GetName(typeof(shops), currentShopLocation) + " shop\n");
             foreach (var item in shopItemsAux)
-                Debug.WriteLine("Items sold: " + Enum.GetName(typeof(Items), item) +
-                (hasBoughtItem[currentShopLocation][shopItemsAux.IndexOf(item)] ? ": bought" : ": not bought"));
+                Event("Items sold: " + Enum.GetName(typeof(Items), item) +
+                (hasBoughtItem[currentShopLocation][shopItemsAux.IndexOf(item)] ? ": bought" : ": not bought") + "\n");
             for (int i = 0; i < list.Count(); i++)
             {
                 if (i == 0) id = 22;
@@ -1695,6 +1784,7 @@ namespace LiveSplit.UI.Components
             int id, idAux = 22;
             byte[] bytes;
 
+            Event("\nResetting items for " + Enum.GetName(typeof(shops), currentShopLocation) + " shop\n");
             for (int i = 0; i < list.Count(); i++)
             {
                 if (i == 0) idAux = 22;
@@ -1731,6 +1821,32 @@ namespace LiveSplit.UI.Components
             }
         }
 
+        private void Event(string text)
+        {
+            if(text.StartsWith("\n"))
+            {
+                Events.Add("\n" + DateTime.Now.ToString("T") + ":" + text.Replace("\n", "") + "\n");
+            }
+            else Events.Add(DateTime.Now.ToString("T") + ":" + text);
+            Debug.WriteLine(text.Replace("\n", ""));
+        }
+
+        private void logResults()
+        {
+            Debug.WriteLine("Creating event log file");
+            var path = "Components/MomodoraRandomizer.log";
+            File.WriteAllText(path, "Using seed: " + seed + "\n");
+            if (File.Exists(path))
+            {
+                File.AppendAllText(path, "Running on version " + gameVersion + "\n");
+                Debug.WriteLine("Writing run events");
+                foreach (var Event in Events)
+                {
+                    File.AppendAllText(path, Event);
+                }
+            }
+            else Debug.WriteLine("Failed to create event log file");
+        }
 
         public string ComponentName => "Momodora Randomizer";
 
@@ -1875,9 +1991,9 @@ namespace LiveSplit.UI.Components
         {
             SetupIntPtrs();
             //Karst City, Forlorn Monsatery, Subterranean Grave, Whiteleaf Memorial Park, Cinder Chambers 1, Cinder Chambers 2, Royal Pinacotheca
-            switch (gameProc.MainModule.ModuleMemorySize)
+            switch (gameVersion)
             {
-                case 39690240:// 1.05
+                case 1.05:
                     shopOffsets = new List<List<int>>
                     {
                         new List<int> { 207, 203, 213 },
@@ -1890,7 +2006,7 @@ namespace LiveSplit.UI.Components
                     };
                     healthChange = new double[] { 0, 2, 1, 1 };
                     break;
-                case 40222720:// 1.07
+                case 1.07:
                     shopOffsets = new List<List<int>>
                     {
                         new List<int> { 208, 204, 214 },
@@ -1914,6 +2030,7 @@ namespace LiveSplit.UI.Components
                     //version 1.05b
                     Debug.WriteLine("Version 1.05b detected");
                     Debug.WriteLine("Setting up pointers");
+                    gameVersion = 1.05;
                     #region setting up IntPtrs
                     potentialSourcesPointers = new IntPtr[RANDOMIZER_SOURCE_AMOUNT];
                     potentialSourcesPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x0230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0xF0);
@@ -2045,6 +2162,7 @@ namespace LiveSplit.UI.Components
                     //version 1.07
                     Debug.WriteLine("Version 1.07 detected");
                     Debug.WriteLine("Setting up pointers");
+                    gameVersion = 1.07;
                     #region setting up IntPtrs
                     potentialSourcesPointers = new IntPtr[RANDOMIZER_SOURCE_AMOUNT];
                     potentialSourcesPointers[0] = IntPtr.Add((IntPtr)new DeepPointer(0x02379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0xF0);
@@ -2168,7 +2286,6 @@ namespace LiveSplit.UI.Components
                     lubella2Pointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x560);
                     playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4}).Deref<int>(gameProc), 0x120);
                     playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
-                    
 
                     #endregion
                     RandomizerLabel.Text = "1.07 randomizer ready to go!";
@@ -2181,9 +2298,9 @@ namespace LiveSplit.UI.Components
 
         private void SetupItemPtrs()
         {
-            switch (gameProc.MainModule.ModuleMemorySize)
+            switch (gameVersion)
             {
-                case 39690240:
+                case 1.05:
                     totalItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a4 }).Deref<Int32>(gameProc), 0x4);
                     activeItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304ce8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc30);
                     passiveItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2304ce8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc40);
@@ -2191,7 +2308,7 @@ namespace LiveSplit.UI.Components
                     inventoryItemsStartPointer = (IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a4, 0xC }).Deref<int>(gameProc);
                     inventoryItemsChargeStartPointer = (IntPtr)new DeepPointer(0x230b11c, new int[] { 0x1a8, 0xC }).Deref<int>(gameProc);
                     break;
-                case 40222720:
+                case 1.07:
                     totalItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x023782DC, new int[] { 0x1ac }).Deref<Int32>(gameProc), 0x4);
                     activeItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc40);
                     passiveItemsPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2371EA8, new int[] { 0x4 }).Deref<Int32>(gameProc), 0xc50);
