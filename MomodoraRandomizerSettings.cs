@@ -31,6 +31,9 @@ namespace LiveSplit.UI.Components
             set { BackgroundGradient = (GradientType)Enum.Parse(typeof(GradientType), value); }
         }
 
+        public bool logEnabled { get; set; }
+        public bool showLogWarning { get; set; }
+
         public MomodoraRandomizerSettings()
         {
             InitializeComponent();
@@ -47,6 +50,8 @@ namespace LiveSplit.UI.Components
             BackgroundColor = Color.FromArgb(0, 255, 255, 255);
             BackgroundColor2 = Color.FromArgb(0, 255, 255, 255);
             BackgroundGradient = GradientType.Plain;
+            logEnabled = false;
+            showLogWarning = true;
 
             chkVitality.DataBindings.Add("Checked", this, "VitalityFragmentsEnabled", false, DataSourceUpdateMode.OnPropertyChanged);
             chkIvoryBugs.DataBindings.Add("Checked", this, "IvoryBugsEnabled", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -61,26 +66,32 @@ namespace LiveSplit.UI.Components
             btnColor1.DataBindings.Add("BackColor", this, "BackgroundColor", false, DataSourceUpdateMode.OnPropertyChanged);
             btnColor2.DataBindings.Add("BackColor", this, "BackgroundColor2", false, DataSourceUpdateMode.OnPropertyChanged);
             cmbGradientType.DataBindings.Add("SelectedItem", this, "GradientString", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkLog.DataBindings.Add("Checked", this, "logEnabled", false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
-        void MomodoraRandomizerSettings_Load(object sender, EventArgs e)
+        private void MomodoraRandomizerSettings_Load(object sender, EventArgs e)
         {
             chkColor_CheckedChanged(null, null);
             chkFont_CheckedChanged(null, null);
             UseRandomSeed_CheckedChanged(null, null);
+
+            if (showLogWarning == true)
+            {
+                chkLog.Checked = true;
+            }
         }
 
-        void chkColor_CheckedChanged(object sender, EventArgs e)
+        private void chkColor_CheckedChanged(object sender, EventArgs e)
         {
             label4.Enabled = btnOutlineColor.Enabled = label2.Enabled = btnShadowColor.Enabled = label3.Enabled = btnTextColor.Enabled = chkColor.Checked;
         }
 
-        void chkFont_CheckedChanged(object sender, EventArgs e)
+        private void chkFont_CheckedChanged(object sender, EventArgs e)
         {
             label1.Enabled = lblFont.Enabled = btnFont.Enabled = chkFont.Checked;
         }
 
-        void mbGradientType_SelectedIndexChanged(object sender, EventArgs e)
+        private void mbGradientType_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnColor1.Visible = cmbGradientType.SelectedItem.ToString() != "Plain";
             btnColor2.DataBindings.Clear();
@@ -121,6 +132,8 @@ namespace LiveSplit.UI.Components
             BackgroundColor2 = SettingsHelper.ParseColor(element["BackgroundColor2"], Color.FromArgb(0, 0, 0, 0));
             GradientString = SettingsHelper.ParseString(element["BackgroundGradient"], GradientType.Plain.ToString());
             this.textSeed.Text = SettingsHelper.ParseString(element["textSeed"], "");
+            logEnabled = SettingsHelper.ParseBool(element["logEnabled"], false);
+            showLogWarning = SettingsHelper.ParseBool(element["showLogWarning"], true);
         }
 
         public XmlNode GetSettings(XmlDocument document)
@@ -140,6 +153,8 @@ namespace LiveSplit.UI.Components
             SettingsHelper.CreateSetting(document, parent, "BackgroundColor2", BackgroundColor2);
             SettingsHelper.CreateSetting(document, parent, "BackgroundGradient", BackgroundGradient);
             SettingsHelper.CreateSetting(document, parent, "textSeed", this.textSeed.Text);
+            SettingsHelper.CreateSetting(document, parent, "logEnabled", logEnabled);
+            SettingsHelper.CreateSetting(document, parent, "showLogWarning", showLogWarning);
             return parent;
         }
 
@@ -189,10 +204,42 @@ namespace LiveSplit.UI.Components
         {
             if (chkHard.Checked)
             {
-                System.Windows.Forms.MessageBox.Show("Key Items can drop from boss fights. Are you up to the challenge?" +
-                                                     "\n\nTip: you can enter Whiteleaf Memorial Park through Cinder Chambers using Backman Patch"
-                                                     );
+                DialogResult dialogResult = System.Windows.Forms.MessageBox.Show(
+                                "Key Items can drop from boss fights." +
+                                "\n\nTip: you can enter Whiteleaf Memorial Park through Cinder Chambers using Backman Patch\n\n",
+                                "Hard Mode",
+                                MessageBoxButtons.OKCancel);
+                if (dialogResult == DialogResult.OK)
+                {
+                    chkHard.Checked = true;
+                }
+                else
+                    chkHard.Checked = false;
             }
+        }
+
+        private void chkLog_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkLog.Checked)
+            {
+                LogWarning();
+            }
+        }
+
+        private void LogWarning()
+        {
+            DialogResult dialogResult = System.Windows.Forms.MessageBox.Show(
+                                "With this option enabled a log file will be generated upon stoping the timer.\n" +
+                                "This file will be located in the \"Components\" folder inside LiveSplit with" +
+                                " the name MomodoraRandomizer.log. Each subsequent run will overwrite this file.\n" +
+                                "This file will contain important events that occur during a run and nothing else.\n\n",
+                                "Event logging system",
+                                MessageBoxButtons.OKCancel);
+            showLogWarning = false;
+            if(dialogResult == DialogResult.OK)
+                chkLog.Checked = true;
+            else if(dialogResult == DialogResult.Cancel)
+                chkLog.Checked = false;
         }
 
         private void btnClipboard_Click(object sender, EventArgs e)

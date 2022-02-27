@@ -409,7 +409,7 @@ namespace LiveSplit.UI.Components
             placedItems = new List<int>();
 
             InitializeLists();
-         
+
             state.OnStart += OnStart;
             state.OnReset += OnReset;
         }
@@ -974,67 +974,67 @@ namespace LiveSplit.UI.Components
         private void SaveVariables()
         {
             Event("\nSaving variables\n");
-            Events.Add("Item Charges & keys:\n");
+            Event("Item Charges & keys:\n");
             for (int i = 0; i < hasChargeItem.Count(); i++)
             {
-                Events.Add("SavedChargeItem[" + i+"]: " + hasSavedChargeItem[i] + " = ChargeItem["+i+"]: " + hasChargeItem[i] + "\n");
-                Events.Add("SavedKey["+i+"]: " + hasSavedKey[i] + " = Key["+i+"]: " + hasKey[i] + "\n");
+                Event("SavedChargeItem[" + i+"]: " + hasSavedChargeItem[i] + " = ChargeItem["+i+"]: " + hasChargeItem[i] + "\n");
+                Event("SavedKey["+i+"]: " + hasSavedKey[i] + " = Key["+i+"]: " + hasKey[i] + "\n");
                 hasSavedChargeItem[i] = hasChargeItem[i];
                 hasSavedKey[i] = hasKey[i];
             }
-            Events.Add("\nShop items:\n");
+            Event("\nShop items:\n");
             for (int i = 0; i < hasBoughtItem.Count(); i++)
             {
-                Events.Add("\n" + Enum.GetName(typeof(shops), i) + " shop:\n");
+                Event("\n" + Enum.GetName(typeof(shops), i) + " shop:\n");
                 for (int j = 0; j < hasBoughtItem[i].Count(); j++)
                 {
-                    Events.Add("SavedItemBought["+i+"]["+j+"]: " + hasSavedBoughtItem[i][j] +
+                    Event("SavedItemBought["+i+"]["+j+"]: " + hasSavedBoughtItem[i][j] +
                                " = ItemBought["+i+"]["+j+"]: " + hasBoughtItem[i][j] + "\n");
                     hasSavedBoughtItem[i][j] = hasBoughtItem[i][j];
                 }
             }
-            Events.Add("\nSavedLeafBathed: " + hasSavedBathedLeaf + " = LeafBathed: " + hasBathedLeaf + "\n");
+            Event("\nSavedLeafBathed: " + hasSavedBathedLeaf + " = LeafBathed: " + hasBathedLeaf + "\n");
             hasSavedBathedLeaf = hasBathedLeaf;
-            Events.Add("SavedLeafFound: " + hasSavedFoundGreenLeaf + " = LeafFound: " + hasFoundGreenLeaf + "\n");
+            Event("SavedLeafFound: " + hasSavedFoundGreenLeaf + " = LeafFound: " + hasFoundGreenLeaf + "\n");
             hasSavedFoundGreenLeaf = hasFoundGreenLeaf;
-            Events.Add("SavedhasWarp: " + hasSavedWarp + " = hasWarp: " + hasWarp + "\n");
+            Event("SavedhasWarp: " + hasSavedWarp + " = hasWarp: " + hasWarp + "\n");
             hasSavedWarp = hasWarp;
-            Events.Add("SavedhasCatSphere: " + hasSavedCatSphere + " = hasCatSphere: " + hasCatSphere + "\n");
+            Event("SavedhasCatSphere: " + hasSavedCatSphere + " = hasCatSphere: " + hasCatSphere + "\n");
             hasSavedCatSphere = hasCatSphere;
-            Events.Add("\nFinished saving variables\n");
+            Event("\nFinished saving variables\n");
         }
 
         private void LoadVariables()
         {
             Event("\nLoading saved variables\n");
-            Events.Add("Item Charges & keys:\n");
+            Event("Item Charges & keys:\n");
             for (int i = 0; i < hasChargeItem.Count(); i++)
             {
-                Events.Add("ChargeItem["+i+"]: " + hasChargeItem[i] + " = SavedChargeItem["+i+"]: " + hasSavedChargeItem[i] + "\n");
-                Events.Add("Key["+i+"]: " + hasKey[i] +  " = SavedKey["+i+"]: " + hasSavedKey[i] + "\n");
+                Event("ChargeItem["+i+"]: " + hasChargeItem[i] + " = SavedChargeItem["+i+"]: " + hasSavedChargeItem[i] + "\n");
+                Event("Key["+i+"]: " + hasKey[i] +  " = SavedKey["+i+"]: " + hasSavedKey[i] + "\n");
                 hasChargeItem[i] = hasSavedChargeItem[i];
                 hasKey[i] = hasSavedKey[i];
             }
-            Events.Add("\nShop items:\n");
+            Event("\nShop items:\n");
             for (int i = 0; i < hasBoughtItem.Count(); i++)
             {
-                Events.Add("\n" + Enum.GetName(typeof(shops), i) + " shop:\n");
+                Event("\n" + Enum.GetName(typeof(shops), i) + " shop:\n");
                 for (int j = 0; j < hasBoughtItem[i].Count(); j++)
                 {
-                    Events.Add("hasBoughtItem["+i+"]["+j+"]: " + hasBoughtItem[i][j] + 
+                    Event("hasBoughtItem["+i+"]["+j+"]: " + hasBoughtItem[i][j] + 
                                " = Saved["+i+"]["+j+"]: " + hasSavedBoughtItem[i][j] + "\n");
                     hasBoughtItem[i][j] = hasSavedBoughtItem[i][j];
                 }
             }
-            Events.Add("LeafBathed: " + hasBathedLeaf + " = SavedLeafBathed: " + hasSavedFoundGreenLeaf + "\n");
+            Event("LeafBathed: " + hasBathedLeaf + " = SavedLeafBathed: " + hasSavedFoundGreenLeaf + "\n");
             hasBathedLeaf = hasSavedBathedLeaf;
-            Events.Add("LeafFound: " + hasFoundGreenLeaf + " = SavedLeafFound: " + hasSavedWarp + "\n");
+            Event("LeafFound: " + hasFoundGreenLeaf + " = SavedLeafFound: " + hasSavedWarp + "\n");
             hasFoundGreenLeaf = hasSavedFoundGreenLeaf;
-            Events.Add("hasWarp: " + hasWarp + " = SavedSavedhasWarp: " + hasSavedBathedLeaf + "\n");
+            Event("hasWarp: " + hasWarp + " = SavedSavedhasWarp: " + hasSavedBathedLeaf + "\n");
             hasWarp = hasSavedWarp;
-            Events.Add("hasCatSphere: " + hasCatSphere + " = SavedhasCatSphere: " + hasSavedCatSphere + "\n");
+            Event("hasCatSphere: " + hasCatSphere + " = SavedhasCatSphere: " + hasSavedCatSphere + "\n");
             hasCatSphere = hasSavedCatSphere;
-            Events.Add("\nFinished loading variables\n");
+            Event("\nFinished loading variables\n");
         }
 
         private int NextIndex(int itemId = 0)
@@ -1496,7 +1496,7 @@ namespace LiveSplit.UI.Components
 
             #region LubellaAntiSoftlock
             bool lubellaDefeated = Convert.ToBoolean(gameProc.ReadValue<double>(lubella2Pointer));
-            if (current == 149 && lubellaDefeated && !hasCatSphere && !hasWarp)
+            if (current == 149 && lubellaDefeated && !hasCatSphere)
             {
                 Event("\nApplying antisoftlock logic\n");
                 switch (gameVersion)
@@ -1823,29 +1823,35 @@ namespace LiveSplit.UI.Components
 
         private void Event(string text)
         {
-            if(text.StartsWith("\n"))
+            if (settingsControl.logEnabled == true)
             {
-                Events.Add("\n" + DateTime.Now.ToString("T") + ":" + text.Replace("\n", "") + "\n");
+                if (text.StartsWith("\n"))
+                {
+                    Events.Add("\n" + DateTime.Now.ToString("T") + ":" + text.Replace("\n", "") + "\n");
+                }
+                else Events.Add(DateTime.Now.ToString("T") + ":" + text);
             }
-            else Events.Add(DateTime.Now.ToString("T") + ":" + text);
             Debug.WriteLine(text.Replace("\n", ""));
         }
 
         private void logResults()
         {
-            Debug.WriteLine("Creating event log file");
-            var path = "Components/MomodoraRandomizer.log";
-            File.WriteAllText(path, "Using seed: " + seed + "\n");
-            if (File.Exists(path))
+            if(settingsControl.logEnabled == true)
             {
-                File.AppendAllText(path, "Running on version " + gameVersion + "\n");
-                Debug.WriteLine("Writing run events");
-                foreach (var Event in Events)
+                Debug.WriteLine("Creating event log file");
+                var path = "Components/MomodoraRandomizer.log";
+                File.WriteAllText(path, "Using seed: " + seed + "\n");
+                if (File.Exists(path))
                 {
-                    File.AppendAllText(path, Event);
+                    File.AppendAllText(path, "Running on version " + gameVersion + "\n");
+                    Debug.WriteLine("Writing run events");
+                    foreach (var Event in Events)
+                    {
+                        File.AppendAllText(path, Event);
+                    }
                 }
+                else Debug.WriteLine("Failed to create event log file");
             }
-            else Debug.WriteLine("Failed to create event log file");
         }
 
         public string ComponentName => "Momodora Randomizer";

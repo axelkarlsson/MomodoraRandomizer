@@ -31,6 +31,7 @@ namespace LiveSplit.UI.Components
         {
             this.btnSeed = new System.Windows.Forms.Button();
             this.chkRandom = new System.Windows.Forms.CheckBox();
+            this.chkLog = new System.Windows.Forms.CheckBox();
             this.chkIvoryBugs = new System.Windows.Forms.CheckBox();
             this.chkVitality = new System.Windows.Forms.CheckBox();
             this.textSeed = new System.Windows.Forms.TextBox();
@@ -49,18 +50,20 @@ namespace LiveSplit.UI.Components
             this.groupBoxColor = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.chkColor = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnShadowColor = new System.Windows.Forms.Button();
             this.btnTextColor = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnShadowColor = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnOutlineColor = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.btnColor1 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.btnColor2 = new System.Windows.Forms.Button();
             this.cmbGradientType = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnOutlineColor = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxSeed.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
@@ -71,6 +74,8 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSeed
@@ -93,6 +98,17 @@ namespace LiveSplit.UI.Components
             this.chkRandom.Text = "Use random Seed";
             this.chkRandom.UseVisualStyleBackColor = true;
             this.chkRandom.CheckedChanged += new System.EventHandler(this.UseRandomSeed_CheckedChanged);
+            // 
+            // chkLog
+            // 
+            this.chkLog.AutoSize = true;
+            this.chkLog.Location = new System.Drawing.Point(3, 3);
+            this.chkLog.Name = "chkLog";
+            this.chkLog.Size = new System.Drawing.Size(108, 17);
+            this.chkLog.TabIndex = 2;
+            this.chkLog.Text = "Log game events";
+            this.chkLog.UseVisualStyleBackColor = true;
+            this.chkLog.CheckedChanged += new System.EventHandler(this.chkLog_CheckedChanged);
             // 
             // chkIvoryBugs
             // 
@@ -152,15 +168,16 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 191F));
-            this.tableLayoutPanel5.Controls.Add(this.chkRandom, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.textSeed, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.btnSeed, 1, 1);
             this.tableLayoutPanel5.Controls.Add(this.btnClipboard, 2, 1);
+            this.tableLayoutPanel5.Controls.Add(this.chkRandom, 0, 0);
             this.tableLayoutPanel5.Location = new System.Drawing.Point(6, 19);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(448, 57);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
@@ -279,7 +296,7 @@ namespace LiveSplit.UI.Components
             this.groupBoxColor.Controls.Add(this.tableLayoutPanel1);
             this.groupBoxColor.Location = new System.Drawing.Point(3, 290);
             this.groupBoxColor.Name = "groupBoxColor";
-            this.groupBoxColor.Size = new System.Drawing.Size(460, 76);
+            this.groupBoxColor.Size = new System.Drawing.Size(460, 73);
             this.groupBoxColor.TabIndex = 49;
             this.groupBoxColor.TabStop = false;
             this.groupBoxColor.Text = "Text Color";
@@ -320,6 +337,18 @@ namespace LiveSplit.UI.Components
             this.chkColor.UseVisualStyleBackColor = true;
             this.chkColor.CheckedChanged += new System.EventHandler(this.chkColor_CheckedChanged);
             // 
+            // btnTextColor
+            // 
+            this.btnTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnTextColor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnTextColor.Location = new System.Drawing.Point(423, 3);
+            this.btnTextColor.Name = "btnTextColor";
+            this.btnTextColor.Size = new System.Drawing.Size(23, 22);
+            this.btnTextColor.TabIndex = 1;
+            this.btnTextColor.UseVisualStyleBackColor = false;
+            this.btnTextColor.Click += new System.EventHandler(this.colorButton_Click);
+            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -329,6 +358,16 @@ namespace LiveSplit.UI.Components
             this.label3.Size = new System.Drawing.Size(166, 13);
             this.label3.TabIndex = 11;
             this.label3.Text = "Inline:";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 36);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(151, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Shadow:";
             // 
             // btnShadowColor
             // 
@@ -342,32 +381,33 @@ namespace LiveSplit.UI.Components
             this.btnShadowColor.UseVisualStyleBackColor = false;
             this.btnShadowColor.Click += new System.EventHandler(this.colorButton_Click);
             // 
-            // btnTextColor
+            // label4
             // 
-            this.btnTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(251, 36);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(166, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Outline:";
+            // 
+            // btnOutlineColor
+            // 
+            this.btnOutlineColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnTextColor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTextColor.Location = new System.Drawing.Point(423, 3);
-            this.btnTextColor.Name = "btnTextColor";
-            this.btnTextColor.Size = new System.Drawing.Size(23, 22);
-            this.btnTextColor.TabIndex = 1;
-            this.btnTextColor.UseVisualStyleBackColor = false;
-            this.btnTextColor.Click += new System.EventHandler(this.colorButton_Click);
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 36);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(151, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Shadow:";
+            this.btnOutlineColor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOutlineColor.Location = new System.Drawing.Point(423, 31);
+            this.btnOutlineColor.Name = "btnOutlineColor";
+            this.btnOutlineColor.Size = new System.Drawing.Size(23, 24);
+            this.btnOutlineColor.TabIndex = 1;
+            this.btnOutlineColor.UseVisualStyleBackColor = false;
+            this.btnOutlineColor.Click += new System.EventHandler(this.colorButton_Click);
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.80374F));
+            this.tableLayoutPanel2.Controls.Add(this.groupBox1, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.groupBoxColor, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.groupBoxSeed, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.groupBoxFont, 0, 3);
@@ -375,14 +415,15 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 0, 2);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 5;
+            this.tableLayoutPanel2.RowCount = 6;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 81F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 82F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 79F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(471, 379);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(471, 420);
             this.tableLayoutPanel2.TabIndex = 50;
             // 
             // tableLayoutPanel4
@@ -452,27 +493,27 @@ namespace LiveSplit.UI.Components
             this.cmbGradientType.TabIndex = 43;
             this.cmbGradientType.SelectedIndexChanged += new System.EventHandler(this.mbGradientType_SelectedIndexChanged);
             // 
-            // label4
+            // groupBox1
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(251, 36);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(166, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Outline:";
+            this.groupBox1.Controls.Add(this.tableLayoutPanel7);
+            this.groupBox1.Location = new System.Drawing.Point(3, 369);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(460, 46);
+            this.groupBox1.TabIndex = 51;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Debug options";
             // 
-            // btnOutlineColor
+            // tableLayoutPanel7
             // 
-            this.btnOutlineColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOutlineColor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOutlineColor.Location = new System.Drawing.Point(423, 31);
-            this.btnOutlineColor.Name = "btnOutlineColor";
-            this.btnOutlineColor.Size = new System.Drawing.Size(23, 24);
-            this.btnOutlineColor.TabIndex = 1;
-            this.btnOutlineColor.UseVisualStyleBackColor = false;
-            this.btnOutlineColor.Click += new System.EventHandler(this.colorButton_Click);
+            this.tableLayoutPanel7.ColumnCount = 1;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
+            this.tableLayoutPanel7.Controls.Add(this.chkLog, 0, 0);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 1;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(451, 26);
+            this.tableLayoutPanel7.TabIndex = 0;
             // 
             // MomodoraRandomizerSettings
             // 
@@ -480,7 +521,7 @@ namespace LiveSplit.UI.Components
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel2);
             this.Name = "MomodoraRandomizerSettings";
-            this.Size = new System.Drawing.Size(476, 379);
+            this.Size = new System.Drawing.Size(476, 425);
             this.Load += new System.EventHandler(this.MomodoraRandomizerSettings_Load);
             this.groupBoxSeed.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
@@ -497,6 +538,9 @@ namespace LiveSplit.UI.Components
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -529,11 +573,14 @@ namespace LiveSplit.UI.Components
         public System.Windows.Forms.CheckBox chkVitality;
         public System.Windows.Forms.CheckBox chkHard;
         public System.Windows.Forms.CheckBox chkRandom;
+        private System.Windows.Forms.CheckBox chkLog;
         private System.Windows.Forms.TextBox textSeed;
         private System.Windows.Forms.Button btnShadowColor;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnClipboard;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnOutlineColor;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
     }
 }
