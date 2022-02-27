@@ -230,7 +230,7 @@ namespace LiveSplit.UI.Components
         private void LogWarning()
         {
             DialogResult dialogResult = System.Windows.Forms.MessageBox.Show(
-                    "With this option enabled a log file will be generated upon stoping the timer.\n" +
+                    "With this option enabled a log file will be generated upon stopping the timer.\n" +
                     "This file will be located in the \"Components\" folder inside LiveSplit with" +
                     " the name MomodoraRandomizer.log. Each subsequent run will overwrite this file.\n" +
                     "This file will contain important events that occur during a run but are only useful for debugging purposes.\n\n" +
