@@ -286,6 +286,7 @@ namespace LiveSplit.UI.Components
         IntPtr playerFormPointer;
         IntPtr playerXPointer;
         IntPtr playerYPointer;
+        private IntPtr lubella2Pointer;
         #endregion
         #endregion
 
@@ -1414,8 +1415,8 @@ namespace LiveSplit.UI.Components
             #endregion
 
             #region LubellaAntiSoftlock
-            if(current == 149) Debug.WriteLine("room for anti-lubella softlock");
-            if (current == 149 && !hasCatSphere && !hasWarp)
+            bool lubellaDefeated = Convert.ToBoolean(gameProc.ReadValue<double>(lubella2Pointer));
+            if (current == 149 && lubellaDefeated && !hasCatSphere && !hasWarp )
             {
                 Debug.WriteLine("Don't have tools");
                 switch (gameProc.MainModule.ModuleMemorySize)
@@ -2033,6 +2034,7 @@ namespace LiveSplit.UI.Components
 
                     warpStartPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0xB40);
                     playerFormPointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4}).Deref<int>(gameProc), 0x760);
+                    lubella2Pointer = IntPtr.Add((IntPtr)new DeepPointer(0x230C440, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x560);
                     playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x120);
                     playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
 
@@ -2163,8 +2165,10 @@ namespace LiveSplit.UI.Components
 
                     warpStartPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0xB40);
                     playerFormPointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<int>(gameProc), 0x760);
+                    lubella2Pointer = IntPtr.Add((IntPtr)new DeepPointer(0x2379600, new int[] { 0x0, 0x4, 0x60, 0x4, 0x4 }).Deref<Int32>(gameProc), 0x560);
                     playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4}).Deref<int>(gameProc), 0x120);
                     playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x025A2B3C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    
 
                     #endregion
                     RandomizerLabel.Text = "1.07 randomizer ready to go!";
