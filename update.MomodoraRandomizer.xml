@@ -1,4 +1,12 @@
 ﻿<updates>
+  <update version="1.0.10">
+	<files>
+	  <file path="Components/MomodoraRandomizer.dll" status="changed"/>
+	</files>
+	<changelog>
+	  <change> Fixed layout issue where popup windows wouldnt close properly</change>
+    </changelog>
+  </update>
   <update version="1.0.9">
 	<files>
 	  <file path="Components/MomodoraRandomizer.dll" status="changed"/>

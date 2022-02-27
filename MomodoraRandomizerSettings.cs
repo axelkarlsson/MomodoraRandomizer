@@ -11,6 +11,7 @@ namespace LiveSplit.UI.Components
         public bool VitalityFragmentsEnabled { get; set; }
         public bool IvoryBugsEnabled { get; set; }
         public bool HardModeEnabled { get; set; }
+        public bool showHardWarning { get; set; }
         public bool RandomSeed { get; set; }
 
         public Color TextColor { get; set; }
@@ -40,6 +41,7 @@ namespace LiveSplit.UI.Components
             VitalityFragmentsEnabled = true;
             IvoryBugsEnabled = true;
             HardModeEnabled = false;
+            showHardWarning = true;
             RandomSeed = true;
             TextFont = new Font("Segoe UI", 13, FontStyle.Regular, GraphicsUnit.Pixel);
             OverrideTextFont = false;
@@ -74,11 +76,6 @@ namespace LiveSplit.UI.Components
             chkColor_CheckedChanged(null, null);
             chkFont_CheckedChanged(null, null);
             UseRandomSeed_CheckedChanged(null, null);
-
-            if (showLogWarning == true)
-            {
-                chkLog.Checked = true;
-            }
         }
 
         private void chkColor_CheckedChanged(object sender, EventArgs e)
@@ -123,6 +120,7 @@ namespace LiveSplit.UI.Components
             VitalityFragmentsEnabled = SettingsHelper.ParseBool(element["VitalityFragmentsEnabled"], true);
             IvoryBugsEnabled = SettingsHelper.ParseBool(element["IvoryBugsEnabled"], true);
             HardModeEnabled = SettingsHelper.ParseBool(element["HardModeEnabled"], false);
+            showHardWarning = SettingsHelper.ParseBool(element["showHardWarning"], true);
             RandomSeed = SettingsHelper.ParseBool(element["RandomSeed"], true);
             TextColor = SettingsHelper.ParseColor(element["TextColor"], Color.FromArgb(255, 255, 255, 255));
             OutlineColor = SettingsHelper.ParseColor(element["OutlineColor"], Color.FromArgb(255, 255, 255, 255));
@@ -142,6 +140,7 @@ namespace LiveSplit.UI.Components
             SettingsHelper.CreateSetting(document, parent, "VitalityFragmentsEnabled", VitalityFragmentsEnabled);
             SettingsHelper.CreateSetting(document, parent, "IvoryBugsEnabled", IvoryBugsEnabled);
             SettingsHelper.CreateSetting(document, parent, "HardModeEnabled", HardModeEnabled);
+            SettingsHelper.CreateSetting(document, parent, "showHardWarning", showHardWarning);
             SettingsHelper.CreateSetting(document, parent, "RandomSeed", RandomSeed);
             SettingsHelper.CreateSetting(document, parent, "OverrideTextFont", OverrideTextFont);
             SettingsHelper.CreateSetting(document, parent, "OverrideTextColor", OverrideTextColor);
@@ -202,46 +201,26 @@ namespace LiveSplit.UI.Components
 
         private void chkHard_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkHard.Checked)
+            if (chkHard.Checked && showHardWarning)
             {
-                DialogResult dialogResult = System.Windows.Forms.MessageBox.Show(
+                System.Windows.Forms.MessageBox.Show(
                                 "Key Items can drop from boss fights." +
-                                "\n\nTip: you can enter Whiteleaf Memorial Park through Cinder Chambers using Backman Patch\n\n" +
-                                "Enable?",
-                                "Hard Mode",
-                                MessageBoxButtons.OKCancel);
-                if (dialogResult == DialogResult.OK)
-                {
-                    chkHard.Checked = true;
-                }
-                else
-                    chkHard.Checked = false;
+                                "\n\nTip: you can enter Whiteleaf Memorial Park through Cinder Chambers using Backman Patch.");
+                showHardWarning = false;
             }
         }
 
         private void chkLog_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkLog.Checked)
+            if (chkLog.Checked && showLogWarning)
             {
-                LogWarning();
+                System.Windows.Forms.MessageBox.Show(
+                        "With this option enabled a log file will be generated upon stopping the timer.\n" +
+                        "This file will be located in the \"Components\" folder inside LiveSplit with" +
+                        " the name MomodoraRandomizer.log. Each subsequent run will overwrite this file.\n" +
+                        "This file will contain important events that occur during a run but are only useful for debugging purposes.");
+                showLogWarning = false;
             }
-        }
-
-        private void LogWarning()
-        {
-            DialogResult dialogResult = System.Windows.Forms.MessageBox.Show(
-                    "With this option enabled a log file will be generated upon stopping the timer.\n" +
-                    "This file will be located in the \"Components\" folder inside LiveSplit with" +
-                    " the name MomodoraRandomizer.log. Each subsequent run will overwrite this file.\n" +
-                    "This file will contain important events that occur during a run but are only useful for debugging purposes.\n\n" +
-                    "Enable?",
-                    "Event logging system",
-                    MessageBoxButtons.OKCancel);
-            showLogWarning = false;
-            if(dialogResult == DialogResult.OK)
-                chkLog.Checked = true;
-            else if(dialogResult == DialogResult.Cancel)
-                chkLog.Checked = false;
         }
 
         private void btnClipboard_Click(object sender, EventArgs e)
