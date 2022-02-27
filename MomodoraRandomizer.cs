@@ -1296,16 +1296,14 @@ namespace LiveSplit.UI.Components
 
         private void RemoveCrestFragment()
         {
-            double fragments = gameProc.ReadValue<double>(crestFragmentCountPointer);
-            gameProc.WriteValue<double>(crestFragmentCountPointer, fragments - 1);
             RemoveLastItem();
+            CountCrestFragments();
         }
 
         private void AddCrestFragment(int id)
         {
-            double fragments = gameProc.ReadValue<double>(crestFragmentCountPointer);
-            gameProc.WriteValue<double>(crestFragmentCountPointer, fragments + 1);
             AddItem(id);
+            CountCrestFragments();
         }
 
         private void RemoveVitalityFragment()
@@ -1355,6 +1353,24 @@ namespace LiveSplit.UI.Components
             }
 
             AddItem(id);
+        }
+
+        private void CountCrestFragments()
+        {
+            int totalItems = gameProc.ReadValue<int>(totalItemsPointer);
+            int fragments = 0;
+            for(int i = 0; i < totalItems; i++)
+            {
+                double itemId = gameProc.ReadValue<double>(IntPtr.Add(inventoryItemsStartPointer,0x10 * i));
+                if ((int)Items.FragmentWarp >= itemId && itemId >= (int)Items.FragmentBowPow)
+                {
+                    fragments++;
+                }
+            }
+            Debug.WriteLine("Found a total of " + fragments + " crest fragments");
+            fragments = Math.Max(Math.Min(fragments, 4), 0);
+            Debug.WriteLine("Writing " + fragments + " crest fragments");
+            gameProc.WriteValue<double>(crestFragmentCountPointer, fragments);
         }
         #endregion
 
