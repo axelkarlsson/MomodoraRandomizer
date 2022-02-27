@@ -538,6 +538,18 @@ namespace LiveSplit.UI.Components
 
                 //Key items are played in order: Cat Sphere, Crest Fragments, Garden Key, Cinder Key, Monastery Key, (Hazel Badge, Soft Tissue, Dirty Shroom, Ivory Bugs)
                 #region item placement
+                //0: Dirty Shroom - don't randomize, just update requirement matrix
+                #region dirty shroom
+                for (int i = 0; i < requirementLists.Count; i++)
+                {
+                    if (requirementLists[i].Contains(24))
+                    {
+                        for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[7, j] = requirementMatrix[i, j];
+                        requirementMatrix[7, i] = true;
+                    }
+                }
+                #endregion
+
                 //1. Place Cat Sphere
                 #region cat sphere
 
@@ -705,19 +717,6 @@ namespace LiveSplit.UI.Components
                     }
                 }
                 placedItems.Add(27);
-                #endregion
-
-                //8: Dirty Shroom - don't randomize, just update requirement matrix
-                #region dirty shroom
-                index = 24;
-                for (int i = 0; i < requirementLists.Count; i++)
-                {
-                    if (requirementLists[i].Contains(possibleSources[index]))
-                    {
-                        for (int j = 0; j < requirementMatrix.GetLength(0); j++) requirementMatrix[7, j] = requirementMatrix[i, j];
-                        requirementMatrix[7, i] = true;
-                    }
-                }
                 #endregion
 
                 //8.5: Sealed Wind

@@ -1,4 +1,12 @@
 ﻿<updates>
+  <update version="1.0.8">
+    <files>
+      <file path="Components/MomodoraRandomizer.dll" status="changed"/>
+    </files>
+    <changelog>
+      <change> Fixed a softlock where items would not consider that Dirty Shroom requires Cat Sphere when randomizing</change>
+    </changelog>
+  </update>
   <update version="1.0.7">
     <files>
       <file path="Components/MomodoraRandomizer.dll" status="changed"/>
