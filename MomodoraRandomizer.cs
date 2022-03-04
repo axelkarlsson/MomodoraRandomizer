@@ -15,7 +15,7 @@ namespace LiveSplit.UI.Components
 {
     public class MomodoraRandomizer : IComponent
     {
-        private ItemTrackerConnection itemTracker;
+        private TrackerClient itemTracker;
         public enum Items : int
         {
             AdornedRing = 1,
@@ -372,7 +372,7 @@ namespace LiveSplit.UI.Components
             possibleSources = new List<int>();
             impossibleSources = new List<int>();
             placedItems = new List<int>();
-            itemTracker = new ItemTrackerConnection("http://localhost:8000/tracker/momo4");
+            itemTracker = new TrackerClient("http://localhost:8000/tracker/momo4");
 
             vitalityFragments = new List<int>();
             for (int i = 39; i <= 55; i++)
@@ -474,7 +474,6 @@ namespace LiveSplit.UI.Components
                 }
 
                 Debug.WriteLine("Using seed " + seed);
-                itemTracker.set_bool("Passiflora", true);
                 hasSavedChargeItem = new List<bool> { false, false, false };
                 hasChargeItem = new List<bool> { false, false, false };
                 hasSavedKey = new List<int> { 0, 0, 0 };
@@ -1273,6 +1272,7 @@ namespace LiveSplit.UI.Components
             var totalItemAmount = gameProc.ReadValue<int>(totalItemsPointer);
             gameProc.WriteValue<int>(totalItemsPointer, (int)totalItemAmount + 1);
             gameProc.WriteValue<double>(IntPtr.Add(inventoryItemsStartPointer, 0x10 * totalItemAmount), id);
+            itemTracker.Set(id.ToString());
         }
 
         private void removeLastItem()
@@ -1314,18 +1314,21 @@ namespace LiveSplit.UI.Components
             double health = gameProc.ReadValue<double>(maxHealthPointer);
             gameProc.WriteValue<double>(vitalityFragmentCountPointer, fragments + 1);
             gameProc.WriteValue<double>(maxHealthPointer, health + healthChange[(int)difficulty - 1]);
+            itemTracker.SetValue( Items.VitalityFragment.ToString() ,(fragments+1).ToString());
         }
 
         private void addIvoryBug()
         {
             double bugs = gameProc.ReadValue<double>(ivoryBugCountPointer);
             gameProc.WriteValue<double>(ivoryBugCountPointer, bugs + 1);
+            itemTracker.SetValue(Items.IvoryBug.ToString(), (bugs + 1).ToString());
         }
 
         private void removeIvoryBug()
         {
             double bugs = gameProc.ReadValue<double>(ivoryBugCountPointer);
             gameProc.WriteValue<double>(ivoryBugCountPointer, bugs - 1);
+            itemTracker.SetValue(Items.IvoryBug.ToString(), (bugs - 1).ToString());
         }
 
         private void addKey(int id)
