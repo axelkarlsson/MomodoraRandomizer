@@ -94,6 +94,7 @@ namespace LiveSplit.UI.Components
         private List<int> possibleSources;
         private List<int> impossibleSources;
         private List<int> placedItems;
+        private List<int> unsavedItems;
         private List<List<int>> requirementLists;
 
         //                                         CatSphere, Crest, Garden, Cinder, Mona, Haze, Soft, Dirty, Sealed Wind,Bugs
@@ -408,6 +409,8 @@ namespace LiveSplit.UI.Components
             possibleSources = new List<int>();
             impossibleSources = new List<int>();
             placedItems = new List<int>();
+            unsavedItems = new List<int>();
+            //Might need some error handling
             itemTracker = new TrackerClient("http://localhost:8000/tracker/momo4");
 
             InitializeLists();
@@ -529,6 +532,7 @@ namespace LiveSplit.UI.Components
                 }
 
                 Debug.WriteLine("Using seed " + seed);
+                unsavedItems.Clear();
                 hasSavedChargeItem = new List<bool> { false, false, false };
                 hasChargeItem = new List<bool> { false, false, false };
                 hasSavedKey = new List<int> { 0, 0, 0 };
@@ -957,6 +961,14 @@ namespace LiveSplit.UI.Components
                     if(old == 0 && current != 0)
                     {
                         Debug.WriteLine("Respawning");
+                        foreach (int itemID in unsavedItems)
+                        {
+                            itemTracker.Unset(itemID.ToString());
+                        }
+                        int amount = (int)gameProc.ReadValue<double>(vitalityFragmentCountPointer);
+                        itemTracker.SetValue(Items.VitalityFragment.ToString() + "-text", (amount).ToString());
+                        amount = (int)gameProc.ReadValue<double>(ivoryBugCountPointer);
+                        itemTracker.SetValue(Items.IvoryBug.ToString() + "-text", (amount).ToString());
                         itemGiven = 3;
                     }
                 };
@@ -1003,6 +1015,7 @@ namespace LiveSplit.UI.Components
             Event("SavedhasCatSphere: " + hasSavedCatSphere + " = hasCatSphere: " + hasCatSphere + "\n");
             hasSavedCatSphere = hasCatSphere;
             Event("\nFinished saving variables\n");
+            unsavedItems.Clear();
         }
 
         private void LoadVariables()
@@ -1395,6 +1408,11 @@ namespace LiveSplit.UI.Components
             double health = gameProc.ReadValue<double>(maxHealthPointer);
             gameProc.WriteValue<double>(vitalityFragmentCountPointer, fragments - 1);
             gameProc.WriteValue<double>(maxHealthPointer, health - healthChange[(int)difficulty-1]);
+            itemTracker.SetValue(Items.VitalityFragment.ToString() + "-text", (fragments - 1).ToString());
+            if (fragments == 1)
+            {
+                itemTracker.Unset(Items.VitalityFragment.ToString());
+            }
         }
 
         private void AddVitalityFragment()
@@ -1404,21 +1422,25 @@ namespace LiveSplit.UI.Components
             double health = gameProc.ReadValue<double>(maxHealthPointer);
             gameProc.WriteValue<double>(vitalityFragmentCountPointer, fragments + 1);
             gameProc.WriteValue<double>(maxHealthPointer, health + healthChange[(int)difficulty - 1]);
-            itemTracker.SetValue( Items.VitalityFragment.ToString() ,(fragments+1).ToString());
+            itemTracker.SetValue( Items.VitalityFragment.ToString()+ "-text" ,(fragments+1).ToString());
         }
 
         private void AddIvoryBug()
         {
             double bugs = gameProc.ReadValue<double>(ivoryBugCountPointer);
             gameProc.WriteValue<double>(ivoryBugCountPointer, bugs + 1);
-            itemTracker.SetValue(Items.IvoryBug.ToString(), (bugs + 1).ToString());
+            itemTracker.SetValue(Items.IvoryBug.ToString() + "-text", (bugs + 1).ToString());
         }
 
         private void RemoveIvoryBug()
         {
             double bugs = gameProc.ReadValue<double>(ivoryBugCountPointer);
             gameProc.WriteValue<double>(ivoryBugCountPointer, bugs - 1);
-            itemTracker.SetValue(Items.IvoryBug.ToString(), (bugs - 1).ToString());
+            itemTracker.SetValue(Items.IvoryBug.ToString() + "-text", (bugs - 1).ToString());
+            if (bugs == 1)
+            {
+                itemTracker.Unset(Items.IvoryBug.ToString());
+            }
         }
 
         private void AddKey(int id)
