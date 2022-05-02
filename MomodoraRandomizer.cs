@@ -76,7 +76,12 @@ namespace LiveSplit.UI.Components
             RoyalPinacotheca = 6,
         }
 
+        //Mapping of item source to what pointer points to the string that gets displayed when you pick it up.
+        //-1 means that it does not have a string attached (shop source)
+        private int[] sourceToStringMapping = new int[83] { 1, 2, 1, 6, 10, 18, 8, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 20, 22, 1, 24, 11, 12, 1, 9, 21, 30, 31, 3, 4, 14, 19, 13, 5, 25, 23, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 26, 28, 29, 15, 16, 17 };
         const int RANDOMIZER_SOURCE_AMOUNT = 83;
+        //TODO: count real amount of unique get item strings
+        const int GET_ITEM_STRING_AMNT = 30;
 
         private SimpleLabel RandomizerLabel;
         private Process gameProc = null;
@@ -276,7 +281,9 @@ namespace LiveSplit.UI.Components
         private List<int> bossItems;
 
         #region pointers
-        
+
+        IntPtr[] itemGetStringPtrs;
+
         IntPtr[] potentialSourcesPointers;
 
         #region charge item pointers
@@ -1058,6 +1065,10 @@ namespace LiveSplit.UI.Components
 
         private void CreateMemoryWatcher(int giveItemID, int newSourceAddressIndex)
         {
+            //TODO: For changing the display for what item you get:
+            //1. Check if item is unique pickup (sparse thread, astral charm, warp fragment etc.), if so, update that string.
+            //2. If shop item (-1), do nothing. Shop logic will handle that
+            //3. If an item that has a string used in multiple places (bellflower, vitality fragment, ivory bug, etc) create a memorywatcher for when the player enters the corresponding screen (check in sourceIdMapping)
             if (8 <= newSourceAddressIndex && newSourceAddressIndex <= 19)// If item is a shop item
             {
                 SaveShopItem(newSourceAddressIndex, giveItemID);
@@ -2161,6 +2172,72 @@ namespace LiveSplit.UI.Components
                     playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x120);
                     playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
 
+                    //TODO: Change adresses to be the correct ones
+                    itemGetStringPtrs = new IntPtr[GET_ITEM_STRING_AMNT];
+                    //sys_dia03 ivory bug
+                    itemGetStringPtrs[0] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia04 Bellflower
+                    itemGetStringPtrs[1] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia05 Astral Charm
+                    itemGetStringPtrs[2] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia06 Edea's Pearl
+                    itemGetStringPtrs[3] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia07 Bakman Patch
+                    itemGetStringPtrs[4] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia08 Tainted Missive
+                    itemGetStringPtrs[5] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia09 Magnet Stone
+                    itemGetStringPtrs[6] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia10 Vitality Fragment
+                    itemGetStringPtrs[7] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia12 Monastery Key
+                    itemGetStringPtrs[8] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia18 Soft Tissue
+                    itemGetStringPtrs[9] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia19 Garden Key
+                    itemGetStringPtrs[10] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia21 Dirty Shroom
+                    itemGetStringPtrs[11] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia24 Cat Sphere
+                    itemGetStringPtrs[12] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia25 Torn Branch
+                    itemGetStringPtrs[13] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia26 Sparse Thread
+                    itemGetStringPtrs[14] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia28 Bellflower (NPC reward?)
+                    itemGetStringPtrs[15] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia29 Hazel Badge
+                    itemGetStringPtrs[16] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia30 Passiflora
+                    itemGetStringPtrs[17] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia40 Cinder Key
+                    itemGetStringPtrs[18] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia41 Pocket Incensory
+                    itemGetStringPtrs[19] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia44 Black Sachet
+                    itemGetStringPtrs[20] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia47 Fresh Spring Leaf
+                    itemGetStringPtrs[21] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia48 Sealed Wind
+                    itemGetStringPtrs[22] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia49 Heavy Arrows
+                    itemGetStringPtrs[23] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia50 Passiflora (ground?)
+                    itemGetStringPtrs[24] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia51 Bloodstained Tissue
+                    itemGetStringPtrs[25] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia52 airdash crest
+                    itemGetStringPtrs[26] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia53 fast charge crest
+                    itemGetStringPtrs[27] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia54 max charge crest
+                    itemGetStringPtrs[28] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //sys_dia55 warp crest
+                    itemGetStringPtrs[29] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //eri03_dia07 Blessing Charm!
+                    itemGetStringPtrs[30] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
+                    //impnpc_dia08 Rotten Bellflower
+                    itemGetStringPtrs[31] = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
                     #endregion
                     RandomizerLabel.Text = "1.05b randomizer ready to go!";
                     break;
