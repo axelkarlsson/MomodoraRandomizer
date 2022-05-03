@@ -80,7 +80,6 @@ namespace LiveSplit.UI.Components
         //-1 means that it does not have a string attached (shop source)
         private int[] sourceToStringMapping = new int[83] { 1, 2, 1, 6, 10, 18, 8, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 20, 22, 1, 24, 11, 12, 1, 9, 21, 30, 31, 3, 4, 14, 19, 13, 5, 25, 23, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 26, 28, 29, 15, 16, 17 };
         const int RANDOMIZER_SOURCE_AMOUNT = 83;
-        //TODO: count real amount of unique get item strings
         const int GET_ITEM_STRING_AMNT = 32;
 
         private SimpleLabel RandomizerLabel;
@@ -93,6 +92,7 @@ namespace LiveSplit.UI.Components
 
         #region Randomizer logic fields
         private MemoryWatcherList randoSourceWatchers;
+        private MemoryWatcherList randoItemStringWatchers;
         private List<int> bannedSources;
         private List<int> usedSources;
         private List<int> possibleSources;
@@ -181,7 +181,12 @@ namespace LiveSplit.UI.Components
             [73] = (int)Items.IvoryBug,
             [74] = (int)Items.IvoryBug,
             [75] = (int)Items.IvoryBug,
+            [76] = (int)Items.FragmentBowQuick,
+            [77] = (int)Items.FragmentDash,
+            [78] = (int)Items.FragmentBowPow,
+            [79] = (int)Items.FragmentWarp,
             [80] = (int)Items.Bellflower,
+            [81] = (int)Items.HazelBadge,
             [82] = (int)Items.Passiflora
         };
         private Dictionary<int, int[]> sourceToLevelMapping = new Dictionary<int, int[]>
@@ -589,6 +594,14 @@ namespace LiveSplit.UI.Components
                 Array.Clear(requirementMatrix, 0, requirementMatrix.Length);
                 randoSourceWatchers = new MemoryWatcherList();
 
+                levelIDWatcher = new MemoryWatcher<int>(levelIDPointer);
+                levelIDWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
+                levelIDWatcher.Enabled = true;
+                levelIDWatcher.OnChanged += (old, current) =>
+                {
+                    CheckRoom(old, current);
+                };
+
                 //Key items are played in order: Cat Sphere, Crest Fragments, Garden Key, Cinder Key, Monastery Key, (Hazel Badge, Soft Tissue, Dirty Shroom, Ivory Bugs)
                 #region item placement
                 //0: Dirty Shroom - don't randomize, just update requirement matrix
@@ -865,14 +878,6 @@ namespace LiveSplit.UI.Components
                 vitalityFragmentWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
                 vitalityFragmentWatcher.Enabled = true;
 
-                levelIDWatcher = new MemoryWatcher<int>(levelIDPointer);
-                levelIDWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
-                levelIDWatcher.Enabled = true;
-                levelIDWatcher.OnChanged += (old, current) =>
-                {
-                    CheckRoom(old, current);
-                };
-
                 inGameWatcher = new MemoryWatcher<double>(inGamePointer);
                 inGameWatcher.UpdateInterval = new TimeSpan(0, 0, 0, 0, 10);
                 inGameWatcher.Enabled = true;
@@ -1106,6 +1111,35 @@ namespace LiveSplit.UI.Components
                 }
                 temp.Enabled = true;
                 randoSourceWatchers.Add(temp);
+
+                #region get item text
+                int stringIndex = sourceToStringMapping[newSourceAddressIndex];
+                //Shop items are handled elsewhere
+                if(stringIndex != -1)
+                {
+                    //String used multiple times
+                    List<int> multipleStringUses = new List<int> { 0,1,5,7};
+                    if (multipleStringUses.Contains(stringIndex))
+                    {
+                        levelIDWatcher.OnChanged += (old, current) =>
+                        {
+                            if (sourceToLevelMapping[newSourceAddressIndex].Contains(current))
+                            {
+                                byte[] bytes = Encoding.ASCII.GetBytes(Enum.GetName(typeof(Items), giveItemID));
+                                gameProc.WriteBytes(itemGetStringPtrs[stringIndex], bytes);// Set name of placeholder to the one that will get added later
+                                gameProc.WriteValue<int>(itemGetStringPtrs[stringIndex] + bytes.Length, 0x0);// Add end of string
+                            }
+                        };
+                    }
+                    //String used only once
+                    else
+                    {
+                        byte[] bytes = Encoding.ASCII.GetBytes(Enum.GetName(typeof(Items), giveItemID));
+                        gameProc.WriteBytes(itemGetStringPtrs[stringIndex], bytes);// Set name of placeholder to the one that will get added later
+                        gameProc.WriteValue<int>(itemGetStringPtrs[stringIndex] + bytes.Length, 0x0);// Add end of string
+                    }
+                }
+                #endregion
             }
         }
 
@@ -2173,7 +2207,6 @@ namespace LiveSplit.UI.Components
                     playerXPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x120);
                     playerYPointer = IntPtr.Add((IntPtr)new DeepPointer(0x0253597C, new int[] { 0xC, 0xBC, 0x8, 0x4 }).Deref<int>(gameProc), 0x130);
 
-                    //TODO: Change adresses to be the correct ones
                     basePtr = (IntPtr)new DeepPointer(0x230B0F8, new int[] { 0x8, 0x0, 0x0 }).Deref<int>(gameProc);
                     itemGetStringPtrs = new IntPtr[GET_ITEM_STRING_AMNT];
                     //sys_dia03 ivory bug
