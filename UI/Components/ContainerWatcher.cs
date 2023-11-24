@@ -102,7 +102,7 @@ public class ContainerWatcher<T> where T : struct
     ///     <c>reference</c> to WatcherContainer if it exists<br/>
     ///     <c>null</c> otherwise
     /// </returns>
-    public static ContainerWatcher<T> GetWatcherContainer(string name)
+    public static ContainerWatcher<T> GetContainerWatcher(string name)
     {
         foreach(var container in WatcherContainers)
         {
@@ -124,13 +124,13 @@ public class ContainerWatcher<T> where T : struct
     /// </returns>
     public static MemoryWatcher<T> GetMemoryWatcher(string name)
     {
-        foreach(var container in WatcherContainers)
+        ContainerWatcher<T> temp = GetContainerWatcher(name);
+
+        if (temp != null)
         {
-            if (container.Name == name && container.Watcher.Current.GetType() == typeof(T))
-            {
-                return container.Watcher;
-            }
+            return temp.Watcher;
         }
+
         return null;
     }
 
@@ -144,13 +144,13 @@ public class ContainerWatcher<T> where T : struct
     /// </returns>
     public static T GetCurrent(string name)
     {
-        foreach (var container in WatcherContainers)
+        MemoryWatcher<T> temp = GetMemoryWatcher(name);
+
+        if (temp != null)
         {
-            if (container.Name == name && container.Watcher.Current.GetType() == typeof(T))
-            {
-                return container.Watcher.Current;
-            }
+            return temp.Current;
         }
+
         return default;
     }
 
@@ -164,13 +164,13 @@ public class ContainerWatcher<T> where T : struct
     /// </returns>
     public static T GetOld(string name)
     {
-        foreach (var container in WatcherContainers)
+        MemoryWatcher<T> temp = GetMemoryWatcher(name);
+
+        if (temp != null)
         {
-            if (container.Name == name && container.Watcher.Current.GetType() == typeof(T))
-            {
-                return container.Watcher.Old;
-            }
+            return temp.Old;
         }
+
         return default;
     }
 
