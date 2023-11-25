@@ -133,7 +133,7 @@ namespace LiveSplit.UI.Components
 
                     PrepareOffsets();
 
-                    new ContainerWatcher<int>("LevelId", pGameProcess, Offsets["LevelId"], true, (old, current) =>
+                    new ContainerWatcher<int>("LevelId", pGameProcess, Offsets["LevelId"], (old, current) =>
                     {
                         Debug.WriteLine("LevelId_Current: " + current + ", LevelId_Old: " + old);
                         if(current == 1)
@@ -146,12 +146,12 @@ namespace LiveSplit.UI.Components
                         }
                     });
 
-                    new ContainerWatcher<double>("Map_X", pGameProcess, Offsets["Map_X"], true, (old, current) =>
+                    new ContainerWatcher<double>("Map_X", pGameProcess, Offsets["Map_X"], (old, current) =>
                     {
                         Debug.WriteLine("Map_X_Current: " + current + ", Map_X_Old: " + old);
                     });
 
-                    new ContainerWatcher<double>("Map_Y", pGameProcess, Offsets["Map_Y"], true, (old, current) =>
+                    new ContainerWatcher<double>("Map_Y", pGameProcess, Offsets["Map_Y"], (old, current) =>
                     {
                         Debug.WriteLine("Map_Y_Current: " + current + ", Map_Y_Old: " + old);
                     });
