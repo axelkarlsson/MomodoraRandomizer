@@ -15,10 +15,7 @@ public class ContainerWatcher<T> where T : struct
     private ContainerWatcher(string name)
     {
         this.Name = name;
-        if (!Exists())
-        {
-            WatcherContainers.Add(this);
-        }
+        WatcherContainers.Add(this);
     }
 
     /// <summary>
@@ -186,51 +183,18 @@ public class ContainerWatcher<T> where T : struct
     /// </returns>
     private static IntPtr CreatePointer(Process process, params int[] offsets)
     {
-        var typeDeref = new Dictionary<Type, Func<DeepPointer, IntPtr>>
-            {
-                { typeof(short), (dp) => (IntPtr)dp.Deref<short>(process) },
-                { typeof(int), (dp) => (IntPtr)dp.Deref<int>(process) },
-                { typeof(long), (dp) => (IntPtr)dp.Deref<long>(process) },
-                { typeof(double), (dp) => (IntPtr)dp.Deref<double>(process) },
-                { typeof(float), (dp) => (IntPtr)dp.Deref<float>(process) }
-            };
-
-        if (typeDeref.TryGetValue(typeof(T), out var deref))
+        if (offsets.Length == 1)
         {
-            if (offsets.Length == 1)
-            {
-                return IntPtr.Add(process.MainModule.BaseAddress, offsets.First());
-            }
-            else
-            {
-                return IntPtr.Add(deref(new DeepPointer(offsets.First(), offsets.Skip(1).Take(offsets.Length - 2).ToArray())), offsets.Last());
-            }
-
+            return IntPtr.Add(process.MainModule.BaseAddress, offsets.First());
         }
-
-        return IntPtr.Zero;
-    }
-    #endregion
-
-    #region Other methods
-    /// <summary>
-    /// Check if WatcherContainer with the same name and type exists
-    /// </summary>
-    /// <returns>
-    ///     <c>true</c> if it exists<br/>
-    ///     <c>false</c> otherwise
-    /// </returns>
-    private bool Exists()
-    {
-        foreach(var container in WatcherContainers)
+        else if (offsets.Length > 1)
         {
-            if (this.Name == container.Name && this.Watcher.Current.GetType() == container.Watcher.Current.GetType())
-            {
-                return true;
-            }
+            return IntPtr.Add((IntPtr)new DeepPointer(offsets.First(), offsets.Skip(1).Take(offsets.Length - 2).ToArray()).Deref<int>(process), offsets.Last());
         }
-
-        return false;
+        else
+        {
+            return IntPtr.Zero;
+        }
     }
     #endregion
 }

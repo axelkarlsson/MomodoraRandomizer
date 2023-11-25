@@ -5,16 +5,51 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomodoraRandomizer", "MomodoraRandomizer.csproj", "{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveSplit.Core", "..\..\LiveSplit\LiveSplit\LiveSplit.Core\LiveSplit.Core.csproj", "{6DE847DB-20A3-4848-AEEE-1B4364AECDFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateManager", "..\..\LiveSplit\LiveSplit\UpdateManager\UpdateManager.csproj", "{56DEA3A0-2EB7-493B-B50F-A5E3AA8AE52A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomFontDialog", "..\..\LiveSplit\LiveSplit\Libs\CustomFontDialog\CustomFontDialog\CustomFontDialog.csproj", "{D1EE5A8A-A366-4DB4-B6E0-42EE09C97F1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveSplit.Text", "..\..\LiveSplit\LiveSplit\Components\LiveSplit.Text\LiveSplit.Text.csproj", "{BE9D4E57-20C6-4384-A3DC-AA365E11FFD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Release Candidate|Any CPU = Release Candidate|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}.Release Candidate|Any CPU.ActiveCfg = Release|Any CPU
+		{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}.Release Candidate|Any CPU.Build.0 = Release|Any CPU
 		{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DE847DB-20A3-4848-AEEE-1B4364AECDFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE847DB-20A3-4848-AEEE-1B4364AECDFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE847DB-20A3-4848-AEEE-1B4364AECDFB}.Release Candidate|Any CPU.ActiveCfg = Release Candidate|Any CPU
+		{6DE847DB-20A3-4848-AEEE-1B4364AECDFB}.Release Candidate|Any CPU.Build.0 = Release Candidate|Any CPU
+		{6DE847DB-20A3-4848-AEEE-1B4364AECDFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE847DB-20A3-4848-AEEE-1B4364AECDFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56DEA3A0-2EB7-493B-B50F-A5E3AA8AE52A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56DEA3A0-2EB7-493B-B50F-A5E3AA8AE52A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56DEA3A0-2EB7-493B-B50F-A5E3AA8AE52A}.Release Candidate|Any CPU.ActiveCfg = Release Candidate|Any CPU
+		{56DEA3A0-2EB7-493B-B50F-A5E3AA8AE52A}.Release Candidate|Any CPU.Build.0 = Release Candidate|Any CPU
+		{56DEA3A0-2EB7-493B-B50F-A5E3AA8AE52A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56DEA3A0-2EB7-493B-B50F-A5E3AA8AE52A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1EE5A8A-A366-4DB4-B6E0-42EE09C97F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1EE5A8A-A366-4DB4-B6E0-42EE09C97F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1EE5A8A-A366-4DB4-B6E0-42EE09C97F1A}.Release Candidate|Any CPU.ActiveCfg = Release|Any CPU
+		{D1EE5A8A-A366-4DB4-B6E0-42EE09C97F1A}.Release Candidate|Any CPU.Build.0 = Release|Any CPU
+		{D1EE5A8A-A366-4DB4-B6E0-42EE09C97F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1EE5A8A-A366-4DB4-B6E0-42EE09C97F1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE9D4E57-20C6-4384-A3DC-AA365E11FFD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE9D4E57-20C6-4384-A3DC-AA365E11FFD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE9D4E57-20C6-4384-A3DC-AA365E11FFD2}.Release Candidate|Any CPU.ActiveCfg = Release Candidate|Any CPU
+		{BE9D4E57-20C6-4384-A3DC-AA365E11FFD2}.Release Candidate|Any CPU.Build.0 = Release Candidate|Any CPU
+		{BE9D4E57-20C6-4384-A3DC-AA365E11FFD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE9D4E57-20C6-4384-A3DC-AA365E11FFD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

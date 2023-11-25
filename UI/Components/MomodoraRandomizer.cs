@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Windows.Forms;
-using LiveSplit.ComponentUtil;
 using LiveSplit.Model;
 using System.Drawing.Drawing2D;
-using System.IO;
-using System.Collections;
-using System.Windows.Forms.VisualStyles;
 
 namespace LiveSplit.UI.Components
 {
@@ -23,9 +17,7 @@ namespace LiveSplit.UI.Components
         private Process pGameProcess = null;
         private string sGameVersion = "";
         private Random Rnd = new Random();
-        #region Pointers
         private Dictionary<string, int[]> Offsets = new Dictionary<string, int[]>();
-        #endregion
         #endregion
 
         #region Basic component variables
@@ -143,7 +135,7 @@ namespace LiveSplit.UI.Components
 
                     new ContainerWatcher<int>("LevelId", pGameProcess, Offsets["LevelId"], true, (old, current) =>
                     {
-                        Debug.WriteLine("Current: " + current + ", Old: " + old);
+                        Debug.WriteLine("LevelId_Current: " + current + ", LevelId_Old: " + old);
                         if(current == 1)
                         {
                             //MainMenu, restore values
@@ -156,12 +148,12 @@ namespace LiveSplit.UI.Components
 
                     new ContainerWatcher<double>("Map_X", pGameProcess, Offsets["Map_X"], true, (old, current) =>
                     {
-                        Debug.WriteLine("Current: " + current + ", Old: " + old);
+                        Debug.WriteLine("Map_X_Current: " + current + ", Map_X_Old: " + old);
                     });
 
                     new ContainerWatcher<double>("Map_Y", pGameProcess, Offsets["Map_Y"], true, (old, current) =>
                     {
-                        Debug.WriteLine("Current: " + current + ", Old: " + old);
+                        Debug.WriteLine("Map_Y_Current: " + current + ", Map_Y_Old: " + old);
                     });
                 }
             }
@@ -175,6 +167,7 @@ namespace LiveSplit.UI.Components
                 if(sGameVersion != "" && CurrentState.CurrentPhase == TimerPhase.Running)
                 {
                     ContainerWatcher<int>.UpdateWatchers(pGameProcess);
+                    ContainerWatcher<double>.UpdateWatchers(pGameProcess);
 
                     //TODO Check language and update strings if necessary
                 }
@@ -190,6 +183,7 @@ namespace LiveSplit.UI.Components
             if ((pGameProcess = GetProcess(PROCESS_NAME)) != null)
             {
                 ContainerWatcher<int>.ClearWatchers();
+                Offsets.Clear();
                 //TODO Reset Values and strings
             }
             //TODO Log events if necessary
@@ -209,9 +203,9 @@ namespace LiveSplit.UI.Components
         /// <param name="List">List where the items will be stored</param>
         private void PopulateItemList(List<Items> List)
         {
-            foreach(ItemValue item in Enum.GetValues(typeof(ItemValue)))
+            foreach(ItemName name in Enum.GetValues(typeof(ItemName)))
             {
-                List.Add(new Items(item, sGameVersion));
+                List.Add(new Items(name, sGameVersion));
             }
         }
 
@@ -225,7 +219,7 @@ namespace LiveSplit.UI.Components
             switch(sGameVersion)
             {
                 case "1.05b":
-                    Offsets.Add("RoomId", new int[] { 0x230F1A0 });
+                    Offsets.Add("LevelId", new int[] { 0x230F1A0 });
                     //ADD X, Y Map coord
                     //ADD Doors
                     //ADD Green Leaf
@@ -235,9 +229,9 @@ namespace LiveSplit.UI.Components
                     //ADD Strings
                     break;
                 case "1.07":
-                    Offsets.Add("RoomId", new int[] { 0x237C360 });
-                    Offsets.Add("Map_X",  new int[] { 0x2371EA8, 0x4, 0x7B0 });
-                    Offsets.Add("Map_Y",  new int[] { 0x2371EA8, 0x4, 0x7C0 });
+                    Offsets.Add("LevelId", new int[] { 0x237C360 });
+                    Offsets.Add("Map_X", new int[] { 0x2371EA8, 0x4, 0x7B0 });
+                    Offsets.Add("Map_Y", new int[] { 0x2371EA8, 0x4, 0x7C0 });
                     break;
                 default:
                     break;
