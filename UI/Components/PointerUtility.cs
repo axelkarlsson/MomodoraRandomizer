@@ -62,8 +62,5 @@ internal static class PointerUtility
         return false;
     }
 
-    public static T ReadValue<T>(Process process, IntPtr pointer) where T : struct
-    {
-        return process?.ReadValue<T>(pointer) ?? default;
-    }
+    public static T ReadValue<T>(Process process, IntPtr pointer) where T : struct => process?.ReadValue<T>(pointer) ?? default;
 }

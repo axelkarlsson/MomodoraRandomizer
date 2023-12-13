@@ -15,8 +15,8 @@ namespace LiveSplit.UI.Components
         #region Randomizer variables
         private const string V1 = "1.05b", V2 = "1.07";
         private const string PROCESS_NAME = "MomodoraRUtM";
-        private Process pGameProcess = null;
-        private string sGameVersion = "";
+        private Process GameProcess = null;
+        private string GameVersion = "";
         private Random Rnd = new Random();
         private Dictionary<string, int[]> Offsets = new Dictionary<string, int[]>();
         #endregion
@@ -112,12 +112,14 @@ namespace LiveSplit.UI.Components
         #region Component Events
         private void OnStart(object sender, EventArgs e)
         {
-            if (IsProcessRunning(pGameProcess))
+            if (IsProcessRunning(GameProcess))
             {
-                if ((sGameVersion = GetGameVersion()) != "")
+                if ((GameVersion = GetGameVersion()) != "")
                 {
                     string WhatcherName = "";
 
+                    Items.Version = GameVersion;
+                    Items.Process = GameProcess;
                     if (Items.List.Count() == 0)
                     {
                         PopulateItemList(Items.List);
@@ -135,7 +137,7 @@ namespace LiveSplit.UI.Components
                     PrepareOffsets();
 
                     WhatcherName = "LevelId";
-                    ContainerWatcher<int>.List.Add(new ContainerWatcher<int>(WhatcherName, pGameProcess, Offsets[WhatcherName], (old, current) =>
+                    ContainerWatcher<int>.List.Add(new ContainerWatcher<int>(WhatcherName, GameProcess, Offsets[WhatcherName], (old, current) =>
                     {
                         Debug.WriteLine("LevelId_Current: " + current + ", LevelId_Old: " + old);
                         if(current == 1)
@@ -149,34 +151,36 @@ namespace LiveSplit.UI.Components
                     }));
 
                     WhatcherName = "Map_X";
-                    ContainerWatcher<double>.List.Add(new ContainerWatcher<double>(WhatcherName, pGameProcess, Offsets[WhatcherName], (old, current) =>
+                    ContainerWatcher<double>.List.Add(new ContainerWatcher<double>(WhatcherName, GameProcess, Offsets[WhatcherName], (old, current) =>
                     {
                         Debug.WriteLine("Map_X_Current: " + current + ", Map_X_Old: " + old);
                     }));
 
                     WhatcherName = "Map_Y";
-                    ContainerWatcher<double>.List.Add(new ContainerWatcher<double>(WhatcherName, pGameProcess, Offsets[WhatcherName], (old, current) => 
+                    ContainerWatcher<double>.List.Add(new ContainerWatcher<double>(WhatcherName, GameProcess, Offsets[WhatcherName], (old, current) => 
                     {
                         Debug.WriteLine("Map_Y_Current: " + current + ", Map_Y_Old: " + old);
                     }));
+
+                    //TODO Add relevant watchers logic
                 }
             }
         }
 
         public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
-            if (IsProcessRunning(pGameProcess, invalidator, width, height))
+            if (IsProcessRunning(GameProcess, invalidator, width, height))
             {
-                sGameVersion = GetGameVersion(invalidator, width, height);
-                if(sGameVersion != "" && CurrentState.CurrentPhase == TimerPhase.Running)
+                GameVersion = GetGameVersion(invalidator, width, height);
+                if(GameVersion != "" && CurrentState.CurrentPhase == TimerPhase.Running)
                 {
-                    ContainerWatcher<int>.UpdateWatchers(pGameProcess);
-                    ContainerWatcher<double>.UpdateWatchers(pGameProcess);
+                    ContainerWatcher<int>.UpdateWatchers(GameProcess);
+                    ContainerWatcher<double>.UpdateWatchers(GameProcess);
                 }
             }
             else
             {
-                pGameProcess = GetProcess(PROCESS_NAME);
+                GameProcess = GetProcess(PROCESS_NAME);
             }
         }
 
@@ -208,7 +212,7 @@ namespace LiveSplit.UI.Components
         {
             foreach(ItemName name in Enum.GetValues(typeof(ItemName)))
             {
-                List.Add(new Items(name, sGameVersion, pGameProcess));
+                List.Add(new Items(name));
             }
         }
 
@@ -217,7 +221,7 @@ namespace LiveSplit.UI.Components
         /// </summary>
         private void PrepareOffsets()
         {
-            switch(sGameVersion)
+            switch(GameVersion)
             {
                 case V1:
                     Offsets.Add("LevelId",  new int[] { 0x230F1A0 });
@@ -300,7 +304,7 @@ namespace LiveSplit.UI.Components
         {
             string text, version;
 
-            switch (pGameProcess.MainModule.ModuleMemorySize)
+            switch (GameProcess.MainModule.ModuleMemorySize)
             {
                 case 39690240:
                     text = "Supported version detected: " + V1;

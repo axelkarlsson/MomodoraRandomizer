@@ -10,8 +10,8 @@ namespace LiveSplit.UI.Components
         private const string V1 = "1.05b", V2 = "1.07";
 
         public static List<Items> List = new List<Items>();
-        private static string Version;
-        private static Process process;
+        public static string Version;
+        public static Process Process;
 
         public ItemName ItemName { get; }
         private IntPtr ValuePtr;
@@ -27,26 +27,11 @@ namespace LiveSplit.UI.Components
         */
 
         #region Constructor
-        public Items(ItemName itemName, string version, Process processRef)
+        public Items(ItemName itemName)
         {
-            switch (version)
-            {
-                case V1:
-                    Version = V1;
-                    break;
-                case V2:
-                    Version = V2;
-                    break;
-                default:
-                    Version = "";
-                    break;
-            }
-
             this.ItemName = itemName;
 
-            process = processRef;
-
-            this.ValuePtr = PointerUtility.CreatePointer(process, GetValueBase().Concat(GetValueOffsets()).ToArray());
+            this.ValuePtr = PointerUtility.CreatePointer(Process, GetValueBase().Concat(GetValueOffsets()).ToArray());
         }
         #endregion
 
@@ -174,12 +159,12 @@ namespace LiveSplit.UI.Components
         /// <summary>
         /// Set Value of Item to ItemReference's Value
         /// </summary>
-        private void SetValue() => PointerUtility.WriteValue(process, ValuePtr, (int)ItemReference.ItemName);
+        private void SetValue() => PointerUtility.WriteValue(Process, ValuePtr, (int)ItemReference.ItemName);
 
         /// <summary>
         /// Set Value of Item to original Value (ItemName)
         /// </summary>
-        private void ResetValue() => PointerUtility.WriteValue(process, ValuePtr, (int)ItemName);
+        private void ResetValue() => PointerUtility.WriteValue(Process, ValuePtr, (int)ItemName);
         #endregion
     }
 
