@@ -13,7 +13,8 @@ namespace LiveSplit.UI.Components
     public class MomodoraRandomizer : IComponent
     {
         #region Randomizer variables
-        private readonly string PROCESS_NAME = "MomodoraRUtM";
+        private const string V1 = "1.05b", V2 = "1.07";
+        private const string PROCESS_NAME = "MomodoraRUtM";
         private Process pGameProcess = null;
         private string sGameVersion = "";
         private Random Rnd = new Random();
@@ -115,46 +116,49 @@ namespace LiveSplit.UI.Components
             {
                 if ((sGameVersion = GetGameVersion()) != "")
                 {
-                    if (Items.ItemsList.Count() == 0)
+                    string WhatcherName = "";
+
+                    if (Items.List.Count() == 0)
                     {
-                        PopulateItemList(Items.ItemsList);
+                        PopulateItemList(Items.List);
                     }
 
                     //TODO Rendomize items taking into account placement restrictions
-                    List<Items> ItemsCopy = new List<Items>(Items.ItemsList);
-                    foreach (Items item in Items.ItemsList)
+                    List<Items> ItemsCopy = new List<Items>(Items.List);
+                    foreach (Items item in Items.List)
                     {
                         int Index = Rnd.Next(ItemsCopy.Count);
-                        int ItemId = ItemsCopy[Index].Id;
-
-                        item.ItemReference = Items.ItemsList[ItemId];
+                        item.ItemReference = ItemsCopy[Index];
                         ItemsCopy.RemoveAt(Index);
                     }
 
                     PrepareOffsets();
 
-                    new ContainerWatcher<int>("LevelId", pGameProcess, Offsets["LevelId"], (old, current) =>
+                    WhatcherName = "LevelId";
+                    ContainerWatcher<int>.List.Add(new ContainerWatcher<int>(WhatcherName, pGameProcess, Offsets[WhatcherName], (old, current) =>
                     {
                         Debug.WriteLine("LevelId_Current: " + current + ", LevelId_Old: " + old);
                         if(current == 1)
                         {
-                            //MainMenu, restore values
+                            //MainMenu
                         }
                         else
                         {
-                            //InGame, Do Stuff
+                            //InGame
                         }
-                    });
+                    }));
 
-                    new ContainerWatcher<double>("Map_X", pGameProcess, Offsets["Map_X"], (old, current) =>
+                    WhatcherName = "Map_X";
+                    ContainerWatcher<double>.List.Add(new ContainerWatcher<double>(WhatcherName, pGameProcess, Offsets[WhatcherName], (old, current) =>
                     {
                         Debug.WriteLine("Map_X_Current: " + current + ", Map_X_Old: " + old);
-                    });
+                    }));
 
-                    new ContainerWatcher<double>("Map_Y", pGameProcess, Offsets["Map_Y"], (old, current) =>
+                    WhatcherName = "Map_Y";
+                    ContainerWatcher<double>.List.Add(new ContainerWatcher<double>(WhatcherName, pGameProcess, Offsets[WhatcherName], (old, current) => 
                     {
                         Debug.WriteLine("Map_Y_Current: " + current + ", Map_Y_Old: " + old);
-                    });
+                    }));
                 }
             }
         }
@@ -168,8 +172,6 @@ namespace LiveSplit.UI.Components
                 {
                     ContainerWatcher<int>.UpdateWatchers(pGameProcess);
                     ContainerWatcher<double>.UpdateWatchers(pGameProcess);
-
-                    //TODO Check language and update strings if necessary
                 }
             }
             else
@@ -180,12 +182,13 @@ namespace LiveSplit.UI.Components
 
         private void OnReset(object sender, TimerPhase value)
         {
-            if ((pGameProcess = GetProcess(PROCESS_NAME)) != null)
-            {
-                ContainerWatcher<int>.ClearWatchers();
+            //if ((pGameProcess = GetProcess(PROCESS_NAME)) != null)
+            //{
+                ContainerWatcher<int>.Clear();
+                ContainerWatcher<double>.Clear();
                 Offsets.Clear();
-                //TODO Reset Values and strings
-            }
+                Items.Reset();
+            //}
             //TODO Log events if necessary
         }
 
@@ -205,21 +208,19 @@ namespace LiveSplit.UI.Components
         {
             foreach(ItemName name in Enum.GetValues(typeof(ItemName)))
             {
-                List.Add(new Items(name, sGameVersion));
+                List.Add(new Items(name, sGameVersion, pGameProcess));
             }
         }
 
         /// <summary>
-        /// Create pointers for the different variables to track
+        /// Add Offsets to a Dictionary
         /// </summary>
-        /// <param name="version">Version of the game</param>
-        /// <param name="process">Proces to get pointer from</param>
         private void PrepareOffsets()
         {
             switch(sGameVersion)
             {
-                case "1.05b":
-                    Offsets.Add("LevelId", new int[] { 0x230F1A0 });
+                case V1:
+                    Offsets.Add("LevelId",  new int[] { 0x230F1A0 });
                     //ADD X, Y Map coord
                     //ADD Doors
                     //ADD Green Leaf
@@ -228,10 +229,10 @@ namespace LiveSplit.UI.Components
                     //ADD Language
                     //ADD Strings
                     break;
-                case "1.07":
-                    Offsets.Add("LevelId", new int[] { 0x237C360 });
-                    Offsets.Add("Map_X", new int[] { 0x2371EA8, 0x4, 0x7B0 });
-                    Offsets.Add("Map_Y", new int[] { 0x2371EA8, 0x4, 0x7C0 });
+                case V2:
+                    Offsets.Add("LevelId",  new int[] { 0x237C360 });
+                    Offsets.Add("Map_X",    new int[] { 0x2371EA8, 0x4, 0x7B0 });
+                    Offsets.Add("Map_Y",    new int[] { 0x2371EA8, 0x4, 0x7C0 });
                     break;
                 default:
                     break;
@@ -302,12 +303,12 @@ namespace LiveSplit.UI.Components
             switch (pGameProcess.MainModule.ModuleMemorySize)
             {
                 case 39690240:
-                    text = "Supported version detected: v1.05b";
-                    version = "1.05b";
+                    text = "Supported version detected: " + V1;
+                    version = V1;
                     break;
                 case 40222720:
-                    text = "Supported version detected: v1.07";
-                    version = "1.07";
+                    text = "Supported version detected: " + V2;
+                    version = V2;
                     break;
                 default:
                     text = "Version not supported";

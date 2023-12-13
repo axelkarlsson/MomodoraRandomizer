@@ -54,6 +54,7 @@
     <Compile Include="UI\Components\ContainerWatcher.cs" />
     <Compile Include="UI\Components\Items.cs" />
     <Compile Include="UI\Components\MomodoraRandomizer.cs" />
+    <Compile Include="UI\Components\PointerUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\Components\MomodoraRandomizerSettings.resx">

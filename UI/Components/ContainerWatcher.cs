@@ -6,18 +6,12 @@ using System.Linq;
 
 public class ContainerWatcher<T> where T : struct
 {
-    static List<ContainerWatcher<T>> WatcherContainers { get; } = new List<ContainerWatcher<T>>();
+    public static List<ContainerWatcher<T>> List = new List<ContainerWatcher<T>>();
 
     public string Name { get; }
     public MemoryWatcher<T> Watcher { get; }
 
     #region Constructors
-    private ContainerWatcher(string name)
-    {
-        this.Name = name;
-        WatcherContainers.Add(this);
-    }
-
     /// <summary>
     /// Construct WatcherContainer, creating a new MemoryWatcher
     /// </summary>
@@ -26,8 +20,9 @@ public class ContainerWatcher<T> where T : struct
     /// <param name="timeSpan">Update interval (10ms if not provided)</param>
     /// <param name="enabled"><c>Enable</c> or <c>Disable</c> Watcher</param>
     /// <param name="OnChanged">Method reference to attach to OnChanged event</param>
-    public ContainerWatcher(string name, IntPtr pointer, TimeSpan? timeSpan, bool? enabled, MemoryWatcher<T>.DataChangedEventHandler OnChanged = null) : this(name)
+    public ContainerWatcher(string name, IntPtr pointer, TimeSpan? timeSpan, bool? enabled, MemoryWatcher<T>.DataChangedEventHandler OnChanged = null)
     {
+        this.Name = name;
         this.Watcher = new MemoryWatcher<T>(pointer)
         {
             UpdateInterval = timeSpan ?? new TimeSpan(0, 0, 0, 0, 10),
@@ -60,7 +55,7 @@ public class ContainerWatcher<T> where T : struct
     /// <param name="process">Process to get pointer of</param>
     /// <param name="offsets">Offsets of pointer</param>
     /// <param name="OnChanged">Method reference to attach to OnChanged event</param>
-    public ContainerWatcher(string name, Process process, int[] offsets, MemoryWatcher<T>.DataChangedEventHandler OnChanged) : this(name, CreatePointer(process, offsets), null, null, OnChanged) { }
+    public ContainerWatcher(string name, Process process, int[] offsets, MemoryWatcher<T>.DataChangedEventHandler OnChanged) : this(name, PointerUtility.CreatePointer(process, offsets), null, null, OnChanged) { }
 
     /// <summary>
     /// Construct WatcherContainer, creating a new MemoryWatcher
@@ -70,7 +65,7 @@ public class ContainerWatcher<T> where T : struct
     /// <param name="offsets">Offsets of pointer</param>
     /// <param name="enabled"><c>Enable</c> or <c>Disable</c> Watcher</param>
     /// <param name="OnChanged">Method reference to attach to OnChanged event</param>
-    public ContainerWatcher(string name, Process process, int[] offsets, bool enabled = true, MemoryWatcher<T>.DataChangedEventHandler OnChanged = null) : this(name, CreatePointer(process, offsets), null, enabled, OnChanged) { }
+    public ContainerWatcher(string name, Process process, int[] offsets, bool enabled = true, MemoryWatcher<T>.DataChangedEventHandler OnChanged = null) : this(name, PointerUtility.CreatePointer(process, offsets), null, enabled, OnChanged) { }
     #endregion
 
     #region Class methods
@@ -80,7 +75,7 @@ public class ContainerWatcher<T> where T : struct
     /// <param name="process">Process to use in the Update</param>
     public static void UpdateWatchers(Process process)
     {
-        foreach (var container in WatcherContainers)
+        foreach (var container in List)
         {
             container.Watcher.Update(process);
         }
@@ -89,7 +84,7 @@ public class ContainerWatcher<T> where T : struct
     /// <summary>
     /// Clear list of ContainerWatchers
     /// </summary>
-    public static void ClearWatchers() => WatcherContainers.Clear();
+    public static void Clear() => List.Clear();
 
     /// <summary>
     /// Obtain WatcherContainer form Class List matching name and Type
@@ -101,7 +96,7 @@ public class ContainerWatcher<T> where T : struct
     /// </returns>
     public static ContainerWatcher<T> GetContainerWatcher(string name)
     {
-        foreach(var container in WatcherContainers)
+        foreach(var container in List)
         {
             if(container.Name == name && container.Watcher.Current.GetType() == typeof(T))
             {
@@ -121,11 +116,11 @@ public class ContainerWatcher<T> where T : struct
     /// </returns>
     public static MemoryWatcher<T> GetMemoryWatcher(string name)
     {
-        ContainerWatcher<T> temp = GetContainerWatcher(name);
+        ContainerWatcher<T> container = GetContainerWatcher(name);
 
-        if (temp != null)
+        if (container != null)
         {
-            return temp.Watcher;
+            return container.Watcher;
         }
 
         return null;
@@ -141,11 +136,11 @@ public class ContainerWatcher<T> where T : struct
     /// </returns>
     public static T GetCurrent(string name)
     {
-        MemoryWatcher<T> temp = GetMemoryWatcher(name);
+        MemoryWatcher<T> watcher = GetMemoryWatcher(name);
 
-        if (temp != null)
+        if (watcher != null)
         {
-            return temp.Current;
+            return watcher.Current;
         }
 
         return default;
@@ -161,40 +156,14 @@ public class ContainerWatcher<T> where T : struct
     /// </returns>
     public static T GetOld(string name)
     {
-        MemoryWatcher<T> temp = GetMemoryWatcher(name);
+        MemoryWatcher<T> watcher = GetMemoryWatcher(name);
 
-        if (temp != null)
+        if (watcher != null)
         {
-            return temp.Old;
+            return watcher.Old;
         }
 
         return default;
-    }
-
-    /// <summary>
-    /// Create a DeepPointer for the process with the offsets (includes the base)<br/>
-    /// Supports short, int, long, double and float
-    /// </summary>
-    /// <typeparam name="T">Pointer type</typeparam>
-    /// <param name="offsets">Offsets, including the base, of the pointer</param>
-    /// <returns>
-    ///     Reference to a Deep pointer<br/>
-    ///     <c>zero</c> pointer otherwise
-    /// </returns>
-    private static IntPtr CreatePointer(Process process, params int[] offsets)
-    {
-        if (offsets.Length == 1)
-        {
-            return IntPtr.Add(process.MainModule.BaseAddress, offsets.First());
-        }
-        else if (offsets.Length > 1)
-        {
-            return IntPtr.Add((IntPtr)new DeepPointer(offsets.First(), offsets.Skip(1).Take(offsets.Length - 2).ToArray()).Deref<int>(process), offsets.Last());
-        }
-        else
-        {
-            return IntPtr.Zero;
-        }
     }
     #endregion
 }
