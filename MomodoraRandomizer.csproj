@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MomodoraRandomizer</RootNamespace>
     <AssemblyName>MomodoraRandomizer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +32,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CustomFontDialog">
+      <HintPath>References\CustomFontDialog.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveSplit.Core">
+      <HintPath>..\..\LiveSplit\LiveSplit\bin\Debug\LiveSplit.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveSplit.Text">
+      <HintPath>D:\Programas\Livesplit\Components\LiveSplit.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -41,6 +51,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UpdateManager">
+      <HintPath>..\..\LiveSplit\LiveSplit\bin\Debug\UpdateManager.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\Components\MomodoraRandomizerFactory.cs" />
@@ -63,24 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Updates\update.MomodoraRandomizer.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\LiveSplit\LiveSplit\Components\LiveSplit.Text\LiveSplit.Text.csproj">
-      <Project>{be9d4e57-20c6-4384-a3dc-aa365e11ffd2}</Project>
-      <Name>LiveSplit.Text</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\LiveSplit\LiveSplit\Libs\CustomFontDialog\CustomFontDialog\CustomFontDialog.csproj">
-      <Project>{d1ee5a8a-a366-4db4-b6e0-42ee09c97f1a}</Project>
-      <Name>CustomFontDialog</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\LiveSplit\LiveSplit\LiveSplit.Core\LiveSplit.Core.csproj">
-      <Project>{6de847db-20a3-4848-aeee-1b4364aecdfb}</Project>
-      <Name>LiveSplit.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\LiveSplit\LiveSplit\UpdateManager\UpdateManager.csproj">
-      <Project>{56dea3a0-2eb7-493b-b50f-a5e3aa8ae52a}</Project>
-      <Name>UpdateManager</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

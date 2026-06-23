@@ -172,15 +172,7 @@ namespace LiveSplit.UI.Components
 
         private void UseRandomSeed_CheckedChanged(object sender, EventArgs e)
         {
-            if (!chkRandom.Checked)
-            {
-                textSeed.Enabled = true;
-            }
-
-            else
-            {
-                textSeed.Enabled = false;
-            }
+            textSeed.Enabled = !chkRandom.Checked;
         }
 
         public void seed_set(int seed)

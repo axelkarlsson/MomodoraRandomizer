@@ -13,11 +13,12 @@ namespace LiveSplit.UI.Components
     public class MomodoraRandomizer : IComponent
     {
         #region Randomizer variables
-        private const string V1 = "1.05b", V2 = "1.07";
+        private const string VERSION_1_05b = "1.05b", VERSION_1_07 = "1.07";
         private const string PROCESS_NAME = "MomodoraRUtM";
         private Process GameProcess = null;
         private string GameVersion = "";
-        private Random Rnd = new Random();
+        private Random Rnd;
+        private int seed = 0;
         private Dictionary<string, int[]> Offsets = new Dictionary<string, int[]>();
         #endregion
 
@@ -120,20 +121,53 @@ namespace LiveSplit.UI.Components
 
                     Items.Version = GameVersion;
                     Items.Process = GameProcess;
-                    if (Items.List.Count() == 0)
+
+                    // Generate seed
+                    if (!Settings.RandomSeed)
                     {
-                        PopulateItemList(Items.List);
+                        int.TryParse(Settings.seed_get(), out seed);
+                        Rnd = new Random(seed);
+                    }
+                    else
+                    {
+                        Rnd = new Random();
+                        seed = Rnd.Next();
+                        Settings.seed_set(seed);
+                        Rnd = new Random(seed);
                     }
 
-                    //TODO Rendomize items taking into account placement restrictions
-                    List<Items> ItemsCopy = new List<Items>(Items.List);
+                    // Fill item list if its empty
+                    if (!Items.List.Any())
+                    {
+                        Items.List = Enum.GetValues(typeof(ItemName))
+                                            .Cast<ItemName>()
+                                            .Except(Items.ExcludeList)
+                                            .Select(itemName => new Items(itemName))
+                                            .ToList();
+                    }
+
+                    // Copy items in a random order based on the seed
+                    List<Items> ItemsCopy = new List<Items>(Items.List.OrderBy(_ => Rnd.Next()).ToList());
+
+                    // Randomize items and assign them to the item list (so we know which item to give the player when a specific item is collected)
                     foreach (Items item in Items.List)
                     {
-                        int Index = Rnd.Next(ItemsCopy.Count);
-                        item.ItemReference = ItemsCopy[Index];
-                        ItemsCopy.RemoveAt(Index);
+                        Items NewReference = FindValidReference(item, ItemsCopy);
+                        if(NewReference != null)
+                        {
+                            item.ItemReference = NewReference;
+                            NewReference.ReferencedBy = item;
+                            NewReference.DependsOn.AddRange(item.DependsOn.Except(NewReference.DependsOn));
+                        }
+                        else
+                        {
+                            NewReference = AssignReferenceChain(item, ItemsCopy);
+                        }
+                        ItemsCopy.Remove(NewReference);
+                        Debug.WriteLine("{0} transforms into {1}", item.ItemName, item.ItemReference.ItemName);
                     }
 
+                    // Prepare the offsets of the pointers
                     PrepareOffsets();
 
                     WhatcherName = "LevelId";
@@ -142,11 +176,11 @@ namespace LiveSplit.UI.Components
                         Debug.WriteLine("LevelId_Current: " + current + ", LevelId_Old: " + old);
                         if(current == 1)
                         {
-                            //MainMenu
+                            Items.ResetValues();
                         }
                         else
                         {
-                            //InGame
+                            Items.SetValues();
                         }
                     }));
 
@@ -162,7 +196,7 @@ namespace LiveSplit.UI.Components
                         Debug.WriteLine("Map_Y_Current: " + current + ", Map_Y_Old: " + old);
                     }));
 
-                    //TODO Add relevant watchers logic
+                    // TODO Add relevant watchers logic
                 }
             }
         }
@@ -205,25 +239,49 @@ namespace LiveSplit.UI.Components
 
         #region Randomizer logic
         /// <summary>
-        /// Populate a list with the items of the game
+        /// Finds a valid reference item for the specified current item.
         /// </summary>
-        /// <param name="List">List where the items will be stored</param>
-        private void PopulateItemList(List<Items> List)
+        /// <param name="currentItem">The current item for which to find a valid reference.</param>
+        /// <param name="itemList">The list of items to search for a valid reference.</param>
+        /// <returns>The first valid reference item found; otherwise, null if no valid reference is found.</returns>
+        private Items FindValidReference(Items currentItem, List<Items> itemList)
         {
-            foreach(ItemName name in Enum.GetValues(typeof(ItemName)))
+            return itemList.FirstOrDefault(potentialReference =>
+                !currentItem.DependsOn.Contains(potentialReference.ItemName));
+        }
+
+        // Needs revision to make recursive so items can try to find a new valid reference besides themselves
+        /// <summary>
+        /// Reassign references in a chain from the specified item.
+        /// </summary>
+        /// <param name="currentItem">The item from which the chain starts.</param>
+        /// <param name="itemsCopy">The list of items to use for findig references.</param>
+        /// <returns>The last valid item found in the list.</returns>
+        private Items AssignReferenceChain(Items currentItem, List<Items> itemsCopy)
+        {
+            Items NewReference;
+            do
             {
-                List.Add(new Items(name));
-            }
+                Items referencesCurrent = currentItem.ReferencedBy;
+                currentItem.ItemReference = currentItem;
+                currentItem.ReferencedBy = currentItem;
+                foreach (ItemName itemName in referencesCurrent.DependsOn)
+                    currentItem.DependsOn.Remove(itemName);
+                currentItem = referencesCurrent;
+                NewReference = FindValidReference(currentItem, itemsCopy);
+            } while ( NewReference == null);
+            NewReference.DependsOn.AddRange(currentItem.DependsOn.Except(NewReference.DependsOn));
+            return currentItem.ItemReference = NewReference;
         }
 
         /// <summary>
-        /// Add Offsets to a Dictionary
+        /// Adds a collection of offsets to a dictionary.
         /// </summary>
         private void PrepareOffsets()
         {
             switch(GameVersion)
             {
-                case V1:
+                case VERSION_1_05b:
                     Offsets.Add("LevelId",  new int[] { 0x230F1A0 });
                     //ADD X, Y Map coord
                     //ADD Doors
@@ -233,7 +291,7 @@ namespace LiveSplit.UI.Components
                     //ADD Language
                     //ADD Strings
                     break;
-                case V2:
+                case VERSION_1_07:
                     Offsets.Add("LevelId",  new int[] { 0x237C360 });
                     Offsets.Add("Map_X",    new int[] { 0x2371EA8, 0x4, 0x7B0 });
                     Offsets.Add("Map_Y",    new int[] { 0x2371EA8, 0x4, 0x7C0 });
@@ -244,19 +302,15 @@ namespace LiveSplit.UI.Components
         }
 
         /// <summary>
-        /// Check if the process with name is currently running and return a reference
+        /// Checks if a process with the specified name is currently running and returns a reference.
         /// </summary>
-        /// <param name="procesName">Name of the process to check</param>
-        /// <param name="invalidator">Component Invalidator</param>
-        /// <param name="width">Width</param>
-        /// <param name="height">Height</param>
+        /// <param name="processName">The name of the process to check.</param>
         /// <returns>
-        ///     <c>Process</c> reference if the process is running.<br/>
-        ///     <c>null</c> otherwise
+        ///     A <see cref="Process"/> reference if the process is running; otherwise, <c>null</c>.
         /// </returns>
-        private Process GetProcess(string procesName)
+        private Process GetProcess(string processName)
         {
-            Process[] game = Process.GetProcessesByName(procesName);
+            Process[] game = Process.GetProcessesByName(processName);
             Process process = null;
 
             if (game.Length > 0)
@@ -268,15 +322,14 @@ namespace LiveSplit.UI.Components
         }
 
         /// <summary>
-        /// Check if the process is currently running
+        /// Checks if the specified process is currently running.
         /// </summary>
-        /// <param name="process">Reference to the process</param>
-        /// <param name="invalidator">Component Invalidator</param>
-        /// <param name="width">Width</param>
-        /// <param name="height">Height</param>
+        /// <param name="process">The reference to the process to check.</param>
+        /// <param name="invalidator">Component Invalidator.</param>
+        /// <param name="width">Width.</param>
+        /// <param name="height">Height.</param>
         /// <returns>
-        ///     <c>True</c> if the process is running<br/>
-        ///     <c>False</c> otherwise
+        ///     <c>true</c> if the process is running; otherwise, <c>false</c>.
         /// </returns>
         private bool IsProcessRunning(Process process, IInvalidator invalidator = null, float width = 0, float height = 0)
         {
@@ -291,14 +344,13 @@ namespace LiveSplit.UI.Components
         }
 
         /// <summary>
-        ///     Get version of the process based on module memory size
+        ///     Gets the version of the Game based on the module memory size.
         /// </summary>
         /// <param name="invalidator">Component Invalidator</param>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
         /// <returns>
-        ///     <c>string</c> with the version value if it's supported<br/>
-        ///     <c>empty string</c> otherwise
+        ///     A <c>string</c> with the version value if it's supported; otherwise, an empty string.
         /// </returns>
         private string GetGameVersion(IInvalidator invalidator = null, float width = 0, float height = 0)
         {
@@ -307,12 +359,12 @@ namespace LiveSplit.UI.Components
             switch (GameProcess.MainModule.ModuleMemorySize)
             {
                 case 39690240:
-                    text = "Supported version detected: " + V1;
-                    version = V1;
+                    text = "Supported version detected: " + VERSION_1_05b;
+                    version = VERSION_1_05b;
                     break;
                 case 40222720:
-                    text = "Supported version detected: " + V2;
-                    version = V2;
+                    text = "Supported version detected: " + VERSION_1_07;
+                    version = VERSION_1_07;
                     break;
                 default:
                     text = "Version not supported";
@@ -329,12 +381,12 @@ namespace LiveSplit.UI.Components
         }
 
         /// <summary>
-        /// Change text of RandomizerLabel and invalidate state if it's different
+        /// Changes the text of the RandomizerLabel and invalidates the state if it's different.
         /// </summary>
-        /// <param name="newString">text to set RandomizerLabel to</param>
-        /// <param name="invalidator">Component Invalidator</param>
-        /// <param name="width">Width</param>
-        /// <param name="height">Height</param>
+        /// <param name="newString">The text to set RandomizerLabel to.</param>
+        /// <param name="invalidator">Component Invalidator.</param>
+        /// <param name="width">Width.</param>
+        /// <param name="height">Height.</param>
         private void SetSimpleLabelText(string newString, IInvalidator invalidator = null, float width = 0, float height = 0)
         {
             if(RandomizerLabel.Text != newString)

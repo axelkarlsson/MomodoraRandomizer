@@ -1,0 +1,451 @@
+{
+  "NeededBy": [
+    {
+      "name": "CrystalSeed"
+    },
+    {
+      "name": "ClarityShard"
+    },
+    {
+      "name": "SparseThread"
+    },
+    {
+      "name": "BloodstainedTissue"
+    },
+    {
+      "name": "VioletSprite"
+    },
+    {
+      "name": "RottenBellflower"
+    },
+    {
+      "name": "BlessedCharm"
+    },
+    {
+      "name": "AdornedRing"
+    },
+    {
+      "name": "MedalofEquivalence"
+    },
+    {
+      "name": "EdeasPearl"
+    },
+    {
+      "name": "AstralCharm"
+    },
+    {
+      "name": "FaerieTear"
+    },
+    {
+      "name": "RingofCandor"
+    },
+    {
+      "name": "MagnetStone"
+    },
+    {
+      "name": "NecklaceofSacrifice"
+    },
+    {
+      "name": "DullPearl"
+    },
+    {
+      "name": "TornBranch"
+    },
+    {
+      "name": "DrillingArrows"
+    },
+    {
+      "name": "ImpurityFlask"
+    },
+    {
+      "name": "RedRing"
+    },
+    {
+      "name": "PocketIncensory"
+    },
+    {
+      "name": "BlackSachet"
+    },
+    {
+      "name": "QuickArrows"
+    },
+    {
+      "name": "HeavyArrows"
+    },
+    {
+      "name": "CinderKey"
+    },
+    {
+      "name": "FreshSpringLeaf"
+    },
+    {
+      "name": "Birthstone"
+    },
+    {
+      "name": "SmallCoin"
+    },
+    {
+      "name": "HazleBadge",
+      "children": [
+        {
+          "name": "BlessedCharm"
+        }
+      ]
+    },
+    {
+      "name": "Softtissue",
+      "children": [
+        {
+          "name": "BloodstainedTissue"
+        }
+      ]
+    },
+    {
+      "name": "SealedWind",
+      "children": [
+        {
+          "name": "FreshSpringLeaf"
+        }
+      ]
+    },
+    {
+      "name": "DirtyShroom",
+      "children": [
+        {
+          "name": "RottenBellflower"
+        }
+      ]
+    },
+    {
+      "name": "CrestFragment(BowLevel)",
+      "children": [
+        {
+          "name": "VioletSprite"
+        },
+        {
+          "name": "SealedWind",
+          "children": [
+            {
+              "name": "FreshSpringLeaf"
+            }
+          ]
+        },
+        {
+          "name": "BlackSachet"
+        },
+        {
+          "name": "QuickArrows"
+        },
+        {
+          "name": "HeavyArrows"
+        }
+      ]
+    },
+    {
+      "name": "CrestFragment(Warp)",
+      "children": [
+        {
+          "name": "VioletSprite"
+        },
+        {
+          "name": "SealedWind",
+          "children": [
+            {
+              "name": "FreshSpringLeaf"
+            }
+          ]
+        },
+        {
+          "name": "BlackSachet"
+        },
+        {
+          "name": "QuickArrows"
+        },
+        {
+          "name": "HeavyArrows"
+        }
+      ]
+    },
+    {
+      "name": "CrestFragment(BowSpeed)",
+      "children": [
+        {
+          "name": "VioletSprite"
+        },
+        {
+          "name": "SealedWind",
+          "children": [
+            {
+              "name": "FreshSpringLeaf"
+            }
+          ]
+        },
+        {
+          "name": "BlackSachet"
+        },
+        {
+          "name": "QuickArrows"
+        },
+        {
+          "name": "HeavyArrows"
+        }
+      ]
+    },
+    {
+      "name": "CrestFragment(Dash)",
+      "children": [
+        {
+          "name": "VioletSprite"
+        },
+        {
+          "name": "SealedWind",
+          "children": [
+            {
+              "name": "FreshSpringLeaf"
+            }
+          ]
+        },
+        {
+          "name": "BlackSachet"
+        },
+        {
+          "name": "QuickArrows"
+        },
+        {
+          "name": "HeavyArrows"
+        }
+      ]
+    },
+    {
+      "name": "MonasteryKey",
+      "children": [
+        {
+          "name": "Softtissue",
+          "children": [
+            {
+              "name": "BloodstainedTissue"
+            }
+          ]
+        },
+        {
+          "name": "CrestFragment(BowLevel)",
+          "children": [
+            {
+              "name": "VioletSprite"
+            },
+            {
+              "name": "SealedWind",
+              "children": [
+                {
+                  "name": "FreshSpringLeaf"
+                }
+              ]
+            },
+            {
+              "name": "BlackSachet"
+            },
+            {
+              "name": "QuickArrows"
+            },
+            {
+              "name": "HeavyArrows"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CatSphere",
+      "children": [
+        {
+          "name": "Softtissue",
+          "children": [
+            {
+              "name": "BloodstainedTissue"
+            }
+          ]
+        },
+        {
+          "name": "CrestFragment(Warp)",
+          "children": [
+            {
+              "name": "VioletSprite"
+            },
+            {
+              "name": "SealedWind",
+              "children": [
+                {
+                  "name": "FreshSpringLeaf"
+                }
+              ]
+            },
+            {
+              "name": "BlackSachet"
+            },
+            {
+              "name": "QuickArrows"
+            },
+            {
+              "name": "HeavyArrows"
+            }
+          ]
+        },
+        {
+          "name": "DirtyShroom",
+          "children": [
+            {
+              "name": "RottenBellflower"
+            }
+          ]
+        },
+        {
+          "name": "FreshSpringLeaf"
+        },
+        {
+          "name": "HazleBadge",
+          "children": [
+            {
+              "name": "BlessedCharm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GardenKey",
+      "children": [
+        {
+          "name": "CatSphere",
+          "children": [
+            {
+              "name": "Softtissue",
+              "children": [
+                {
+                  "name": "BloodstainedTissue"
+                }
+              ]
+            },
+            {
+              "name": "CrestFragment(Warp)",
+              "children": [
+                {
+                  "name": "VioletSprite"
+                },
+                {
+                  "name": "SealedWind",
+                  "children": [
+                    {
+                      "name": "FreshSpringLeaf"
+                    }
+                  ]
+                },
+                {
+                  "name": "BlackSachet"
+                },
+                {
+                  "name": "QuickArrows"
+                },
+                {
+                  "name": "HeavyArrows"
+                }
+              ]
+            },
+            {
+              "name": "DirtyShroom",
+              "children": [
+                {
+                  "name": "RottenBellflower"
+                }
+              ]
+            },
+            {
+              "name": "FreshSpringLeaf"
+            },
+            {
+              "name": "HazleBadge",
+              "children": [
+                {
+                  "name": "BlessedCharm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "DullPearl"
+        },
+        {
+          "name": "TornBranch"
+        }
+      ]
+    },
+    {
+      "name": "BakmanPatch",
+      "children": [
+        {
+          "name": "CatSphere",
+          "children": [
+            {
+              "name": "Softtissue",
+              "children": [
+                {
+                  "name": "BloodstainedTissue"
+                }
+              ]
+            },
+            {
+              "name": "CrestFragment(Warp)",
+              "children": [
+                {
+                  "name": "VioletSprite"
+                },
+                {
+                  "name": "SealedWind",
+                  "children": [
+                    {
+                      "name": "FreshSpringLeaf"
+                    }
+                  ]
+                },
+                {
+                  "name": "BlackSachet"
+                },
+                {
+                  "name": "QuickArrows"
+                },
+                {
+                  "name": "HeavyArrows"
+                }
+              ]
+            },
+            {
+              "name": "DirtyShroom",
+              "children": [
+                {
+                  "name": "RottenBellflower"
+                }
+              ]
+            },
+            {
+              "name": "FreshSpringLeaf"
+            },
+            {
+              "name": "HazleBadge",
+              "children": [
+                {
+                  "name": "BlessedCharm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "DullPearl"
+        },
+        {
+          "name": "TornBranch"
+        }
+      ]
+    }
+  ]
+}

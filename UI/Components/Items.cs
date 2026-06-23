@@ -7,15 +7,27 @@ namespace LiveSplit.UI.Components
 {
     internal class Items
     {
-        private const string V1 = "1.05b", V2 = "1.07";
+        private const string VERSION_1_05b = "1.05b", VERSION_1_07 = "1.07";
 
-        public static List<Items> List = new List<Items>();
-        public static string Version;
-        public static Process Process;
+        internal static string Version;
+        internal static Process Process;
+        internal static List<Items> List = new List<Items>();
+        internal static List<ItemName> ExcludeList = new List<ItemName>() { // Items to exclude from Randomization
+            ItemName.ADORNED_RING,
+            ItemName.MEDAL_OF_EQUIVALENCE,
+            ItemName.MAPLE_LEAF,
+            ItemName.BELLFLOWER,
+            ItemName.DIRTY_SHROOM,
+            ItemName.TAINTED_MISSIVE,
+            ItemName.POCKET_INCENSORY,
+            ItemName.IVORY_BUG
+        };
 
-        public ItemName ItemName { get; }
-        private IntPtr ValuePtr;
-        public Items ItemReference { get; set; }
+        internal ItemName ItemName { get; }
+        internal IntPtr PtrToValue { get; }
+        internal Items ReferencedBy { get; set; }
+        internal Items ItemReference { get; set; }
+        internal List<ItemName> DependsOn { get; } = new List<ItemName>();
 
         /*
         private int[] StringBaseOffsetList;
@@ -31,26 +43,29 @@ namespace LiveSplit.UI.Components
         {
             this.ItemName = itemName;
 
-            this.ValuePtr = PointerUtility.CreatePointer(Process, GetValueBase().Concat(GetValueOffsets()).ToArray());
+            this.PtrToValue = PointerUtility.CreatePointer(Process, GetBase().Concat(GetOffsets()).ToArray());
+
+            AddDependencies();
         }
         #endregion
 
         #region Static Methods
         /// <summary>
-        /// Reset values and ItemReference in ItemList
+        /// Resets values and ItemReferences in the static 'List' variable of the class.
         /// </summary>
         static public void Reset()
         {
             foreach (Items item in List)
             {
+                item.ReferencedBy = null;
                 item.ItemReference = null;
                 item.ResetValue();
+                item.ResetDependencies();
             }
         }
 
         /// <summary>
-        /// Set Value of Items in ItemList to their ItemReference's Value
-        /// 
+        /// Sets the value of the items in the static 'List' variable to their corresponding 'ItemReference' values.
         /// </summary>
         static public void SetValues()
         {
@@ -61,7 +76,7 @@ namespace LiveSplit.UI.Components
         }
 
         /// <summary>
-        /// Set Value of Items in ItemList to their original Value (ItemName)
+        /// Sets the value of the items in the static 'List' variable to their original values (ItemName).
         /// </summary>
         static public void ResetValues()
         {
@@ -74,35 +89,33 @@ namespace LiveSplit.UI.Components
 
         #region Instance Methods
         /// <summary>
-        /// Get Value Base of item
+        /// Gets the Offsets base of the item
         /// </summary>
         /// <returns>
-        ///     Offsets base if Version is valid<br/>
-        ///     <c>null</c> otherwise
+        ///     Offsets base if the version is valid; otherwise, <c>null</c>.
         /// </returns>
-        private int[] GetValueBase()
+        private int[] GetBase()
         {
             switch (Version)
             {
-                case V1: return new int[] { 0x2304CE8, 0x4 };
-                case V2: return new int[] { 0x2371EA8, 0x4 };
+                case VERSION_1_05b: return new int[] { 0x2304CE8, 0x4 };
+                case VERSION_1_07: return new int[] { 0x2371EA8, 0x4 };
                 default: return null;
             }
         }
 
         /// <summary>
-        /// Get Value Offsets of item
+        /// Get Offsets of item.
         /// </summary>
         /// <returns>
-        ///     Offsets value if Version and ItemName are valid<br/>
-        ///     <c>null</c> otherwise
+        ///     Offsets value if the version and ItemName are valid; otherwise, <c>null</c>.
         /// </returns>
-        private int[] GetValueOffsets()
+        private int[] GetOffsets()
         {
-            switch(Version)
+            switch (Version)
             {
-                case V1:
-                case V2:
+                case VERSION_1_05b:
+                case VERSION_1_07:
                     switch (this.ItemName)
                     {
                         case ItemName.ADORNED_RING: return new int[] { 0xC70 };
@@ -157,63 +170,155 @@ namespace LiveSplit.UI.Components
         }
 
         /// <summary>
-        /// Set Value of Item to ItemReference's Value
+        /// Sets the value of the item to its ItemReference's value.
         /// </summary>
-        private void SetValue() => PointerUtility.WriteValue(Process, ValuePtr, (int)ItemReference.ItemName);
+        private void SetValue() => PointerUtility.WriteValue(Process, PtrToValue, (double)ItemReference.ItemName);
 
         /// <summary>
-        /// Set Value of Item to original Value (ItemName)
+        /// Sets the value of the item to its original value (ItemName).
         /// </summary>
-        private void ResetValue() => PointerUtility.WriteValue(Process, ValuePtr, (int)ItemName);
+        private void ResetValue() => PointerUtility.WriteValue(Process, PtrToValue, (double)ItemName);
+
+        /// <summary>
+        /// Adds dependencies to the dependency lists.
+        /// </summary>
+        private void AddDependencies()
+        {
+            DependsOn.AddRange(GetDependsOn(this.ItemName));
+        }
+
+        /// <summary>
+        /// Clears dependency lists.
+        /// </summary>
+        private void ClearDependencies()
+        {
+            DependsOn.Clear();
+        }
+
+        /// <summary>
+        /// Resets the value of the dependency lists.
+        /// </summary>
+        private void ResetDependencies()
+        {
+            ClearDependencies();
+            AddDependencies();
+        }
+
+        /// <summary>
+        /// Lists Items a given Item depends on for a user to acquire it.
+        /// </summary>
+        /// <param name="itemName">Name of the Item.</param>
+        /// <returns>List of distinct ItemName.</returns>
+        private ItemName[] GetDependsOn(ItemName itemName)
+        {
+            switch (itemName)
+            {
+                case ItemName.BLESSING_CHARM:
+                    return CombineDependsOn(ItemName.HAZLE_BADGE);
+
+                case ItemName.BLOODSTAINED_TISSUE:
+                    return CombineDependsOn(ItemName.SOFT_TISSUE);
+
+                case ItemName.FRESH_SPRING_LEAF:
+                    return CombineDependsOn(ItemName.SEALED_WIND);
+
+                case ItemName.ROTTEN_BELLFLOWER:
+                    return CombineDependsOn(ItemName.DIRTY_SHROOM);
+
+                case ItemName.SMALL_COIN:
+                case ItemName.BIRTHSTONE:
+                    return CombineDependsOn(ItemName.FRESH_SPRING_LEAF);
+
+                case ItemName.CF_WARP:
+                    return CombineDependsOn(ItemName.CAT_SPHERE);
+
+                case ItemName.HAZLE_BADGE:
+                case ItemName.DIRTY_SHROOM:
+                    return CombineDependsOn(ItemName.CAT_SPHERE);
+
+                case ItemName.SEALED_WIND:
+                case ItemName.VIOLET_SPRITE:
+                case ItemName.BLACK_SACHET:
+                case ItemName.QUICK_ARROWS:
+                case ItemName.HEAVY_ARROWS:
+                    return CombineDependsOn(
+                        ItemName.CF_BOW_LVL,
+                        ItemName.CF_BOW_SPEED,
+                        ItemName.CF_DASH,
+                        ItemName.CF_WARP,
+                        ItemName.CAT_SPHERE
+                    );
+
+                case ItemName.CAT_SPHERE:
+                    return new[] { ItemName.GARDEN_KEY/*, ItemName.BAKMAN_PATCH*/ };
+
+                case ItemName.SOFT_TISSUE:
+                case ItemName.CF_BOW_LVL:
+                    return new[] { ItemName.MONASTERY_KEY };
+
+                default:
+                    return new ItemName[] { };
+            }
+        }
+
+        /// <summary>
+        /// Combines all required Items and their requirements in the given list.
+        /// </summary>
+        /// <param name="dependencies">List of Items to get the depencency of.</param>
+        /// <returns>List of distinct ItemName.</returns>
+        private ItemName[] CombineDependsOn(params ItemName[] dependencies)
+        {
+            return dependencies.Concat(dependencies.SelectMany(item => GetDependsOn(item))).ToArray();
+        }
         #endregion
     }
 
-    enum ItemName
+    public enum ItemName
     {
         ADORNED_RING = 1,
-        NECKLACE_OF_SACRIFICE,
-        BELLFLOWER,
+        NECKLACE_OF_SACRIFICE = 2,
+        BELLFLOWER = 4,
         ASTRAL_CHARM = 5,
-        EDEAS_PEARL,
-        DULL_PEARL,
-        RED_RING,
-        MAGNET_STONE,
-        ROTTEN_BELLFLOWER,
-        FAERIE_TEAR,
+        EDEAS_PEARL = 6,
+        DULL_PEARL = 7,
+        RED_RING = 8,
+        MAGNET_STONE = 9,
+        ROTTEN_BELLFLOWER = 10,
+        FAERIE_TEAR = 11,
         IMPURITY_FLASK = 13,
-        PASSIFLORA,
-        CRYTAL_SEED,
-        MEDAL_OF_EQUIVALENCE,
-        TAINTED_MISSIVE,
-        BLACK_SACHET,
+        PASSIFLORA = 14,
+        CRYTAL_SEED = 15,
+        MEDAL_OF_EQUIVALENCE = 16,
+        TAINTED_MISSIVE = 17,
+        BLACK_SACHET = 18,
         RING_OF_CANDOR = 21,
-        SMALL_COIN,
-        BAKMAN_PATCH,
-        CAT_SPHERE,
-        HAZLE_BADGE,
-        TORN_BRANCH,
-        MONASTERY_KEY,
+        SMALL_COIN = 22,
+        BAKMAN_PATCH = 23,
+        CAT_SPHERE = 24,
+        HAZLE_BADGE = 25,
+        TORN_BRANCH = 26,
+        MONASTERY_KEY = 27,
         CLARITY_SHARD = 31,
-        DIRTY_SHROOM,
+        DIRTY_SHROOM = 32,
         IVORY_BUG = 34,
-        VIOLET_SPRITE,
-        SOFT_TISSUE,
-        GARDEN_KEY,
-        SPARSE_THREAD,
-        BLESSING_CHARM,
-        HEAVY_ARROWS,
-        BLOODSTAINED_TISSUE,
-        MAPLE_LEAF,
-        FRESH_SPRING_LEAF,
-        POCKET_INCENSORY,
-        BIRTHSTONE,
-        QUICK_ARROWS,
-        DRILLING_ARROWS,
-        SEALED_WIND,
-        CINDER_KEY,
-        CF_BOW_LVL,
-        CF_BOW_SPEED,
-        CF_DASH,
-        CF_WARP
+        VIOLET_SPRITE = 35,
+        SOFT_TISSUE = 36,
+        GARDEN_KEY = 37,
+        SPARSE_THREAD = 38,
+        BLESSING_CHARM = 39,
+        HEAVY_ARROWS = 40,
+        BLOODSTAINED_TISSUE = 41,
+        MAPLE_LEAF = 42,
+        FRESH_SPRING_LEAF = 43,
+        POCKET_INCENSORY = 44,
+        BIRTHSTONE = 45,
+        QUICK_ARROWS = 46,
+        DRILLING_ARROWS = 47,
+        SEALED_WIND = 48,
+        CINDER_KEY = 49,
+        CF_BOW_LVL = 50,
+        CF_BOW_SPEED = 51,
+        CF_DASH = 52,
+        CF_WARP = 53
     }
 }

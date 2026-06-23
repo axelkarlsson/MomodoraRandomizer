@@ -2,14 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 
 public class ContainerWatcher<T> where T : struct
 {
-    public static List<ContainerWatcher<T>> List = new List<ContainerWatcher<T>>();
+    internal static List<ContainerWatcher<T>> List = new List<ContainerWatcher<T>>();
 
-    public string Name { get; }
-    public MemoryWatcher<T> Watcher { get; }
+    internal string Name { get; }
+    internal MemoryWatcher<T> Watcher { get; }
 
     #region Constructors
     /// <summary>
