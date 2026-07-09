@@ -1,21 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.7.34221.43
+# Visual Studio Version 18
+VisualStudioVersion = 18.7.11919.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomodoraRandomizer", "MomodoraRandomizer.csproj", "{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Release Candidate|Any CPU = Release Candidate|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}.Release Candidate|Any CPU.ActiveCfg = Release|Any CPU
-		{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}.Release Candidate|Any CPU.Build.0 = Release|Any CPU
 		{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEC444DC-20BC-4E52-90AC-0C7C0014E51C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
@@ -23,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {9ABA210E-CD7F-4424-89AD-A63D74868DAF}
+		        SolutionGuid = {9ABA210E-CD7F-4424-89AD-A63D74868DAF}
 	EndGlobalSection
 EndGlobal

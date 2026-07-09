@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="45">
+<CheatTable CheatEngineTableVersion="52">
   <CheatEntries>
+    <CheatEntry>
+      <ID>3125</ID>
+      <Description>"a"</Description>
+      <Options moRecursiveSetValue="1"/>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
     <CheatEntry>
       <ID>1902</ID>
       <Description>"Bases (Dont touch)"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+      <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
@@ -71,13 +77,13 @@
     <CheatEntry>
       <ID>2567</ID>
       <Description>"Items Info"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+      <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>2568</ID>
           <Description>"Adorned Ring"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -139,7 +145,7 @@
         <CheatEntry>
           <ID>2572</ID>
           <Description>"Necklade of Sacrifice"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -201,7 +207,7 @@
         <CheatEntry>
           <ID>2576</ID>
           <Description>"Bellflower (No Reference Found)"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -252,7 +258,7 @@
         <CheatEntry>
           <ID>2579</ID>
           <Description>"Astral Charm"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -314,7 +320,7 @@
         <CheatEntry>
           <ID>2583</ID>
           <Description>"Edea's Pearl"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -376,7 +382,7 @@
         <CheatEntry>
           <ID>2587</ID>
           <Description>"Dull Pearl"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -438,7 +444,7 @@
         <CheatEntry>
           <ID>2591</ID>
           <Description>"Red Ring"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -500,7 +506,7 @@
         <CheatEntry>
           <ID>2595</ID>
           <Description>"Magnet Stone"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -562,7 +568,7 @@
         <CheatEntry>
           <ID>2599</ID>
           <Description>"Rotten Bellflower"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -624,7 +630,7 @@
         <CheatEntry>
           <ID>2603</ID>
           <Description>"Faerie Tear"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -686,7 +692,7 @@
         <CheatEntry>
           <ID>2607</ID>
           <Description>"Impurity Flask"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -748,7 +754,7 @@
         <CheatEntry>
           <ID>2611</ID>
           <Description>"Passiflora"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -810,7 +816,7 @@
         <CheatEntry>
           <ID>2615</ID>
           <Description>"Crytal Seed"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -872,7 +878,7 @@
         <CheatEntry>
           <ID>2619</ID>
           <Description>"Medal of Equivalence"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -934,7 +940,7 @@
         <CheatEntry>
           <ID>2623</ID>
           <Description>"Tainted Missive"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -996,7 +1002,7 @@
         <CheatEntry>
           <ID>2627</ID>
           <Description>"Black Sachet"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1058,7 +1064,7 @@
         <CheatEntry>
           <ID>2631</ID>
           <Description>"Ring of Candor"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1120,7 +1126,7 @@
         <CheatEntry>
           <ID>2635</ID>
           <Description>"Small Coin"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1182,7 +1188,7 @@
         <CheatEntry>
           <ID>2639</ID>
           <Description>"Bakman Patch"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1244,7 +1250,7 @@
         <CheatEntry>
           <ID>2643</ID>
           <Description>"Cat Sphere"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1306,7 +1312,7 @@
         <CheatEntry>
           <ID>2647</ID>
           <Description>"Hazle Badge"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1368,7 +1374,7 @@
         <CheatEntry>
           <ID>2651</ID>
           <Description>"Torn Branch"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1430,7 +1436,7 @@
         <CheatEntry>
           <ID>2655</ID>
           <Description>"Monastery Key"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1492,7 +1498,7 @@
         <CheatEntry>
           <ID>2659</ID>
           <Description>"Karst Crest"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1554,7 +1560,7 @@
         <CheatEntry>
           <ID>2663</ID>
           <Description>"Clarity Shard"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1616,7 +1622,7 @@
         <CheatEntry>
           <ID>2667</ID>
           <Description>"Dirty Shroom"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1678,7 +1684,7 @@
         <CheatEntry>
           <ID>2671</ID>
           <Description>"Ivory Bug"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1740,7 +1746,7 @@
         <CheatEntry>
           <ID>2675</ID>
           <Description>"Violet Sprite"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1802,7 +1808,7 @@
         <CheatEntry>
           <ID>2679</ID>
           <Description>"Soft Tissue"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1864,7 +1870,7 @@
         <CheatEntry>
           <ID>2683</ID>
           <Description>"Garden Key"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1926,7 +1932,7 @@
         <CheatEntry>
           <ID>2687</ID>
           <Description>"Sparse Thread"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1988,7 +1994,7 @@
         <CheatEntry>
           <ID>2691</ID>
           <Description>"Blessing Charm"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2050,7 +2056,7 @@
         <CheatEntry>
           <ID>2695</ID>
           <Description>"Heavy Arrows"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2112,7 +2118,7 @@
         <CheatEntry>
           <ID>2699</ID>
           <Description>"Bloodstained Tissue"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2174,7 +2180,7 @@
         <CheatEntry>
           <ID>2703</ID>
           <Description>"Maple Leaf"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2236,7 +2242,7 @@
         <CheatEntry>
           <ID>2707</ID>
           <Description>"Fresh Spring Leaf"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2298,7 +2304,7 @@
         <CheatEntry>
           <ID>2711</ID>
           <Description>"Pocket Incensory"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2360,7 +2366,7 @@
         <CheatEntry>
           <ID>2715</ID>
           <Description>"Birthstone"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2422,7 +2428,7 @@
         <CheatEntry>
           <ID>2719</ID>
           <Description>"Quick Arrows"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2484,7 +2490,7 @@
         <CheatEntry>
           <ID>2723</ID>
           <Description>"Drilling Arrows"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2546,7 +2552,7 @@
         <CheatEntry>
           <ID>2727</ID>
           <Description>"Sealed Wind"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2608,7 +2614,7 @@
         <CheatEntry>
           <ID>2731</ID>
           <Description>"Cinder Key"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2670,7 +2676,7 @@
         <CheatEntry>
           <ID>2735</ID>
           <Description>"Crest Fragment(BLvl)"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2732,7 +2738,7 @@
         <CheatEntry>
           <ID>2739</ID>
           <Description>"Crest Fragment(BSpd)"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2794,7 +2800,7 @@
         <CheatEntry>
           <ID>2743</ID>
           <Description>"Crest Fragment(Dash)"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2856,7 +2862,7 @@
         <CheatEntry>
           <ID>2747</ID>
           <Description>"Crest Fragment(Warp)"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2920,13 +2926,13 @@
     <CheatEntry>
       <ID>2751</ID>
       <Description>"Shops"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+      <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>2752</ID>
           <Description>"Karst City"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -2967,7 +2973,7 @@
         <CheatEntry>
           <ID>2756</ID>
           <Description>"Subterranean Grave"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -2997,7 +3003,7 @@
         <CheatEntry>
           <ID>2759</ID>
           <Description>"Whiteleaf Memorial Park"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3016,7 +3022,7 @@
         <CheatEntry>
           <ID>2761</ID>
           <Description>"Cinder Chambers 1"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3046,7 +3052,7 @@
         <CheatEntry>
           <ID>2764</ID>
           <Description>"Cinder Chambers 2"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3087,7 +3093,7 @@
         <CheatEntry>
           <ID>2768</ID>
           <Description>"Forlorn Monastery"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3106,7 +3112,7 @@
         <CheatEntry>
           <ID>2770</ID>
           <Description>"Royal Pinacotheca"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3149,7 +3155,7 @@
     <CheatEntry>
       <ID>2774</ID>
       <Description>"Player Data"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+      <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
@@ -3165,7 +3171,7 @@
         <CheatEntry>
           <ID>2776</ID>
           <Description>"Health"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3193,13 +3199,13 @@
         <CheatEntry>
           <ID>2779</ID>
           <Description>"Position"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>2780</ID>
               <Description>"Map"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3209,7 +3215,7 @@
                   <VariableType>Double</VariableType>
                   <Address>(Base1)</Address>
                   <Offsets>
-                    <Offset>7B0</Offset>
+                    <Offset>7C0</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -3219,7 +3225,7 @@
                   <VariableType>Double</VariableType>
                   <Address>(Base1)</Address>
                   <Offsets>
-                    <Offset>7C0</Offset>
+                    <Offset>7B0</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -3227,7 +3233,7 @@
             <CheatEntry>
               <ID>2783</ID>
               <Description>"Room"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>"MomodoraRUtM.exe"+230F1A0</Address>
@@ -3259,7 +3265,7 @@
         <CheatEntry>
           <ID>2786</ID>
           <Description>"Speed"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3287,7 +3293,7 @@
         <CheatEntry>
           <ID>2789</ID>
           <Description>"Camera"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3306,7 +3312,7 @@
             <CheatEntry>
               <ID>2791</ID>
               <Description>"Go To (When Follow Player = No)"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3334,7 +3340,7 @@
             <CheatEntry>
               <ID>2794</ID>
               <Description>"Current Position (Dont touch)"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3364,7 +3370,7 @@
         <CheatEntry>
           <ID>2797</ID>
           <Description>"Palette"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3392,7 +3398,7 @@
         <CheatEntry>
           <ID>2800</ID>
           <Description>"State"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3447,7 +3453,7 @@
               <VariableType>Double</VariableType>
               <Address>(Base1)</Address>
               <Offsets>
-                <Offset>670</Offset>
+                <Offset>660</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
@@ -3485,13 +3491,13 @@
         <CheatEntry>
           <ID>2809</ID>
           <Description>"Stats"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>2810</ID>
               <Description>"Human"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3549,7 +3555,7 @@
             <CheatEntry>
               <ID>2816</ID>
               <Description>"Cat"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3639,13 +3645,13 @@
         <CheatEntry>
           <ID>2825</ID>
           <Description>"Inventory"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>2826</ID>
               <Description>"Charges (Max)"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3683,7 +3689,7 @@
             <CheatEntry>
               <ID>2830</ID>
               <Description>"Ammount (Non sloted)"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3732,7 +3738,7 @@
             <CheatEntry>
               <ID>2835</ID>
               <Description>"List"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -4674,13 +4680,13 @@
     <CheatEntry>
       <ID>2901</ID>
       <Description>"Misc"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+      <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>2350</ID>
           <Description>"Debug"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -4694,7 +4700,7 @@
               <VariableType>Double</VariableType>
               <Address>(Base1)</Address>
               <Offsets>
-                <Offset>AF0</Offset>
+                <Offset>AE0</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
@@ -4907,7 +4913,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>2905</ID>
           <Description>"GetBossItem"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -4919,8 +4925,7 @@ if t2 then t2.destroy(); t2=nil end
               <Offsets>
                 <Offset>1450</Offset>
                 <Offset>4</Offset>
-                <Offset>140</Offset>
-                <Offset>4</Offset>
+                <Offset>0</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
@@ -4976,29 +4981,31 @@ if t2 then t2.destroy(); t2=nil end
               </Offsets>
             </CheatEntry>
             <CheatEntry>
-              <ID>2912</ID>
+              <ID>3133</ID>
               <Description>"Arsonist"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+02302C84</Address>
+              <Address>"MomodoraRUtM.exe"+0253597C</Address>
               <Offsets>
                 <Offset>1450</Offset>
                 <Offset>4</Offset>
-                <Offset>0</Offset>
-                <Offset>0</Offset>
+                <Offset>13C</Offset>
+                <Offset>8</Offset>
+                <Offset>AC</Offset>
+                <Offset>5C</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
-              <ID>3124</ID>
+              <ID>3136</ID>
               <Description>"Fennel"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+02302C84</Address>
+              <Address>"MomodoraRUtM.exe"+0253597C</Address>
               <Offsets>
                 <Offset>1450</Offset>
                 <Offset>4</Offset>
-                <Offset>0</Offset>
-                <Offset>0</Offset>
+                <Offset>8</Offset>
+                <Offset>B8</Offset>
+                <Offset>48</Offset>
+                <Offset>D88</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
@@ -5058,7 +5065,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>2917</ID>
           <Description>"Ivory Bugs"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -5284,7 +5291,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>2940</ID>
           <Description>"Grove"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -5502,7 +5509,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>2962</ID>
           <Description>"Frore Ciele"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -5540,7 +5547,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>2966</ID>
           <Description>"Karst Ciry"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -5778,7 +5785,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>2990</ID>
           <Description>"Subterranean Graves"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -5986,7 +5993,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>3011</ID>
           <Description>"Whiteleaf Memorial Park"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -6154,7 +6161,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>3028</ID>
           <Description>"Cinder Chambers"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -6332,7 +6339,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>3046</ID>
           <Description>"Forgotten Monastery"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -6530,7 +6537,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>3066</ID>
           <Description>"Pinacotheca"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -6758,7 +6765,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>3089</ID>
           <Description>"Karst Castle"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -6926,7 +6933,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>3106</ID>
           <Description>"Misc"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>

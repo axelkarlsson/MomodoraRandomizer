@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="45">
+<CheatTable CheatEngineTableVersion="52">
   <CheatEntries>
     <CheatEntry>
       <ID>2561</ID>
       <Description>"Bases (Dont touch)"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+      <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
@@ -45,7 +45,7 @@
           </Offsets>
         </CheatEntry>
         <CheatEntry>
-          <ID>2565</ID>
+          <ID>3322</ID>
           <Description>"Base3"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
@@ -56,14 +56,46 @@
           </Offsets>
         </CheatEntry>
         <CheatEntry>
+          <ID>3317</ID>
+          <Description>"Base4-1"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"MomodoraRUtM.exe"+23782DC</Address>
+          <Offsets>
+            <Offset>1AC</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
           <ID>2566</ID>
           <Description>"Base4"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>(Base4-1)</Address>
+          <Offsets>
+            <Offset>C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3320</ID>
+          <Description>"Base5"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>4 Bytes</VariableType>
           <Address>"MomodoraRUtM.exe"+23782DC</Address>
           <Offsets>
             <Offset>C</Offset>
-            <Offset>1AC</Offset>
+            <Offset>1B0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3323</ID>
+          <Description>"Base6"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"MomodoraRUtM.exe"+23782B8</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>0</Offset>
+            <Offset>4</Offset>
           </Offsets>
         </CheatEntry>
       </CheatEntries>
@@ -71,13 +103,13 @@
     <CheatEntry>
       <ID>2567</ID>
       <Description>"Items Info"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+      <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>2568</ID>
-          <Description>"Adorned Ring"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Description>"0"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -88,7 +120,7 @@
           <Offsets>
             <Offset>0</Offset>
             <Offset>0</Offset>
-            <Offset>70</Offset>
+            <Offset>10</Offset>
           </Offsets>
           <CheatEntries>
             <CheatEntry>
@@ -104,7 +136,7 @@
               <Offsets>
                 <Offset>0</Offset>
                 <Offset>0</Offset>
-                <Offset>80</Offset>
+                <Offset>20</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
@@ -120,11 +152,73 @@
               <Offsets>
                 <Offset>0</Offset>
                 <Offset>0</Offset>
-                <Offset>B0</Offset>
+                <Offset>50</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
               <ID>2571</ID>
+              <Description>"Reference (Use debug comand to find it)"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>(Base1)</Address>
+              <Offsets>
+                <Offset>C70</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3371</ID>
+          <Description>"Adorned Ring"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>String</VariableType>
+          <Length>239</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>(Base3)</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>0</Offset>
+            <Offset>70</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3372</ID>
+              <Description>"Effect"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>85</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3373</ID>
+              <Description>"Description"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>530</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>B0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3374</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
               <ShowAsSigned>0</ShowAsSigned>
@@ -139,7 +233,7 @@
         <CheatEntry>
           <ID>2572</ID>
           <Description>"Necklade of Sacrifice"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -199,9 +293,71 @@
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
+          <ID>3375</ID>
+          <Description>"3"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>String</VariableType>
+          <Length>239</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>(Base3)</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>0</Offset>
+            <Offset>130</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3376</ID>
+              <Description>"Effect"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>85</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>140</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3377</ID>
+              <Description>"Description"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>530</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>170</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3378</ID>
+              <Description>"Reference (Use debug comand to find it)"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>(Base1)</Address>
+              <Offsets>
+                <Offset>C80</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
           <ID>2576</ID>
-          <Description>"Bellflower (No Reference Found)"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Description>"Bellflower"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -247,12 +403,59 @@
                 <Offset>1D0</Offset>
               </Offsets>
             </CheatEntry>
+            <CheatEntry>
+              <ID>3325</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>21DC</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3341</ID>
+              <Description>"Received Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>5494</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3312</ID>
+              <Description>"Reference"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>(Base1)</Address>
+              <Offsets>
+                <Offset>5E0</Offset>
+              </Offsets>
+            </CheatEntry>
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
           <ID>2579</ID>
           <Description>"Astral Charm"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -299,6 +502,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3326</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>256C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2582</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -314,7 +535,7 @@
         <CheatEntry>
           <ID>2583</ID>
           <Description>"Edea's Pearl"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -361,6 +582,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3327</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>28BC</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2586</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -376,7 +615,7 @@
         <CheatEntry>
           <ID>2587</ID>
           <Description>"Dull Pearl"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -438,7 +677,7 @@
         <CheatEntry>
           <ID>2591</ID>
           <Description>"Red Ring"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -500,7 +739,7 @@
         <CheatEntry>
           <ID>2595</ID>
           <Description>"Magnet Stone"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -547,6 +786,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3330</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>4434</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2598</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -562,7 +819,7 @@
         <CheatEntry>
           <ID>2599</ID>
           <Description>"Rotten Bellflower"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -609,6 +866,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3357</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>100</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>160</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2602</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -624,7 +899,7 @@
         <CheatEntry>
           <ID>2603</ID>
           <Description>"Faerie Tear"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -684,9 +959,71 @@
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
+          <ID>3358</ID>
+          <Description>"12"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>String</VariableType>
+          <Length>239</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>(Base3)</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>0</Offset>
+            <Offset>490</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3359</ID>
+              <Description>"Effect"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>85</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>4A0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3360</ID>
+              <Description>"Description"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>530</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>4D0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3383</ID>
+              <Description>"Reference (Use debug comand to find it)"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>(Base1)</Address>
+              <Offsets>
+                <Offset>CC0</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
           <ID>2607</ID>
           <Description>"Impurity Flask"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -748,7 +1085,7 @@
         <CheatEntry>
           <ID>2611</ID>
           <Description>"Passiflora"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -795,6 +1132,42 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3350</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>2338</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3342</ID>
+              <Description>"Received Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>1F0C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2614</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -810,7 +1183,7 @@
         <CheatEntry>
           <ID>2615</ID>
           <Description>"Crytal Seed"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -872,7 +1245,7 @@
         <CheatEntry>
           <ID>2619</ID>
           <Description>"Medal of Equivalence"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -934,7 +1307,7 @@
         <CheatEntry>
           <ID>2623</ID>
           <Description>"Tainted Missive"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -981,6 +1354,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3329</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>4084</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2626</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -996,7 +1387,7 @@
         <CheatEntry>
           <ID>2627</ID>
           <Description>"Black Sachet"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1043,6 +1434,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3345</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>9F8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2630</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -1056,9 +1465,133 @@
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
+          <ID>3362</ID>
+          <Description>"19"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>String</VariableType>
+          <Length>239</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>(Base3)</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>0</Offset>
+            <Offset>730</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3363</ID>
+              <Description>"Effect"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>85</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>740</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3364</ID>
+              <Description>"Description"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>530</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>770</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3384</ID>
+              <Description>"Reference (Use debug comand to find it)"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>(Base1)</Address>
+              <Offsets>
+                <Offset>CC0</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3365</ID>
+          <Description>"20"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>String</VariableType>
+          <Length>239</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>(Base3)</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>0</Offset>
+            <Offset>790</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3366</ID>
+              <Description>"Effect"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>85</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>7A0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3367</ID>
+              <Description>"Description"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>530</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>7D0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3385</ID>
+              <Description>"Reference (Use debug comand to find it)"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>(Base1)</Address>
+              <Offsets>
+                <Offset>CC0</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
           <ID>2631</ID>
           <Description>"Ring of Candor"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1120,7 +1653,7 @@
         <CheatEntry>
           <ID>2635</ID>
           <Description>"Small Coin"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1182,7 +1715,7 @@
         <CheatEntry>
           <ID>2639</ID>
           <Description>"Bakman Patch"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1229,6 +1762,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3328</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>2C0C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2642</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -1244,7 +1795,7 @@
         <CheatEntry>
           <ID>2643</ID>
           <Description>"Cat Sphere"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1291,6 +1842,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3338</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>35CC</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2646</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -1306,7 +1875,7 @@
         <CheatEntry>
           <ID>2647</ID>
           <Description>"Hazle Badge"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1353,6 +1922,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3340</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>5020</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2650</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -1368,7 +1955,7 @@
         <CheatEntry>
           <ID>2651</ID>
           <Description>"Torn Branch"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1415,6 +2002,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3337</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>317C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2654</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -1430,7 +2035,7 @@
         <CheatEntry>
           <ID>2655</ID>
           <Description>"Monastery Key"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1477,6 +2082,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3334</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>27C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2658</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -1491,8 +2114,8 @@
         </CheatEntry>
         <CheatEntry>
           <ID>2659</ID>
-          <Description>"Karst Crest"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Description>"Crest Fragment???"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1503,7 +2126,7 @@
           <Offsets>
             <Offset>0</Offset>
             <Offset>0</Offset>
-            <Offset>AF0</Offset>
+            <Offset>A90</Offset>
           </Offsets>
           <CheatEntries>
             <CheatEntry>
@@ -1519,7 +2142,7 @@
               <Offsets>
                 <Offset>0</Offset>
                 <Offset>0</Offset>
-                <Offset>B00</Offset>
+                <Offset>AA0</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
@@ -1535,12 +2158,136 @@
               <Offsets>
                 <Offset>0</Offset>
                 <Offset>0</Offset>
-                <Offset>B30</Offset>
+                <Offset>AD0</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
               <ID>2662</ID>
-              <Description>"Reference"</Description>
+              <Description>"Reference (Use debug comand to find it)"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>(Base1)</Address>
+              <Offsets>
+                <Offset>DC0</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3379</ID>
+          <Description>"Karst Crest(Warp) FAKE"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>String</VariableType>
+          <Length>239</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>(Base3)</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>0</Offset>
+            <Offset>AF0</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3380</ID>
+              <Description>"Effect"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>85</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>B00</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3381</ID>
+              <Description>"Description"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>530</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>B30</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3382</ID>
+              <Description>"Reference (Use debug comand to find it)"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>(Base1)</Address>
+              <Offsets>
+                <Offset>DC0</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3368</ID>
+          <Description>"30"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>String</VariableType>
+          <Length>239</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>(Base3)</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>0</Offset>
+            <Offset>B50</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3369</ID>
+              <Description>"Effect"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>85</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>B60</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3370</ID>
+              <Description>"Description"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>530</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>B90</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3386</ID>
+              <Description>"Reference (Use debug comand to find it)"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>Double</VariableType>
@@ -1554,7 +2301,7 @@
         <CheatEntry>
           <ID>2663</ID>
           <Description>"Clarity Shard"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1616,7 +2363,7 @@
         <CheatEntry>
           <ID>2667</ID>
           <Description>"Dirty Shroom"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1663,6 +2410,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3336</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>11B0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2670</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -1676,9 +2441,71 @@
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
+          <ID>3387</ID>
+          <Description>"33"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>String</VariableType>
+          <Length>239</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>(Base3)</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>0</Offset>
+            <Offset>C70</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3388</ID>
+              <Description>"Effect"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>85</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>C80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3389</ID>
+              <Description>"Description"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>530</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base3)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>CB0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3391</ID>
+              <Description>"Reference (Use debug comand to find it)"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>(Base1)</Address>
+              <Offsets>
+                <Offset>DF0</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
           <ID>2671</ID>
           <Description>"Ivory Bug"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1725,6 +2552,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3324</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>CC4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2674</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -1740,7 +2585,7 @@
         <CheatEntry>
           <ID>2675</ID>
           <Description>"Violet Sprite"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1802,7 +2647,7 @@
         <CheatEntry>
           <ID>2679</ID>
           <Description>"Soft Tissue"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1849,6 +2694,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3333</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>4A8C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2682</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -1864,7 +2727,7 @@
         <CheatEntry>
           <ID>2683</ID>
           <Description>"Garden Key"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1911,6 +2774,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3335</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>4E3C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2686</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -1926,7 +2807,7 @@
         <CheatEntry>
           <ID>2687</ID>
           <Description>"Sparse Thread"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -1973,6 +2854,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3339</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>3CAC</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2690</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -1988,7 +2887,7 @@
         <CheatEntry>
           <ID>2691</ID>
           <Description>"Blessing Charm"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2035,6 +2934,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3356</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>100</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>5A60</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2694</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -2050,7 +2967,7 @@
         <CheatEntry>
           <ID>2695</ID>
           <Description>"Heavy Arrows"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2097,6 +3014,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3349</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>6C10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2698</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -2112,7 +3047,7 @@
         <CheatEntry>
           <ID>2699</ID>
           <Description>"Bloodstained Tissue"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2159,6 +3094,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3348</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>2788</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2702</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -2174,7 +3127,7 @@
         <CheatEntry>
           <ID>2703</ID>
           <Description>"Maple Leaf"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2236,7 +3189,7 @@
         <CheatEntry>
           <ID>2707</ID>
           <Description>"Fresh Spring Leaf"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2283,6 +3236,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3347</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>428</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2710</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -2298,7 +3269,7 @@
         <CheatEntry>
           <ID>2711</ID>
           <Description>"Pocket Incensory"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2345,6 +3316,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3344</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>2D84</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2714</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -2360,7 +3349,7 @@
         <CheatEntry>
           <ID>2715</ID>
           <Description>"Birthstone"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2422,7 +3411,7 @@
         <CheatEntry>
           <ID>2719</ID>
           <Description>"Quick Arrows"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2484,7 +3473,7 @@
         <CheatEntry>
           <ID>2723</ID>
           <Description>"Drilling Arrows"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2546,7 +3535,7 @@
         <CheatEntry>
           <ID>2727</ID>
           <Description>"Sealed Wind"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2593,6 +3582,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3346</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>68A0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2730</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -2608,7 +3615,7 @@
         <CheatEntry>
           <ID>2731</ID>
           <Description>"Cinder Key"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2655,6 +3662,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3517</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>2934</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2734</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -2670,7 +3695,7 @@
         <CheatEntry>
           <ID>2735</ID>
           <Description>"Crest Fragment(BLvl)"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2717,6 +3742,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3354</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>100</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>3F4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2738</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -2732,7 +3775,7 @@
         <CheatEntry>
           <ID>2739</ID>
           <Description>"Crest Fragment(BSpd)"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2779,6 +3822,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3352</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>100</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>2EEC</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2742</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -2794,7 +3855,7 @@
         <CheatEntry>
           <ID>2743</ID>
           <Description>"Crest Fragment(Dash)"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2841,6 +3902,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3353</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>100</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>2A58</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2746</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -2856,7 +3935,7 @@
         <CheatEntry>
           <ID>2747</ID>
           <Description>"Crest Fragment(Warp)"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>String</VariableType>
           <Length>239</Length>
@@ -2903,6 +3982,24 @@
               </Offsets>
             </CheatEntry>
             <CheatEntry>
+              <ID>3355</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>100</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>740</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>2750</ID>
               <Description>"Reference"</Description>
               <DropDownListLink>Item[0]</DropDownListLink>
@@ -2915,18 +4012,55 @@
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
+        <CheatEntry>
+          <ID>3332</ID>
+          <Description>"Vitality Fragment (Not Really)"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>String</VariableType>
+          <Length>239</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>(Base3)</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>0</Offset>
+            <Offset>0</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3331</ID>
+              <Description>"Got Item Dialogue"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>String</VariableType>
+              <Length>35</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>(Base6)</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+                <Offset>10</Offset>
+                <Offset>C</Offset>
+                <Offset>B1C</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
       <ID>2751</ID>
       <Description>"Shops"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+      <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>2752</ID>
           <Description>"Karst City"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -2967,7 +4101,7 @@
         <CheatEntry>
           <ID>2756</ID>
           <Description>"Subterranean Grave"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -2997,7 +4131,7 @@
         <CheatEntry>
           <ID>2759</ID>
           <Description>"Whiteleaf Memorial Park"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3016,7 +4150,7 @@
         <CheatEntry>
           <ID>2761</ID>
           <Description>"Cinder Chambers 1"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3046,7 +4180,7 @@
         <CheatEntry>
           <ID>2764</ID>
           <Description>"Cinder Chambers 2"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3087,7 +4221,7 @@
         <CheatEntry>
           <ID>2768</ID>
           <Description>"Forlorn Monastery"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3106,7 +4240,7 @@
         <CheatEntry>
           <ID>2770</ID>
           <Description>"Royal Pinacotheca"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3149,7 +4283,7 @@
     <CheatEntry>
       <ID>2774</ID>
       <Description>"Player Data"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+      <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
@@ -3165,7 +4299,7 @@
         <CheatEntry>
           <ID>2776</ID>
           <Description>"Health"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3193,13 +4327,13 @@
         <CheatEntry>
           <ID>2779</ID>
           <Description>"Position"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>2780</ID>
               <Description>"Map"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3227,7 +4361,7 @@
             <CheatEntry>
               <ID>2783</ID>
               <Description>"Room"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>MomodoraRUtM.exe+237C360</Address>
@@ -3259,7 +4393,7 @@
         <CheatEntry>
           <ID>2786</ID>
           <Description>"Speed"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3287,7 +4421,7 @@
         <CheatEntry>
           <ID>2789</ID>
           <Description>"Camera"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3306,7 +4440,7 @@
             <CheatEntry>
               <ID>2791</ID>
               <Description>"Go To (When Follow Player = No)"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3334,7 +4468,7 @@
             <CheatEntry>
               <ID>2794</ID>
               <Description>"Current Position (Dont touch)"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3364,7 +4498,7 @@
         <CheatEntry>
           <ID>2797</ID>
           <Description>"Palette"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3415,7 +4549,7 @@
         <CheatEntry>
           <ID>2800</ID>
           <Description>"State"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -3508,13 +4642,13 @@
         <CheatEntry>
           <ID>2809</ID>
           <Description>"Stats"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>2810</ID>
               <Description>"Human"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3572,7 +4706,7 @@
             <CheatEntry>
               <ID>2816</ID>
               <Description>"Cat"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3662,13 +4796,13 @@
         <CheatEntry>
           <ID>2825</ID>
           <Description>"Inventory"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>2826</ID>
               <Description>"Charges (Max)"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3701,12 +4835,22 @@
                     <Offset>580</Offset>
                   </Offsets>
                 </CheatEntry>
+                <CheatEntry>
+                  <ID>3519</ID>
+                  <Description>"Cat Sphere"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>(Base3)</Address>
+                  <Offsets>
+                    <Offset>940</Offset>
+                  </Offsets>
+                </CheatEntry>
               </CheatEntries>
             </CheatEntry>
             <CheatEntry>
               <ID>2830</ID>
               <Description>"Ammount (Non sloted)"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
@@ -3739,33 +4883,32 @@
                     <Offset>1110</Offset>
                   </Offsets>
                 </CheatEntry>
-                <CheatEntry>
-                  <ID>2834</ID>
-                  <Description>"Total"</Description>
-                  <ShowAsSigned>0</ShowAsSigned>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>"MomodoraRUtM.exe"+023782DC</Address>
-                  <Offsets>
-                    <Offset>4</Offset>
-                    <Offset>1AC</Offset>
-                  </Offsets>
-                </CheatEntry>
               </CheatEntries>
             </CheatEntry>
             <CheatEntry>
               <ID>2835</ID>
               <Description>"List"</Description>
-              <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
-                  <ID>2836</ID>
-                  <Description>"Total size"</Description>
+                  <ID>3318</ID>
+                  <Description>"Array Size"</Description>
                   <ShowAsSigned>0</ShowAsSigned>
                   <VariableType>4 Bytes</VariableType>
-                  <Address>(Base4)</Address>
+                  <Address>(Base4-1)</Address>
                   <Offsets>
-                    <Offset>-10</Offset>
+                    <Offset>8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3310</ID>
+                  <Description>"Array Count"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>(Base4-1)</Address>
+                  <Offsets>
+                    <Offset>4</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -4697,29 +5840,42 @@
     <CheatEntry>
       <ID>2901</ID>
       <Description>"Misc"</Description>
-      <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+      <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
-          <ID>2350</ID>
+          <ID>2902</ID>
           <Description>"Debug"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-          <GroupHeader>1</GroupHeader>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>2902</ID>
-              <Description>"Debug"</Description>
-              <DropDownList ReadOnly="1" DisplayValueAsItem="1">0: Disabled
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+          <DropDownList ReadOnly="1" DisplayValueAsItem="1">0: Disabled
 1: Full
 2: Reduced
 </DropDownList>
-              <ShowAsSigned>0</ShowAsSigned>
-              <VariableType>Double</VariableType>
-              <Address>(Base1)</Address>
-              <Offsets>
-                <Offset>AF0</Offset>
-              </Offsets>
-            </CheatEntry>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Double</VariableType>
+          <Address>(Base1)</Address>
+          <Offsets>
+            <Offset>AF0</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>112</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>113</Key>
+              </Keys>
+              <Value>0</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+          <CheatEntries>
             <CheatEntry>
               <ID>2430</ID>
               <Description>"Enable for numpad 0 to respawn"</Description>
@@ -4928,159 +6084,9 @@ if t2 then t2.destroy(); t2=nil end
           </Offsets>
         </CheatEntry>
         <CheatEntry>
-          <ID>2905</ID>
-          <Description>"GetBossItem"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
-          <GroupHeader>1</GroupHeader>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>2906</ID>
-              <Description>"Edea"</Description>
-              <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+0237E54C</Address>
-              <Offsets>
-                <Offset>1460</Offset>
-                <Offset>4</Offset>
-                <Offset>140</Offset>
-                <Offset>4</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>2907</ID>
-              <Description>"Moka"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+0237C39C</Address>
-              <Offsets>
-                <Offset>1460</Offset>
-                <Offset>4</Offset>
-                <Offset>140</Offset>
-                <Offset>84</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>2908</ID>
-              <Description>"Lubella 1"</Description>
-              <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+0237E54C</Address>
-              <Offsets>
-                <Offset>1460</Offset>
-                <Offset>4</Offset>
-                <Offset>13C</Offset>
-                <Offset>C</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>2909</ID>
-              <Description>"Frida"</Description>
-              <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+0237E54C</Address>
-              <Offsets>
-                <Offset>1460</Offset>
-                <Offset>4</Offset>
-                <Offset>13C</Offset>
-                <Offset>34</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>2910</ID>
-              <Description>"Lubella 2"</Description>
-              <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+0236FE44</Address>
-              <Offsets>
-                <Offset>1460</Offset>
-                <Offset>4</Offset>
-                <Offset>0</Offset>
-                <Offset>0</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>2911</ID>
-              <Description>"Arsonist"</Description>
-              <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+02332CB4</Address>
-              <Offsets>
-                <Offset>1460</Offset>
-                <Offset>4</Offset>
-                <Offset>13C</Offset>
-                <Offset>13C</Offset>
-                <Offset>13C</Offset>
-                <Offset>C</Offset>
-                <Offset>318</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>2912</ID>
-              <Description>"Fennel"</Description>
-              <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+0236FE44</Address>
-              <Offsets>
-                <Offset>1460</Offset>
-                <Offset>4</Offset>
-                <Offset>0</Offset>
-                <Offset>0</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>2913</ID>
-              <Description>"Lupiar"</Description>
-              <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+02332CB4</Address>
-              <Offsets>
-                <Offset>1460</Offset>
-                <Offset>4</Offset>
-                <Offset>13C</Offset>
-                <Offset>C</Offset>
-                <Offset>8E0</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>2914</ID>
-              <Description>"Magnolia"</Description>
-              <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+0236FE44</Address>
-              <Offsets>
-                <Offset>1460</Offset>
-                <Offset>4</Offset>
-                <Offset>0</Offset>
-                <Offset>0</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>2915</ID>
-              <Description>"Queen"</Description>
-              <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+0236FE44</Address>
-              <Offsets>
-                <Offset>1460</Offset>
-                <Offset>4</Offset>
-                <Offset>140</Offset>
-                <Offset>140</Offset>
-                <Offset>298</Offset>
-                <Offset>13C</Offset>
-                <Offset>298</Offset>
-                <Offset>4C</Offset>
-                <Offset>0</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>2916</ID>
-              <Description>"Choir"</Description>
-              <VariableType>Double</VariableType>
-              <Address>"MomodoraRUtM.exe"+0236FE44</Address>
-              <Offsets>
-                <Offset>1460</Offset>
-                <Offset>4</Offset>
-                <Offset>0</Offset>
-                <Offset>0</Offset>
-              </Offsets>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
           <ID>2917</ID>
           <Description>"Ivory Bugs"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -5295,6 +6301,445 @@ if t2 then t2.destroy(); t2=nil end
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
+        <CheatEntry>
+          <ID>3424</ID>
+          <Description>"Bosses"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3423</ID>
+              <Description>"Edea_Boss"</Description>
+              <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>"MomodoraRUtM.exe"+0237E54C</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>140</Offset>
+                <Offset>140</Offset>
+                <Offset>4</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3431</ID>
+                  <Description>"Get Edea Item (Freeze to force value)"</Description>
+                  <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>"MomodoraRUtM.exe"+0237E54C</Address>
+                  <Offsets>
+                    <Offset>1460</Offset>
+                    <Offset>4</Offset>
+                    <Offset>140</Offset>
+                    <Offset>4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3432</ID>
+                  <Description>"Edea Health"</Description>
+                  <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>3433</ID>
+                      <Description>"Edea Health Max"</Description>
+                      <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Double</VariableType>
+                      <Address>"MomodoraRUtM.exe"+0237E54C</Address>
+                      <Offsets>
+                        <Offset>240</Offset>
+                        <Offset>4</Offset>
+                        <Offset>140</Offset>
+                        <Offset>4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>2906</ID>
+                      <Description>"Edea Health Current"</Description>
+                      <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Double</VariableType>
+                      <Address>"MomodoraRUtM.exe"+0237E54C</Address>
+                      <Offsets>
+                        <Offset>230</Offset>
+                        <Offset>4</Offset>
+                        <Offset>140</Offset>
+                        <Offset>4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3428</ID>
+                  <Description>"Edea Position"</Description>
+                  <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>3426</ID>
+                      <Description>"Edea X"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Double</VariableType>
+                      <Address>(Edea_Boss)+4</Address>
+                      <Offsets>
+                        <Offset>120</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>3429</ID>
+                      <Description>"Edea Y"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>Double</VariableType>
+                      <Address>(Edea_Boss)+4</Address>
+                      <Offsets>
+                        <Offset>130</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3427</ID>
+                  <Description>"???"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>(Edea_Boss)+4</Address>
+                  <Offsets>
+                    <Offset>11A0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3406</ID>
+                  <Description>"???"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>(Edea_Boss)+4</Address>
+                  <Offsets>
+                    <Offset>11B0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3405</ID>
+                  <Description>"???"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>(Edea_Boss)+4</Address>
+                  <Offsets>
+                    <Offset>11C0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3404</ID>
+                  <Description>"???"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>(Edea_Boss)+4</Address>
+                  <Offsets>
+                    <Offset>11D0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3409</ID>
+                  <Description>"???"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>(Edea_Boss)+4</Address>
+                  <Offsets>
+                    <Offset>11E0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3410</ID>
+                  <Description>"???"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>(Edea_Boss)+4</Address>
+                  <Offsets>
+                    <Offset>11F0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3397</ID>
+                  <Description>"Edea Pattern Timer"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>(Edea_Boss)+4</Address>
+                  <Offsets>
+                    <Offset>1200</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3402</ID>
+                  <Description>"???"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>(Edea_Boss)+4</Address>
+                  <Offsets>
+                    <Offset>1210</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3403</ID>
+                  <Description>"Edea Attack Pattern"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>(Edea_Boss)+4</Address>
+                  <Offsets>
+                    <Offset>1220</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3400</ID>
+                  <Description>"???"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>(Edea_Boss)+4</Address>
+                  <Offsets>
+                    <Offset>1250</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3408</ID>
+                  <Description>"Edea Distance To Player"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>(Edea_Boss)+4</Address>
+                  <Offsets>
+                    <Offset>1260</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3411</ID>
+                  <Description>"???"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>(Edea_Boss)+4</Address>
+                  <Offsets>
+                    <Offset>1270</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2905</ID>
+          <Description>"Will Get Boss Item? (Freeze to force value)"</Description>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>2907</ID>
+              <Description>"Moka"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+0237C39C</Address>
+              <Offsets>
+                <Offset>1460</Offset>
+                <Offset>4</Offset>
+                <Offset>140</Offset>
+                <Offset>84</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2908</ID>
+              <Description>"Lubella 1"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+0237E54C</Address>
+              <Offsets>
+                <Offset>1460</Offset>
+                <Offset>4</Offset>
+                <Offset>13C</Offset>
+                <Offset>C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2909</ID>
+              <Description>"Frida"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+0237E54C</Address>
+              <Offsets>
+                <Offset>1460</Offset>
+                <Offset>4</Offset>
+                <Offset>13C</Offset>
+                <Offset>34</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2910</ID>
+              <Description>"Lubella 2"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+0236FE44</Address>
+              <Offsets>
+                <Offset>1460</Offset>
+                <Offset>4</Offset>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2911</ID>
+              <Description>"Arsonist"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02332CB4</Address>
+              <Offsets>
+                <Offset>1460</Offset>
+                <Offset>4</Offset>
+                <Offset>13C</Offset>
+                <Offset>13C</Offset>
+                <Offset>13C</Offset>
+                <Offset>C</Offset>
+                <Offset>318</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2912</ID>
+              <Description>"Fennel"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+0236FE44</Address>
+              <Offsets>
+                <Offset>1460</Offset>
+                <Offset>4</Offset>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2913</ID>
+              <Description>"Lupiar"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+02332CB4</Address>
+              <Offsets>
+                <Offset>1460</Offset>
+                <Offset>4</Offset>
+                <Offset>13C</Offset>
+                <Offset>C</Offset>
+                <Offset>8E0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2914</ID>
+              <Description>"Magnolia"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+0236FE44</Address>
+              <Offsets>
+                <Offset>1460</Offset>
+                <Offset>4</Offset>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2915</ID>
+              <Description>"Queen"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+0236FE44</Address>
+              <Offsets>
+                <Offset>1460</Offset>
+                <Offset>4</Offset>
+                <Offset>140</Offset>
+                <Offset>140</Offset>
+                <Offset>298</Offset>
+                <Offset>13C</Offset>
+                <Offset>298</Offset>
+                <Offset>4C</Offset>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>2916</ID>
+              <Description>"Choir"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+0236FE44</Address>
+              <Offsets>
+                <Offset>1460</Offset>
+                <Offset>4</Offset>
+                <Offset>0</Offset>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3303</ID>
+          <Description>"Got Item bubble"</Description>
+          <Options moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3304</ID>
+              <Description>"Is Showing"</Description>
+              <DropDownList ReadOnly="1" DisplayValueAsItem="1">0: No
+1: Yes
+</DropDownList>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+0237B858</Address>
+              <Offsets>
+                <Offset>20</Offset>
+                <Offset>4</Offset>
+                <Offset>8</Offset>
+                <Offset>B8</Offset>
+                <Offset>C</Offset>
+                <Offset>2DC</Offset>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3306</ID>
+              <Description>"Icon"</Description>
+              <DropDownListLink>Item[0]</DropDownListLink>
+              <VariableType>Double</VariableType>
+              <Address>"MomodoraRUtM.exe"+0237B858</Address>
+              <Offsets>
+                <Offset>CF0</Offset>
+                <Offset>4</Offset>
+                <Offset>8</Offset>
+                <Offset>AC</Offset>
+                <Offset>C</Offset>
+                <Offset>2DC</Offset>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
@@ -5306,7 +6751,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>2940</ID>
           <Description>"Grove"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -5524,7 +6969,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>2962</ID>
           <Description>"Frore Ciele"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -5562,7 +7007,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>2966</ID>
           <Description>"Karst Ciry"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -5800,7 +7245,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>2990</ID>
           <Description>"Subterranean Graves"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -6008,7 +7453,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>3011</ID>
           <Description>"Whiteleaf Memorial Park"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -6176,7 +7621,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>3028</ID>
           <Description>"Cinder Chambers"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -6354,7 +7799,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>3046</ID>
           <Description>"Forgotten Monastery"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -6552,7 +7997,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>3066</ID>
           <Description>"Pinacotheca"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -6780,7 +8225,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>3089</ID>
           <Description>"Karst Castle"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -6948,7 +8393,7 @@ if t2 then t2.destroy(); t2=nil end
         <CheatEntry>
           <ID>3106</ID>
           <Description>"Misc"</Description>
-          <Options moAlwaysHideChildren="1" moManualExpandCollapse="1"/>
+          <Options moDefaultCollapsed="1" moManualExpandCollapse="1"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
@@ -6999,16 +8444,6 @@ if t2 then t2.destroy(); t2=nil end
               <Address>(Base0)</Address>
               <Offsets>
                 <Offset>AE0</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>3112</ID>
-              <Description>"Ivory Bug Count"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <VariableType>Double</VariableType>
-              <Address>(Base0)</Address>
-              <Offsets>
-                <Offset>3C0</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
@@ -7099,6 +8534,16 @@ if t2 then t2.destroy(); t2=nil end
               <Address>(Base0)</Address>
               <Offsets>
                 <Offset>620</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3112</ID>
+              <Description>"Ivory Bug Count"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Double</VariableType>
+              <Address>(Base0)</Address>
+              <Offsets>
+                <Offset>3C0</Offset>
               </Offsets>
             </CheatEntry>
           </CheatEntries>

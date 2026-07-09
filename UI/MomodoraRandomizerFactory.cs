@@ -1,27 +1,24 @@
 ﻿using LiveSplit.Model;
 using System;
 
-namespace LiveSplit.UI.Components
-{
-    class MomodoraRandomizerFactory : IComponentFactory
-    {
-        public string ComponentName => "Momodora RUtM Randomizer";
+namespace LiveSplit.UI.Components;
 
-        public string Description => "A fun and exciting randomizer for Momodora: Reverie Under the Moonlight";
+class MomodoraRandomizerFactory : IComponentFactory {
+    public string ComponentName => "Momodora RUtM Randomizer";
 
-        public ComponentCategory Category => ComponentCategory.Other;
+    public string Description => "A fun and exciting randomizer for Momodora: Reverie Under the Moonlight";
 
-        public string UpdateName => ComponentName;
+    public ComponentCategory Category => ComponentCategory.Other;
 
-        public string XMLURL => UpdateURL + "update.MomodoraRandomizer.xml";
+    public string UpdateName => ComponentName;
 
-        public string UpdateURL => "https://raw.githubusercontent.com/axelkarlsson/MomodoraRandomizer/main/Updates";
+    public string XMLURL => UpdateURL + "update.MomodoraRandomizer.xml";
 
-        public Version Version => Version.Parse("1.0.10");
+    public string UpdateURL => "https://raw.githubusercontent.com/axelkarlsson/MomodoraRandomizer/main/Updates";
 
-        public IComponent Create(LiveSplitState state)
-        {
-            return new MomodoraRandomizer(state);
-        }
+    public Version Version => Version.Parse("1.0.10");
+
+    public IComponent Create(LiveSplitState state) {
+        return new MomodoraRandomizer.Core.Randomizer.MomodoraRandomizer(state);
     }
 }
