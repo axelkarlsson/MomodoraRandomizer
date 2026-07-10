@@ -1,6 +1,6 @@
 ﻿namespace MomodoraRandomizer.Data.Enums;
 
-public enum ItemDropType {
+internal enum ItemDropType {
     None,
     Starter,
     World,

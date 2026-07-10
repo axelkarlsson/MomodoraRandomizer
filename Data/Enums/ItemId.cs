@@ -1,6 +1,6 @@
 ﻿namespace MomodoraRandomizer.Data.Enums;
 
-public enum ItemId {
+internal enum ItemId {
     NONE = -1,
     ADORNED_RING = 1,
     NECKLACE_OF_SACRIFICE = 2,

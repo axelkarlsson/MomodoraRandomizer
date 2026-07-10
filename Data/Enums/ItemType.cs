@@ -1,6 +1,6 @@
 ﻿namespace MomodoraRandomizer.Data.Enums;
 
-public enum ItemType {
+internal enum ItemType {
     NONE = -1,
     ACTIVE = 1,
     PASSIVE = 2,

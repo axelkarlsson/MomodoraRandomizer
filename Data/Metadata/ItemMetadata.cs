@@ -5,7 +5,7 @@ using System.Linq;
 namespace MomodoraRandomizer.Data.Metadata;
 
 internal static class ItemMetadata {
-    public static readonly Dictionary<ItemId, ItemType> Types = new() {
+    internal static readonly Dictionary<ItemId, ItemType> Types = new() {
         { ItemId.ADORNED_RING, ItemType.PASSIVE },
         { ItemId.NECKLACE_OF_SACRIFICE, ItemType.PASSIVE },
         { ItemId.BELLFLOWER, ItemType.ACTIVE },
@@ -54,7 +54,7 @@ internal static class ItemMetadata {
     };
 
     // TODO: Redo logic for randomization since after placing required items we might not need to go some or other places
-    public static readonly Dictionary<ItemId, ItemId[]> ItemRequirements = new() {
+    internal static readonly Dictionary<ItemId, ItemId[]> ItemRequirements = new() {
         { ItemId.BLESSING_CHARM, CombineRequirements(ItemId.HAZLE_BADGE) },
         { ItemId.BLOODSTAINED_TISSUE, CombineRequirements(ItemId.SOFT_TISSUE) },
         { ItemId.FRESH_SPRING_LEAF, CombineRequirements(ItemId.SEALED_WIND) },
@@ -74,9 +74,9 @@ internal static class ItemMetadata {
         { ItemId.CF_BOW_LVL, [ItemId.MONASTERY_KEY] }
     };
 
-    public static readonly Dictionary<ItemId, int[]> SpawnRooms = new() {
+    internal static readonly Dictionary<ItemId, int[]> SpawnRooms = new() {
         { ItemId.NECKLACE_OF_SACRIFICE, [127] },
-        { ItemId.BELLFLOWER, [25, 64, 70, 162, 163, 269] }, // Individual room 70 is for 1.05b or less, 64 is for 1.07 or more
+        { ItemId.BELLFLOWER, [25, 64, 70, 162, 163, 269] }, // Individual. Room 70 is for 1.05b or less, 64 is for 1.07 or more
         { ItemId.ASTRAL_CHARM, [37] },
         { ItemId.EDEAS_PEARL, [53] },
         { ItemId.DULL_PEARL, [160] },
@@ -119,11 +119,11 @@ internal static class ItemMetadata {
         { ItemId.VITALITY_FRAGMENT, [35, 39, 47, 58, 67, 81, 108, 144, 168, 185, 191, 199, 205, 209, 270, 246, 264] }  // Individual
     };
 
-    public static readonly Dictionary<GameVersion, int[]> StringsBase = new() {
+    internal static readonly Dictionary<GameVersion, int[]> StringsBase = new() {
         { GameVersion.VERSION_1_05b, [0x230B134, 0x14, 0x0] },
         { GameVersion.VERSION_1_07, [0x23782F4, 0x14, 0x0] }
     };
-    public static readonly Dictionary<ItemId, int> StringsOffsets = new() {
+    internal static readonly Dictionary<ItemId, int> StringsOffsets = new() {
         { ItemId.ADORNED_RING, 0x70 },
         { ItemId.NECKLACE_OF_SACRIFICE, 0xD0 },
         { ItemId.BELLFLOWER, 0x190 },
@@ -173,7 +173,7 @@ internal static class ItemMetadata {
         { ItemId.CF_DASH, 0x1390 },
         { ItemId.CF_WARP, 0x13F0 }
     };
-    public static readonly Dictionary<(ItemId, ItemDropType), int> GotItemStringsOffsets = new() {
+    internal static readonly Dictionary<(ItemId, ItemDropType), int> GotItemStringsOffsets = new() {
         { (ItemId.BELLFLOWER, ItemDropType.World), 0x21DC },
         { (ItemId.BELLFLOWER, ItemDropType.Reward), 0x5494 },
         { (ItemId.ASTRAL_CHARM, ItemDropType.World), 0x256C },
@@ -208,7 +208,7 @@ internal static class ItemMetadata {
         { (ItemId.CF_WARP, ItemDropType.World), 0x740 },
         { (ItemId.VITALITY_FRAGMENT, ItemDropType.World), 0x68A0 }
     };
-    public static readonly Dictionary<ItemId, string[]> FakeStrings = new() { // Declaration of strings for items that dont have some of them in-game
+    internal static readonly Dictionary<ItemId, string[]> FakeStrings = new() { // Declaration of strings for items that dont have some of them in-game
         { ItemId.VITALITY_FRAGMENT, new[] { // TODO: Not really, update VF to match some in-game text or whatever
             "Vitality Fragment",
             "Increases ones life",
@@ -223,7 +223,7 @@ internal static class ItemMetadata {
         }} // TODO: Add the rest of the items
     };
 
-    public static readonly Dictionary<ItemId, ItemDropType[]> DropTypes = new() { // One for each instance in the game
+    internal static readonly Dictionary<ItemId, ItemDropType[]> DropTypes = new() { // One for each instance in the game
         { ItemId.ADORNED_RING, [ItemDropType.Starter] },
         { ItemId.NECKLACE_OF_SACRIFICE, [ItemDropType.Shop] },
         { ItemId.BELLFLOWER, [ItemDropType.World, ItemDropType.World, ItemDropType.World, ItemDropType.World, ItemDropType.Reward, ItemDropType.World] },
@@ -285,7 +285,7 @@ internal static class ItemMetadata {
     /// </summary>
     /// <param name="itemId">Name of the Item.</param>
     /// <returns>List of distinct ItemId.</returns>
-    public static ItemId[] GetRquirements(ItemId itemId)
+    internal static ItemId[] GetRquirements(ItemId itemId)
         => ItemRequirements.TryGetValue(itemId, out var requirements) ? requirements : [];
 
     /// <summary>
@@ -295,7 +295,7 @@ internal static class ItemMetadata {
     /// <returns>
     ///     Offsets base if the version is valid; otherwise, <c>empty array</c>.
     /// </returns>
-    public static int[] GetStringsBase(GameVersion gameVersion)
+    internal static int[] GetStringsBase(GameVersion gameVersion)
         => StringsBase.TryGetValue(gameVersion, out var baseOffsets) ? baseOffsets : [];
 
     /// <summary>
@@ -305,7 +305,7 @@ internal static class ItemMetadata {
     /// <returns>
     ///     Offset value if ItemId is valid; otherwise, <c>0</c>.
     /// </returns>
-    public static int GetStringsOffset(ItemId itemId)
+    internal static int GetStringsOffset(ItemId itemId)
         => StringsOffsets.TryGetValue(itemId, out var stringOffset) ? stringOffset : 0;
 
     /// <summary>
@@ -316,7 +316,7 @@ internal static class ItemMetadata {
     /// <returns>
     ///     Rooms where the item spawns; otherwise, <c>empty array</c>.
     /// </returns>
-    public static int[] GetItemSpawnRooms(ItemId itemId, int spawnIndex) {
+    internal static int[] GetItemSpawnRooms(ItemId itemId, int spawnIndex) {
         if (!SpawnRooms.TryGetValue(itemId, out var Rooms) || Rooms.Length == 0 || spawnIndex >= Rooms.Length) {
             return [];
         }
@@ -334,7 +334,7 @@ internal static class ItemMetadata {
     /// <returns>
     ///     Offset value if ItemId and dropType are valid; otherwise, <c>0</c>.
     /// </returns>
-    public static int GetStringPickupOffset(ItemId itemId, ItemDropType dropType)
+    internal static int GetStringPickupOffset(ItemId itemId, ItemDropType dropType)
         => GotItemStringsOffsets.TryGetValue((itemId, dropType), out var stringOffset) ? stringOffset : 0;
 
     /// <summary>

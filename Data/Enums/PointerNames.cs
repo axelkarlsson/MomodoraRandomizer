@@ -1,6 +1,6 @@
 ﻿namespace MomodoraRandomizer.Data.Enums;
 
-public enum PointerNames {
+internal enum PointerNames {
     LEVEL_ID,
     MAP_X,
     MAP_Y,

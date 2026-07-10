@@ -282,6 +282,14 @@ public class MomodoraRandomizer : IComponent {
             return true;
         }
 
+        if (item.Id == ItemId.BELLFLOWER) { // Exclude Bellflower based on the GameVersion and Spawn room since it was changed on 1.07. Temp Fix
+            if (GameVersion == GameVersion.VERSION_1_05b && item.SpawnRooms.Contains(64)) {
+                return true;
+            } else if (GameVersion == GameVersion.VERSION_1_07 && item.SpawnRooms.Contains(70)) {
+                return true;
+            }
+        }
+
         if (ItemExcludeList.Contains(item.Id)) {
             return true;
         }
