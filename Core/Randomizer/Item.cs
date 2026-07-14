@@ -1,4 +1,5 @@
-﻿using MomodoraRandomizer.Core.Memory;
+﻿using LiveSplit.ComponentUtil;
+using MomodoraRandomizer.Core.Memory;
 using MomodoraRandomizer.Data.Enums;
 using MomodoraRandomizer.Data.Metadata;
 using System;
@@ -13,10 +14,14 @@ namespace MomodoraRandomizer.Core.Randomizer {
         internal int InstanceId { get; }
         internal ItemType Type { get; }
         internal ItemDropType DropType { get; }
-        internal IntPtr PtrToName { get; private set; }
-        internal IntPtr PtrToEffect { get; private set; }
-        internal IntPtr PtrToDescription { get; private set; }
-        internal IntPtr PtrToGotItem { get; private set; }
+        private IntPtr PtrToName;
+        private IntPtr PtrToEffect;
+        private IntPtr PtrToDescription;
+        private IntPtr PtrToGotItem;
+        internal DeepPointer DeepPointerToName { get; private set; }
+        internal DeepPointer DeepPointerToEffect { get; private set; }
+        internal DeepPointer DeepPointerToDescription { get; private set; }
+        internal DeepPointer DeepPointerToGotItem { get; private set; }
         internal List<int> SpawnRooms { get; }
         #endregion
 
@@ -47,7 +52,7 @@ namespace MomodoraRandomizer.Core.Randomizer {
 
             IsStringFake = new bool[] { false, false, false, false };
 
-            SetStringPtrs(process, gameVersion);
+            SetStringDeepPointers(process, gameVersion);
         }
         #endregion
 
@@ -65,44 +70,72 @@ namespace MomodoraRandomizer.Core.Randomizer {
         /// </summary>
         /// <param name="process">Process of the game</param>
         /// <param name="gameVersion">Version of the game</param>
-        public void SetStringPtrs(Process process, GameVersion gameVersion) {
+        public void SetStringDeepPointers(Process process, GameVersion gameVersion) {
             int[] StringsBase = ItemMetadata.GetStringsBase(gameVersion);
 
             // Item Name, Effect and Description
             int StringOffset = ItemMetadata.GetStringsOffset(Id);
             if (StringOffset != 0) {
-                PtrToName = PointerUtility.CreatePointer(process, StringsBase.Concat(new[] { StringOffset, 0x0, 0x0 }).ToArray());
-                PtrToEffect = PointerUtility.CreatePointer(process, StringsBase.Concat(new[] { StringOffset + 0x10, 0x0, 0x0 }).ToArray());
-                PtrToDescription = PointerUtility.CreatePointer(process, StringsBase.Concat(new[] { StringOffset + 0x40, 0x0, 0x0 }).ToArray());
+                DeepPointerToName = PointerUtility.CreateDeepPointer(process, StringsBase.Concat(new[] { StringOffset, 0x0, 0x0 }).ToArray());
+                DeepPointerToEffect = PointerUtility.CreateDeepPointer(process, StringsBase.Concat(new[] { StringOffset + 0x10, 0x0, 0x0 }).ToArray());
+                DeepPointerToDescription = PointerUtility.CreateDeepPointer(process, StringsBase.Concat(new[] { StringOffset + 0x40, 0x0, 0x0 }).ToArray());
             }
 
             int StringPickupOffset = ItemMetadata.GetStringPickupOffset(Id, DropType);
             if (StringPickupOffset != 0) {
                 StringsBase[0] -= 0x3C; // Adjust base pointer to the correct address for the item pickup string
-                PtrToGotItem = PointerUtility.CreatePointer(process, StringsBase.Concat(new[] { StringPickupOffset, 0xC, 0x10, 0x0 }).ToArray());
+                DeepPointerToGotItem = PointerUtility.CreateDeepPointer(process, StringsBase.Concat(new[] { StringPickupOffset, 0xC, 0x10, 0x0 }).ToArray());
             }
 
             string[] FakeStrings = ItemMetadata.GetFakeStrings(Id);
             if (FakeStrings.Length > 0) { // Fill any missing string if necessary
-                if (PtrToName == IntPtr.Zero && FakeStrings[0] != "") {
+                FreeFakeStringPointers(); // Free strings to prevent memory leak
+
+                if (DeepPointerToName == null && FakeStrings[0] != "") {
                     PtrToName = StringInjector.AllocateAnsiString(FakeStrings[0]);
+                    DeepPointerToName = new DeepPointer(PtrToName);
                     IsStringFake[0] = true;
                 }
 
-                if (PtrToEffect == IntPtr.Zero && FakeStrings[1] != "") {
+                if (DeepPointerToEffect == null && FakeStrings[1] != "") {
                     PtrToEffect = StringInjector.AllocateAnsiString(FakeStrings[1]);
+                    DeepPointerToEffect = new DeepPointer(PtrToEffect);
                     IsStringFake[1] = true;
                 }
 
-                if (PtrToDescription == IntPtr.Zero && FakeStrings[2] != "") {
+                if (DeepPointerToDescription == null && FakeStrings[2] != "") {
                     PtrToDescription = StringInjector.AllocateAnsiString(FakeStrings[2]);
+                    DeepPointerToDescription = new DeepPointer(PtrToDescription);
                     IsStringFake[2] = true;
                 }
 
-                if (PtrToGotItem == IntPtr.Zero && FakeStrings[3] != "") {
+                if (DeepPointerToGotItem == null && FakeStrings[3] != "") {
                     PtrToGotItem = StringInjector.AllocateAnsiString(FakeStrings[3]);
+                    DeepPointerToGotItem = new DeepPointer(PtrToGotItem);
                     IsStringFake[3] = true;
                 }
+            }
+        }
+
+        public void FreeFakeStringPointers() {
+            if (IsStringFake[0]) {
+                StringInjector.FreeAnsiString(PtrToName);
+                IsStringFake[0] = false;
+            }
+
+            if (IsStringFake[1]) {
+                StringInjector.FreeAnsiString(PtrToEffect);
+                IsStringFake[1] = false;
+            }
+
+            if (IsStringFake[2]) {
+                StringInjector.FreeAnsiString(PtrToDescription);
+                IsStringFake[2] = false;
+            }
+
+            if (IsStringFake[3]) {
+                StringInjector.FreeAnsiString(PtrToGotItem);
+                IsStringFake[3] = false;
             }
         }
         #endregion

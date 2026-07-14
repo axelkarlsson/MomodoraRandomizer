@@ -66,5 +66,10 @@ namespace MomodoraRandomizer.Core.Memory {
         ///     Clear dictionary of MemoryWatcher
         /// </summary>
         public void Clear() => Watchers.Clear();
+
+        /// <summary>
+        ///     Return how many Memory watchers are in the dictionary
+        /// </summary>
+        public int Count => Watchers.Count;
     }
 }

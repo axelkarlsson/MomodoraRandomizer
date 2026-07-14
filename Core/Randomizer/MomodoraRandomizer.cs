@@ -219,7 +219,7 @@ namespace MomodoraRandomizer.Core.Randomizer {
                 SetSimpleLabelText("Game running.", invalidator, width, height);
 
                 if (CurrentState.CurrentPhase == TimerPhase.Running) {
-                    SetSimpleLabelText("New game instance detected, attempting to continue...", invalidator, width, height);
+                    SetSimpleLabelText("New game instance detected\nAttempting to continue...", invalidator, width, height);
                 }
 
                 OldGameProcess = GameProcess; // Update old value so this section is not triggered again on the next update
@@ -237,7 +237,7 @@ namespace MomodoraRandomizer.Core.Randomizer {
                 SetSimpleLabelText("Game version changed.", invalidator, width, height);
 
                 if (CurrentState.CurrentPhase == TimerPhase.NotRunning) { // Prepare randomizer information and wait for run to start
-                    SetSimpleLabelText($"Supported version detected: {GameVersion}", invalidator, width, height);
+                    SetSimpleLabelText($"Supported version detected:\n{GameVersion}", invalidator, width, height);
 
                     if (ItemFullList.Count == 0) { // Fill item list if its empty, this only needs to be done once
                         foreach (ItemId Id in Enum.GetValues(typeof(ItemId))) {
@@ -249,16 +249,14 @@ namespace MomodoraRandomizer.Core.Randomizer {
 
                     ResetItemsData(); // Make sure the items are on the default state
                     ItemRandomizedList.Clear(); // Clear randomized list since user can change item randomization toggles
-
-                    return;
                 }
 
                 PointerOffsets = PointerMetadata.GetOffsets(GameVersion); // Prepare the pointer offsets
 
-                ItemFullList.ForEach(item => item.SetStringPtrs(GameProcess, GameVersion)); // Update Item string pointers
+                ItemFullList.ForEach(item => item.SetStringDeepPointers(GameProcess, GameVersion)); // Update Item string pointers
 
-                WatcherManager.Clear(); // TODO: Revise that the current implementation supports game resets, if not then switch to DeepPtrs and remove this
-                PrepareMemoryWatchers(); // TODO: Revise that the current implementation supports game resets, if not then switch to DeepPtrs and remove this
+                WatcherManager.Clear(); // Remove old Memory Watchers since base offset is not valid anymore
+                PrepareMemoryWatchers(); // Prepare Memory Watchers
 
                 return;
             }
@@ -272,10 +270,11 @@ namespace MomodoraRandomizer.Core.Randomizer {
 
         private void OnReset(object sender, TimerPhase value) {
             ResetItemsData();
-            Rnd = null; // Reset in case user decides to use a set seed.
+            Rnd = null; // Reset in case user decides to use a random seed.
         }
 
         public void Dispose() {
+            FreeItemsFakeStrings();
             CurrentState.OnStart -= OnStart;
             CurrentState.OnReset -= OnReset;
         }
@@ -288,14 +287,11 @@ namespace MomodoraRandomizer.Core.Randomizer {
         /// </summary>
         private void PrepareMemoryWatchers() {
             PointerNames WatcherName = PointerNames.LEVEL_ID;
-            WatcherManager.Add(WatcherName, MemoryWatcherFactory.Create<double>(GameProcess, PointerOffsets[WatcherName], (old, current) => {
+            WatcherManager.Add(WatcherName, MemoryWatcherFactory.Create<int>(GameProcess, PointerOffsets[WatcherName], (old, current) => {
                 Debug.WriteLine($"Level_ID: {old} -> {current}");
-                if (current == 1)
-                {
+                if (current == 1) {
                     // ItemFullList.ResetValues();
-                }
-                else
-                {
+                } else {
                     // Item.SetValues();
                     // TODO: Add logic to iniciate tracking so we can replace the item when its picked up. But only if we are in a room which contains an item that has not been picked up
                 }
@@ -610,6 +606,12 @@ namespace MomodoraRandomizer.Core.Randomizer {
         #endregion
 
         #region Item manipulation
+        /// <summary>
+        ///     Frees the memory for fake strings.
+        /// </summary>
+        private void FreeItemsFakeStrings()
+            => ItemFullList.ForEach(item => item.FreeFakeStringPointers());
+
         /// <summary>
         ///     Resets very item in <see cref="ItemFullList"/> to the default values.
         /// </summary>
