@@ -1,10 +1,10 @@
-﻿namespace MomodoraRandomizer.Data.Enums;
-
-internal enum ItemDropType {
-    None,
-    Starter,
-    World,
-    Boss,
-    Shop,
-    Reward
+﻿namespace MomodoraRandomizer.Data.Enums {
+    internal enum ItemDropType {
+        NONE,
+        STARTER,
+        WORLD,
+        BOSS,
+        SHOP,
+        REWARD
+    }
 }
